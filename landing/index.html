@@ -417,138 +417,183 @@
 
   <!-- ====== TAB 2: 快手AI员工 ====== -->
   <div class="tab-panel" id="tab-product">
+
+    <!-- Section A: 产品对比 + 效率大数字 合并 -->
     <section class="section">
       <div class="section-inner">
         <div class="section-label">🤖 快手 AI 员工</div>
-        <h2 class="section-title">认识你的快手 AI 员工</h2>
-        <!-- CodeFlicker vs MyFlicker 对比 -->
-        <div class="product-compare">
-          <div class="pc-item">
-            <div class="pc-badge">研发专属</div>
-            <div class="pc-icon">💻</div>
-            <div class="pc-name">CodeFlicker</div>
-            <div class="pc-desc">IDE 插件，内嵌 VSCode / JetBrains，为研发工程师定制的 AI 编程助手</div>
-            <div class="pc-who">适合：研发工程师</div>
-            <a class="pc-btn" href="https://codeflicker.kuaishou.com" target="_blank">安装 CodeFlicker →</a>
+        <h2 class="section-title">快手 AI 员工：认识你的数字搭档</h2>
+        <p class="section-desc">一套 AI 员工体系，两种接入方式，覆盖全员所有职能场景</p>
+
+        <!-- 双产品对比（新版：卡片横向，自适应折叠）-->
+        <div class="pc2-wrap">
+          <div class="pc2-card">
+            <div class="pc2-left">
+              <div class="pc2-icon">💻</div>
+              <div>
+                <div class="pc2-name">CodeFlicker</div>
+                <div class="pc2-tag">研发专属</div>
+              </div>
+            </div>
+            <div class="pc2-body">
+              <p class="pc2-desc">IDE 插件，内嵌 VSCode / JetBrains，为研发工程师定制。代码生成、智能补全、跨仓研究、Auto Fix，编码全链路 AI 化。</p>
+              <div class="pc2-for">👨‍💻 适合：研发工程师</div>
+            </div>
+            <a class="pc2-btn" href="https://codeflicker.kuaishou.com" target="_blank">安装 →</a>
           </div>
-          <div class="pc-divider">
-            <div class="pc-divider-line"></div>
-            <div class="pc-divider-label">共用底层</div>
-            <div class="pc-divider-line"></div>
+          <div class="pc2-connector">
+            <div class="pc2-conn-line"></div>
+            <div class="pc2-conn-label">共用底层 AgentOS</div>
+            <div class="pc2-conn-line"></div>
           </div>
-          <div class="pc-item pc-highlight">
-            <div class="pc-badge pc-badge-new">全员版 · 4.12 正式发布</div>
-            <div class="pc-icon">🤖</div>
-            <div class="pc-name">MyFlicker</div>
-            <div class="pc-desc">KIM 对话界面，无需安装，任何快手人都可用，100+ 职能 Skill 覆盖所有角色</div>
-            <div class="pc-who">适合：全员（研发 / 产品 / 运营 / 行政）</div>
-            <a class="pc-btn pc-btn-primary" href="https://myflicker.kuaishou.com" target="_blank">立即体验 MyFlicker →</a>
+          <div class="pc2-card pc2-card-featured">
+            <div class="pc2-left">
+              <div class="pc2-icon">🤖</div>
+              <div>
+                <div class="pc2-name">MyFlicker</div>
+                <div class="pc2-tag pc2-tag-new">全员版 · 4.12 发布</div>
+              </div>
+            </div>
+            <div class="pc2-body">
+              <p class="pc2-desc">KIM 对话界面，无需安装，任何快手人即开即用。100+ 职能 Skill 覆盖研发、产品、运营、设计、行政全角色。</p>
+              <div class="pc2-for">🌐 适合：全员</div>
+            </div>
+            <a class="pc2-btn pc2-btn-primary" href="https://myflicker.kuaishou.com" target="_blank">立即体验 →</a>
           </div>
         </div>
 
-        <!-- 效率提升大数字 -->
-        <div class="efficiency-grid">
-          <div class="eff-card">
-            <div class="eff-role">研发工程师</div>
-            <div class="eff-num" style="color:var(--accent-blue)">40%<span class="eff-up">↑</span></div>
-            <div class="eff-label">开发效率提升</div>
-            <div class="eff-scene">代码生成 / 需求澄清 / 跨仓研究 / Auto Fix</div>
+        <!-- 效率数字（重新设计：横向条形，4列网格）-->
+        <div class="eff2-grid">
+          <div class="eff2-card">
+            <div class="eff2-accent" style="background:var(--accent-blue)"></div>
+            <div class="eff2-role">👨‍💻 研发工程师</div>
+            <div class="eff2-num" style="color:var(--accent-blue)">+40%</div>
+            <div class="eff2-label">开发效率</div>
+            <div class="eff2-scene">代码生成 · 需求澄清 · Auto Fix</div>
           </div>
-          <div class="eff-card">
-            <div class="eff-role">产品经理</div>
-            <div class="eff-num" style="color:var(--accent-purple)">-90%</div>
-            <div class="eff-label">竞品调研时间</div>
-            <div class="eff-scene">竞品分析 / 需求文档 / 数据洞察</div>
+          <div class="eff2-card">
+            <div class="eff2-accent" style="background:var(--accent-purple)"></div>
+            <div class="eff2-role">📋 产品经理</div>
+            <div class="eff2-num" style="color:var(--accent-purple)">-90%</div>
+            <div class="eff2-label">竞品调研时间</div>
+            <div class="eff2-scene">竞品分析 · 需求文档 · 洞察</div>
           </div>
-          <div class="eff-card">
-            <div class="eff-role">商业分析师</div>
-            <div class="eff-num" style="color:var(--accent-green)">-80%</div>
-            <div class="eff-label">报表制作时间</div>
-            <div class="eff-scene">自动取数 / 可视化 / 洞察生成</div>
+          <div class="eff2-card">
+            <div class="eff2-accent" style="background:var(--accent-green)"></div>
+            <div class="eff2-role">📊 数据分析师</div>
+            <div class="eff2-num" style="color:var(--accent-green)">-80%</div>
+            <div class="eff2-label">报表制作时间</div>
+            <div class="eff2-scene">自动取数 · 可视化 · 洞察生成</div>
           </div>
-          <div class="eff-card">
-            <div class="eff-role">HR / 行政 / 职能</div>
-            <div class="eff-num" style="color:var(--accent-amber)">-70%</div>
-            <div class="eff-label">重复工作时间</div>
-            <div class="eff-scene">会议纪要 / 行政服务 / 文档整理</div>
+          <div class="eff2-card">
+            <div class="eff2-accent" style="background:var(--accent-amber)"></div>
+            <div class="eff2-role">🏢 行政 / HR</div>
+            <div class="eff2-num" style="color:var(--accent-amber)">-70%</div>
+            <div class="eff2-label">重复工作时间</div>
+            <div class="eff2-scene">会议纪要 · 行政服务 · 文档</div>
           </div>
         </div>
+        <p class="eff2-note">来源：3月 Showcase 先锋队实测数据</p>
       </div>
     </section>
 
-    <!-- 四大核心能力 -->
+    <!-- Section B: 四大核心能力（重新设计：2×2 网格，左右分栏）-->
     <section class="section section-bg-gray">
       <div class="section-inner">
         <div class="section-label">⚡ 核心能力</div>
         <h2 class="section-title">AI 员工能为你做什么</h2>
-        <div class="ability-grid">
-          <div class="ab-card">
-            <div class="ab-icon">🔔</div>
-            <div class="ab-title">随叫随到</div>
-            <div class="ab-desc">KIM 发一条消息，AI 员工 7×24 在线处理，不需要等待、不需要排队</div>
-            <div class="ab-tech">Remote Agent · KIM 集成</div>
+        <div class="ab2-grid">
+          <div class="ab2-card">
+            <div class="ab2-icon-wrap" style="background:#eff6ff">🔔</div>
+            <div class="ab2-content">
+              <div class="ab2-title">随叫随到</div>
+              <div class="ab2-desc">KIM 发一条消息，AI 员工 7×24 在线响应，不需要等待、不需要排队</div>
+              <div class="ab2-tech">Remote Agent · KIM 集成</div>
+            </div>
           </div>
-          <div class="ab-card">
-            <div class="ab-icon">⏳</div>
-            <div class="ab-title">长程执行</div>
-            <div class="ab-desc">交代一个任务，AI 自动完成、验证、修复，不需要盯着。连续工作 6 小时+</div>
-            <div class="ab-tech">Long Task · 自动修复循环</div>
+          <div class="ab2-card">
+            <div class="ab2-icon-wrap" style="background:#faf5ff">⏳</div>
+            <div class="ab2-content">
+              <div class="ab2-title">长程执行</div>
+              <div class="ab2-desc">交代任务后 AI 自动完成、验证、修复，不需要盯着，连续工作 6 小时+</div>
+              <div class="ab2-tech">Long Task · 自动修复循环</div>
+            </div>
           </div>
-          <div class="ab-card">
-            <div class="ab-icon">🎭</div>
-            <div class="ab-title">多技能协作</div>
-            <div class="ab-desc">研发、数据、设计、行政……不同场景随时切换，一个 AI 员工搞定多种需求</div>
-            <div class="ab-tech">公司级 Skill 市场 · 100+ 能力</div>
+          <div class="ab2-card">
+            <div class="ab2-icon-wrap" style="background:#f0fdf4">🎭</div>
+            <div class="ab2-content">
+              <div class="ab2-title">多技能协作</div>
+              <div class="ab2-desc">研发、数据、设计、行政……随时切换，一个 AI 员工搞定多种需求</div>
+              <div class="ab2-tech">公司级 Skill 市场 · 100+ 能力</div>
+            </div>
           </div>
-          <div class="ab-card">
-            <div class="ab-icon">🧬</div>
-            <div class="ab-title">越用越懂你</div>
-            <div class="ab-desc">自进化系统记住你的偏好、工作习惯和组织知识，越用越顺手</div>
-            <div class="ab-tech">自进化体系 · 长期记忆</div>
+          <div class="ab2-card">
+            <div class="ab2-icon-wrap" style="background:#fff7ed">🧬</div>
+            <div class="ab2-content">
+              <div class="ab2-title">越用越懂你</div>
+              <div class="ab2-desc">自进化系统记住你的偏好、习惯和组织知识，越用越顺手</div>
+              <div class="ab2-tech">自进化体系 · 长期记忆</div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 版本路线 -->
+    <!-- Section C: 版本路线（重新设计：横向时间线卡片）-->
     <section class="section">
       <div class="section-inner">
         <div class="section-label">🗺️ 产品路线图</div>
         <h2 class="section-title">MyFlicker 版本规划</h2>
-        <div class="version-list">
-          <div class="ver-item ver-done">
-            <div class="ver-tag tag-done">✅ 已发布</div>
-            <div class="ver-name">V0.1 内测版</div>
-            <div class="ver-date">2026-04-03</div>
-            <div class="ver-desc">核心能力可用，对内亮相</div>
+        <div class="roadmap-timeline">
+          <div class="rm-item rm-done">
+            <div class="rm-dot rm-dot-done">✓</div>
+            <div class="rm-card">
+              <div class="rm-tag tag-done">✅ 已发布</div>
+              <div class="rm-version">V0.1 内测版</div>
+              <div class="rm-date">2026-04-03</div>
+              <div class="rm-desc">核心能力可用，对内亮相</div>
+            </div>
           </div>
-          <div class="ver-item ver-hot">
-            <div class="ver-tag tag-hot">🔥 即将发布</div>
-            <div class="ver-name">V1.0 正式版</div>
-            <div class="ver-date">2026-04-12</div>
-            <div class="ver-desc">AI 数字员工基础体验 · 行政服务类 Skill · 官方 Skill 门户上线</div>
+          <div class="rm-item rm-hot">
+            <div class="rm-dot rm-dot-hot">🔥</div>
+            <div class="rm-card rm-card-hot">
+              <div class="rm-tag tag-hot">🔥 即将发布</div>
+              <div class="rm-version">V1.0 正式版</div>
+              <div class="rm-date">2026-04-12</div>
+              <div class="rm-desc">AI 数字员工基础体验 · 行政服务类 Skill · 官方 Skill 门户上线</div>
+              <a class="rm-cta" href="https://myflicker.kuaishou.com" target="_blank">预约体验 →</a>
+            </div>
           </div>
-          <div class="ver-item ver-plan">
-            <div class="ver-tag tag-plan">📅 规划中</div>
-            <div class="ver-name">V1.1 游戏化升级</div>
-            <div class="ver-date">2026-05</div>
-            <div class="ver-desc">游戏化体验升级 · 多端接入 · 办公/研发/内容/数据全类 Skill</div>
+          <div class="rm-item rm-plan">
+            <div class="rm-dot rm-dot-plan">○</div>
+            <div class="rm-card">
+              <div class="rm-tag tag-plan">📅 规划中</div>
+              <div class="rm-version">V1.1 游戏化升级</div>
+              <div class="rm-date">2026-05</div>
+              <div class="rm-desc">游戏化体验 · 多端接入 · 全类 Skill</div>
+            </div>
           </div>
-          <div class="ver-item ver-plan">
-            <div class="ver-tag tag-plan">📅 规划中</div>
-            <div class="ver-name">V1.2 全类别 Skill</div>
-            <div class="ver-date">2026-06</div>
-            <div class="ver-desc">技术运维 Skill · 团队体验</div>
+          <div class="rm-item rm-plan">
+            <div class="rm-dot rm-dot-plan">○</div>
+            <div class="rm-card">
+              <div class="rm-tag tag-plan">📅 规划中</div>
+              <div class="rm-version">V1.2 全类 Skill</div>
+              <div class="rm-date">2026-06</div>
+              <div class="rm-desc">技术运维 Skill · 团队体验</div>
+            </div>
           </div>
-          <div class="ver-item ver-plan">
-            <div class="ver-tag tag-plan">🔭 展望</div>
-            <div class="ver-name">V1.x AI 团队协作</div>
-            <div class="ver-date">2026 下半年</div>
-            <div class="ver-desc">多会话管理 · 自进化升级 · AI 团队协作</div>
+          <div class="rm-item rm-plan">
+            <div class="rm-dot rm-dot-plan">○</div>
+            <div class="rm-card">
+              <div class="rm-tag tag-plan">🔭 展望</div>
+              <div class="rm-version">V1.x AI 团队协作</div>
+              <div class="rm-date">2026 下半年</div>
+              <div class="rm-desc">多会话管理 · AI 团队协作</div>
+            </div>
           </div>
         </div>
 
-        <!-- 技术底层说明（展开显示）-->
+        <!-- 技术说明（精简版）-->
         <div class="tech-note-open">
           <div class="tech-note-title">🔧 底层架构（研发同学选看）</div>
           <div class="tech-note-body">

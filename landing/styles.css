@@ -285,7 +285,8 @@ button { cursor: pointer; font-family: var(--font); }
 .mv-hot .mv-title { color: var(--accent-blue); }
 .mv-hot { background: rgba(37,99,235,0.03); border-radius: 6px; }
 
-/* ===== PRODUCT: EFFICIENCY GRID ===== */
+/* ===== PRODUCT: EFFICIENCY GRID (v2 — replaced by eff2) ===== */
+/* legacy styles kept for reference, not actively used */
 .efficiency-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 8px; }
 .eff-card { background: var(--bg-card); border-radius: var(--radius); padding: 24px; text-align: center; box-shadow: var(--shadow-sm); }
 .eff-role { font-size: 12px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
@@ -294,7 +295,7 @@ button { cursor: pointer; font-family: var(--font); }
 .eff-label { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
 .eff-scene { font-size: 11px; color: var(--text-muted); }
 
-/* ===== ABILITY GRID ===== */
+/* ===== ABILITY GRID (legacy, replaced by ab2) ===== */
 .ability-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 .ab-card { background: var(--bg-card); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow-sm); }
 .ab-icon { font-size: 32px; margin-bottom: 12px; }
@@ -302,7 +303,7 @@ button { cursor: pointer; font-family: var(--font); }
 .ab-desc { font-size: 14px; color: var(--text-secondary); margin-bottom: 12px; line-height: 1.6; }
 .ab-tech { font-size: 11px; color: var(--text-muted); background: #f1f5f9; padding: 4px 8px; border-radius: 4px; }
 
-/* ===== VERSION LIST ===== */
+/* ===== VERSION LIST (legacy, replaced by roadmap-timeline) ===== */
 .version-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
 .ver-item { background: var(--bg-card); border-radius: var(--radius); padding: 20px; display: grid; grid-template-columns: 100px 160px 100px 1fr; gap: 16px; align-items: center; box-shadow: var(--shadow-sm); }
 .ver-item.ver-hot { border: 1px solid var(--accent-blue); }
@@ -328,12 +329,198 @@ button { cursor: pointer; font-family: var(--font); }
 .tech-note-open .tech-note-body p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 6px; }
 .tech-note-muted { color: var(--text-muted) !important; }
 
-/* ===== PRODUCT COMPARE (CodeFlicker vs MyFlicker) ===== */
+/* ===== PRODUCT COMPARE v2 (pc2 — 横向卡片，自适应好) ===== */
+.pc2-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 24px 0 32px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+}
+.pc2-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 24px;
+  background: var(--bg-card);
+  transition: background 0.15s;
+  border-bottom: 1px solid var(--border);
+}
+.pc2-card:last-child { border-bottom: none; }
+.pc2-card-featured { background: #eff6ff; }
+.pc2-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  min-width: 160px;
+}
+.pc2-icon { font-size: 28px; line-height: 1; }
+.pc2-name { font-size: 18px; font-weight: 900; color: var(--text-primary); line-height: 1.2; }
+.pc2-tag {
+  display: inline-block;
+  font-size: 11px; font-weight: 700;
+  padding: 2px 8px; border-radius: 8px;
+  background: #f1f5f9; color: var(--text-muted);
+  margin-top: 4px;
+}
+.pc2-tag-new { background: rgba(37,99,235,0.12); color: var(--accent-blue); }
+.pc2-body { flex: 1; }
+.pc2-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin: 0 0 6px; }
+.pc2-for { font-size: 12px; color: var(--text-muted); font-weight: 600; }
+.pc2-btn {
+  flex-shrink: 0;
+  display: inline-block;
+  padding: 8px 18px;
+  font-size: 13px; font-weight: 700;
+  border-radius: 8px; text-decoration: none;
+  border: 1px solid var(--border);
+  color: var(--text-secondary); background: #fff;
+  transition: all 0.15s; cursor: pointer; white-space: nowrap;
+}
+.pc2-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+.pc2-btn-primary { background: var(--accent-blue); color: #fff; border-color: var(--accent-blue); }
+.pc2-btn-primary:hover { background: #1d4ed8; }
+.pc2-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 6px 24px;
+  background: #f8fafc;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.pc2-conn-line { flex: 1; height: 1px; background: var(--border); }
+.pc2-conn-label { font-size: 11px; color: var(--text-muted); font-weight: 600; white-space: nowrap; padding: 0 8px; }
+
+/* ===== EFFICIENCY v2 ===== */
+.eff2-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.eff2-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 20px 16px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+.eff2-accent {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.eff2-role { font-size: 12px; color: var(--text-secondary); font-weight: 600; margin-bottom: 10px; margin-top: 4px; }
+.eff2-num { font-size: 38px; font-weight: 900; line-height: 1; margin-bottom: 4px; }
+.eff2-label { font-size: 12px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+.eff2-scene { font-size: 11px; color: var(--text-muted); line-height: 1.5; }
+.eff2-note { font-size: 11px; color: var(--text-muted); text-align: right; margin-top: 4px; }
+
+/* ===== ABILITY v2 (2×2 grid, icon+text layout) ===== */
+.ab2-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.ab2-card {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+}
+.ab2-icon-wrap {
+  flex-shrink: 0;
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px;
+}
+.ab2-content { flex: 1; }
+.ab2-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.ab2-desc { font-size: 13px; color: var(--text-secondary); margin-bottom: 10px; line-height: 1.6; }
+.ab2-tech { display: inline-block; font-size: 11px; color: var(--text-muted); background: #f1f5f9; padding: 3px 8px; border-radius: 4px; }
+
+/* ===== ROADMAP TIMELINE (竖向时间线，每项左图标+右卡片) ===== */
+.roadmap-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 24px;
+  position: relative;
+}
+.roadmap-timeline::before {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 20px;
+  bottom: 20px;
+  width: 2px;
+  background: var(--border);
+  z-index: 0;
+}
+.rm-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 8px 0;
+  position: relative;
+  z-index: 1;
+}
+.rm-dot {
+  flex-shrink: 0;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 900;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  z-index: 2;
+}
+.rm-dot-done { background: var(--done-bg); border-color: var(--done-color); color: var(--done-color); font-size: 16px; }
+.rm-dot-hot { background: rgba(37,99,235,0.1); border-color: var(--accent-blue); font-size: 16px; }
+.rm-dot-plan { background: #f8fafc; border-color: #d1d5db; color: #9ca3af; font-size: 16px; }
+.rm-card {
+  flex: 1;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 4px;
+  border: 1px solid var(--border);
+}
+.rm-card-hot { border-color: var(--accent-blue); background: #fafcff; }
+.rm-tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; margin-bottom: 6px; }
+.rm-version { font-size: 15px; font-weight: 800; color: var(--text-primary); margin-bottom: 2px; }
+.rm-date { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
+.rm-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+.rm-cta {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 6px 16px;
+  font-size: 12px; font-weight: 700;
+  border-radius: 6px; text-decoration: none;
+  background: var(--accent-blue); color: #fff;
+  transition: background 0.15s;
+}
+.rm-cta:hover { background: #1d4ed8; }
+
+/* ===== (legacy) PRODUCT COMPARE (old pc- classes, kept for reference) ===== */
 .product-compare { display: flex; align-items: center; gap: 0; margin: 20px 0 0; background: var(--bg-card); border-radius: 14px; box-shadow: var(--shadow-sm); overflow: hidden; border: 1px solid var(--border); }
 .pc-item { flex: 1; padding: 24px 28px; display: flex; flex-direction: column; gap: 8px; }
 .pc-highlight { background: #eff6ff; border-left: 1px solid var(--border); }
 .pc-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 8px; background: #f1f5f9; color: var(--text-muted); margin-bottom: 4px; align-self: flex-start; }
-.pc-badge-new { background: rgba(37,99,235,0.1); color: var(--accent-blue); }
+.pc-badge-new { background: rgba(37,99,235,0.12); color: var(--accent-blue); }
 .pc-icon { font-size: 32px; }
 .pc-name { font-size: 20px; font-weight: 900; color: var(--text-primary); }
 .pc-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; flex: 1; }
@@ -595,6 +782,9 @@ button { cursor: pointer; font-family: var(--font); }
   .coming-grid { grid-template-columns: 1fr; }
   .skill-stats-bar { grid-template-columns: repeat(3, 1fr); }
   .ver-item { grid-template-columns: 1fr; }
+  /* pc2: 宽度够，保持横向 */
+  .eff2-grid { grid-template-columns: repeat(2, 1fr); }
+  /* ab2: 保持2列 */
 }
 @media (max-width: 768px) {
   .topbar-tabs { display: none; }
@@ -609,4 +799,17 @@ button { cursor: pointer; font-family: var(--font); }
   .sprint-status-grid { grid-template-columns: repeat(2, 1fr); }
   .skill-stats-bar { grid-template-columns: repeat(2, 1fr); }
   .skill-flow { grid-template-columns: 1fr; }
+  /* pc2: 窄屏时按钮换行 */
+  .pc2-card { flex-wrap: wrap; }
+  .pc2-left { min-width: 120px; }
+  .pc2-btn { width: 100%; text-align: center; }
+  /* eff2: 2列（窄屏仍然保持2列，不退化为1列）*/
+  .eff2-grid { grid-template-columns: repeat(2, 1fr); }
+  /* ab2: 窄屏1列 */
+  .ab2-grid { grid-template-columns: 1fr; }
+  .ab2-card { flex-direction: column; gap: 12px; }
+  .ab2-icon-wrap { width: 40px; height: 40px; font-size: 20px; }
+  /* roadmap: 缩小dot */
+  .roadmap-timeline::before { left: 15px; }
+  .rm-dot { width: 32px; height: 32px; font-size: 13px; }
 }
