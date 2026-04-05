@@ -257,9 +257,9 @@ function buildMatrixHTML(channels, layers) {
   });
 
   // Summary row
-  html += `<tr class="summary-row"><td class="row-header" style="font-weight:700;font-size:12px">合计</td>`;
+  html += `<tr class="summary-row"><td class="row-header" style="font-weight:700;font-size:12px;text-align:center">合计</td>`;
   channels.forEach(ch => {
-    html += `<td><span class="summary-num">${ch.online}</span>${ch.online}上线 / ${ch.total}总</td>`;
+    html += `<td style="text-align:center"><div class="summary-num">${ch.online}</div><div style="font-size:10px;color:var(--text-muted)">${ch.online} 上线 / ${ch.total} 总</div></td>`;
   });
   html += `</tr>`;
 

@@ -94,9 +94,12 @@
     panel.innerHTML = `
       <section class="section">
         <div class="section-inner">
-          <div class="section-label">🌟 AI研发范式跃迁 · 先锋队计划</div>
+          <div class="section-label">🌟 AI 研发范式跃迁 · 先锋队计划</div>
           <h2 class="section-title">AI-Native 先锋队全景</h2>
-          <p class="section-desc">行 = 业务线，列 = 职能通道 · 共 <strong>${totalTeams}</strong> 个先锋队，<strong>${nativeCount}</strong> 支 AI Native 团队，<strong>${doneCount}</strong> 个案例已产出</p>
+          <p class="section-desc">
+            <strong>${totalTeams}</strong> 支先锋队横跨 <strong>${bizLines.length}</strong> 条业务线，<strong>${nativeCount}</strong> 支已进入 AI-Native 工作模式，<strong>${doneCount}</strong> 个案例已在 Showcase 产出 ·
+            <span style="font-size:12px;color:var(--text-muted)">矩阵以「业务线 × 职能通道」双维度呈现，空白格代表当前周期尚未设立先锋队（预留扩展位）</span>
+          </p>
 
           <!-- 统计条 -->
           <div class="pm-stats">

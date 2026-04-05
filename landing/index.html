@@ -19,8 +19,8 @@
     </div>
     <ul class="topbar-tabs" id="mainTabs">
       <li class="tab-item active" data-tab="intro">🚀 战役介绍</li>
-      <li class="tab-item" data-tab="pioneer">🌟 AI-Native 先锋队</li>
       <li class="tab-item" data-tab="product">🤖 AI 员工</li>
+      <li class="tab-item" data-tab="pioneer">🌟 AI-Native 先锋队</li>
       <li class="tab-item" data-tab="skill">🛒 AI 技能 &amp; 知识市场</li>
     </ul>
     <div class="topbar-right">
@@ -39,8 +39,8 @@
       <h1 class="hero-title">快手全员 AI 生产力战役</h1>
       <p class="hero-sub">让每个快手人都能用上 AI 员工<br/>目标：组织效率提升 15%+</p>
       <div class="hero-actions">
-        <button class="btn-primary" onclick="switchTab('product')">体验快手AI员工 →</button>
-        <button class="btn-secondary" onclick="switchTab('skill')">查看技能&知识市场</button>
+        <a class="btn-primary" href="https://myflicker.kuaishou.com" target="_blank">立即体验 MyFlicker →</a>
+        <a class="btn-secondary" href="https://codeflicker.kuaishou.com" target="_blank">研发专属 CodeFlicker</a>
       </div>
       <p class="hero-meta">经管委决议 · Sponsor：孙琳 / 郭亮 · AI基建虚拟组织 · 2026 Q2</p>
     </div>
@@ -120,7 +120,7 @@
               <span class="ext-tag">申请 AI 先锋队</span>
               <span class="ext-tag">了解战役全貌</span>
             </div>
-            <button class="entry-btn entry-btn-amber" onclick="document.getElementById('section-pioneer').scrollIntoView({behavior:'smooth'})">了解先锋队 →</button>
+            <button class="entry-btn entry-btn-amber" onclick="switchTab('pioneer')">查看先锋队全景 →</button>
           </div>
         </div>
       </div>
@@ -167,7 +167,7 @@
             <div class="stat-accent" style="background:var(--accent-purple)"></div>
             <div class="stat-num">11</div>
             <div class="stat-label">子项目并行推进</div>
-            <div class="stat-sub">业务/产品/技术/运营</div>
+            <div class="stat-sub">业务 2 + 产品 2 + 技术 3 + 运营 2 + 先锋队 + 成本</div>
           </div>
           <div class="stat-chip">
             <div class="stat-accent" style="background:var(--accent-green)"></div>
@@ -245,7 +245,7 @@
       <div class="section-inner">
         <div class="section-label" style="color:var(--blue-300)">📊 冲刺进度</div>
         <h2 class="section-title" style="color:#fff">距 4.12 正式发布，整体进度 72%</h2>
-        <p class="section-desc" style="color:rgba(255,255,255,0.45)">最后更新：2026-04-05 · 11 个子项目并行推进</p>
+        <p class="section-desc" style="color:rgba(255,255,255,0.45)">最后更新：2026-04-05 · 11 个子项目并行推进（业务应用 2 + 产品建设 2 + 技术能力 3 + 运营推广 2 + 先锋队 1 + 成本治理 1）</p>
 
         <div class="progress-overall" style="margin-bottom:32px">
           <div class="po-label">4.12 正式发布冲刺</div>
@@ -298,19 +298,19 @@
             <div class="pioneer-tag">主站先锋队</div>
             <div class="pioneer-metric">AI 辅助代码生成</div>
             <div class="pioneer-num">40%<span class="pioneer-unit">+ 效率提升</span></div>
-            <div class="pioneer-desc">研发工程师借助 AI 员工完成需求分析、代码编写、测试用例生成全流程，已沉淀最佳实践 Skill 包</div>
+            <div class="pioneer-desc">研发工程师借助 AI 员工完成需求分析、代码编写、测试用例生成全流程，已沉淀最佳实践 Skill 包<span class="data-source">（来源：3月 Showcase 实测数据）</span></div>
           </div>
           <div class="pioneer-card">
             <div class="pioneer-tag">商业化先锋队</div>
             <div class="pioneer-metric">数据分析 + 报告生成</div>
             <div class="pioneer-num">80%<span class="pioneer-unit"> 时间节省</span></div>
-            <div class="pioneer-desc">数据分析师使用 AI 员工自动取数、生成分析报告，每日节省 3-4 小时重复工作</div>
+            <div class="pioneer-desc">数据分析师使用 AI 员工自动取数、生成分析报告，每日节省 3-4 小时重复工作<span class="data-source">（来源：3月 Showcase 实测数据）</span></div>
           </div>
           <div class="pioneer-card">
             <div class="pioneer-tag">KSIB 先锋队</div>
             <div class="pioneer-metric">产品需求研究</div>
             <div class="pioneer-num">90%<span class="pioneer-unit"> 调研时间↓</span></div>
-            <div class="pioneer-desc">产品经理使用 AI 员工完成竞品调研、需求文档撰写，调研周期从 1 周压缩至半天</div>
+            <div class="pioneer-desc">产品经理使用 AI 员工完成竞品调研、需求文档撰写，调研周期从 1 周压缩至半天<span class="data-source">（来源：3月 Showcase 实测数据）</span></div>
           </div>
         </div>
         <!-- 月度参与活动 -->
@@ -419,9 +419,32 @@
   <div class="tab-panel" id="tab-product">
     <section class="section">
       <div class="section-inner">
-        <div class="section-label">🤖 快手AI员工</div>
+        <div class="section-label">🤖 快手 AI 员工</div>
         <h2 class="section-title">认识你的快手 AI 员工</h2>
-        <p class="section-desc">产品名：<strong>MyFlicker</strong> · 「你不需要懂技术，你只需要告诉我你想要什么」</p>
+        <!-- CodeFlicker vs MyFlicker 对比 -->
+        <div class="product-compare">
+          <div class="pc-item">
+            <div class="pc-badge">研发专属</div>
+            <div class="pc-icon">💻</div>
+            <div class="pc-name">CodeFlicker</div>
+            <div class="pc-desc">IDE 插件，内嵌 VSCode / JetBrains，为研发工程师定制的 AI 编程助手</div>
+            <div class="pc-who">适合：研发工程师</div>
+            <a class="pc-btn" href="https://codeflicker.kuaishou.com" target="_blank">安装 CodeFlicker →</a>
+          </div>
+          <div class="pc-divider">
+            <div class="pc-divider-line"></div>
+            <div class="pc-divider-label">共用底层</div>
+            <div class="pc-divider-line"></div>
+          </div>
+          <div class="pc-item pc-highlight">
+            <div class="pc-badge pc-badge-new">全员版 · 4.12 正式发布</div>
+            <div class="pc-icon">🤖</div>
+            <div class="pc-name">MyFlicker</div>
+            <div class="pc-desc">KIM 对话界面，无需安装，任何快手人都可用，100+ 职能 Skill 覆盖所有角色</div>
+            <div class="pc-who">适合：全员（研发 / 产品 / 运营 / 行政）</div>
+            <a class="pc-btn pc-btn-primary" href="https://myflicker.kuaishou.com" target="_blank">立即体验 MyFlicker →</a>
+          </div>
+        </div>
 
         <!-- 效率提升大数字 -->
         <div class="efficiency-grid">
@@ -525,15 +548,14 @@
           </div>
         </div>
 
-        <!-- 技术底层折叠说明 -->
-        <details class="tech-note">
-          <summary>🔧 技术底层说明</summary>
+        <!-- 技术底层说明（展开显示）-->
+        <div class="tech-note-open">
+          <div class="tech-note-title">🔧 底层架构（研发同学选看）</div>
           <div class="tech-note-body">
-            <p>快手AI员工底层由 <strong>AgentOS</strong> 驱动：AgentCore（任务规划引擎）+ 公司级全域 Skill 市场 + Auto 调度 + 安全体系。</p>
-            <p>「企业级安全可控，数据不出域」——所有 Skill 均经过六阶段安全审核流程。</p>
-            <p><em>备注：当前 CodeFlicker（研发专属版）与 MyFlicker 共用底层；终态规划：研发能力将逐步融合到 MyFlicker，统一提供一套「快手AI员工」产品体验。</em></p>
+            <p>快手 AI 员工底层由 <strong>AgentOS</strong> 驱动：AgentCore（任务规划引擎）+ 公司级全域 Skill 市场 + Auto 调度 + 安全体系。企业级安全可控，数据不出域，所有 Skill 均经过六阶段安全审核。</p>
+            <p class="tech-note-muted">CodeFlicker（研发专属）与 MyFlicker 共用底层；终态规划：研发能力逐步融入 MyFlicker，统一提供一套「快手 AI 员工」体验。</p>
           </div>
-        </details>
+        </div>
       </div>
     </section>
   </div><!-- /tab-product -->
