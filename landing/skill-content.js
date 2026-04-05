@@ -129,6 +129,107 @@ function renderSkillTab() {
         </div>
       </div>
     </section>
+
+    <!-- ===== 团队 & 个人级 Skill 市场 ===== -->
+    <section class="section section-bg-gray" style="border-top:2px solid var(--border)">
+      <div class="section-inner">
+        <div class="section-label">🧩 更多市场层级</div>
+        <h2 class="section-title">团队 &amp; 个人级 Skill 市场</h2>
+        <p class="section-desc">
+          除公司级官方 Skill 外，MyFlicker 还支持<strong>团队定制</strong>和<strong>个人专属</strong>两种更灵活的 Skill 形态，让 AI 员工真正懂你的业务场景。
+        </p>
+
+        <!-- 三级市场架构说明 -->
+        <div class="skill-market-levels">
+          <!-- 公司级（当前页面已有，作为背景参照）-->
+          <div class="sml-item sml-company">
+            <div class="sml-tier-badge">L0</div>
+            <div class="sml-content">
+              <div class="sml-header">
+                <div class="sml-icon">🏢</div>
+                <div>
+                  <div class="sml-name">公司级官方市场</div>
+                  <div class="sml-subtitle">当前页面 · 经管委授权 · 6阶段认证</div>
+                </div>
+                <div class="sml-status sml-status-live">已上线</div>
+              </div>
+              <div class="sml-desc">由 AI 基建虚拟组统一管理，覆盖全员通用场景（协作办公、研发工具链、基础设施），经严格安全审核方可上线。</div>
+              <div class="sml-scope">📦 26 个技能包 · 98 个 Skill · 覆盖 4 层 × 6 职能通道</div>
+            </div>
+          </div>
+
+          <!-- 团队级 -->
+          <div class="sml-item sml-team">
+            <div class="sml-tier-badge sml-badge-team">L1</div>
+            <div class="sml-content">
+              <div class="sml-header">
+                <div class="sml-icon">👥</div>
+                <div>
+                  <div class="sml-name">团队级定制市场</div>
+                  <div class="sml-subtitle">基于 MyFlicker · 业务团队自建</div>
+                </div>
+                <div class="sml-status sml-status-hot">开放申请</div>
+              </div>
+              <div class="sml-desc">业务团队可在 MyFlicker 内创建团队专属 Skill 空间，沉淀本团队的业务流程、数据口径、代码规范等私有知识，仅团队内可见可用。</div>
+              <div class="sml-scope">🎯 适用：先锋队团队、项目组、虚拟组织</div>
+              <div class="sml-features">
+                <span class="sml-feat">📋 私有 Skill 创建</span>
+                <span class="sml-feat">🔒 团队隔离</span>
+                <span class="sml-feat">🧠 业务知识沉淀</span>
+                <span class="sml-feat">📊 团队用量统计</span>
+              </div>
+              <div class="sml-actions">
+                <a class="sml-btn sml-btn-primary" href="https://myflicker.kuaishou.com/team" target="_blank">在 MyFlicker 创建团队空间 →</a>
+                <a class="sml-btn" href="https://myflicker.kuaishou.com/docs/team-skill" target="_blank">查看团队 Skill 指南</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 个人级 -->
+          <div class="sml-item sml-personal">
+            <div class="sml-tier-badge sml-badge-personal">L2</div>
+            <div class="sml-content">
+              <div class="sml-header">
+                <div class="sml-icon">🧑‍💻</div>
+                <div>
+                  <div class="sml-name">个人专属市场</div>
+                  <div class="sml-subtitle">基于 MyFlicker · 个人自建</div>
+                </div>
+                <div class="sml-status sml-status-hot">开放申请</div>
+              </div>
+              <div class="sml-desc">每位快手人都可以在 MyFlicker 内训练属于自己的 AI 员工：记住你的工作风格、常用术语、偏好格式，打造真正懂你的私人 AI 搭档。</div>
+              <div class="sml-scope">🎯 适用：个人效率提升、私有 Prompt 沉淀、个人知识库</div>
+              <div class="sml-features">
+                <span class="sml-feat">🪄 个人 Prompt 库</span>
+                <span class="sml-feat">💾 个人长期记忆</span>
+                <span class="sml-feat">🔁 使用习惯学习</span>
+                <span class="sml-feat">🌟 收藏 &amp; 评分</span>
+              </div>
+              <div class="sml-actions">
+                <a class="sml-btn sml-btn-primary" href="https://myflicker.kuaishou.com" target="_blank">打开 MyFlicker 开始使用 →</a>
+                <a class="sml-btn" href="https://myflicker.kuaishou.com/docs/personal-skill" target="_blank">个人 Skill 入门指南</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 底部对比说明 -->
+        <div class="sml-compare-note">
+          <div class="sml-cn-item">
+            <div class="sml-cn-icon">🔓</div>
+            <div class="sml-cn-text"><strong>开放性</strong>：公司级全员可见 → 团队级内部可见 → 个人级仅自己可用</div>
+          </div>
+          <div class="sml-cn-item">
+            <div class="sml-cn-icon">⚙️</div>
+            <div class="sml-cn-text"><strong>灵活性</strong>：公司级严格认证 → 团队级轻量审核 → 个人级自由创建</div>
+          </div>
+          <div class="sml-cn-item">
+            <div class="sml-cn-icon">🔼</div>
+            <div class="sml-cn-text"><strong>晋升通道</strong>：优质团队/个人 Skill 经评审可申请晋升为公司级官方 Skill</div>
+          </div>
+        </div>
+      </div>
+    </section>
   `;
 
   // Bind role filters
