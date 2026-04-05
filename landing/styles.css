@@ -374,7 +374,13 @@ button { cursor: pointer; font-family: var(--font); }
 .pkg-card.l3 { border-color: var(--l3-border); border-left-color: var(--l3-color); background: var(--l3-bg); }
 .pkg-card.l2 { border-color: var(--l2-border); border-left-color: var(--l2-color); background: var(--l2-bg); }
 .pkg-card.l1 { border-color: var(--l1-border); border-left-color: var(--l1-color); background: var(--l1-bg); }
-.cell-empty { color: var(--text-muted); font-size: 12px; text-align: center; padding: 16px 0; }
+.cell-empty { color: var(--text-muted); font-size: 12px; text-align: center; padding: 8px 0; }
+.cell-empty-skill { display: block; padding: 8px 0; }
+
+/* 知识库预留槽 */
+.knowledge-slot { margin-top: 6px; padding: 5px 8px; border-radius: 5px; font-size: 11px; font-weight: 600; text-align: center; cursor: default; }
+.knowledge-slot-locked { background: #f1f5f9; color: #94a3b8; border: 1px dashed #cbd5e1; }
+.knowledge-slot-locked:hover { background: #e2e8f0; }
 .summary-row td { background: #f8fafc; font-size: 12px; font-weight: 600; text-align: center; padding: 10px; border: 1px solid var(--border); color: var(--text-secondary); }
 .summary-num { font-size: 16px; font-weight: 800; color: var(--text-primary); display: block; }
 /* Universal row */

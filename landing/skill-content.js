@@ -29,9 +29,9 @@ function renderSkillTab() {
   container.innerHTML = `
     <section class="section">
       <div class="section-inner">
-        <div class="section-label">🛒 AI Skill 市场</div>
-        <h2 class="section-title">快手公司级 AI Skill 市场</h2>
-        <p class="section-desc">AI 时代的「公司级 App Store」——为快手AI员工提供各类专业能力，所有 Skill 均经过六阶段安全审核</p>
+        <div class="section-label">🛒 AI 技能 &amp; 知识市场</div>
+        <h2 class="section-title">快手公司级 AI 技能 &amp; 知识市场</h2>
+        <p class="section-desc">AI 时代的「公司级 App Store」——每个格子包含<strong>技能</strong>（可直接调用）和<strong>知识</strong>（AI 员工的记忆库）两种类型，知识部分持续建设中</p>
 
         <!-- Stats bar -->
         <div class="skill-stats-bar">
@@ -85,7 +85,7 @@ function renderSkillTab() {
           <div class="legend-item"><div class="legend-dot" style="background:var(--canary-color)"></div><span>灰度中</span></div>
           <div class="legend-item"><div class="legend-dot" style="background:var(--wip-color)"></div><span>开发中</span></div>
           <div class="legend-item"><div class="legend-dot" style="background:var(--plan-color)"></div><span>计划中</span></div>
-          <span style="margin-left:8px">左侧彩条 = 架构层标识色 · 点击卡片查看详情</span>
+          <span style="margin-left:8px">左侧彩条 = 架构层标识色 · 每格 = 技能包（可点击）+ 知识库（建设中）· 点击卡片查看详情</span>
         </div>
 
         <!-- Matrix wrapper -->
@@ -215,7 +215,10 @@ function buildMatrixHTML(channels, layers) {
       const colIdx = channels.indexOf(ch);
       html += `<td class="matrix-cell" data-col="${ch.id}" data-col-idx="${colIdx}">`;
       if (pkgs.length === 0) {
-        html += `<div class="cell-empty">—</div>`;
+        html += `<div class="cell-empty">
+          <span class="cell-empty-skill">—</span>
+          <div class="knowledge-slot knowledge-slot-locked" title="知识库建设中">🔒 知识库</div>
+        </div>`;
       } else {
         pkgs.forEach(pkg => {
           html += `<div class="pkg-card ${layer.id}" data-pkg-id="${pkg.id}">
@@ -226,6 +229,8 @@ function buildMatrixHTML(channels, layers) {
             </div>
           </div>`;
         });
+        // 知识库占位卡（预留）
+        html += `<div class="knowledge-slot knowledge-slot-locked" title="知识库建设中">🔒 知识库</div>`;
       }
       html += `</td>`;
     });

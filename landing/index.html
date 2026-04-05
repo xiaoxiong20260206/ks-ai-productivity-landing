@@ -20,9 +20,8 @@
     <ul class="topbar-tabs" id="mainTabs">
       <li class="tab-item active" data-tab="intro">🚀 战役介绍</li>
       <li class="tab-item" data-tab="pioneer">🌟 AI-Native 先锋队</li>
-      <li class="tab-item" data-tab="product">🤖 快手AI员工</li>
-      <li class="tab-item" data-tab="skill">🛒 AI Skill 市场</li>
-      <li class="tab-item" data-tab="knowledge">📚 AI 知识库</li>
+      <li class="tab-item" data-tab="product">🤖 AI 员工</li>
+      <li class="tab-item" data-tab="skill">🛒 AI 技能 &amp; 知识市场</li>
     </ul>
     <div class="topbar-right">
       <span class="version-badge">内部版 v1.0 · 2026 Q2</span>
@@ -41,7 +40,7 @@
       <p class="hero-sub">让每个快手人都能用上 AI 员工<br/>目标：组织效率提升 15%+</p>
       <div class="hero-actions">
         <button class="btn-primary" onclick="switchTab('product')">体验快手AI员工 →</button>
-        <button class="btn-secondary" onclick="switchTab('skill')">查看 Skill 市场</button>
+        <button class="btn-secondary" onclick="switchTab('skill')">查看技能&知识市场</button>
       </div>
       <p class="hero-meta">经管委决议 · Sponsor：孙琳 / 郭亮 · AI基建虚拟组织 · 2026 Q2</p>
     </div>
@@ -545,8 +544,8 @@
   <!-- ====== TAB 5: 先锋队 ====== -->
   <div class="tab-panel" id="tab-pioneer"></div>
 
-  <!-- ====== TAB 4: AI 知识库 ====== -->
-  <div class="tab-panel" id="tab-knowledge">
+  <!-- ====== TAB 4: AI 知识库（已合并入技能&知识市场）====== -->
+  <div class="tab-panel" id="tab-knowledge" style="display:none">
     <section class="section section-coming">
       <div class="section-inner" style="text-align:center">
         <div class="coming-icon">📚</div>
@@ -592,8 +591,8 @@
     </div>
     <div class="footer-links">
       <a href="#" onclick="switchTab('intro')">战役介绍</a>
-      <a href="#" onclick="switchTab('product')">快手AI员工</a>
-      <a href="#" onclick="switchTab('skill')">Skill 市场</a>
+      <a href="#" onclick="switchTab('product')">AI 员工</a>
+      <a href="#" onclick="switchTab('skill')">技能&知识市场</a>
     </div>
   </div>
 </footer>
