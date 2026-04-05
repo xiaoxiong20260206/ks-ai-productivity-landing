@@ -161,6 +161,17 @@ function renderSkillTab() {
 function buildMatrixHTML(channels, layers) {
   const colCount = channels.length;
 
+  // L4 业务线下拉选项（与 pioneer-data 业务线对应）
+  const l4BizOptions = [
+    { id: 'zhuZhan',    name: '主站' },
+    { id: 'ksib',       name: 'KSIB' },
+    { id: 'shangYeHua', name: '商业化' },
+    { id: 'zongXiao',   name: '综效' },
+    { id: 'yanFaXian',  name: '研发线' },
+    { id: 'shujuPT',    name: '数据平台' },
+    { id: 'anQuan',     name: '安全风控' },
+  ];
+
   let html = `<table class="skill-matrix">`;
 
   // Header
@@ -202,18 +213,26 @@ function buildMatrixHTML(channels, layers) {
     }
 
     // Normal layer row
-    html += `<tr>
+    // L4 行头特殊处理：加业务线下拉
+    const isL4 = layer.id === 'l4';
+    html += `<tr data-layer="${layer.id}">
       <td class="row-header">
         <div class="layer-label" style="color:${layer.color}">
           <span class="layer-code">${layer.code}</span>
           <span class="layer-name">${layer.name}</span>
           <span class="layer-desc" style="font-size:9px;color:var(--text-muted)">${layer.desc}</span>
         </div>
+        ${isL4 ? `
+        <div class="l4-biz-selector">
+          <select id="l4BizSelect" class="l4-biz-select" onchange="switchL4Biz(this.value)">
+            ${l4BizOptions.map(b => `<option value="${b.id}">${b.name}</option>`).join('')}
+          </select>
+        </div>` : ''}
       </td>`;
     channels.forEach(ch => {
       const pkgs = layer.packages[ch.id] || [];
       const colIdx = channels.indexOf(ch);
-      html += `<td class="matrix-cell" data-col="${ch.id}" data-col-idx="${colIdx}">`;
+      html += `<td class="matrix-cell" data-col="${ch.id}" data-col-idx="${colIdx}" data-layer="${layer.id}">`;
       if (pkgs.length === 0) {
         html += `<div class="cell-empty">
           <span class="cell-empty-skill">—</span>
@@ -289,4 +308,55 @@ function statusBadge(status) {
 
 function statusLabel(status) {
   return { done: '✅ 已上线', canary: '🔵 灰度中', wip: '🟡 开发中', plan: '⬜ 计划中' }[status] || status;
+}
+
+// ── L4 业务线切换 ──────────────────────────────────────────────
+// skill-data.js 每个 l4 packages 里按 bizId 分包，切换时刷新 L4 行
+function switchL4Biz(bizId) {
+  const l4 = window.SKILL_DATA && window.SKILL_DATA.layers.find(l => l.id === 'l4');
+  if (!l4) return;
+
+  // L4 business-line overrides: packages per biz（从 l4BizPackages 读取，若无则 fallback 到默认）
+  const bizPkgs = (window.L4_BIZ_PACKAGES && window.L4_BIZ_PACKAGES[bizId]) || l4.packages;
+
+  // 更新 L4 行每个通道格
+  const channels = window.SKILL_DATA.channels;
+  const l4Cells = document.querySelectorAll('.matrix-cell[data-layer="l4"]');
+  l4Cells.forEach(cell => {
+    const chId = cell.dataset.col;
+    const pkgs = (bizPkgs[chId]) || [];
+    cell.innerHTML = '';
+    if (pkgs.length === 0) {
+      cell.innerHTML = `<div class="cell-empty">
+        <span class="cell-empty-skill">—</span>
+        <div class="knowledge-slot knowledge-slot-locked" title="知识库建设中">🔒 知识库</div>
+      </div>`;
+    } else {
+      pkgs.forEach(pkg => {
+        const div = document.createElement('div');
+        div.className = `pkg-card l4`;
+        div.dataset.pkgId = pkg.id;
+        div.innerHTML = `<div class="pkg-card-title">${pkg.title}</div>
+          <div class="pkg-card-meta">
+            <span class="status-badge ${statusBadge(pkg.status)}">${statusLabel(pkg.status)}</span>
+            ${pkg.skillCount ? `<span class="pkg-count">${pkg.skillCount} 技能</span>` : ''}
+          </div>`;
+        div.addEventListener('click', () => {
+          const p = findPkg(pkg.id, window.SKILL_DATA.layers);
+          if (p) openSkillModal(p); else openSkillModal(pkg);
+        });
+        cell.appendChild(div);
+      });
+      const ks = document.createElement('div');
+      ks.className = 'knowledge-slot knowledge-slot-locked';
+      ks.title = '知识库建设中';
+      ks.textContent = '🔒 知识库';
+      cell.appendChild(ks);
+    }
+  });
+
+  // 更新行头显示当前业务线名
+  const sel = document.getElementById('l4BizSelect');
+  if (sel) sel.value = bizId;
+}
 }

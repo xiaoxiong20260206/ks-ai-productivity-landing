@@ -68,3 +68,66 @@ window.SKILL_DATA = {
     packages: 26, online: 36, canary: 5, wip: 16, plan: 41, total: 98
   }
 };
+
+/* ── L4 业务线定制包（按业务线切换时使用）──────────────────────────
+ * 默认显示「主站」；切换下拉后替换 L4 行内容
+ * 格式：{ [bizId]: { [channelId]: [ pkgObject, ... ] } }
+ */
+window.L4_BIZ_PACKAGES = {
+  zhuZhan: {
+    dev:     [{ id:'l4-dev',     title:'主站研发 AI 技能包',     status:'canary', skillCount:8,  desc:'面向主站研发工程师的定制化 AI 能力包，覆盖代码生成、需求澄清、自动测试等' }],
+    product: [{ id:'l4-product', title:'主站数据分析技能包',     status:'done',   skillCount:4,  desc:'主站产品数据分析与洞察能力' }],
+    design:  [{ id:'l4-design',  title:'主站视觉设计技能包',     status:'wip',    skillCount:3,  desc:'短视频封面优化/直播间视觉规范/UGC 内容视觉打分' }],
+    data:    [{ id:'l4-data',    title:'主站数据洞察技能包',     status:'done',   skillCount:5,  desc:'数据分析师专属，覆盖取数、分析、报表全流程' }],
+    ops:     [{ id:'l4-ops',     title:'主站运营 AI 技能包',     status:'done',   skillCount:6,  desc:'主站运营专属能力，覆盖内容审核、活动策划等' }],
+    admin:   [{ id:'l4-admin',   title:'行政职能 AI 技能包',     status:'done',   skillCount:4,  desc:'行政/HR/法务专属，覆盖办公自动化' }],
+  },
+  ksib: {
+    dev:     [{ id:'l4-ksib-dev',     title:'KSIB 研发 AI 技能包',    status:'wip',    skillCount:5,  desc:'面向 KSIB 研发工程师，支持海外多时区协作与本地化研发' }],
+    product: [{ id:'l4-ksib-product', title:'KSIB 产品分析技能包',    status:'plan',   skillCount:3,  desc:'海外市场产品数据分析' }],
+    design:  [],
+    data:    [{ id:'l4-ksib-data',    title:'KSIB 数据洞察技能包',    status:'plan',   skillCount:3,  desc:'海外业务数据分析与报告自动化' }],
+    ops:     [{ id:'l4-ksib-ops',     title:'KSIB 运营 AI 技能包',    status:'plan',   skillCount:4,  desc:'海外运营内容生成与活动策划' }],
+    admin:   [],
+  },
+  shangYeHua: {
+    dev:     [{ id:'l4-sy-dev',     title:'商业化研发 AI 技能包',   status:'done',   skillCount:10, desc:'商业化研发全流程 AI 化，覆盖广告/品牌/电商研发链路' }],
+    product: [{ id:'l4-sy-product', title:'商业化产品技能包',       status:'wip',    skillCount:4,  desc:'商业化产品规划与数据分析' }],
+    design:  [{ id:'l4-sy-design',  title:'商业化创意设计技能包',   status:'plan',   skillCount:3,  desc:'广告创意生成与优化' }],
+    data:    [{ id:'l4-sy-data',    title:'商业化数据洞察技能包',   status:'done',   skillCount:5,  desc:'广告数据看板智能分析' }],
+    ops:     [{ id:'l4-sy-ops',     title:'商业化运营 AI 技能包',   status:'done',   skillCount:6,  desc:'生服营销/活动策划/内容生成' }],
+    admin:   [],
+  },
+  zongXiao: {
+    dev:     [{ id:'l4-zx-dev',  title:'综效研发 AI 技能包',    status:'canary', skillCount:4, desc:'企业应用前端研发效能提升' }],
+    product: [],
+    design:  [],
+    data:    [],
+    ops:     [],
+    admin:   [{ id:'l4-zx-admin', title:'综效职能 AI 技能包',   status:'plan',   skillCount:3, desc:'企业内部系统行政职能自动化' }],
+  },
+  yanFaXian: {
+    dev:     [{ id:'l4-yfx-dev',  title:'研发线 AI 技能包',    status:'done',   skillCount:8, desc:'研发效能中心 AI Native 研发模式工具链' }],
+    product: [],
+    design:  [],
+    data:    [],
+    ops:     [],
+    admin:   [],
+  },
+  shujuPT: {
+    dev:     [{ id:'l4-sj-dev',     title:'数据平台研发 AI 技能包', status:'done',   skillCount:6, desc:'数据平台工程师代码生成/SQL 优化/数据血缘分析' }],
+    product: [],
+    design:  [],
+    data:    [{ id:'l4-sj-data',    title:'数据平台分析师技能包',   status:'done',   skillCount:5, desc:'经营数据中心全流程 AI 分析' }],
+    ops:     [],
+    admin:   [],
+  },
+  anQuan: {
+    dev:     [{ id:'l4-aq-dev',  title:'安全风控研发 AI 技能包', status:'wip',    skillCount:4, desc:'安全攻防、漏洞检测、合规扫描 AI 辅助' }],
+    product: [],
+    design:  [],
+    data:    [],
+    ops:     [],
+    admin:   [],
+  },
+};

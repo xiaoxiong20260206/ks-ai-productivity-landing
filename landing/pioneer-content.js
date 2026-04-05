@@ -1,6 +1,6 @@
-/* pioneer-content.js — 先锋队 Tab 渲染逻辑 v2
- * 布局：行 = 业务线，列 = 通道（AI Native / AI 驱动 / AI 增强）
- * 单元格状态：进行中 / 已成功（含案例按钮）
+/* pioneer-content.js — 先锋队 Tab v3（视觉优化版）
+ * 布局：行 = 业务线（7行），列 = 通道（6列，与Skill市场对齐）
+ * 视觉：卡片化通道列头、渐变业务线行头、团队卡片立体感
  */
 (function () {
 
@@ -10,71 +10,74 @@
     const { bizLines, tiers, teams } = window.PIONEER_DATA;
 
     const tierMap = Object.fromEntries(tiers.map(t => [t.id, t]));
-    const bizMap  = Object.fromEntries(bizLines.map(b => [b.id, b]));
 
     // 统计
     const totalTeams  = teams.length;
-    const nativeCount = teams.filter(t => t.tier === 'native').length;
+    const nativeCount = teams.filter(t => t.status.includes('Native')).length;
     const doneCount   = teams.filter(t => t.caseTitle).length;
 
-    // ── 状态分类逻辑 ──────────────────────────────────────
-    // caseTitle 非空 → 已成功；否则 → 进行中
     function isDone(team) { return !!team.caseTitle; }
 
-    // ── 单个业务线单元格 ──────────────────────────────────
-    function cellHTML(bizId, tierId) {
-      const matched = teams.filter(t => t.biz === bizId && t.tier === tierId);
-      if (matched.length === 0) {
-        return `<div class="pm-cell pm-cell-empty">—</div>`;
-      }
-      const tier = tierMap[tierId];
-      const cards = matched.map(t => {
-        const done = isDone(t);
-        return `<div class="pm-team-card ${done ? 'pm-card-done' : 'pm-card-wip'}" style="--tier-color:${tier.color}">
-          <div class="pm-team-top">
-            <span class="pm-team-name">${t.name}</span>
-            <span class="pm-status-dot ${done ? 'dot-done' : 'dot-wip'}" title="${done ? '已成功' : '进行中'}"></span>
-          </div>
-          <div class="pm-team-meta">
-            <span class="pm-lead">${t.lead !== '—' ? t.lead : ''}</span>
-            <span class="pm-size">${t.size}</span>
-          </div>
-          <div class="pm-team-status-text">${t.status}</div>
-          ${done ? `<button class="pm-case-btn" onclick="showPioneerCase('${bizId}','${tierId}','${t.name.replace(/'/g, "\\'")}')">查看案例 →</button>` : ''}
-        </div>`;
-      }).join('');
-      return `<div class="pm-cell">${cards}</div>`;
+    // ── 团队卡片 ──────────────────────────────────────────
+    function teamCardHTML(t, tier, bizId) {
+      const done = isDone(t);
+      const safeName = t.name.replace(/'/g, "\\'");
+      return `<div class="pm-card ${done ? 'pm-card-done' : 'pm-card-wip'}">
+        <div class="pm-card-header">
+          <span class="pm-card-name">${t.name}</span>
+          <span class="pm-card-badge ${done ? 'badge-success' : 'badge-progress'}">${done ? '✓ 已成功' : '进行中'}</span>
+        </div>
+        <div class="pm-card-info">
+          ${t.lead && t.lead !== '—' ? `<span class="pm-info-item">👤 ${t.lead}</span>` : ''}
+          <span class="pm-info-item">👥 ${t.size}</span>
+        </div>
+        <div class="pm-card-status">${t.status}</div>
+        ${done ? `<button class="pm-case-btn" onclick="showPioneerCase('${bizId}','${tier.id}','${safeName}')">查看案例 →</button>` : ''}
+      </div>`;
     }
 
-    // ── 表头：3个通道列 ───────────────────────────────────
-    const thead = `<div class="pm-row pm-header-row">
-      <div class="pm-biz-header-cell pm-corner">
-        <span>业务线</span>
-      </div>
-      ${tiers.map(tier => `
-        <div class="pm-tier-header-cell" style="--tier-color:${tier.color};--tier-bg:${tier.bg};--tier-border:${tier.border}">
-          <div class="pm-tier-name">${tier.label}</div>
-          <div class="pm-tier-desc">${tier.desc}</div>
-          <div class="pm-tier-count">${teams.filter(t => t.tier === tier.id).length} 个团队</div>
-        </div>`).join('')}
-    </div>`;
+    // ── 单元格 ────────────────────────────────────────────
+    function cellHTML(bizId, tierId) {
+      const matched = teams.filter(t => t.biz === bizId && t.tier === tierId);
+      const tier = tierMap[tierId];
+      if (matched.length === 0) {
+        return `<td class="pm-cell pm-cell-empty"><span class="pm-empty-dash">—</span></td>`;
+      }
+      return `<td class="pm-cell">${matched.map(t => teamCardHTML(t, tier, bizId)).join('')}</td>`;
+    }
 
-    // ── 数据行：每行 = 一个业务线 ─────────────────────────
-    const rows = bizLines.map(biz => `
-      <div class="pm-row">
-        <div class="pm-biz-label-cell" style="--biz-color:${biz.color};--biz-bg:${biz.bg};--biz-border:${biz.border}">
-          <div class="pm-biz-name">${biz.name}</div>
-          <div class="pm-biz-bp">BP: ${biz.bp}</div>
-          <div class="pm-biz-count">${teams.filter(t => t.biz === biz.id).length} 队</div>
-        </div>
-        ${tiers.map(tier => cellHTML(biz.id, tier.id)).join('')}
-      </div>`).join('');
-
-    // ── 图例 ─────────────────────────────────────────────
-    const legend = `<div class="pm-legend">
-      <span class="pm-legend-item"><span class="dot-done"></span> 已成功（有案例）</span>
-      <span class="pm-legend-item"><span class="dot-wip"></span> 进行中</span>
-    </div>`;
+    // ── 表格 HTML ─────────────────────────────────────────
+    const tableHTML = `
+      <div class="pm-table-wrap">
+        <table class="pm-table">
+          <thead>
+            <tr>
+              <th class="pm-th-corner">业务线</th>
+              ${tiers.map(tier => `
+                <th class="pm-th-tier" style="--tc:${tier.color};--tb:${tier.bg};--tbd:${tier.border}">
+                  <div class="pm-th-tier-bar"></div>
+                  <div class="pm-th-tier-name">${tier.label}</div>
+                  <div class="pm-th-tier-desc">${tier.desc}</div>
+                  <div class="pm-th-tier-count">${teams.filter(t => t.tier === tier.id).length} 个团队</div>
+                </th>`).join('')}
+            </tr>
+          </thead>
+          <tbody>
+            ${bizLines.map(biz => `
+              <tr>
+                <td class="pm-td-biz" style="--bc:${biz.color};--bb:${biz.bg};--bbd:${biz.border}">
+                  <div class="pm-biz-bar"></div>
+                  <div class="pm-biz-content">
+                    <div class="pm-biz-name">${biz.name}</div>
+                    <div class="pm-biz-meta">BP: ${biz.bp}</div>
+                    <div class="pm-biz-cnt">${teams.filter(t => t.biz === biz.id).length} 个团队</div>
+                  </div>
+                </td>
+                ${tiers.map(tier => cellHTML(biz.id, tier.id)).join('')}
+              </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>`;
 
     // ── 案例 Modal ────────────────────────────────────────
     const caseModal = `<div id="pioneerCaseModal" class="modal-overlay" onclick="closePioneerCase(event)">
@@ -87,51 +90,59 @@
       </div>
     </div>`;
 
-    // ── 渲染进页面 ────────────────────────────────────────
+    // ── 渲染 ──────────────────────────────────────────────
     panel.innerHTML = `
       <section class="section">
         <div class="section-inner">
           <div class="section-label">🌟 AI研发范式跃迁 · 先锋队计划</div>
           <h2 class="section-title">AI-Native 先锋队全景</h2>
-          <p class="section-desc">行 = 业务线，列 = 试点通道 · 共 ${totalTeams} 个先锋队，${nativeCount} 支 AI Native 团队，${doneCount} 个案例已产出</p>
+          <p class="section-desc">行 = 业务线，列 = 职能通道 · 共 <strong>${totalTeams}</strong> 个先锋队，<strong>${nativeCount}</strong> 支 AI Native 团队，<strong>${doneCount}</strong> 个案例已产出</p>
 
           <!-- 统计条 -->
-          <div class="pioneer-stats">
-            <div class="ps-item"><span class="ps-num">${totalTeams}</span><span class="ps-label">先锋队总数</span></div>
-            <div class="ps-item"><span class="ps-num" style="color:#dc2626">${nativeCount}</span><span class="ps-label">AI Native 团队</span></div>
-            <div class="ps-item"><span class="ps-num" style="color:#16a34a">${doneCount}</span><span class="ps-label">已产出案例</span></div>
-            <div class="ps-item"><span class="ps-num">${bizLines.length}</span><span class="ps-label">覆盖业务线</span></div>
-          </div>
-
-          ${legend}
-
-          <!-- 矩阵 -->
-          <div class="pioneer-matrix-wrap">
-            <div class="pioneer-matrix pioneer-matrix-v2">
-              ${thead}${rows}
+          <div class="pm-stats">
+            <div class="pm-stat-item">
+              <div class="pm-stat-num">${totalTeams}</div>
+              <div class="pm-stat-label">先锋队总数</div>
+            </div>
+            <div class="pm-stat-item pm-stat-native">
+              <div class="pm-stat-num">${nativeCount}</div>
+              <div class="pm-stat-label">AI Native 团队</div>
+            </div>
+            <div class="pm-stat-item pm-stat-done">
+              <div class="pm-stat-num">${doneCount}</div>
+              <div class="pm-stat-label">已产出案例</div>
+            </div>
+            <div class="pm-stat-item">
+              <div class="pm-stat-num">${bizLines.length}</div>
+              <div class="pm-stat-label">覆盖业务线</div>
             </div>
           </div>
+
+          <!-- 图例 -->
+          <div class="pm-legend-bar">
+            <span class="pm-leg"><span class="pm-leg-dot pm-leg-success"></span>已成功（有案例）</span>
+            <span class="pm-leg"><span class="pm-leg-dot pm-leg-wip"></span>进行中</span>
+            <span class="pm-leg-note">点击「查看案例 →」可查看实践详情</span>
+          </div>
+
+          ${tableHTML}
         </div>
       </section>
       ${caseModal}
     `;
 
-    // 绑定 Modal 关闭
+    // 案例 Modal 逻辑
     window.closePioneerCase = function(e) {
       if (!e || e.target === document.getElementById('pioneerCaseModal')) {
         document.getElementById('pioneerCaseModal').classList.remove('open');
       }
     };
 
-    // 绑定案例查看
     window.showPioneerCase = function(bizId, tierId, teamName) {
-      const { cases } = window.PIONEER_DATA;
-      const biz  = window.PIONEER_DATA.bizLines.find(b => b.id === bizId);
-      // 先按团队名匹配，再按业务线兜底
-      let c = cases.find(x => x.biz === bizId && x.team === teamName);
-      if (!c) c = cases.find(x => x.biz === bizId);
+      const biz   = window.PIONEER_DATA.bizLines.find(b => b.id === bizId);
+      let c = window.PIONEER_DATA.cases.find(x => x.biz === bizId && x.team === teamName);
+      if (!c) c = window.PIONEER_DATA.cases.find(x => x.biz === bizId);
 
-      const modal = document.getElementById('pioneerCaseModal');
       document.getElementById('pioneerModalTitle').textContent = teamName + ' · 实践案例';
       document.getElementById('pioneerModalHeader').style.borderTopColor = biz ? biz.color : '#16a34a';
 
@@ -151,7 +162,7 @@
       } else {
         body.innerHTML = `<p style="color:var(--text-muted);font-size:14px">案例详情暂未录入，请联系效能BP获取。</p>`;
       }
-      modal.classList.add('open');
+      document.getElementById('pioneerCaseModal').classList.add('open');
     };
   }
 
