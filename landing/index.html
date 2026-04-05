@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>快手 AI 生产力</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ========== TOPBAR ========== -->
+<nav id="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-brand">
+      <span class="brand-icon">⚡</span>
+      <span class="brand-name">快手 AI 生产力</span>
+      <span class="brand-badge">官方 · 经管委授权</span>
+    </div>
+    <ul class="topbar-tabs" id="mainTabs">
+      <li class="tab-item active" data-tab="intro">🚀 战役介绍</li>
+      <li class="tab-item" data-tab="product">🤖 快手AI员工</li>
+      <li class="tab-item" data-tab="skill">🛒 AI Skill 市场</li>
+      <li class="tab-item" data-tab="knowledge">📚 AI 知识库</li>
+    </ul>
+    <div class="topbar-right">
+      <span class="version-badge">内部版 v1.0 · 2026 Q2</span>
+      <div class="user-avatar">S</div>
+    </div>
+  </div>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-label">公司级 AI 生产力战役 · 2026 Q2</div>
+      <h1 class="hero-title">快手全员 AI 生产力战役</h1>
+      <p class="hero-sub">让每个快手人都能用上 AI 员工<br/>目标：组织效率提升 15%+</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="switchTab('product')">体验快手AI员工 →</button>
+        <button class="btn-secondary" onclick="switchTab('skill')">查看 Skill 市场</button>
+      </div>
+      <p class="hero-meta">经管委决议 · Sponsor：孙琳 / 郭亮 · AI基建虚拟组织 · 2026 Q2</p>
+    </div>
+    <div class="hero-right">
+      <div class="countdown-card">
+        <div class="countdown-label">距 4.12 正式发布</div>
+        <div class="countdown-number" id="countdownDays">—</div>
+        <div class="countdown-unit">天</div>
+        <div class="countdown-sub">CodeFlicker V1.1 + 快手AI员工（MyFlicker V1.0）</div>
+        <div class="countdown-bar">
+          <div class="countdown-progress" id="countdownProgress"></div>
+        </div>
+        <div class="milestone-chips">
+          <span class="chip chip-done">✅ 0403 内测版已发布</span>
+          <span class="chip chip-hot">🔥 0412 正式版冲刺中</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TABS CONTENT ========== -->
+<main id="main-content">
+
+  <!-- ====== TAB 1: 战役介绍 ====== -->
+  <div class="tab-panel active" id="tab-intro">
+    <!-- Section A: 用户入口矩阵 -->
+    <section class="section section-entry">
+      <div class="section-inner">
+        <div class="section-label">📌 找到你的 AI 生产力起点</div>
+        <h2 class="section-title">你是谁？从这里开始</h2>
+        <p class="section-desc">无论你是研发、产品、运营还是行政，AI 员工都有适合你的方式</p>
+        <div class="entry-grid">
+          <div class="entry-card entry-card-blue">
+            <div class="entry-icon">👨‍💻</div>
+            <div class="entry-title">研发工程师</div>
+            <div class="entry-primary">
+              <span class="entry-badge">首选</span>体验快手AI员工（MyFlicker）
+            </div>
+            <div class="entry-extends">
+              <span class="ext-tag">CodeFlicker 编程加速</span>
+              <span class="ext-tag">参与 Skill 建设</span>
+            </div>
+            <button class="entry-btn" onclick="switchTab('product')">立即体验 →</button>
+          </div>
+          <div class="entry-card entry-card-purple">
+            <div class="entry-icon">💼</div>
+            <div class="entry-title">产品 / 运营 / 数据</div>
+            <div class="entry-primary">
+              <span class="entry-badge">首选</span>体验快手AI员工（MyFlicker）
+            </div>
+            <div class="entry-extends">
+              <span class="ext-tag">查看适合我的 Skill 包</span>
+              <span class="ext-tag">提交 Skill 需求</span>
+            </div>
+            <button class="entry-btn" onclick="switchTab('product')">立即体验 →</button>
+          </div>
+          <div class="entry-card entry-card-green">
+            <div class="entry-icon">🏢</div>
+            <div class="entry-title">设计 / 行政 / 职能</div>
+            <div class="entry-primary">
+              <span class="entry-badge">首选</span>体验快手AI员工（MyFlicker）
+            </div>
+            <div class="entry-extends">
+              <span class="ext-tag">行政 AI 化先行</span>
+              <span class="ext-tag">4月「今天请客」活动</span>
+            </div>
+            <button class="entry-btn" onclick="switchTab('product')">立即体验 →</button>
+          </div>
+          <div class="entry-card entry-card-amber">
+            <div class="entry-icon">👔</div>
+            <div class="entry-title">管理者 / Leader</div>
+            <div class="entry-primary">
+              <span class="entry-badge">首选</span>带领团队 AI-Native 转型
+            </div>
+            <div class="entry-extends">
+              <span class="ext-tag">申请 AI 先锋队</span>
+              <span class="ext-tag">了解战役全貌</span>
+            </div>
+            <button class="entry-btn entry-btn-amber" onclick="document.getElementById('section-pioneer').scrollIntoView({behavior:'smooth'})">了解先锋队 →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section B: 战役背景 -->
+    <section class="section section-bg-gray">
+      <div class="section-inner">
+        <div class="section-label">📖 战役背景</div>
+        <h2 class="section-title">为什么现在做这件事</h2>
+        <div class="three-cols">
+          <div class="col-card">
+            <div class="col-icon">🌐</div>
+            <h3>外部趋势</h3>
+            <p>AI 正从「个人工具」进化为「可独立承担工作的数字员工」。ChatGPT、Cursor、Manus 先后验证——谁先将 AI 融入组织工作流，谁就在效率上拉开差距。</p>
+          </div>
+          <div class="col-card">
+            <div class="col-icon">⚡</div>
+            <h3>快手时机</h3>
+            <p>三年 CodeFlicker 积累，AI 基础设施就绪。2026 年是快手完成组织级跃迁的关键年——现在不做，窗口期即将关闭。</p>
+          </div>
+          <div class="col-card">
+            <div class="col-icon">🏛️</div>
+            <h3>组织决策</h3>
+            <p>经管委正式决议，成立「AI 基建」虚拟组织。Sponsor：孙琳、郭亮，覆盖研发、主站、商业化、综效、社科、安全六大业务线。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section C: 目标体系 -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-label">🎯 目标体系</div>
+        <h2 class="section-title">这场战役要打赢什么</h2>
+        <div class="stats-strip">
+          <div class="stat-chip">
+            <div class="stat-accent" style="background:var(--accent-blue)"></div>
+            <div class="stat-num">15%<span class="stat-sup">+</span></div>
+            <div class="stat-label">组织效率提升目标</div>
+            <div class="stat-sub">2026年全年</div>
+          </div>
+          <div class="stat-chip">
+            <div class="stat-accent" style="background:var(--accent-purple)"></div>
+            <div class="stat-num">11</div>
+            <div class="stat-label">子项目并行推进</div>
+            <div class="stat-sub">业务/产品/技术/运营</div>
+          </div>
+          <div class="stat-chip">
+            <div class="stat-accent" style="background:var(--accent-green)"></div>
+            <div class="stat-num">全员</div>
+            <div class="stat-label">覆盖目标</div>
+            <div class="stat-sub">研发 + 非研发</div>
+          </div>
+          <div class="stat-chip">
+            <div class="stat-accent" style="background:var(--accent-amber)"></div>
+            <div class="stat-num">4.12</div>
+            <div class="stat-label">正式发布里程碑</div>
+            <div class="stat-sub">MyFlicker V1.0 + CodeFlicker V1.1</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section D: 五阶段演进 -->
+    <section class="section section-bg-gray">
+      <div class="section-inner">
+        <div class="section-label">🗺️ 产品演进路线</div>
+        <h2 class="section-title">AI 生产力的五个阶段</h2>
+        <div class="timeline-h">
+          <div class="tl-item tl-done">
+            <div class="tl-dot tl-dot-done">✓</div>
+            <div class="tl-content">
+              <div class="tl-year">2025</div>
+              <div class="tl-title">AI 辅助提效</div>
+              <div class="tl-desc">KATE + CodeAgent，人→工具提效</div>
+            </div>
+          </div>
+          <div class="tl-line tl-line-done"></div>
+          <div class="tl-item tl-done">
+            <div class="tl-dot tl-dot-done">✓</div>
+            <div class="tl-content">
+              <div class="tl-year">2026 Q1</div>
+              <div class="tl-title">AI 工程师</div>
+              <div class="tl-desc">CodeFlicker，AI 替代部分研发工作</div>
+            </div>
+          </div>
+          <div class="tl-line tl-line-done"></div>
+          <div class="tl-item tl-current">
+            <div class="tl-dot tl-dot-current">🔥</div>
+            <div class="tl-content">
+              <div class="tl-year">2026 Q2</div>
+              <div class="tl-title">AI 员工 ← 你在这里</div>
+              <div class="tl-desc">快手AI员工（MyFlicker），全员可用</div>
+            </div>
+            <div class="tl-badge">当前阶段</div>
+          </div>
+          <div class="tl-line"></div>
+          <div class="tl-item tl-future">
+            <div class="tl-dot tl-dot-future">◯</div>
+            <div class="tl-content">
+              <div class="tl-year">2026 Q3</div>
+              <div class="tl-title">AI 团队</div>
+              <div class="tl-desc">MyFlicker 团队版，共享一个 AI 员工</div>
+            </div>
+          </div>
+          <div class="tl-line"></div>
+          <div class="tl-item tl-future">
+            <div class="tl-dot tl-dot-future">◯</div>
+            <div class="tl-content">
+              <div class="tl-year">2026 Q4-2027</div>
+              <div class="tl-title">AI 组织</div>
+              <div class="tl-desc">组织共享 AI 员工，全面 AI-Native</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section E: 本周进展 -->
+    <section class="section section-dark" id="section-progress">
+      <div class="section-inner">
+        <div class="section-label" style="color:var(--blue-300)">📊 本周进展</div>
+        <h2 class="section-title" style="color:#fff">11 个子项目全景</h2>
+        <p class="section-desc" style="color:var(--blue-200)">数据每周更新 · 最后更新：2026-04-05（第 3.30-4.5 周）</p>
+
+        <div class="progress-overall">
+          <div class="po-label">4月12日正式发布冲刺进度</div>
+          <div class="po-bar"><div class="po-fill" style="width:72%"></div></div>
+          <div class="po-pct">72%</div>
+        </div>
+
+        <div class="projects-grid">
+          <div class="proj-card">
+            <div class="proj-cat cat-biz">业务应用</div>
+            <div class="proj-name">2B AI-Native 转型（Top-Down）</div>
+            <div class="proj-status status-green">🟢 正常</div>
+            <div class="proj-progress">主站/商业化/KSIB 先锋队 3月 Showcase 已完成，Q2 全员化启动</div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-cat cat-biz">业务应用</div>
+            <div class="proj-name">全员 AI 提效（Down-Top）</div>
+            <div class="proj-status status-green">🟢 正常</div>
+            <div class="proj-progress">4月活动方案已输出，4.20「今天请客」全员活动推进中</div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-cat cat-product">产品建设</div>
+            <div class="proj-name">CodeFlicker 产品</div>
+            <div class="proj-status status-green">🟢 正常</div>
+            <div class="proj-progress">V1.1 版本冲刺中，目标 4.12 发布</div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-cat cat-product">产品建设</div>
+            <div class="proj-name">快手AI员工（MyFlicker）</div>
+            <div class="proj-status status-yellow">🟡 跟踪中</div>
+            <div class="proj-progress">V0.1 内测版已发布；chat 接口风险跟踪中，不影响 4.12 节奏</div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-cat cat-tech">技术能力</div>
+            <div class="proj-name">自进化能力</div>
+            <div class="proj-status status-green">🟢 正常</div>
+            <div class="proj-progress">长期记忆、AgentCore 重构已完成；自进化机制 4.12 上线</div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-cat cat-tech">技术能力</div>
+            <div class="proj-name">Skill 市场建设</div>
+            <div class="proj-status status-yellow">🟡 部分延期</div>
+            <div class="proj-progress">技术基建+产品能力 4.10 完成；Roadmap 展示排清明后，非刚需</div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-cat cat-tech">技术能力</div>
+            <div class="proj-name">Auto 模式</div>
+            <div class="proj-status status-green">🟢 正常</div>
+            <div class="proj-progress">一期 4.7 交付；方案已完成，支持 Claude/Kimi 等 provider</div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-cat cat-tech">技术能力</div>
+            <div class="proj-name">成本治理</div>
+            <div class="proj-status status-green">🟢 正常</div>
+            <div class="proj-progress">Token 看板已输出；成本优化方案 4.9 交付</div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-cat cat-tech">技术能力</div>
+            <div class="proj-name">安全建设</div>
+            <div class="proj-status status-green">🟢 正常</div>
+            <div class="proj-progress">AP 认证方案已上线；安全需求开发 4.12 完成</div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-cat cat-tech">技术能力</div>
+            <div class="proj-name">高可用弹性建设</div>
+            <div class="proj-status status-green">🟢 正常</div>
+            <div class="proj-progress">技术方案 4.7 对齐；机器 4.9 就绪</div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-cat cat-ops">运营推广</div>
+            <div class="proj-name">运营推广</div>
+            <div class="proj-status status-green">🟢 正常</div>
+            <div class="proj-progress">产品策划方案输出中；培训方案 4.10 完成</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section F: 先锋队成果 -->
+    <section class="section" id="section-pioneer">
+      <div class="section-inner">
+        <div class="section-label">🌟 先锋队成果</div>
+        <h2 class="section-title">真实案例，不是口号</h2>
+        <p class="section-desc">三个业务线先锋队已完成 3 月 Showcase，效率提升有数据可循</p>
+        <div class="pioneer-grid">
+          <div class="pioneer-card">
+            <div class="pioneer-tag">主站先锋队</div>
+            <div class="pioneer-metric">AI 辅助代码生成</div>
+            <div class="pioneer-num">40%<span class="pioneer-unit">+ 效率提升</span></div>
+            <div class="pioneer-desc">研发工程师借助 AI 员工完成需求分析、代码编写、测试用例生成全流程，已沉淀最佳实践 Skill 包</div>
+          </div>
+          <div class="pioneer-card">
+            <div class="pioneer-tag">商业化先锋队</div>
+            <div class="pioneer-metric">数据分析 + 报告生成</div>
+            <div class="pioneer-num">80%<span class="pioneer-unit"> 时间节省</span></div>
+            <div class="pioneer-desc">数据分析师使用 AI 员工自动取数、生成分析报告，每日节省 3-4 小时重复工作</div>
+          </div>
+          <div class="pioneer-card">
+            <div class="pioneer-tag">KSIB 先锋队</div>
+            <div class="pioneer-metric">产品需求研究</div>
+            <div class="pioneer-num">90%<span class="pioneer-unit"> 调研时间↓</span></div>
+            <div class="pioneer-desc">产品经理使用 AI 员工完成竞品调研、需求文档撰写，调研周期从 1 周压缩至半天</div>
+          </div>
+        </div>
+        <!-- Top-Down / Down-Top 渠道 -->
+        <div class="channels-block">
+          <div class="channel-item">
+            <div class="channel-icon">⬆️</div>
+            <div class="channel-body">
+              <div class="channel-title">Top-Down：AI-Native 转型通道</div>
+              <div class="channel-desc">三个业务线先锋队已建立 → Q2 扩展全员 · 通道委员长：叶紫（质量）、徐海生（设计）</div>
+              <div class="channel-tags">
+                <span class="ch-tag">主站</span><span class="ch-tag">商业化</span><span class="ch-tag">KSIB</span><span class="ch-tag ch-more">更多通道扩展中...</span>
+              </div>
+            </div>
+          </div>
+          <div class="channel-item">
+            <div class="channel-icon">⬇️</div>
+            <div class="channel-body">
+              <div class="channel-title">Down-Top：全员 AI 提效活动</div>
+              <div class="channel-desc">月度主题活动，人人都能参与</div>
+              <div class="channel-tags">
+                <span class="ch-tag ch-active">4月 行政AI化 🔥</span>
+                <span class="ch-tag">5月 财务AI化</span>
+                <span class="ch-tag">6月 移动办公AI化</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section G: 加入行动 CTA -->
+    <section class="section section-cta">
+      <div class="section-inner">
+        <h2 class="section-title" style="color:#fff">准备好了吗？从这里加入</h2>
+        <p class="section-desc" style="color:var(--blue-200)">三个行动入口，找到最适合你的方式</p>
+        <div class="cta-grid">
+          <div class="cta-card">
+            <div class="cta-icon">🤖</div>
+            <div class="cta-title">体验快手AI员工</div>
+            <div class="cta-desc">立即申请 MyFlicker，让 AI 员工帮你处理日常工作</div>
+            <button class="cta-btn cta-btn-primary" onclick="switchTab('product')">了解并申请</button>
+          </div>
+          <div class="cta-card">
+            <div class="cta-icon">🌟</div>
+            <div class="cta-title">申请加入先锋队</div>
+            <div class="cta-desc">带领团队率先完成 AI-Native 转型，沉淀最佳实践</div>
+            <button class="cta-btn cta-btn-outline">联系 PMO 申请</button>
+          </div>
+          <div class="cta-card">
+            <div class="cta-icon">💡</div>
+            <div class="cta-title">提交 Skill 需求</div>
+            <div class="cta-desc">告诉我们你需要什么 AI 能力，共建公司级 Skill 生态</div>
+            <button class="cta-btn cta-btn-outline" onclick="switchTab('skill')">查看 Skill 市场</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section H: 里程碑时间轴 -->
+    <section class="section section-bg-gray">
+      <div class="section-inner">
+        <div class="section-label">🏁 关键里程碑</div>
+        <h2 class="section-title">战役节奏</h2>
+        <div class="milestones-v">
+          <div class="mv-item mv-done">
+            <div class="mv-dot">✅</div>
+            <div class="mv-date">2026-04-03</div>
+            <div class="mv-title">快手AI员工 V0.1 内测版发布</div>
+            <div class="mv-desc">0403 对内可亮相版本，核心能力可用</div>
+          </div>
+          <div class="mv-item mv-hot">
+            <div class="mv-dot">🔥</div>
+            <div class="mv-date">2026-04-12</div>
+            <div class="mv-title">快手AI员工（MyFlicker V1.0）正式发布</div>
+            <div class="mv-desc">联合 CodeFlicker V1.1 + 官方 AI Skill 门户，公司级正式亮相</div>
+          </div>
+          <div class="mv-item mv-plan">
+            <div class="mv-dot">📅</div>
+            <div class="mv-date">2026-04-20</div>
+            <div class="mv-title">「快手AI员工：今天请客」全员体验活动</div>
+            <div class="mv-desc">行政 AI 化主题，全员参与体验</div>
+          </div>
+          <div class="mv-item mv-plan">
+            <div class="mv-dot">🗓</div>
+            <div class="mv-date">2026-05</div>
+            <div class="mv-title">MyFlicker V1.1 游戏化升级</div>
+            <div class="mv-desc">游戏化体验升级，多端接入</div>
+          </div>
+          <div class="mv-item mv-plan">
+            <div class="mv-dot">🗓</div>
+            <div class="mv-date">2026-06</div>
+            <div class="mv-title">MyFlicker V1.2 全类别 Skill 上线</div>
+            <div class="mv-desc">办公 / 数据 / 设计全类别 Skill 上线</div>
+          </div>
+          <div class="mv-item mv-plan">
+            <div class="mv-dot">🗓</div>
+            <div class="mv-date">2026 下半年</div>
+            <div class="mv-title">多会话管理 · AI 团队协作</div>
+            <div class="mv-desc">MyFlicker 向 AI 团队、AI 组织演进</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div><!-- /tab-intro -->
+
+  <!-- ====== TAB 2: 快手AI员工 ====== -->
+  <div class="tab-panel" id="tab-product">
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-label">🤖 快手AI员工</div>
+        <h2 class="section-title">认识你的快手 AI 员工</h2>
+        <p class="section-desc">产品名：<strong>MyFlicker</strong> · 「你不需要懂技术，你只需要告诉我你想要什么」</p>
+
+        <!-- 效率提升大数字 -->
+        <div class="efficiency-grid">
+          <div class="eff-card">
+            <div class="eff-role">研发工程师</div>
+            <div class="eff-num" style="color:var(--accent-blue)">40%<span class="eff-up">↑</span></div>
+            <div class="eff-label">开发效率提升</div>
+            <div class="eff-scene">代码生成 / 需求澄清 / 跨仓研究 / Auto Fix</div>
+          </div>
+          <div class="eff-card">
+            <div class="eff-role">产品经理</div>
+            <div class="eff-num" style="color:var(--accent-purple)">-90%</div>
+            <div class="eff-label">竞品调研时间</div>
+            <div class="eff-scene">竞品分析 / 需求文档 / 数据洞察</div>
+          </div>
+          <div class="eff-card">
+            <div class="eff-role">商业分析师</div>
+            <div class="eff-num" style="color:var(--accent-green)">-80%</div>
+            <div class="eff-label">报表制作时间</div>
+            <div class="eff-scene">自动取数 / 可视化 / 洞察生成</div>
+          </div>
+          <div class="eff-card">
+            <div class="eff-role">HR / 行政 / 职能</div>
+            <div class="eff-num" style="color:var(--accent-amber)">-70%</div>
+            <div class="eff-label">重复工作时间</div>
+            <div class="eff-scene">会议纪要 / 行政服务 / 文档整理</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 四大核心能力 -->
+    <section class="section section-bg-gray">
+      <div class="section-inner">
+        <div class="section-label">⚡ 核心能力</div>
+        <h2 class="section-title">AI 员工能为你做什么</h2>
+        <div class="ability-grid">
+          <div class="ab-card">
+            <div class="ab-icon">🔔</div>
+            <div class="ab-title">随叫随到</div>
+            <div class="ab-desc">KIM 发一条消息，AI 员工 7×24 在线处理，不需要等待、不需要排队</div>
+            <div class="ab-tech">Remote Agent · KIM 集成</div>
+          </div>
+          <div class="ab-card">
+            <div class="ab-icon">⏳</div>
+            <div class="ab-title">长程执行</div>
+            <div class="ab-desc">交代一个任务，AI 自动完成、验证、修复，不需要盯着。连续工作 6 小时+</div>
+            <div class="ab-tech">Long Task · 自动修复循环</div>
+          </div>
+          <div class="ab-card">
+            <div class="ab-icon">🎭</div>
+            <div class="ab-title">多技能协作</div>
+            <div class="ab-desc">研发、数据、设计、行政……不同场景随时切换，一个 AI 员工搞定多种需求</div>
+            <div class="ab-tech">公司级 Skill 市场 · 100+ 能力</div>
+          </div>
+          <div class="ab-card">
+            <div class="ab-icon">🧬</div>
+            <div class="ab-title">越用越懂你</div>
+            <div class="ab-desc">自进化系统记住你的偏好、工作习惯和组织知识，越用越顺手</div>
+            <div class="ab-tech">自进化体系 · 长期记忆</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 版本路线 -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-label">🗺️ 产品路线图</div>
+        <h2 class="section-title">MyFlicker 版本规划</h2>
+        <div class="version-list">
+          <div class="ver-item ver-done">
+            <div class="ver-tag tag-done">✅ 已发布</div>
+            <div class="ver-name">V0.1 内测版</div>
+            <div class="ver-date">2026-04-03</div>
+            <div class="ver-desc">核心能力可用，对内亮相</div>
+          </div>
+          <div class="ver-item ver-hot">
+            <div class="ver-tag tag-hot">🔥 即将发布</div>
+            <div class="ver-name">V1.0 正式版</div>
+            <div class="ver-date">2026-04-12</div>
+            <div class="ver-desc">AI 数字员工基础体验 · 行政服务类 Skill · 官方 Skill 门户上线</div>
+          </div>
+          <div class="ver-item ver-plan">
+            <div class="ver-tag tag-plan">📅 规划中</div>
+            <div class="ver-name">V1.1 游戏化升级</div>
+            <div class="ver-date">2026-05</div>
+            <div class="ver-desc">游戏化体验升级 · 多端接入 · 办公/研发/内容/数据全类 Skill</div>
+          </div>
+          <div class="ver-item ver-plan">
+            <div class="ver-tag tag-plan">📅 规划中</div>
+            <div class="ver-name">V1.2 全类别 Skill</div>
+            <div class="ver-date">2026-06</div>
+            <div class="ver-desc">技术运维 Skill · 团队体验</div>
+          </div>
+          <div class="ver-item ver-plan">
+            <div class="ver-tag tag-plan">🔭 展望</div>
+            <div class="ver-name">V1.x AI 团队协作</div>
+            <div class="ver-date">2026 下半年</div>
+            <div class="ver-desc">多会话管理 · 自进化升级 · AI 团队协作</div>
+          </div>
+        </div>
+
+        <!-- 技术底层折叠说明 -->
+        <details class="tech-note">
+          <summary>🔧 技术底层说明</summary>
+          <div class="tech-note-body">
+            <p>快手AI员工底层由 <strong>AgentOS</strong> 驱动：AgentCore（任务规划引擎）+ 公司级全域 Skill 市场 + Auto 调度 + 安全体系。</p>
+            <p>「企业级安全可控，数据不出域」——所有 Skill 均经过六阶段安全审核流程。</p>
+            <p><em>备注：当前 CodeFlicker（研发专属版）与 MyFlicker 共用底层；终态规划：研发能力将逐步融合到 MyFlicker，统一提供一套「快手AI员工」产品体验。</em></p>
+          </div>
+        </details>
+      </div>
+    </section>
+  </div><!-- /tab-product -->
+
+  <!-- ====== TAB 3: AI Skill 市场（内容由 skill-content.js 渲染）====== -->
+  <div class="tab-panel" id="tab-skill"></div>
+
+  <!-- ====== TAB 4: AI 知识库 ====== -->
+  <div class="tab-panel" id="tab-knowledge">
+    <section class="section section-coming">
+      <div class="section-inner" style="text-align:center">
+        <div class="coming-icon">📚</div>
+        <div class="section-label">AI 生产力知识库</div>
+        <h2 class="section-title">快手内部 AI 实践沉淀</h2>
+        <p class="section-desc">正在建设中，将汇聚先锋队最佳实践、使用教程、效率数据报告</p>
+        <div class="coming-grid">
+          <div class="coming-card coming-blur">
+            <div class="coming-card-icon">📖</div>
+            <div class="coming-card-title">最佳实践案例库</div>
+            <div class="coming-card-desc">先锋队 Showcase 沉淀，各业务线真实案例</div>
+            <div class="coming-lock">🔒 建设中</div>
+          </div>
+          <div class="coming-card coming-blur">
+            <div class="coming-card-icon">🎓</div>
+            <div class="coming-card-title">AI 工具使用教程</div>
+            <div class="coming-card-desc">快手AI员工上手指南，零基础可用</div>
+            <div class="coming-lock">🔒 建设中</div>
+          </div>
+          <div class="coming-card coming-blur">
+            <div class="coming-card-icon">📊</div>
+            <div class="coming-card-title">效率提升数据报告</div>
+            <div class="coming-card-desc">各通道实测数据，可量化的效率提升</div>
+            <div class="coming-lock">🔒 建设中</div>
+          </div>
+        </div>
+        <p class="coming-contact">内容建设中，如有贡献意向，联系 PMO 张佳丽</p>
+      </div>
+    </section>
+  </div><!-- /tab-knowledge -->
+
+</main><!-- /main-content -->
+
+<!-- ========== FOOTER ========== -->
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span>⚡ 快手 AI 生产力</span>
+      <span class="footer-badge">官方 · 经管委授权</span>
+    </div>
+    <div class="footer-meta">
+      数据每周更新 · 最后更新 2026-04-05 · Owner：沈浪 · PMO：张佳丽
+    </div>
+    <div class="footer-links">
+      <a href="#" onclick="switchTab('intro')">战役介绍</a>
+      <a href="#" onclick="switchTab('product')">快手AI员工</a>
+      <a href="#" onclick="switchTab('skill')">Skill 市场</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ========== SKILL MODAL ========== -->
+<div id="skillModal" class="modal-overlay" onclick="closeModal(event)">
+  <div class="modal-box" id="modalBox">
+    <div class="modal-header" id="modalHeader">
+      <h3 id="modalTitle">技能包详情</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script src="skill-data.js"></script>
+<script src="skill-content.js"></script>
+</body>
+</html>
