@@ -423,68 +423,75 @@ button { cursor: pointer; font-family: var(--font); }
 /* ===== PIONEER TAB ===== */
 
 /* 统计条 */
-.pioneer-stats { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+.pioneer-stats { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
 .ps-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 12px 20px; text-align: center; flex: 1; min-width: 100px; }
 .ps-num { display: block; font-size: 28px; font-weight: 900; color: var(--accent-blue); line-height: 1; }
 .ps-label { font-size: 11px; color: var(--text-muted); margin-top: 4px; display: block; }
 
-/* 筛选条 */
-.pf-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
-.pf-btn { padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border); background: #fff; font-size: 13px; color: var(--text-secondary); cursor: pointer; transition: all 0.15s; }
-.pf-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
-.pf-btn.pf-active { background: #eff6ff; color: var(--accent-blue); border-color: var(--accent-blue); font-weight: 600; }
+/* 图例 */
+.pm-legend { display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
+.pm-legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-muted); }
+.pm-legend-item .dot-done, .pm-legend-item .dot-wip { display: inline-block; }
 
 /* 矩阵容器 */
-.pioneer-matrix { overflow-x: auto; margin: 0 -4px; }
+.pioneer-matrix-wrap { overflow-x: auto; }
+.pioneer-matrix-v2 { display: table; width: 100%; border-collapse: separate; border-spacing: 6px; min-width: 700px; }
 
 /* 矩阵行 */
-.pm-header-row,
-.pm-row { display: grid; grid-template-columns: 160px repeat(var(--biz-cols, 7), minmax(140px, 1fr)); gap: 6px; margin-bottom: 6px; }
+.pm-row { display: table-row; }
+.pm-header-row .pm-corner,
+.pm-header-row .pm-tier-header-cell,
+.pm-biz-label-cell,
+.pm-cell,
+.pm-cell-empty { display: table-cell; vertical-align: top; }
 
 /* 角落格 */
-.pm-corner { background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 12px; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; justify-content: center; text-align: center; }
+.pm-corner { background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 12px; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; text-align: center; white-space: nowrap; }
 
-/* 表头: 业务线 */
-.pm-biz-col { background: var(--biz-bg); border: 1px solid var(--biz-border); border-top: 3px solid var(--biz-color); border-radius: 8px; padding: 12px; text-align: center; }
-.pm-biz-name { font-size: 14px; font-weight: 800; color: var(--biz-color); }
-.pm-biz-bp { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
-
-/* 通道标签格 */
-.pm-tier-col { background: var(--tier-bg, #f8fafc); border: 1px solid var(--tier-border, var(--border)); border-left: 3px solid var(--tier-color, #94a3b8); border-radius: 8px; padding: 12px; }
-.pm-tier-name { font-size: 13px; font-weight: 800; color: var(--tier-color, var(--text-primary)); }
+/* 表头: 通道列 */
+.pm-tier-header-cell { background: var(--tier-bg); border: 1px solid var(--tier-border); border-top: 3px solid var(--tier-color); border-radius: 8px; padding: 12px 14px; text-align: center; width: 30%; }
+.pm-tier-name { font-size: 14px; font-weight: 800; color: var(--tier-color); }
 .pm-tier-desc { font-size: 11px; color: var(--text-muted); margin-top: 4px; line-height: 1.5; }
-.pm-tier-count { font-size: 12px; font-weight: 700; color: var(--tier-color); margin-top: 8px; }
+.pm-tier-count { font-size: 12px; font-weight: 700; color: var(--tier-color); margin-top: 6px; }
 
-/* 矩阵格 */
-.pm-cell { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 8px; display: flex; flex-direction: column; gap: 6px; min-height: 60px; }
-.pm-cell-empty { background: #f8fafc; border: 1px dashed #e2e8f0; color: var(--text-muted); font-size: 13px; border-radius: 8px; display: flex; align-items: center; justify-content: center; min-height: 60px; }
+/* 业务线行头 */
+.pm-biz-label-cell { background: var(--biz-bg); border: 1px solid var(--biz-border); border-left: 3px solid var(--biz-color); border-radius: 8px; padding: 12px 14px; white-space: nowrap; vertical-align: middle; min-width: 90px; }
+.pm-biz-name { font-size: 14px; font-weight: 800; color: var(--biz-color); }
+.pm-biz-bp { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+.pm-biz-count { font-size: 12px; font-weight: 700; color: var(--biz-color); margin-top: 4px; }
+
+/* 数据格 */
+.pm-cell { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 8px; vertical-align: top; }
+.pm-cell-empty { background: #f8fafc; border: 1px dashed #e2e8f0; border-radius: 8px; color: var(--text-muted); font-size: 14px; text-align: center; padding: 20px 8px; }
 
 /* 团队卡片 */
-.pm-team-card { background: #f8fafc; border: 1px solid var(--border); border-left: 3px solid var(--tier-color, #2563eb); border-radius: 6px; padding: 8px 10px; }
-.pm-team-name { font-size: 13px; font-weight: 700; color: var(--text-primary); }
-.pm-team-meta { display: flex; gap: 8px; margin-top: 3px; flex-wrap: wrap; }
+.pm-team-card { border-radius: 6px; padding: 9px 11px; margin-bottom: 6px; border: 1px solid; }
+.pm-team-card:last-child { margin-bottom: 0; }
+.pm-card-done { background: #f0fdf4; border-color: #bbf7d0; border-left: 3px solid #16a34a; }
+.pm-card-wip  { background: #f8fafc; border-color: #e2e8f0; border-left: 3px solid var(--tier-color, #94a3b8); }
+.pm-team-top  { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-bottom: 3px; }
+.pm-team-name { font-size: 13px; font-weight: 700; color: var(--text-primary); flex: 1; }
+.pm-team-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 2px; }
 .pm-lead { font-size: 11px; color: var(--text-secondary); }
 .pm-size { font-size: 11px; color: var(--text-muted); }
-.pm-team-status { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
-.pm-has-case { font-size: 10px; color: #16a34a; font-weight: 600; margin-top: 4px; }
+.pm-team-status-text { font-size: 11px; color: var(--text-muted); }
 
-/* 案例卡片 */
-.pioneer-cases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-.pc-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; transition: box-shadow 0.15s; }
-.pc-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
-.pc-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
-.pc-biz-tag { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; border: 1px solid; }
-.pc-team { font-size: 11px; color: var(--text-muted); }
-.pc-date { font-size: 11px; color: var(--text-muted); margin-left: auto; }
-.pc-title { font-size: 14px; font-weight: 700; color: var(--text-primary); line-height: 1.5; margin-bottom: 10px; }
-.pc-footer { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-.pc-metric { font-size: 12px; color: var(--text-secondary); flex: 1; }
-.pc-tag { font-size: 11px; background: #f1f5f9; color: var(--text-muted); padding: 2px 8px; border-radius: 4px; }
+/* 状态点 */
+.pm-status-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.dot-done { width: 8px; height: 8px; border-radius: 50%; background: #16a34a; display: inline-block; }
+.dot-wip  { width: 8px; height: 8px; border-radius: 50%; background: #f59e0b; display: inline-block; }
+
+/* 案例按钮 */
+.pm-case-btn { margin-top: 7px; padding: 4px 10px; font-size: 11px; font-weight: 700; color: #16a34a; background: #fff; border: 1px solid #86efac; border-radius: 4px; cursor: pointer; transition: all 0.15s; display: block; width: 100%; text-align: center; }
+.pm-case-btn:hover { background: #f0fdf4; border-color: #16a34a; }
+
+/* Pioneer Modal（复用 skillModal 样式，独立id） */
+#pioneerCaseModal { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; display: none; align-items: center; justify-content: center; }
+#pioneerCaseModal.open { display: flex; }
 
 /* responsive */
 @media (max-width: 900px) {
-  .pioneer-cases { grid-template-columns: 1fr; }
-  .pm-header-row, .pm-row { grid-template-columns: 120px repeat(var(--biz-cols, 7), minmax(120px, 1fr)); }
+  .pioneer-matrix-v2 { min-width: 500px; }
 }
 
 /* ===== COMING SOON ===== */
