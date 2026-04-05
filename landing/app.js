@@ -10,6 +10,15 @@ function switchTab(tabId) {
   document.querySelectorAll('.tab-panel').forEach(el => {
     el.classList.toggle('active', el.id === 'tab-' + tabId);
   });
+  // Lazy render: pioneer tab
+  if (tabId === 'pioneer') {
+    const panel = document.getElementById('tab-pioneer');
+    if (panel && !panel.dataset.rendered && window.PIONEER_DATA) {
+      panel.dataset.rendered = '1';
+      if (typeof window.renderPioneerTab === 'function') window.renderPioneerTab();
+    }
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 document.addEventListener('DOMContentLoaded', function () {
