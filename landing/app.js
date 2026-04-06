@@ -22,8 +22,9 @@ function switchTab(tabId) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  // Bind tab clicks
+  // Bind tab clicks (skip external tabs that have their own onclick)
   document.querySelectorAll('.tab-item').forEach(el => {
+    if (el.classList.contains('tab-item-external')) return; // 外链 Tab 由 onclick 自处理
     el.addEventListener('click', () => switchTab(el.dataset.tab));
   });
 
