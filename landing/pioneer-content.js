@@ -92,10 +92,16 @@
 
     // ── 渲染 ──────────────────────────────────────────────
     panel.innerHTML = `
+      <!-- ① Top-Down：AI-Native 先锋队 -->
       <section class="section">
         <div class="section-inner">
-          <div class="section-label">🌟 AI 研发范式跃迁 · 先锋队计划</div>
-          <h2 class="section-title">AI-Native 先锋队全景</h2>
+          <div class="practice-type-banner practice-type-top">
+            <div class="ptb-label">Top-Down</div>
+            <div class="ptb-name">AI-Native 先锋队</div>
+            <div class="ptb-desc">由公司 AI 基建虚拟组统一组织，业务线 × 职能通道双维覆盖，自上而下推进 AI-Native 工作范式落地</div>
+          </div>
+
+          <div class="section-label" style="margin-top:0">🌟 先锋队全景矩阵</div>
           <p class="section-desc">
             <strong>${totalTeams}</strong> 支先锋队横跨 <strong>${bizLines.length}</strong> 条业务线，<strong>${nativeCount}</strong> 支已进入 AI-Native 工作模式，<strong>${doneCount}</strong> 个案例已在 Showcase 产出 ·
             <span style="font-size:12px;color:var(--text-muted)">矩阵以「业务线 × 职能通道」双维度呈现，空白格代表当前周期尚未设立先锋队（预留扩展位）</span>
@@ -129,6 +135,64 @@
           </div>
 
           ${tableHTML}
+        </div>
+      </section>
+
+      <!-- ② Down-Top：AI 超级个体/团队 -->
+      <section class="section section-bg-gray">
+        <div class="section-inner">
+          <div class="practice-type-banner practice-type-bottom">
+            <div class="ptb-label">Down-Top</div>
+            <div class="ptb-name">AI 超级个体 / 团队</div>
+            <div class="ptb-desc">由一线员工与自发团队驱动，探索 AI 使用边界，孵化极致 AI 用法，反哺公司级 Skill 市场</div>
+          </div>
+
+          <div class="super-collect-banner">
+            <div class="scb-icon">🌱</div>
+            <div class="scb-body">
+              <div class="scb-title">正在征集中 · 你就是下一个 AI 超级个体</div>
+              <div class="scb-desc">无论你是用 AI 干掉了繁琐流程、还是训练出了一个专属你的 AI 搭档，都欢迎来分享你的故事。</div>
+              <div class="scb-tags">
+                <span class="scb-tag scb-tag-a">🏆 AI 超级个体</span>
+                <span class="scb-tag scb-tag-b">🔥 AI-Native 团队</span>
+                <span class="scb-tag scb-tag-c">🛠️ 高价值 Skill 创造者</span>
+              </div>
+            </div>
+            <a class="scb-cta" href="https://myflicker.kuaishou.com/nominate" target="_blank">👉 立即申报</a>
+          </div>
+
+          <!-- 四大入选标准 -->
+          <div class="super-criteria">
+            <div class="sc-card">
+              <div class="sc-icon">⚡</div>
+              <div class="sc-title">AI 超级个体</div>
+              <div class="sc-desc">个人通过 AI 工具使工作效率提升 2x+ 以上，或创造了可复用、可分享的高价值 AI 使用方法</div>
+              <div class="sc-status">征集中</div>
+            </div>
+            <div class="sc-card">
+              <div class="sc-icon">🧑‍🤝‍🧑</div>
+              <div class="sc-title">AI-Native 团队</div>
+              <div class="sc-desc">团队已将 AI 工具全面融入日常工作流，效率提升显著，愿意分享团队实践经验与 SOP</div>
+              <div class="sc-status">征集中</div>
+            </div>
+            <div class="sc-card">
+              <div class="sc-icon">🛠️</div>
+              <div class="sc-title">高价值 Skill 创造者</div>
+              <div class="sc-desc">开发了团队/个人级 Skill 并在组内落地，经评审后可晋升为公司级官方 Skill，获得官方认证与激励</div>
+              <div class="sc-status">征集中</div>
+            </div>
+            <div class="sc-card">
+              <div class="sc-icon">📖</div>
+              <div class="sc-title">实践案例贡献者</div>
+              <div class="sc-desc">有完整的 AI 实践案例（背景、方法、效果），愿意在公司级 AI 知识库中沉淀与分享</div>
+              <div class="sc-status">征集中</div>
+            </div>
+          </div>
+
+          <div class="super-footer-note">
+            📌 入选后将获得：官方认证荣誉 · 公司级 Skill 晋升通道 · Showcase 分享机会 · AI 生产力战役官方背书<br/>
+            如有意向，联系 PMO 张佳丽 或 在 MyFlicker 内搜索「AI超级个体申报」
+          </div>
         </div>
       </section>
       ${caseModal}

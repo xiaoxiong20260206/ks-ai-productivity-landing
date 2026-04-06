@@ -811,6 +811,119 @@ button { cursor: pointer; font-family: var(--font); }
 
 /* ===== PIONEER TAB v3 ===== */
 
+/* ── AI-Native 实践：Top-Down / Down-Top 分区标识 ── */
+.practice-type-banner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+  border-left: 5px solid;
+}
+.practice-type-top {
+  background: linear-gradient(90deg, rgba(37,99,235,0.06) 0%, transparent 100%);
+  border-left-color: var(--accent-blue);
+}
+.practice-type-bottom {
+  background: linear-gradient(90deg, rgba(124,58,237,0.06) 0%, transparent 100%);
+  border-left-color: var(--accent-purple);
+}
+.ptb-label {
+  flex-shrink: 0;
+  font-size: 11px; font-weight: 900;
+  padding: 4px 10px; border-radius: 20px;
+  letter-spacing: 0.5px; text-transform: uppercase;
+}
+.practice-type-top .ptb-label { background: rgba(37,99,235,0.12); color: var(--accent-blue); }
+.practice-type-bottom .ptb-label { background: rgba(124,58,237,0.12); color: var(--accent-purple); }
+.ptb-name { font-size: 16px; font-weight: 900; color: var(--text-primary); }
+.ptb-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; flex: 1; }
+
+/* ── 超级个体/团队 征集横幅 ── */
+.super-collect-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, #faf5ff 0%, #eff6ff 100%);
+  border: 1px solid rgba(124,58,237,0.2);
+  border-radius: var(--radius);
+  margin-bottom: 20px;
+}
+.scb-icon { font-size: 32px; flex-shrink: 0; line-height: 1; }
+.scb-body { flex: 1; }
+.scb-title { font-size: 16px; font-weight: 800; color: var(--text-primary); margin-bottom: 6px; }
+.scb-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 10px; }
+.scb-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.scb-tag {
+  font-size: 12px; font-weight: 700;
+  padding: 3px 10px; border-radius: 20px;
+}
+.scb-tag-a { background: rgba(37,99,235,0.1); color: var(--accent-blue); }
+.scb-tag-b { background: rgba(220,38,38,0.08); color: #dc2626; }
+.scb-tag-c { background: rgba(124,58,237,0.1); color: var(--accent-purple); }
+.scb-cta {
+  flex-shrink: 0;
+  align-self: center;
+  display: inline-block;
+  padding: 10px 18px;
+  font-size: 13px; font-weight: 700;
+  border-radius: 8px; text-decoration: none;
+  background: var(--accent-purple); color: #fff;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+.scb-cta:hover { background: #6d28d9; }
+
+/* ── 四大标准卡片 ── */
+.super-criteria {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.sc-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+}
+.sc-icon { font-size: 24px; }
+.sc-title { font-size: 14px; font-weight: 800; color: var(--text-primary); }
+.sc-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.6; flex: 1; }
+.sc-status {
+  display: inline-block;
+  font-size: 11px; font-weight: 700;
+  padding: 2px 8px; border-radius: 20px;
+  background: rgba(245,158,11,0.1); color: #d97706;
+  align-self: flex-start;
+}
+
+/* ── 底部说明 ── */
+.super-footer-note {
+  font-size: 12px; color: var(--text-muted);
+  background: #f8fafc; border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 12px 16px;
+  line-height: 1.8;
+}
+
+/* responsive */
+@media (max-width: 900px) {
+  .super-criteria { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .super-criteria { grid-template-columns: 1fr; }
+  .super-collect-banner { flex-direction: column; }
+  .scb-cta { width: 100%; text-align: center; }
+  .practice-type-banner { flex-direction: column; gap: 8px; align-items: flex-start; }
+}
+
 /* 统计条 */
 .pm-stats { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
 .pm-stat-item { flex: 1; min-width: 90px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
