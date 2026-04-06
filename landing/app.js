@@ -1,4 +1,4 @@
-/* app.js — Tab switching, countdown, modal */
+/* app.js — Tab switching, countdown, modal, scroll reveal */
 
 // ===== TAB SWITCHING =====
 function switchTab(tabId) {
@@ -32,23 +32,58 @@ document.addEventListener('DOMContentLoaded', function () {
   (function initCountdown() {
     const target = new Date('2026-04-12T00:00:00+08:00');
     const start  = new Date('2026-03-01T00:00:00+08:00');
-    const totalDays = Math.round((target - start) / 86400000);
 
     function update() {
       const now = new Date();
       const diffMs = target - now;
       const daysLeft = Math.max(0, Math.ceil(diffMs / 86400000));
-      const elapsed = Math.max(0, Math.round((now - start) / 86400000));
-      const pct = Math.min(100, Math.round((elapsed / totalDays) * 100));
-
       const numEl = document.getElementById('countdownDays');
-      const barEl = document.getElementById('countdownProgress');
       if (numEl) numEl.textContent = daysLeft;
-      if (barEl) barEl.style.width = pct + '%';
     }
     update();
     setInterval(update, 60000);
   })();
+
+  // ===== SCROLL REVEAL (Intersection Observer) =====
+  const revealEls = document.querySelectorAll(
+    '.section-inner, .entry-card, .col-card, .stat-chip, .pioneer-card, ' +
+    '.eff2-card, .ab2-card, .rm-item, .pc2-card, .cta-card, .channel-item, ' +
+    '.hpc-chat, .hpc-metrics, .hero-trust'
+  );
+  if ('IntersectionObserver' in window) {
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          // Stagger child elements
+          const delay = entry.target.closest('.entry-grid, .eff2-grid, .ab2-grid, .stats-strip, .pioneer-grid, .cta-grid')
+            ? Array.from(entry.target.parentElement.children).indexOf(entry.target) * 60
+            : 0;
+          setTimeout(() => entry.target.classList.add('revealed'), delay);
+          revealObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => {
+      el.classList.add('reveal-on-scroll');
+      revealObs.observe(el);
+    });
+  } else {
+    // Fallback: show everything immediately
+    revealEls.forEach(el => el.classList.add('revealed'));
+  }
+
+  // ===== TOPBAR SCROLL EFFECT =====
+  const topbar = document.getElementById('topbar');
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y > 100) {
+      topbar.classList.add('topbar-scrolled');
+    } else {
+      topbar.classList.remove('topbar-scrolled');
+    }
+    lastScroll = y;
+  }, { passive: true });
 });
 
 // ===== MODAL =====
