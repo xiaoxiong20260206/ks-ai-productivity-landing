@@ -1105,6 +1105,11 @@ button { cursor: pointer; font-family: var(--font); }
 }
 .practice-type-top .ptb-label { background: rgba(37,99,235,0.12); color: var(--accent-blue); }
 .practice-type-bottom .ptb-label { background: rgba(124,58,237,0.12); color: var(--accent-purple); }
+.practice-type-inclusion {
+  background: linear-gradient(90deg, rgba(16,185,129,0.06) 0%, transparent 100%);
+  border-left-color: #10b981;
+}
+.practice-type-inclusion .ptb-label { background: rgba(16,185,129,0.12); color: #059669; }
 .ptb-name { font-size: 16px; font-weight: 900; color: var(--text-primary); }
 .ptb-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; flex: 1; }
 
@@ -1184,6 +1189,188 @@ button { cursor: pointer; font-family: var(--font); }
   background: #f8fafc; border: 1px solid var(--border);
   border-radius: var(--radius-sm); padding: 12px 16px;
   line-height: 1.8;
+}
+
+/* ────────────────────────────────────────────────────────
+   AI 普惠：月度领域路线图时间线
+──────────────────────────────────────────────────────── */
+.inclusion-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 28px;
+}
+
+.itl-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  position: relative;
+}
+
+.itl-dot {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  border: 2px solid #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--text-muted);
+  z-index: 1;
+  margin-top: 18px;
+  margin-right: 16px;
+}
+
+.itl-done .itl-dot {
+  background: #10b981;
+  border-color: #059669;
+  color: #fff;
+  font-size: 16px;
+}
+
+.itl-connector {
+  position: absolute;
+  left: 17px;
+  top: 54px;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, #10b981 0%, #e2e8f0 100%);
+}
+.itl-connector-last {
+  display: none;
+}
+.itl-item:last-child .itl-connector { display: none; }
+
+.itl-card {
+  flex: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s var(--ease-out);
+}
+.itl-card:hover {
+  transform: translateX(4px);
+  box-shadow: var(--shadow-md);
+}
+
+.itl-done .itl-card {
+  border-color: rgba(16,185,129,0.3);
+  background: linear-gradient(135deg, #f0fdf4 0%, #fff 100%);
+}
+
+.itl-card-planned {
+  opacity: 0.8;
+  border-style: dashed;
+}
+
+.itl-month {
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+.itl-done .itl-month { color: #059669; }
+
+.itl-domain {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.itl-domain-icon { font-size: 22px; flex-shrink: 0; }
+.itl-domain-name { font-size: 17px; font-weight: 900; color: var(--text-primary); flex: 1; }
+
+.itl-status {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+.itl-status-done {
+  background: rgba(16,185,129,0.12);
+  color: #059669;
+}
+.itl-status-plan {
+  background: rgba(100,116,139,0.1);
+  color: var(--text-muted);
+}
+
+.itl-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.itl-event {
+  font-size: 12px;
+  font-weight: 700;
+  color: #d97706;
+  background: rgba(245,158,11,0.08);
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.itl-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.itl-skill-tag {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: #f1f5f9;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+.itl-done .itl-skill-tag {
+  background: rgba(16,185,129,0.08);
+  color: #059669;
+  border-color: rgba(16,185,129,0.2);
+}
+
+/* AI 普惠目标横幅 */
+.inclusion-goal-banner {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, #f0fdf4 0%, #ecfeff 100%);
+  border: 1px solid rgba(16,185,129,0.25);
+  border-radius: var(--radius);
+}
+.igb-left { flex: 1; }
+.igb-title { font-size: 15px; font-weight: 900; color: var(--text-primary); margin-bottom: 8px; }
+.igb-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+.igb-stats {
+  flex-shrink: 0;
+  display: flex;
+  gap: 20px;
+}
+.igb-stat { text-align: center; }
+.igb-stat-num { font-size: 22px; font-weight: 900; color: #059669; }
+.igb-stat-label { font-size: 11px; color: var(--text-muted); white-space: nowrap; }
+
+@media (max-width: 768px) {
+  .inclusion-goal-banner { flex-direction: column; align-items: flex-start; }
+  .igb-stats { width: 100%; justify-content: space-around; }
+  .itl-card:hover { transform: none; }
 }
 
 /* responsive */

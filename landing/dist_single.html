@@ -1113,6 +1113,11 @@ button { cursor: pointer; font-family: var(--font); }
 }
 .practice-type-top .ptb-label { background: rgba(37,99,235,0.12); color: var(--accent-blue); }
 .practice-type-bottom .ptb-label { background: rgba(124,58,237,0.12); color: var(--accent-purple); }
+.practice-type-inclusion {
+  background: linear-gradient(90deg, rgba(16,185,129,0.06) 0%, transparent 100%);
+  border-left-color: #10b981;
+}
+.practice-type-inclusion .ptb-label { background: rgba(16,185,129,0.12); color: #059669; }
 .ptb-name { font-size: 16px; font-weight: 900; color: var(--text-primary); }
 .ptb-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; flex: 1; }
 
@@ -1192,6 +1197,188 @@ button { cursor: pointer; font-family: var(--font); }
   background: #f8fafc; border: 1px solid var(--border);
   border-radius: var(--radius-sm); padding: 12px 16px;
   line-height: 1.8;
+}
+
+/* ────────────────────────────────────────────────────────
+   AI 普惠：月度领域路线图时间线
+──────────────────────────────────────────────────────── */
+.inclusion-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 28px;
+}
+
+.itl-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  position: relative;
+}
+
+.itl-dot {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  border: 2px solid #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--text-muted);
+  z-index: 1;
+  margin-top: 18px;
+  margin-right: 16px;
+}
+
+.itl-done .itl-dot {
+  background: #10b981;
+  border-color: #059669;
+  color: #fff;
+  font-size: 16px;
+}
+
+.itl-connector {
+  position: absolute;
+  left: 17px;
+  top: 54px;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, #10b981 0%, #e2e8f0 100%);
+}
+.itl-connector-last {
+  display: none;
+}
+.itl-item:last-child .itl-connector { display: none; }
+
+.itl-card {
+  flex: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s var(--ease-out);
+}
+.itl-card:hover {
+  transform: translateX(4px);
+  box-shadow: var(--shadow-md);
+}
+
+.itl-done .itl-card {
+  border-color: rgba(16,185,129,0.3);
+  background: linear-gradient(135deg, #f0fdf4 0%, #fff 100%);
+}
+
+.itl-card-planned {
+  opacity: 0.8;
+  border-style: dashed;
+}
+
+.itl-month {
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+.itl-done .itl-month { color: #059669; }
+
+.itl-domain {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.itl-domain-icon { font-size: 22px; flex-shrink: 0; }
+.itl-domain-name { font-size: 17px; font-weight: 900; color: var(--text-primary); flex: 1; }
+
+.itl-status {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+.itl-status-done {
+  background: rgba(16,185,129,0.12);
+  color: #059669;
+}
+.itl-status-plan {
+  background: rgba(100,116,139,0.1);
+  color: var(--text-muted);
+}
+
+.itl-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.itl-event {
+  font-size: 12px;
+  font-weight: 700;
+  color: #d97706;
+  background: rgba(245,158,11,0.08);
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.itl-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.itl-skill-tag {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: #f1f5f9;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+.itl-done .itl-skill-tag {
+  background: rgba(16,185,129,0.08);
+  color: #059669;
+  border-color: rgba(16,185,129,0.2);
+}
+
+/* AI 普惠目标横幅 */
+.inclusion-goal-banner {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, #f0fdf4 0%, #ecfeff 100%);
+  border: 1px solid rgba(16,185,129,0.25);
+  border-radius: var(--radius);
+}
+.igb-left { flex: 1; }
+.igb-title { font-size: 15px; font-weight: 900; color: var(--text-primary); margin-bottom: 8px; }
+.igb-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+.igb-stats {
+  flex-shrink: 0;
+  display: flex;
+  gap: 20px;
+}
+.igb-stat { text-align: center; }
+.igb-stat-num { font-size: 22px; font-weight: 900; color: #059669; }
+.igb-stat-label { font-size: 11px; color: var(--text-muted); white-space: nowrap; }
+
+@media (max-width: 768px) {
+  .inclusion-goal-banner { flex-direction: column; align-items: flex-start; }
+  .igb-stats { width: 100%; justify-content: space-around; }
+  .itl-card:hover { transform: none; }
 }
 
 /* responsive */
@@ -3208,6 +3395,140 @@ window.PIONEER_DATA = {
           <div class="super-footer-note">
             📌 入选后将获得：官方认证荣誉 · 公司级 Skill 晋升通道 · Showcase 分享机会 · AI 生产力战役官方背书<br/>
             如有意向，联系 PMO 张佳丽 或 在 MyFlicker 内搜索「AI超级个体申报」
+          </div>
+        </div>
+      </section>
+
+      <!-- ③ AI 普惠：用 AI 提升快手员工工作体验 -->
+      <section class="section">
+        <div class="section-inner">
+          <div class="practice-type-banner practice-type-inclusion">
+            <div class="ptb-label">AI 普惠</div>
+            <div class="ptb-name">用 AI 提升快手员工工作体验</div>
+            <div class="ptb-desc">每月聚焦一个领域，将 AI 能力注入员工日常工作场景，让每一位快手员工都能切实感受到 AI 带来的效率提升与体验改善</div>
+          </div>
+
+          <div class="section-label" style="margin-top:0">📅 每月一个领域·AI 化路线图</div>
+          <p class="section-desc">
+            从高频、强感知的工作场景入手，按月滚动推进 AI 普惠——先让每个人在最日常的场景里感受到 AI 的价值，再逐步扩展到全岗位、全流程
+          </p>
+
+          <!-- 月度路线图时间线 -->
+          <div class="inclusion-timeline">
+            <div class="itl-item itl-done">
+              <div class="itl-dot"><span>✓</span></div>
+              <div class="itl-connector"></div>
+              <div class="itl-card">
+                <div class="itl-month">4 月</div>
+                <div class="itl-domain">
+                  <span class="itl-domain-icon">🏢</span>
+                  <span class="itl-domain-name">行政 AI 化</span>
+                  <span class="itl-status itl-status-done">进行中</span>
+                </div>
+                <div class="itl-desc">
+                  餐厅查询、停车申请、报修工单、访客预约——把最常用的行政场景全部 AI 化，让 MyFlicker 成为每天都要打开的工作助手
+                </div>
+                <div class="itl-event">🎉 4.20「今天请客」全员体验活动</div>
+                <div class="itl-skills">
+                  <span class="itl-skill-tag">🍱 食堂查询</span>
+                  <span class="itl-skill-tag">🚗 停车申请</span>
+                  <span class="itl-skill-tag">🔧 行政报修</span>
+                  <span class="itl-skill-tag">🏃 访客预约</span>
+                  <span class="itl-skill-tag">💪 健身房预约</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="itl-item">
+              <div class="itl-dot"><span>5</span></div>
+              <div class="itl-connector"></div>
+              <div class="itl-card itl-card-planned">
+                <div class="itl-month">5 月</div>
+                <div class="itl-domain">
+                  <span class="itl-domain-icon">💬</span>
+                  <span class="itl-domain-name">办公协作 AI 化</span>
+                  <span class="itl-status itl-status-plan">规划中</span>
+                </div>
+                <div class="itl-desc">
+                  KIM 消息智能摘要、Docs 文档 AI 助手、会议纪要自动生成——让信息处理效率翻倍，从「读文档」到「问文档」
+                </div>
+                <div class="itl-skills">
+                  <span class="itl-skill-tag">📝 会议记录</span>
+                  <span class="itl-skill-tag">📄 文档摘要</span>
+                  <span class="itl-skill-tag">📅 日程管理</span>
+                  <span class="itl-skill-tag">🔔 消息助手</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="itl-item">
+              <div class="itl-dot"><span>6</span></div>
+              <div class="itl-connector"></div>
+              <div class="itl-card itl-card-planned">
+                <div class="itl-month">6 月</div>
+                <div class="itl-domain">
+                  <span class="itl-domain-icon">📊</span>
+                  <span class="itl-domain-name">数据分析 AI 化</span>
+                  <span class="itl-status itl-status-plan">规划中</span>
+                </div>
+                <div class="itl-desc">
+                  自然语言查数据、AI 自动解读报表、业务异动归因——把「取数→分析→汇报」的全链路从小时级缩短到分钟级
+                </div>
+                <div class="itl-skills">
+                  <span class="itl-skill-tag">🔍 自然语言取数</span>
+                  <span class="itl-skill-tag">📈 报表解读</span>
+                  <span class="itl-skill-tag">🧩 A/B分析</span>
+                  <span class="itl-skill-tag">⚠️ 异动归因</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="itl-item">
+              <div class="itl-dot"><span>Q3</span></div>
+              <div class="itl-connector itl-connector-last"></div>
+              <div class="itl-card itl-card-planned">
+                <div class="itl-month">Q3</div>
+                <div class="itl-domain">
+                  <span class="itl-domain-icon">🎨</span>
+                  <span class="itl-domain-name">内容创作 AI 化</span>
+                  <span class="itl-status itl-status-plan">规划中</span>
+                </div>
+                <div class="itl-desc">
+                  PPT 自动生成、营销文案创作、UI 设计辅助——让非技术同学也能快速产出高质量内容，释放创意生产力
+                </div>
+                <div class="itl-skills">
+                  <span class="itl-skill-tag">🖼️ 图片生成</span>
+                  <span class="itl-skill-tag">📊 PPT 生成</span>
+                  <span class="itl-skill-tag">✍️ 文案创作</span>
+                  <span class="itl-skill-tag">🎭 设计辅助</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 底部目标说明 -->
+          <div class="inclusion-goal-banner">
+            <div class="igb-left">
+              <div class="igb-title">🎯 AI 普惠的目标</div>
+              <div class="igb-desc">
+                每一位快手员工，无论职能、层级，都能在日常工作中拥有一个"懂你的 AI 搭档"——
+                不需要学习提示词，不需要懂技术，打开 MyFlicker 就能用。
+              </div>
+            </div>
+            <div class="igb-stats">
+              <div class="igb-stat">
+                <div class="igb-stat-num">每月</div>
+                <div class="igb-stat-label">1 个领域上线</div>
+              </div>
+              <div class="igb-stat">
+                <div class="igb-stat-num">全员</div>
+                <div class="igb-stat-label">零门槛触达</div>
+              </div>
+              <div class="igb-stat">
+                <div class="igb-stat-num">15%+</div>
+                <div class="igb-stat-label">组织效率目标</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

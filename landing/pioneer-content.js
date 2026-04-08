@@ -195,6 +195,140 @@
           </div>
         </div>
       </section>
+
+      <!-- ③ AI 普惠：用 AI 提升快手员工工作体验 -->
+      <section class="section">
+        <div class="section-inner">
+          <div class="practice-type-banner practice-type-inclusion">
+            <div class="ptb-label">AI 普惠</div>
+            <div class="ptb-name">用 AI 提升快手员工工作体验</div>
+            <div class="ptb-desc">每月聚焦一个领域，将 AI 能力注入员工日常工作场景，让每一位快手员工都能切实感受到 AI 带来的效率提升与体验改善</div>
+          </div>
+
+          <div class="section-label" style="margin-top:0">📅 每月一个领域·AI 化路线图</div>
+          <p class="section-desc">
+            从高频、强感知的工作场景入手，按月滚动推进 AI 普惠——先让每个人在最日常的场景里感受到 AI 的价值，再逐步扩展到全岗位、全流程
+          </p>
+
+          <!-- 月度路线图时间线 -->
+          <div class="inclusion-timeline">
+            <div class="itl-item itl-done">
+              <div class="itl-dot"><span>✓</span></div>
+              <div class="itl-connector"></div>
+              <div class="itl-card">
+                <div class="itl-month">4 月</div>
+                <div class="itl-domain">
+                  <span class="itl-domain-icon">🏢</span>
+                  <span class="itl-domain-name">行政 AI 化</span>
+                  <span class="itl-status itl-status-done">进行中</span>
+                </div>
+                <div class="itl-desc">
+                  餐厅查询、停车申请、报修工单、访客预约——把最常用的行政场景全部 AI 化，让 MyFlicker 成为每天都要打开的工作助手
+                </div>
+                <div class="itl-event">🎉 4.20「今天请客」全员体验活动</div>
+                <div class="itl-skills">
+                  <span class="itl-skill-tag">🍱 食堂查询</span>
+                  <span class="itl-skill-tag">🚗 停车申请</span>
+                  <span class="itl-skill-tag">🔧 行政报修</span>
+                  <span class="itl-skill-tag">🏃 访客预约</span>
+                  <span class="itl-skill-tag">💪 健身房预约</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="itl-item">
+              <div class="itl-dot"><span>5</span></div>
+              <div class="itl-connector"></div>
+              <div class="itl-card itl-card-planned">
+                <div class="itl-month">5 月</div>
+                <div class="itl-domain">
+                  <span class="itl-domain-icon">💬</span>
+                  <span class="itl-domain-name">办公协作 AI 化</span>
+                  <span class="itl-status itl-status-plan">规划中</span>
+                </div>
+                <div class="itl-desc">
+                  KIM 消息智能摘要、Docs 文档 AI 助手、会议纪要自动生成——让信息处理效率翻倍，从「读文档」到「问文档」
+                </div>
+                <div class="itl-skills">
+                  <span class="itl-skill-tag">📝 会议记录</span>
+                  <span class="itl-skill-tag">📄 文档摘要</span>
+                  <span class="itl-skill-tag">📅 日程管理</span>
+                  <span class="itl-skill-tag">🔔 消息助手</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="itl-item">
+              <div class="itl-dot"><span>6</span></div>
+              <div class="itl-connector"></div>
+              <div class="itl-card itl-card-planned">
+                <div class="itl-month">6 月</div>
+                <div class="itl-domain">
+                  <span class="itl-domain-icon">📊</span>
+                  <span class="itl-domain-name">数据分析 AI 化</span>
+                  <span class="itl-status itl-status-plan">规划中</span>
+                </div>
+                <div class="itl-desc">
+                  自然语言查数据、AI 自动解读报表、业务异动归因——把「取数→分析→汇报」的全链路从小时级缩短到分钟级
+                </div>
+                <div class="itl-skills">
+                  <span class="itl-skill-tag">🔍 自然语言取数</span>
+                  <span class="itl-skill-tag">📈 报表解读</span>
+                  <span class="itl-skill-tag">🧩 A/B分析</span>
+                  <span class="itl-skill-tag">⚠️ 异动归因</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="itl-item">
+              <div class="itl-dot"><span>Q3</span></div>
+              <div class="itl-connector itl-connector-last"></div>
+              <div class="itl-card itl-card-planned">
+                <div class="itl-month">Q3</div>
+                <div class="itl-domain">
+                  <span class="itl-domain-icon">🎨</span>
+                  <span class="itl-domain-name">内容创作 AI 化</span>
+                  <span class="itl-status itl-status-plan">规划中</span>
+                </div>
+                <div class="itl-desc">
+                  PPT 自动生成、营销文案创作、UI 设计辅助——让非技术同学也能快速产出高质量内容，释放创意生产力
+                </div>
+                <div class="itl-skills">
+                  <span class="itl-skill-tag">🖼️ 图片生成</span>
+                  <span class="itl-skill-tag">📊 PPT 生成</span>
+                  <span class="itl-skill-tag">✍️ 文案创作</span>
+                  <span class="itl-skill-tag">🎭 设计辅助</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 底部目标说明 -->
+          <div class="inclusion-goal-banner">
+            <div class="igb-left">
+              <div class="igb-title">🎯 AI 普惠的目标</div>
+              <div class="igb-desc">
+                每一位快手员工，无论职能、层级，都能在日常工作中拥有一个"懂你的 AI 搭档"——
+                不需要学习提示词，不需要懂技术，打开 MyFlicker 就能用。
+              </div>
+            </div>
+            <div class="igb-stats">
+              <div class="igb-stat">
+                <div class="igb-stat-num">每月</div>
+                <div class="igb-stat-label">1 个领域上线</div>
+              </div>
+              <div class="igb-stat">
+                <div class="igb-stat-num">全员</div>
+                <div class="igb-stat-label">零门槛触达</div>
+              </div>
+              <div class="igb-stat">
+                <div class="igb-stat-num">15%+</div>
+                <div class="igb-stat-label">组织效率目标</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       ${caseModal}
     `;
 
