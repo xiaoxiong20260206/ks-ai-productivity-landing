@@ -1,0 +1,184 @@
+{
+  "_meta": {
+    "version": "2.0.0",
+    "date_range": "4.6 - 4.10",
+    "onepage_url": "https://docs.corp.kuaishou.com/k/home/VIk71GqLpA8M/fcABzhPO1WwkNAClTVc5DIhEO",
+    "onepage_url_fallback": "https://docs.corp.kuaishou.com/k/home/VIk71GqLpA8M/fcABzhPO1WwkNAClTVc5DIhEO",
+    "milestones": {
+      "m1": "4.12：CodeFlicker V1.1 / MyFlicker V0.1，2个形态启动内测",
+      "m2": "4.20：版本合一，正式发布MyFlicker1.0（全形态：客户端/云/KIM；全场景：Code + Work）；AI普惠第一期全员体验（行政AI化）"
+    }
+  },
+  "config": {
+    "forward": true,
+    "forwardType": 2,
+    "wideSelfAdaptive": true
+  },
+  "blocks": [
+    {
+      "blockId": "title",
+      "type": "content",
+      "text": {
+        "type": "kimMd",
+        "content": "# 🚀 快手AI生产力战役 · 周报（4.6 - 4.10）"
+      }
+    },
+    {
+      "blockId": "d0",
+      "type": "divider"
+    },
+    {
+      "blockId": "overview",
+      "type": "content",
+      "text": {
+        "type": "kimMd",
+        "content": "**📊 整体态势**\n本周战役整体保持绿灯推进，重心已从单点能力交付，切换到「两类形态启动内测 → 版本合一正式发布 → AI普惠活动落地」的连续节奏。"
+      }
+    },
+    {
+      "blockId": "d1",
+      "type": "divider"
+    },
+    {
+      "blockId": "biz_title",
+      "type": "content",
+      "text": {
+        "type": "kimMd",
+        "content": "**🏢 业务推广**"
+      }
+    },
+    {
+      "blockId": "biz_content",
+      "type": "content",
+      "text": {
+        "type": "kimMd",
+        "content": "**AI转型**\n- 技术通道完成4象限模型，Q2目标从30支先锋队扩展到50+，并沉淀Top5标杆实践\n- 非技术通道启动产品讨论与AIBP方案设计\n- 职能通道明确HR/行政/财务等Skill接入路径\n- 涌现通道已招募100+布道师，5月启动Skill大赛\n\n**AI普惠**\n- 行政领域首期活动需求澄清完成，人员分工与排期已确认\n- 4.20落地第一期全员体验活动：行政AI化"
+      }
+    },
+    {
+      "blockId": "d2",
+      "type": "divider"
+    },
+    {
+      "blockId": "prod_title",
+      "type": "content",
+      "text": {
+        "type": "kimMd",
+        "content": "**📱 产品建设（MyFlicker + AgentOS）**"
+      }
+    },
+    {
+      "blockId": "prod_content",
+      "type": "content",
+      "text": {
+        "type": "kimMd",
+        "content": "- 0403内测版正常交付，整体进度符合预期\n- 0412节点：CodeFlicker V1.1 + MyFlicker V0.1 两个形态同步启动内测\n- 0420节点：版本合一，正式发布 MyFlicker 1.0（全形态：客户端/云/KIM；全场景：Code + Work）\n- 4月内统一合并为服务全员的 MyFlicker 单一版本（端+云）"
+      }
+    },
+    {
+      "blockId": "d3",
+      "type": "divider"
+    },
+    {
+      "blockId": "tech_title",
+      "type": "content",
+      "text": {
+        "type": "kimMd",
+        "content": "**⚙️ 技术专项**"
+      }
+    },
+    {
+      "blockId": "tech_fields1",
+      "type": "section",
+      "fields": [
+        {
+          "text": {
+            "type": "kimMd",
+            "content": "**技能生态**\n- Skill市场基础能力建设拉齐60%，可用性评测完成70%\n- SSO标准基建完成，开发规范发布\n- 0412预计覆盖20+精品Skill、40+通用Skill"
+          }
+        },
+        {
+          "text": {
+            "type": "kimMd",
+            "content": "**模型服务**\n- Auto分类器一版完成，整体开发进度60%\n- Claude/Kimi Auto provider 在建"
+          }
+        }
+      ]
+    },
+    {
+      "blockId": "tech_fields2",
+      "type": "section",
+      "fields": [
+        {
+          "text": {
+            "type": "kimMd",
+            "content": "**自进化**\n- 10个核心Skill建设完成\n- 记忆进化、定时复盘、知识库、引导Skill均已交付"
+          }
+        },
+        {
+          "text": {
+            "type": "kimMd",
+            "content": "**高可用**\n- 推进0412机器资源筹备\n- KFS独立集群方案推进\n- 用户目录规则统一完成"
+          }
+        }
+      ]
+    },
+    {
+      "blockId": "tech_fields3",
+      "type": "section",
+      "fields": [
+        {
+          "text": {
+            "type": "kimMd",
+            "content": "**安全建设**\n- 审计日志建设完成并完成泄露风险加固\n- AP认证方案0403上线\n- 目录隔离/非root权限完成"
+          }
+        },
+        {
+          "text": {
+            "type": "kimMd",
+            "content": "**项目经营**\n- 已输出AI经营分析框架\n- Token额度对标进展持续跟进中"
+          }
+        }
+      ]
+    },
+    {
+      "blockId": "d4",
+      "type": "divider"
+    },
+    {
+      "blockId": "milestone",
+      "type": "content",
+      "text": {
+        "type": "kimMd",
+        "content": "**🏁 近期关键里程碑**\n- 📌 **4.12** — CodeFlicker V1.1 / MyFlicker V0.1，2个形态启动内测\n- 📌 **4.20** — 版本合一，正式发布MyFlicker1.0（全形态：客户端/云/KIM；全场景：Code + Work）；AI普惠第一期全员体验（行政AI化）\n- 📌 **4.30** — 模型服务三期交付 + 安全需求上线"
+      }
+    },
+    {
+      "blockId": "d5",
+      "type": "divider"
+    },
+    {
+      "blockId": "insight",
+      "type": "content",
+      "text": {
+        "type": "kimMd",
+        "content": "**🧭 本周战役解读**\n\n本周一个明显的变化是：子项目划分更清晰了——AI转型、AI普惠、产品建设、技能生态、技术专项、项目经营，6条线各司其职，责任更明确。更多团队正在从「观察者」变成「建设者」，在公司级AI基础设施中承担实质性工作。\n\n力出一孔的效果开始显现：过去分散在各团队的AI探索，正在逐步收敛到统一的平台和Skill体系上，每个人的工作都在直接对齐4.20的最终交付。\n\n整体进度加速推进中，4.12是技术验证的节点，4.20是面向全员的第一次真正亮相。"
+      }
+    },
+    {
+      "blockId": "d6",
+      "type": "divider"
+    },
+    {
+      "blockId": "onepage_btn",
+      "type": "action",
+      "actions": [
+        {
+          "type": "button",
+          "text": {"type": "plainText", "content": "📖 了解快手AI生产力战役"},
+          "url": "https://docs.corp.kuaishou.com/k/home/VIk71GqLpA8M/fcABzhPO1WwkNAClTVc5DIhEO"
+        }
+      ]
+    }
+  ]
+}
