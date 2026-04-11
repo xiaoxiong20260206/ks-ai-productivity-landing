@@ -2025,6 +2025,175 @@ button { cursor: pointer; font-family: var(--font); }
   .pgn-arrow { transform: rotate(90deg); }
 }
 
+/* ===== MyFlicker 单产品介绍卡 (mf-intro) ===== */
+.mf-intro-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  background: linear-gradient(135deg, #faf5ff 0%, #eff6ff 100%);
+  border: 1.5px solid #c4b5fd;
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.mf-intro-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+.mf-intro-icon {
+  width: 52px; height: 52px;
+  background: white;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(124,58,237,0.15);
+}
+.mf-intro-name { font-size: 20px; font-weight: 800; color: #4c1d95; }
+.mf-intro-version {
+  font-size: 12px; font-weight: 600;
+  background: #7c3aed; color: white;
+  padding: 2px 8px; border-radius: 20px; margin-top: 4px;
+  display: inline-block;
+}
+.mf-intro-body { flex: 1; min-width: 200px; }
+.mf-intro-quote {
+  font-size: 15px; font-weight: 600; color: #3730a3;
+  border-left: 3px solid #7c3aed;
+  padding-left: 12px;
+  margin: 0 0 10px 0;
+  font-style: italic;
+}
+.mf-intro-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.7; margin: 0 0 12px 0; }
+.mf-intro-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.mf-intro-tags span {
+  font-size: 12px; background: white; border: 1px solid #c4b5fd;
+  color: #5b21b6; border-radius: 20px; padding: 3px 10px;
+}
+.mf-intro-btn {
+  display: inline-flex; align-items: center;
+  background: #7c3aed; color: white; font-weight: 600;
+  padding: 10px 20px; border-radius: 10px; font-size: 14px;
+  text-decoration: none; white-space: nowrap; flex-shrink: 0;
+  transition: background 0.2s, transform 0.15s;
+  align-self: center;
+}
+.mf-intro-btn:hover { background: #6d28d9; transform: translateY(-1px); }
+
+/* ===== 横向里程碑 (milestones-h) ===== */
+.milestones-h { overflow-x: auto; padding-bottom: 8px; margin-top: 32px; }
+.mh-track {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  position: relative;
+  min-width: 700px;
+  padding-top: 20px;
+}
+.mh-line {
+  position: absolute;
+  top: 32px;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #10b981 0%, #7c3aed 30%, #94a3b8 100%);
+}
+.mh-node {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.mh-dot {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  border: 2px solid var(--border);
+  background: white;
+  margin-bottom: 10px;
+  flex-shrink: 0;
+}
+.mh-done .mh-dot {
+  background: #10b981; border-color: #10b981; color: white;
+}
+.mh-hot .mh-dot {
+  background: white; border-color: #f59e0b;
+  font-size: 16px; box-shadow: 0 0 0 4px rgba(245,158,11,0.15);
+}
+.mh-plan .mh-dot {
+  background: white; border-color: #94a3b8; color: #94a3b8; font-size: 14px;
+}
+.mh-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  width: calc(100% - 16px);
+  font-size: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.mh-hot .mh-card {
+  border-color: #f59e0b;
+  background: #fffbeb;
+}
+.mh-date { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
+.mh-name { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+.mh-hot .mh-name { color: #d97706; }
+.mh-done .mh-name { color: #059669; }
+.mh-desc { font-size: 11.5px; color: var(--text-secondary); line-height: 1.5; }
+.mh-cta {
+  display: inline-block; margin-top: 8px;
+  font-size: 11px; font-weight: 600; color: #7c3aed;
+  background: #f5f3ff; border-radius: 6px; padding: 4px 10px;
+  text-decoration: none;
+}
+.mh-cta:hover { background: #ede9fe; }
+
+/* ===== 三大核心能力新版 (ab3) ===== */
+.ab3-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 16px;
+  margin-top: 28px;
+}
+.ab3-card-full { grid-column: 1 / -1; }
+.ab3-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  transition: box-shadow 0.2s var(--ease-out);
+}
+.ab3-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); }
+.ab3-card-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px; }
+.ab3-icon-wrap {
+  width: 40px; height: 40px; min-width: 40px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+}
+.ab3-label { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+.ab3-title { font-size: 15px; font-weight: 700; color: var(--text-primary); }
+.ab3-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 14px; }
+.ab3-skills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.ab3-skills span {
+  font-size: 12px; background: #f8fafc; border: 1px solid var(--border);
+  border-radius: 6px; padding: 4px 10px; color: var(--text-secondary);
+}
+.ab3-bullets { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+.ab3-bullets div { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+.ab3-tech { font-size: 11px; color: var(--text-muted); background: #f8fafc; border-radius: 6px; padding: 4px 10px; display: inline-block; }
+
+@media (max-width: 768px) {
+  .mf-intro-card { flex-direction: column; }
+  .ab3-grid { grid-template-columns: 1fr; }
+  .ab3-card-full { grid-column: 1; }
+  .mh-track { min-width: 600px; }
+}
+
 </style>
 </head>
 <body>
@@ -2065,7 +2234,6 @@ button { cursor: pointer; font-family: var(--font); }
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
           立即体验 MyFlicker
         </a>
-        <a class="btn-secondary" href="https://codeflicker.kuaishou.com" target="_blank">研发专属 CodeFlicker →</a>
       </div>
       <div class="hero-trust">
         <span class="hero-trust-item">经管委决议</span>
@@ -2425,42 +2593,66 @@ button { cursor: pointer; font-family: var(--font); }
       <div class="section-inner">
         <div class="section-label"><svg class="sec-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg> 关键里程碑</div>
         <h2 class="section-title">战役节奏</h2>
-        <div class="milestones-v">
-          <div class="mv-item mv-done">
-            <div class="mv-dot">✅</div>
-            <div class="mv-date">2026-04-03</div>
-            <div class="mv-title">MyFlicker V0.1 内测版发布</div>
-            <div class="mv-desc">0403 对内可亮相版本，核心能力可用</div>
-          </div>
-          <div class="mv-item mv-hot">
-            <div class="mv-dot">🔥</div>
-            <div class="mv-date">2026-04-12</div>
-            <div class="mv-title">MyFlicker V1.0 AI 工作伙伴正式发布</div>
-            <div class="mv-desc">全员即开即用，陪你一起上班，全类 Skill 上线</div>
-          </div>
-          <div class="mv-item mv-plan">
-            <div class="mv-dot">📅</div>
-            <div class="mv-date">2026-04-20</div>
-            <div class="mv-title">「MyFlicker 伙伴：今天请大家」全员体验活动</div>
-            <div class="mv-desc">行政 AI 化主题，全员参与体验</div>
-          </div>
-          <div class="mv-item mv-plan">
-            <div class="mv-dot">🗓</div>
-            <div class="mv-date">2026-05</div>
-            <div class="mv-title">MyFlicker V1.1 游戏化升级</div>
-            <div class="mv-desc">游戏化体验升级，多端接入</div>
-          </div>
-          <div class="mv-item mv-plan">
-            <div class="mv-dot">🗓</div>
-            <div class="mv-date">2026-06</div>
-            <div class="mv-title">MyFlicker V1.2 全类别 Skill 上线</div>
-            <div class="mv-desc">办公 / 数据 / 设计全类别 Skill 上线</div>
-          </div>
-          <div class="mv-item mv-plan">
-            <div class="mv-dot">🗓</div>
-            <div class="mv-date">2026 下半年</div>
-            <div class="mv-title">多会话管理 · AI 团队协作</div>
-            <div class="mv-desc">MyFlicker 向 AI 团队、AI 组织演进</div>
+        <div class="milestones-h">
+          <div class="mh-track">
+            <div class="mh-line"></div>
+            <!-- 节点 1 -->
+            <div class="mh-node mh-done">
+              <div class="mh-dot">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div class="mh-card">
+                <div class="mh-date">4 月 3 日</div>
+                <div class="mh-name">V0.1 内测发布</div>
+                <div class="mh-desc">对内可亮相版本<br/>核心能力可用</div>
+              </div>
+            </div>
+            <!-- 节点 2 -->
+            <div class="mh-node mh-hot">
+              <div class="mh-dot">🔥</div>
+              <div class="mh-card">
+                <div class="mh-date">4 月 20 日</div>
+                <div class="mh-name">V1.0 正式发布</div>
+                <div class="mh-desc">全员即开即用<br/>陪你一起上班</div>
+                <a class="mh-cta" href="https://myflicker.kuaishou.com" target="_blank">立即体验 →</a>
+              </div>
+            </div>
+            <!-- 节点 3 -->
+            <div class="mh-node mh-plan">
+              <div class="mh-dot">📅</div>
+              <div class="mh-card">
+                <div class="mh-date">4 月 20 日活动</div>
+                <div class="mh-name">今天请大家</div>
+                <div class="mh-desc">行政 AI 化主题<br/>全员参与体验</div>
+              </div>
+            </div>
+            <!-- 节点 4 -->
+            <div class="mh-node mh-plan">
+              <div class="mh-dot">🗓</div>
+              <div class="mh-card">
+                <div class="mh-date">5 月</div>
+                <div class="mh-name">V1.1 游戏化升级</div>
+                <div class="mh-desc">游戏化体验<br/>全类 Skill 上线</div>
+              </div>
+            </div>
+            <!-- 节点 5 -->
+            <div class="mh-node mh-plan">
+              <div class="mh-dot">🗓</div>
+              <div class="mh-card">
+                <div class="mh-date">6 月</div>
+                <div class="mh-name">V2.0 AI 团队</div>
+                <div class="mh-desc">AI 数字员工 Team<br/>技术运维类 Skill</div>
+              </div>
+            </div>
+            <!-- 节点 6 -->
+            <div class="mh-node mh-plan">
+              <div class="mh-dot">✦</div>
+              <div class="mh-card">
+                <div class="mh-date">下半年</div>
+                <div class="mh-name">V2.x 持续进化</div>
+                <div class="mh-desc">多会话管理<br/>AI 团队协作</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -2477,41 +2669,28 @@ button { cursor: pointer; font-family: var(--font); }
         <h2 class="section-title">MyFlicker：你的 AI 工作伙伴，今天起陪你一起上班</h2>
         <p class="section-desc">不是来替代你的，而是陪你一起把工作做得更好——两种接入方式，全员即开即用</p>
 
-        <!-- 双产品对比（新版：卡片横向，自适应折叠）-->
-        <div class="pc2-wrap">
-          <div class="pc2-card">
-            <div class="pc2-left">
-              <div class="pc2-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
-              <div>
-                <div class="pc2-name">CodeFlicker</div>
-                <div class="pc2-tag">研发专属</div>
-              </div>
+        <!-- MyFlicker 产品介绍（单卡 + 自我介绍文案）-->
+        <div class="mf-intro-card">
+          <div class="mf-intro-left">
+            <div class="mf-intro-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg>
             </div>
-            <div class="pc2-body">
-              <p class="pc2-desc">IDE 插件，内嵌 VSCode / JetBrains，为研发工程师定制。代码生成、智能补全、跨仓研究、Auto Fix，编码全链路 AI 化。</p>
-              <div class="pc2-for">👨‍💻 适合：研发工程师</div>
+            <div class="mf-intro-meta">
+              <div class="mf-intro-name">MyFlicker</div>
+              <div class="mf-intro-version">V1.0 · 4.20 正式发布</div>
             </div>
-            <a class="pc2-btn" href="https://codeflicker.kuaishou.com" target="_blank">安装 →</a>
           </div>
-          <div class="pc2-connector">
-            <div class="pc2-conn-line"></div>
-            <div class="pc2-conn-label">共用底层 AgentOS</div>
-            <div class="pc2-conn-line"></div>
-          </div>
-          <div class="pc2-card pc2-card-featured">
-            <div class="pc2-left">
-              <div class="pc2-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg></div>
-              <div>
-                <div class="pc2-name">MyFlicker</div>
-                <div class="pc2-tag pc2-tag-new">全员版 · 4.20 正式发布</div>
-              </div>
+          <div class="mf-intro-body">
+            <p class="mf-intro-quote">"你不需要懂技术，只需要告诉我你想要什么——我们一起把它搞定。"</p>
+            <p class="mf-intro-desc">KIM 对话界面，无需安装，任何快手人即开即用。从 2024 年的代码补全工具，到今天陪伴全体员工的 AI 工作伙伴——同一套大脑，向每个岗位报到了。</p>
+            <div class="mf-intro-tags">
+              <span>🌐 全员可用</span>
+              <span>💬 KIM 对话入口</span>
+              <span>⚡ 100+ Skill</span>
+              <span>🔒 数据不出域</span>
             </div>
-            <div class="pc2-body">
-              <p class="pc2-desc">KIM 对话界面，无需安装，任何快手人即开即用。你不需要懂技术，只需要告诉我你想要什么——100+ 职能 Skill，研发、产品、运营、数据、行政全岗位覆盖。</p>
-              <div class="pc2-for">🌐 适合：全员 · 4.20 正式发布</div>
-            </div>
-            <a class="pc2-btn pc2-btn-primary" href="https://myflicker.kuaishou.com" target="_blank">立即体验 →</a>
           </div>
+          <a class="mf-intro-btn" href="https://myflicker.kuaishou.com" target="_blank">立即体验 →</a>
         </div>
 
         <!-- 三大定位介绍（新增）-->
@@ -2568,44 +2747,70 @@ button { cursor: pointer; font-family: var(--font); }
       </div>
     </section>
 
-    <!-- Section B: 四大核心能力（重新设计：2×2 网格，左右分栏）-->
+    <!-- Section B: 三大核心能力（对齐文档：全能 / 可靠 / 进化）-->
     <section class="section section-bg-gray">
       <div class="section-inner">
         <div class="section-label"><svg class="sec-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> 核心能力</div>
         <h2 class="section-title">和你一起干活：三大核心能力</h2>
-        <div class="ab2-grid">
-          <div class="ab2-card">
-            <div class="ab2-icon-wrap" style="background:#eff6ff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
-            <div class="ab2-content">
-              <div class="ab2-title">随叫随到，7×24 在线</div>
-              <div class="ab2-desc">KIM 发一条消息，立即响应。合上电脑，任务还在云端继续推进，完成后通知你</div>
-              <div class="ab2-tech">Remote Agent · KIM 集成</div>
+        <div class="ab3-grid">
+
+          <!-- ① 全能 -->
+          <div class="ab3-card ab3-card-full">
+            <div class="ab3-card-header">
+              <div class="ab3-icon-wrap" style="background:#eff6ff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+              <div>
+                <div class="ab3-label">① 全能</div>
+                <div class="ab3-title">能一起干的事，没有边界</div>
+              </div>
             </div>
-          </div>
-          <div class="ab2-card">
-            <div class="ab2-icon-wrap" style="background:#faf5ff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-            <div class="ab2-content">
-              <div class="ab2-title">大活一起扛，不需要盯着</div>
-              <div class="ab2-desc">Long Task 连跑 6 小时，自动执行→验证→修复循环。遇到复杂大任务，召唤多 Agent 并行协作</div>
-              <div class="ab2-tech">Long Task · Agent Teams · 自动修复</div>
+            <div class="ab3-desc">你真实的工作日里不只是编码——还要写文档、查数据、做汇报、对接系统、管理任务……MyFlicker 内置 100+ 公司级 Skills，覆盖日常工作中绝大多数场景。</div>
+            <div class="ab3-skills">
+              <span>💻 软件研发：代码生成 · Auto Fix · MR 发起</span>
+              <span>📊 数据分析：KwaiBI 查询 · SQL 取数 · Data Agent</span>
+              <span>🤝 办公协同：KIM 消息 · Docs 读写 · 会议室预定</span>
+              <span>📝 汇报创作：高管汇报 · PPT 生成 · AI 生图</span>
+              <span>🏢 行政服务：食堂菜单 · 班车时刻 · 报修 · 访客预约</span>
+              <span>🔧 技术运维：天问日志 · 告警根因 · 变更异常上报</span>
             </div>
+            <div class="ab3-tech">公司级 Skill 市场 · 100+ 能力 · 持续扩展</div>
           </div>
-          <div class="ab2-card">
-            <div class="ab2-icon-wrap" style="background:#f0fdf4"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
-            <div class="ab2-content">
-              <div class="ab2-title">什么都能一起做</div>
-              <div class="ab2-desc">100+ 公司级 Skill 覆盖软件研发 · 数据分析 · 办公协同 · 汇报创作 · 行政服务 · 技术运维，随时切换</div>
-              <div class="ab2-tech">公司级 Skill 市场 · 100+ 能力</div>
+
+          <!-- ② 可靠 -->
+          <div class="ab3-card">
+            <div class="ab3-card-header">
+              <div class="ab3-icon-wrap" style="background:#faf5ff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <div>
+                <div class="ab3-label">② 可靠</div>
+                <div class="ab3-title">随时在、守得住、大活一起扛</div>
+              </div>
             </div>
-          </div>
-          <div class="ab2-card">
-            <div class="ab2-icon-wrap" style="background:#fff7ed"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
-            <div class="ab2-content">
-              <div class="ab2-title">越用越像你的风格</div>
-              <div class="ab2-desc">你的工作习惯、技术偏好被持续感知记忆。今天纠正过的，明天不再重犯。用久了，就是你的老搭档</div>
-              <div class="ab2-tech">自进化体系 · 长期记忆</div>
+            <div class="ab3-desc">合上笔记本，任务照样推进。通过 KIM 消息号下发任务，Remote Agent 7×24 小时在线执行。Long Task 连跑 6+ 小时，自动执行→验证→修复循环，不需要你盯着。遇到复杂大任务，召唤多个子 Agent 并行协作——这就是 Agent Teams。</div>
+            <div class="ab3-bullets">
+              <div>📱 <strong>随时在</strong>：KIM 发条消息，立即响应；合上电脑，云端继续</div>
+              <div>🏃 <strong>守得住</strong>：Long Task 6 小时以上持续执行，自动纠错不跑偏</div>
+              <div>🤝 <strong>大活一起扛</strong>：Agent Teams 自动拆分任务，多子 Agent 并行协同</div>
             </div>
+            <div class="ab3-tech">Remote Agent · Long Task · Agent Teams · 自动修复</div>
           </div>
+
+          <!-- ③ 进化 -->
+          <div class="ab3-card">
+            <div class="ab3-card-header">
+              <div class="ab3-icon-wrap" style="background:#f0fdf4"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+              <div>
+                <div class="ab3-label">③ 进化</div>
+                <div class="ab3-title">今天纠正过的，明天不会再犯</div>
+              </div>
+            </div>
+            <div class="ab3-desc">你的代码风格、技术选型偏好、工作习惯被持续感知和记忆。第一天用，我们还在磨合；用久了，我就像你的老搭档。社区共同进化——任何人都可以贡献新 Skill，整个组织的经验在这里汇聚。</div>
+            <div class="ab3-bullets">
+              <div>🧠 <strong>越用越懂你</strong>：习惯、偏好、风格持续记忆，第一天磨合 → 用久了是老搭档</div>
+              <div>🔄 <strong>纠错即学习</strong>：今天纠正的问题写入记忆，明天不再重犯</div>
+              <div>🌱 <strong>社区共同进化</strong>：你的经验整理成新 Skill，滋养整个组织</div>
+            </div>
+            <div class="ab3-tech">自进化体系 · 长期记忆 · Skills 市场共建</div>
+          </div>
+
         </div>
       </div>
     </section>
