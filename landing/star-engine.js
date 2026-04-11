@@ -131,10 +131,12 @@ class StarWidget {
     const isBlackDwarf = phase.special === "blackdwarf";
     const isSN         = phase.special === "supernova";
     const isPulsar     = phase.special === "pulsar";
+    const isUltraWD    = phase.special === "ultra-wd";
 
     // ---- visual sizing ----
     let size = Math.max(22, Math.min(190, 28 + radius * 180));
     if (isSN) size = Math.min(190, size * (1 + t * 3));
+    if (isUltraWD) size = Math.max(18, size); // 超大质量白矮星，极小但有蓝白光芒
 
     const haloSize = size * 2.6;
     const opacity  = isBlackDwarf ? Math.max(0.04, 1 - t * 0.94) : 1;
@@ -146,6 +148,11 @@ class StarWidget {
     } else if (isPulsar) {
       this.$.core.style.background = `radial-gradient(circle at 40% 35%, #ddffff 0%, ${color} 45%, #002244 100%)`;
       this.$.core.style.boxShadow  = `0 0 ${Math.round(size * 0.5)}px rgba(100,200,255,0.7)`;
+    } else if (isUltraWD) {
+      // 超大质量白矮星：强烈蓝白色，带危险的脉动光芒
+      const pulse = 0.7 + 0.3 * Math.sin(Date.now() / 600);
+      this.$.core.style.background = `radial-gradient(circle at 35% 30%, #ffffff 0%, #aaccff 30%, #5588ff 70%, #002060 100%)`;
+      this.$.core.style.boxShadow  = `0 0 ${Math.round(size * 1.2 * pulse)}px rgba(100,160,255,${0.7 * pulse}), 0 0 ${Math.round(size * 2.5)}px rgba(80,120,255,0.3)`;
     } else if (isBlackDwarf) {
       this.$.core.style.background = `radial-gradient(circle at 38% 30%, #2a2a4a 0%, ${color} 60%, #0a0a18 100%)`;
       this.$.core.style.boxShadow  = `0 0 ${Math.round(size * 0.2)}px rgba(60,60,120,0.15)`;
@@ -171,6 +178,7 @@ class StarWidget {
     // ---- special overlays ----
     this.$.sn.style.display   = isSN     ? "" : "none";
     this.$.beam.style.display = isPulsar ? "" : "none";
+    // ultra-wd 不需要 overlay，脉动效果已内嵌在 core 里
     if (isPulsar) {
       const angle = (Date.now() / 8) % 360;
       this.$.beam.style.transform = `rotate(${angle}deg)`;
@@ -335,6 +343,7 @@ class StarApp {
       if (result.phase.special === "supernova") anySupernova = true;
       if (result.phase.special === "pulsar")    anyPulsar = true;
       if (result.phase.special === "blackdwarf" && progress > 980) anyBlackDwarf = true;
+      if (result.phase.special === "ultra-wd"   && progress > 980) anyBlackDwarf = true; // ultra-wd 也触发结局
     });
 
     // 教学栏（基于第一颗活跃星）
@@ -415,7 +424,7 @@ class StarApp {
       const w = this.widgets[k];
       if (!w) return;
       const sp = w.getCurrentPhase().special;
-      if (sp === "blackdwarf" || sp === "pulsar") {
+      if (sp === "blackdwarf" || sp === "pulsar" || sp === "ultra-wd") {
         star = STAR_CATALOG.find(s => s.key === k);
       }
     });
@@ -549,11 +558,12 @@ class StarApp {
     // ===== 拖拽进度条（鼠标 + 触屏） =====
     this._bindProgressDrag();
 
-    // 脉冲星动画需要持续刷新
+    // 脉冲星 & 超大质量白矮星动画需要持续刷新
     setInterval(() => {
       this.activeStars.forEach(k => {
         const w = this.widgets[k];
-        if (w && w.getCurrentPhase && w.getCurrentPhase()?.special === "pulsar") {
+        const sp = w && w.getCurrentPhase && w.getCurrentPhase()?.special;
+        if (sp === "pulsar" || sp === "ultra-wd") {
           w.render(this.progress);
         }
       });
