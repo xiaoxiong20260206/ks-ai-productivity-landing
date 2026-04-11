@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 900px;
+  background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #f0f9ff 100%);
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  padding: 36px 40px 44px;
+}
+.title { text-align:center; font-size:18px; font-weight:700; color:#1e293b; margin-bottom:6px; }
+.subtitle { text-align:center; font-size:12px; color:#64748b; margin-bottom:28px; }
+
+/* === 通用节点 === */
+.node {
+  border-radius: 12px;
+  border: 2px solid;
+  padding: 12px 18px;
+  text-align: center;
+}
+.nt { font-size:13px; font-weight:700; margin-bottom:3px; }
+.ns { font-size:11px; opacity:.8; line-height:1.4; }
+
+/* 颜色类 */
+.n-orange { background:#fff7ed; border-color:#f97316; color:#c2410c; }
+.n-blue   { background:#eff6ff; border-color:#3b82f6; color:#1d4ed8; }
+.n-green  { background:#f0fdf4; border-color:#22c55e; color:#15803d; }
+.n-purple { background:#fdf4ff; border-color:#a855f7; color:#7e22ce; }
+.n-dark   { background:#1e293b; border-color:#1e293b; color:white; }
+.n-yellow { background:#fffbeb; border-color:#eab308; color:#92400e; }
+
+/* === 箭头 === */
+.arr-down {
+  width:2px; height:24px; background:#94a3b8;
+  position:relative; margin:0 auto; flex-shrink:0;
+}
+.arr-down::after {
+  content:''; position:absolute; bottom:-7px; left:-5px;
+  border-left:6px solid transparent; border-right:6px solid transparent;
+  border-top:8px solid #94a3b8;
+}
+.arr-right {
+  width:24px; height:2px; background:#94a3b8;
+  position:relative; flex-shrink:0; align-self:center;
+}
+.arr-right::after {
+  content:''; position:absolute; right:-7px; top:-5px;
+  border-top:6px solid transparent; border-bottom:6px solid transparent;
+  border-left:8px solid #94a3b8;
+}
+
+/* === 布局 === */
+.col { display:flex; flex-direction:column; align-items:center; gap:0; }
+.row { display:flex; align-items:center; justify-content:center; gap:10px; }
+.w820 { width:820px; margin:0 auto; }
+
+/* 分隔虚线 */
+.vdash { width:1px; background:repeating-linear-gradient(to bottom,#cbd5e1 0,#cbd5e1 6px,transparent 6px,transparent 12px); margin:0 16px; align-self:stretch; }
+
+/* 标签胶囊 */
+.pill {
+  font-size:10.5px; font-weight:600;
+  background:white; border:1.5px solid #e2e8f0;
+  color:#475569; border-radius:20px;
+  padding:3px 12px; white-space:nowrap;
+}
+.pill-green { border-color:#86efac; color:#15803d; background:#f0fdf4; }
+.pill-red   { border-color:#fca5a5; color:#b91c1c; background:#fff5f5; }
+
+/* 蓄水池回流区 */
+.pool-box {
+  width:820px;
+  background:#fffbeb;
+  border:2px solid #eab308;
+  border-radius:14px;
+  padding:14px 20px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+.pool-left { text-align:center; min-width:120px; }
+.pool-left .pl-icon { font-size:26px; }
+.pool-left .pl-title { font-size:13px; font-weight:800; color:#92400e; margin:4px 0 2px; }
+.pool-left .pl-sub { font-size:10.5px; color:#a16207; }
+.pool-right { flex:1; display:flex; flex-direction:column; gap:6px; }
+.pool-row { display:flex; align-items:center; gap:8px; font-size:11.5px; color:#64748b; }
+.pool-row .pr-tag { font-size:11px; font-weight:700; background:white; border:1.5px solid #fde68a; color:#92400e; border-radius:6px; padding:2px 10px; white-space:nowrap; }
+
+/* 超额路径区 */
+.paths-box {
+  width:820px;
+  background:white;
+  border:2px solid #e2e8f0;
+  border-radius:14px;
+  padding:16px 20px;
+  display:flex;
+  gap:0;
+}
+.path-item {
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  padding:0 12px;
+  text-align:center;
+}
+.path-item + .path-item { border-left:1px solid #e2e8f0; }
+.pi-icon { font-size:28px; }
+.pi-name { font-size:13px; font-weight:800; }
+.pi-desc { font-size:11px; color:#64748b; line-height:1.5; }
+.pi-who  { font-size:11px; font-weight:700; border-radius:6px; padding:3px 10px; margin-top:2px; }
+
+/* 闭环箭头说明 */
+.feedback-bar {
+  width:820px;
+  background:#f0fdf4;
+  border:1.5px solid #86efac;
+  border-radius:10px;
+  padding:10px 20px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:12px;
+  color:#15803d;
+  font-weight:600;
+}
+</style>
+</head>
+<body>
+<div class="title">经营模型：资金流转与积分运转全流程</div>
+<div class="subtitle">从资金申请到用户使用，到超额处理，到积分回流，形成完整自循环体系</div>
+
+<div class="col" style="gap:0">
+
+  <!-- ① 资金来源 -->
+  <div class="row w820" style="gap:16px; margin-bottom:0">
+    <div class="node n-orange" style="flex:1">
+      <div class="nt">🏦 公司战略投资</div>
+      <div class="ns">按年申请专项补贴<br>作为全员 AI 使用基础预算</div>
+    </div>
+    <div style="font-size:13px;color:#94a3b8;font-weight:600;flex-shrink:0">OR</div>
+    <div class="node n-orange" style="flex:1">
+      <div class="nt">🏢 研发线自持</div>
+      <div class="ns">由研发线在自身预算内承担<br>灵活但依赖线级支持力度</div>
+    </div>
+  </div>
+  <div class="arr-down"></div>
+
+  <!-- ② 年度预算池 -->
+  <div class="node n-blue w820" style="padding:14px 24px">
+    <div class="nt">💼 年度预算池</div>
+    <div class="ns">全年成本三档推算（基准 / 乐观 / 悲观）→ 申请依据 · 动态监控</div>
+  </div>
+  <div class="arr-down"></div>
+
+  <!-- ③ 配额分层 -->
+  <div class="row w820" style="gap:16px">
+    <div class="node n-green" style="flex:1">
+      <div class="nt">👩‍💻 研发类用户</div>
+      <div class="ns">高配额 / 周<br>Coding 场景 Token 用量高</div>
+    </div>
+    <div style="font-size:13px;color:#94a3b8;font-weight:600;flex-shrink:0">+</div>
+    <div class="node n-green" style="flex:1">
+      <div class="nt">👤 非研发类用户</div>
+      <div class="ns">标准配额 / 周<br>问答、文档处理等场景</div>
+    </div>
+  </div>
+  <div class="arr-down"></div>
+
+  <!-- ④ 用户使用 -->
+  <div class="node n-purple w820" style="padding:14px 24px">
+    <div class="nt">⚡ 用户使用 · 积分按模型倍数消耗</div>
+    <div class="ns" style="margin-top:6px;display:flex;justify-content:center;gap:20px;flex-wrap:wrap">
+      <span style="background:#dcfce7;color:#15803d;border-radius:6px;padding:3px 10px;font-weight:700;font-size:11px">GLM5 / KAT &nbsp;0.x 倍 ✅ 最省</span>
+      <span style="background:#fff;border:2px solid #22c55e;color:#15803d;border-radius:6px;padding:3px 10px;font-weight:700;font-size:11px">Auto 1倍 ⭐ 推荐</span>
+      <span style="background:#eff6ff;color:#1d4ed8;border-radius:6px;padding:3px 10px;font-weight:700;font-size:11px">Gemini/GPT 中等</span>
+      <span style="background:#fee2e2;color:#dc2626;border-radius:6px;padding:3px 10px;font-weight:700;font-size:11px">Claude 最高 ⚠️</span>
+    </div>
+  </div>
+
+  <!-- ⑤ 双出口分叉 -->
+  <div class="row w820" style="gap:0;margin-top:12px;align-items:flex-start">
+
+    <!-- 左：用不完 -->
+    <div class="col" style="flex:1;align-items:center">
+      <div class="arr-down"></div>
+      <div class="pill pill-green" style="margin:4px 0">用不完</div>
+      <div class="node n-green" style="min-width:200px">
+        <div class="nt">💾 剩余积分</div>
+        <div class="ns">本周未消耗部分</div>
+      </div>
+      <div class="arr-down"></div>
+      <!-- 回流箭头向下进入奖励池 -->
+      <div class="pill" style="margin:4px 0">→ 流入奖励池</div>
+    </div>
+
+    <div class="vdash"></div>
+
+    <!-- 右：用超了 -->
+    <div class="col" style="flex:1;align-items:center">
+      <div class="arr-down"></div>
+      <div class="pill pill-red" style="margin:4px 0">用超了</div>
+      <div class="paths-box" style="width:auto;flex-direction:column;gap:10px;padding:12px 16px">
+        <div style="font-size:11px;font-weight:700;color:#64748b;text-align:center;margin-bottom:2px">三条超额路径（自选）</div>
+        <div style="display:flex;gap:8px">
+          <div style="flex:1;background:#fff7ed;border:1.5px solid #f97316;border-radius:10px;padding:10px;text-align:center">
+            <div style="font-size:20px">🏆</div>
+            <div style="font-size:12px;font-weight:800;color:#c2410c;margin:3px 0">先锋队认证</div>
+            <div style="font-size:10.5px;color:#9a3412;line-height:1.4">参与 AI 活动<br>赢取奖励积分</div>
+            <div style="font-size:10px;font-weight:700;background:#ffedd5;color:#c2410c;border-radius:4px;padding:2px 6px;margin-top:5px">奖励池买单</div>
+          </div>
+          <div style="flex:1;background:#eff6ff;border:1.5px solid #3b82f6;border-radius:10px;padding:10px;text-align:center">
+            <div style="font-size:20px">📋</div>
+            <div style="font-size:12px;font-weight:800;color:#1d4ed8;margin:3px 0">业务申请配额</div>
+            <div style="font-size:10.5px;color:#1e40af;line-height:1.4">Leader 一键授权<br>轻审批快速通过</div>
+            <div style="font-size:10px;font-weight:700;background:#dbeafe;color:#1d4ed8;border-radius:4px;padding:2px 6px;margin-top:5px">业务线预算买单</div>
+          </div>
+          <div style="flex:1;background:#f0fdf4;border:1.5px solid #22c55e;border-radius:10px;padding:10px;text-align:center">
+            <div style="font-size:20px">🖥️</div>
+            <div style="font-size:12px;font-weight:800;color:#15803d;margin:3px 0">接入自有节点</div>
+            <div style="font-size:10.5px;color:#166534;line-height:1.4">业务线自建推理<br>不受公共配额限</div>
+            <div style="font-size:10px;font-weight:700;background:#dcfce7;color:#15803d;border-radius:4px;padding:2px 6px;margin-top:5px">业务线自建买单</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑥ 奖励池 + 回流闭环 -->
+  <div style="width:820px;display:flex;align-items:center;gap:12px;margin-top:16px">
+    <div class="arr-down" style="margin:0"></div>
+  </div>
+  <div class="pool-box">
+    <div class="pool-left">
+      <div class="pl-icon">🌊</div>
+      <div class="pl-title">奖励积分池</div>
+      <div class="pl-sub">节省积分蓄水</div>
+    </div>
+    <div style="width:1px;background:#fde68a;align-self:stretch;margin:0 4px"></div>
+    <div class="pool-right">
+      <div class="pool-row">
+        <span class="pr-tag">↗ 补贴先锋队</span>
+        <span>参与 AI 转型活动的用户获得额外积分奖励</span>
+      </div>
+      <div class="pool-row">
+        <span class="pr-tag">↗ 补贴申请者</span>
+        <span>早期阶段补贴通过审批申请的超额用户</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑦ 自循环说明 -->
+  <div class="feedback-bar" style="margin-top:12px">
+    <span style="font-size:16px">♻️</span>
+    <span><strong>自我循环机制</strong>：节约行为天然补贴高价值使用行为 — 减少对外部持续追加投入的依赖，体系越运转越高效</span>
+  </div>
+
+</div>
+</body>
+</html>

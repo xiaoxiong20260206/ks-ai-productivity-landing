@@ -5,12 +5,12 @@
 
 window.PIONEER_DATA = {
   bizLines: [
-    { id: 'zhuZhan',    name: '主站',     bp: '王娟',   color: '#2563eb', bg: '#eff6ff', border: '#bfdbfe' },
-    { id: 'ksib',       name: 'KSIB',    bp: '王娟',   color: '#7c3aed', bg: '#faf5ff', border: '#ddd6fe' },
-    { id: 'shangYeHua', name: '商业化',   bp: '王贤',   color: '#16a34a', bg: '#f0fdf4', border: '#bbf7d0' },
+    { id: 'zhuZhan',    name: '主站',     bp: '王诩',   color: '#2563eb', bg: '#eff6ff', border: '#bfdbfe' },
+    { id: 'ksib',       name: 'KSIB',    bp: '王诩',   color: '#7c3aed', bg: '#faf5ff', border: '#ddd6fe' },
+    { id: 'shangYeHua', name: '商业化',   bp: '王诩',   color: '#16a34a', bg: '#f0fdf4', border: '#bbf7d0' },
     { id: 'zongXiao',   name: '综效',     bp: '于旭东', color: '#d97706', bg: '#fffbeb', border: '#fde68a' },
-    { id: 'yanFaXian',  name: '研发线',   bp: '于旭东', color: '#0369a1', bg: '#f0f9ff', border: '#bae6fd' },
-    { id: 'shujuPT',    name: '数据平台', bp: '—',      color: '#dc2626', bg: '#fef2f2', border: '#fecaca' },
+    { id: 'yanFaXian',  name: '研发线',   bp: '王硕',   color: '#0369a1', bg: '#f0f9ff', border: '#bae6fd' },
+    { id: 'shujuPT',    name: '数据平台', bp: '张蕤',   color: '#dc2626', bg: '#fef2f2', border: '#fecaca' },
     { id: 'anQuan',     name: '安全风控', bp: '于旭东', color: '#6b7280', bg: '#f9fafb', border: '#e5e7eb' },
   ],
   // 与 Skill 市场保持一致的 6 个通道（顺序一致）

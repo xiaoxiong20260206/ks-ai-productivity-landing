@@ -1,4 +1,4 @@
-/* skill-content.js — Renders the AI Skill Market tab from SKILL_DATA */
+/* skill-content.js — Renders the AI Skill Market tab from SKILL_DATA (v2) */
 
 document.addEventListener('DOMContentLoaded', function () {
   renderSkillTab();
@@ -85,7 +85,7 @@ function renderSkillTab() {
           <div class="legend-item"><div class="legend-dot" style="background:var(--canary-color)"></div><span>灰度中</span></div>
           <div class="legend-item"><div class="legend-dot" style="background:var(--wip-color)"></div><span>开发中</span></div>
           <div class="legend-item"><div class="legend-dot" style="background:var(--plan-color)"></div><span>计划中</span></div>
-          <span style="margin-left:8px">左侧彩条 = 架构层标识色 · 每格 = 技能包（可点击）+ 知识库（建设中）· 点击卡片查看详情</span>
+          <span style="margin-left:8px">左侧彩条 = 架构层标识色 · 点击卡片查看技能详情</span>
         </div>
 
         <!-- Matrix wrapper -->
@@ -259,6 +259,39 @@ function renderSkillTab() {
   });
 }
 
+/* ── 辅助函数：整体状态 ─────────────────────────────────── */
+function overallStatusLabel(s) {
+  return { applied: '🟢 已应用', building: '🟡 建设中' }[s] || '⬜ 未知';
+}
+function overallStatusClass(s) {
+  return { applied: 'attr-applied', building: 'attr-building' }[s] || '';
+}
+
+/* ── 辅助函数：知识库状态 ───────────────────────────────── */
+function kbLabel(s) {
+  return { notStarted: '⬜ 未启动', building: '🔵 建设中', published: '✅ 已发布' }[s] || '⬜ 未启动';
+}
+function kbClass(s) {
+  return { notStarted: 'attr-kb-not', building: 'attr-kb-building', published: 'attr-kb-published' }[s] || 'attr-kb-not';
+}
+
+/* ── 构建单个卡片内的属性行 HTML ──────────────────────── */
+function buildPkgAttrs(pkg) {
+  return `<div class="pkg-card-attrs">
+    <div class="pkg-attr-row">
+      <span class="pkg-attr-label">状态</span>
+      <span class="pkg-attr-val ${overallStatusClass(pkg.overallStatus)}">${overallStatusLabel(pkg.overallStatus)}</span>
+      <span class="pkg-attr-sep">|</span>
+      <span class="pkg-attr-label">Skills</span>
+      <span class="pkg-attr-val">${pkg.skillProgress || '0/0'}</span>
+    </div>
+    <div class="pkg-attr-row">
+      <span class="pkg-attr-label">知识库</span>
+      <span class="pkg-attr-val ${kbClass(pkg.knowledgeBase)}">${kbLabel(pkg.knowledgeBase)}</span>
+    </div>
+  </div>`;
+}
+
 function buildMatrixHTML(channels, layers) {
   const colCount = channels.length;
 
@@ -292,7 +325,7 @@ function buildMatrixHTML(channels, layers) {
   html += `</tr></thead><tbody>`;
 
   layers.forEach(layer => {
-    // Universal row (L3 only)
+    // Universal row（L2 协作办公层只渲染 universal，不渲染 packages 职能行）
     if (layer.universal && layer.universal.length) {
       html += `<tr>
         <td class="row-header">
@@ -302,19 +335,23 @@ function buildMatrixHTML(channels, layers) {
             <span class="layer-desc" style="font-size:9px;color:var(--text-muted)">${layer.desc}</span>
           </div>
         </td>
-        <td colspan="${colCount}" class="universal-cell">`;
+        <td colspan="${colCount}" class="universal-cell"><div class="universal-cell-inner">`;
       layer.universal.forEach(u => {
-        html += `<div class="universal-pkg" data-pkg-id="${u.id}" style="border-color:var(--l3-border)">
-          <span class="pkg-card-title">${u.title}</span>
-          <span class="status-badge ${statusBadge(u.status)}" style="margin-left:6px">${statusLabel(u.status)}</span>
-          <span class="pkg-count" style="margin-left:4px">${u.skillCount} 技能</span>
+        html += `<div class="universal-pkg" data-pkg-id="${u.id}" style="border-color:var(--l2-border)">
+          <div class="universal-pkg-header">
+            <span class="pkg-card-title">${u.title}</span>
+            <span class="status-badge ${statusBadge(u.status)}" style="margin-left:6px">${statusLabel(u.status)}</span>
+          </div>
+          ${buildPkgAttrs(u)}
         </div>`;
       });
-      html += `</td></tr>`;
+      html += `<div class="universal-pkg-more" title="更多通用包持续建设中">…</div>`;
+      html += `</div></td></tr>`;
+      // L2 协作办公层只有通用行，直接跳过，不再渲染 packages 行
+      return;
     }
 
-    // Normal layer row
-    // L4 行头特殊处理：加业务线下拉
+    // Normal layer row（L4、L3、L1 的职能分列矩阵）
     const isL4 = layer.id === 'l4';
     html += `<tr data-layer="${layer.id}">
       <td class="row-header">
@@ -335,22 +372,14 @@ function buildMatrixHTML(channels, layers) {
       const colIdx = channels.indexOf(ch);
       html += `<td class="matrix-cell" data-col="${ch.id}" data-col-idx="${colIdx}" data-layer="${layer.id}">`;
       if (pkgs.length === 0) {
-        html += `<div class="cell-empty">
-          <span class="cell-empty-skill">—</span>
-          <div class="knowledge-slot knowledge-slot-locked" title="知识库建设中">🔒 知识库</div>
-        </div>`;
+        html += `<div class="cell-empty"><span class="cell-empty-skill">—</span></div>`;
       } else {
         pkgs.forEach(pkg => {
           html += `<div class="pkg-card ${layer.id}" data-pkg-id="${pkg.id}">
             <div class="pkg-card-title">${pkg.title}</div>
-            <div class="pkg-card-meta">
-              <span class="status-badge ${statusBadge(pkg.status)}">${statusLabel(pkg.status)}</span>
-              ${pkg.skillCount ? `<span class="pkg-count">${pkg.skillCount} 技能</span>` : ''}
-            </div>
+            ${buildPkgAttrs(pkg)}
           </div>`;
         });
-        // 知识库占位卡（预留）
-        html += `<div class="knowledge-slot knowledge-slot-locked" title="知识库建设中">🔒 知识库</div>`;
       }
       html += `</td>`;
     });
@@ -412,15 +441,12 @@ function statusLabel(status) {
 }
 
 // ── L4 业务线切换 ──────────────────────────────────────────────
-// skill-data.js 每个 l4 packages 里按 bizId 分包，切换时刷新 L4 行
 function switchL4Biz(bizId) {
   const l4 = window.SKILL_DATA && window.SKILL_DATA.layers.find(l => l.id === 'l4');
   if (!l4) return;
 
-  // L4 business-line overrides: packages per biz（从 l4BizPackages 读取，若无则 fallback 到默认）
   const bizPkgs = (window.L4_BIZ_PACKAGES && window.L4_BIZ_PACKAGES[bizId]) || l4.packages;
 
-  // 更新 L4 行每个通道格
   const channels = window.SKILL_DATA.channels;
   const l4Cells = document.querySelectorAll('.matrix-cell[data-layer="l4"]');
   l4Cells.forEach(cell => {
@@ -428,31 +454,20 @@ function switchL4Biz(bizId) {
     const pkgs = (bizPkgs[chId]) || [];
     cell.innerHTML = '';
     if (pkgs.length === 0) {
-      cell.innerHTML = `<div class="cell-empty">
-        <span class="cell-empty-skill">—</span>
-        <div class="knowledge-slot knowledge-slot-locked" title="知识库建设中">🔒 知识库</div>
-      </div>`;
+      cell.innerHTML = `<div class="cell-empty"><span class="cell-empty-skill">—</span></div>`;
     } else {
       pkgs.forEach(pkg => {
         const div = document.createElement('div');
         div.className = `pkg-card l4`;
         div.dataset.pkgId = pkg.id;
         div.innerHTML = `<div class="pkg-card-title">${pkg.title}</div>
-          <div class="pkg-card-meta">
-            <span class="status-badge ${statusBadge(pkg.status)}">${statusLabel(pkg.status)}</span>
-            ${pkg.skillCount ? `<span class="pkg-count">${pkg.skillCount} 技能</span>` : ''}
-          </div>`;
+          ${buildPkgAttrs(pkg)}`;
         div.addEventListener('click', () => {
           const p = findPkg(pkg.id, window.SKILL_DATA.layers);
           if (p) openSkillModal(p); else openSkillModal(pkg);
         });
         cell.appendChild(div);
       });
-      const ks = document.createElement('div');
-      ks.className = 'knowledge-slot knowledge-slot-locked';
-      ks.title = '知识库建设中';
-      ks.textContent = '🔒 知识库';
-      cell.appendChild(ks);
     }
   });
 

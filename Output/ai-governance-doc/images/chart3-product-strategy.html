@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 900px;
+  background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #f0f9ff 100%);
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  padding: 36px 40px 44px;
+}
+.title { text-align:center; font-size:18px; font-weight:700; color:#1e293b; margin-bottom:6px; }
+.subtitle { text-align:center; font-size:12px; color:#64748b; margin-bottom:28px; }
+
+.arr-down {
+  width:2px; height:22px; background:#94a3b8; position:relative; margin:0 auto; flex-shrink:0;
+}
+.arr-down::after {
+  content:''; position:absolute; bottom:-7px; left:-5px;
+  border-left:6px solid transparent; border-right:6px solid transparent;
+  border-top:8px solid #94a3b8;
+}
+.col { display:flex; flex-direction:column; align-items:center; }
+.pill {
+  font-size:10.5px; font-weight:600;
+  background:white; border:1.5px solid #e2e8f0; color:#475569;
+  border-radius:20px; padding:3px 12px; white-space:nowrap;
+}
+
+/* 两轨容器 */
+.two-tracks {
+  display:flex;
+  gap:0;
+  width:820px;
+  margin:0 auto;
+}
+.track {
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:0;
+  padding:0 16px;
+}
+.track + .track { border-left:2px dashed #e2e8f0; }
+.track-header {
+  font-size:11px;
+  font-weight:700;
+  border-radius:20px;
+  padding:4px 16px;
+  margin-bottom:10px;
+  text-align:center;
+}
+.th-green { background:#dcfce7; color:#15803d; border:1.5px solid #86efac; }
+.th-orange { background:#ffedd5; color:#c2410c; border:1.5px solid #fdba74; }
+
+.node {
+  border-radius:12px; border:2px solid; padding:12px 16px;
+  text-align:center; width:100%;
+}
+.nt { font-size:13px; font-weight:700; margin-bottom:3px; }
+.ns { font-size:11px; opacity:.8; line-height:1.4; }
+.n-green  { background:#f0fdf4; border-color:#22c55e; color:#15803d; }
+.n-orange { background:#fff7ed; border-color:#f97316; color:#c2410c; }
+.n-blue   { background:#eff6ff; border-color:#3b82f6; color:#1d4ed8; }
+.n-purple { background:#fdf4ff; border-color:#a855f7; color:#7e22ce; }
+.n-slate  { background:#f1f5f9; border-color:#94a3b8; color:#475569; }
+
+/* 模型倍数小表 */
+.model-mini {
+  width:100%;
+  background:white;
+  border:1.5px solid #e2e8f0;
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:8px;
+}
+.mm-row {
+  display:flex;
+  align-items:center;
+  padding:6px 10px;
+  gap:6px;
+  border-bottom:1px solid #f1f5f9;
+  font-size:11px;
+}
+.mm-row:last-child { border-bottom:none; }
+.mm-name { flex:1; font-weight:600; color:#1e293b; }
+.mm-tag {
+  font-size:10.5px; font-weight:700; border-radius:5px; padding:2px 8px;
+}
+
+/* 合流节点 */
+.merge-node {
+  width:820px;
+  border-radius:14px;
+  border:2.5px solid #a855f7;
+  background:#fdf4ff;
+  padding:14px 24px;
+  text-align:center;
+}
+.mn-title { font-size:14px; font-weight:800; color:#7e22ce; margin-bottom:6px; }
+.mn-sub { font-size:11.5px; color:#6b21a8; }
+
+/* 出口分叉 */
+.fork-row {
+  display:flex;
+  gap:0;
+  width:820px;
+  align-items:flex-start;
+}
+.fork-col {
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:0;
+  padding:0 8px;
+}
+.vdash { width:1px; background:repeating-linear-gradient(to bottom,#cbd5e1 0,#cbd5e1 6px,transparent 6px,transparent 12px); margin:0 8px; align-self:stretch; }
+</style>
+</head>
+<body>
+<div class="title">产品策略：用户体验与成本控制双优设计</div>
+<div class="subtitle">两轨并行引导用户走最优路径 · 超额后平滑引导无断层感</div>
+
+<div style="width:820px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:0">
+
+  <!-- 统一入口 -->
+  <div class="node n-blue" style="width:820px;padding:14px 24px">
+    <div class="nt">📱 MyFlicker · 统一产品入口</div>
+    <div class="ns">通用 AI 助手 + 领域 Agent（Data Agent · KATE · 设计 Agent · 稳定性 Agent）</div>
+  </div>
+  <div class="arr-down"></div>
+
+  <!-- 两轨分流 -->
+  <div class="two-tracks">
+
+    <!-- 左轨：非 Code 场景 -->
+    <div class="track">
+      <div class="track-header th-green">🤖 非 Code 场景</div>
+      <div class="node n-green">
+        <div class="nt">Auto 模式默认开启</div>
+        <div class="ns">不暴露模型选择界面<br>用户无需关心底层模型</div>
+      </div>
+      <div class="arr-down"></div>
+      <div class="node n-slate">
+        <div class="nt" style="font-size:12px">系统智能路由</div>
+        <div class="ns">任务复杂度低 → 低成本模型<br>任务复杂度高 → 高能力模型</div>
+      </div>
+      <div class="arr-down"></div>
+      <div style="font-size:11px;color:#15803d;background:#dcfce7;border:1.5px solid #86efac;border-radius:8px;padding:6px 12px;text-align:center;width:100%">
+        <strong>✅ 成本最优</strong><br><span style="font-size:10px">用户体验顺畅，成本系统最低</span>
+      </div>
+    </div>
+
+    <!-- 右轨：Code 场景 -->
+    <div class="track">
+      <div class="track-header th-orange">💻 Code 场景</div>
+      <div class="node n-orange">
+        <div class="nt">保留模型选择权</div>
+        <div class="ns">倍数差异清晰可见<br>用户知情后自主选择</div>
+      </div>
+      <div class="arr-down"></div>
+      <!-- 模型倍数小表 -->
+      <div class="model-mini">
+        <div class="mm-row" style="background:#f8fafc;font-weight:700;color:#64748b;font-size:10px">
+          <span class="mm-name">模型</span><span style="font-size:10px;font-weight:700;color:#64748b">积分倍数</span>
+        </div>
+        <div class="mm-row">
+          <span class="mm-name" style="color:#15803d">GLM5 / KAT</span>
+          <span class="mm-tag" style="background:#dcfce7;color:#16a34a">0.x 倍</span>
+        </div>
+        <div class="mm-row" style="background:#f0fdf4">
+          <span class="mm-name" style="color:#15803d;font-weight:800">Auto ⭐</span>
+          <span class="mm-tag" style="background:white;border:1.5px solid #22c55e;color:#15803d">1 倍</span>
+        </div>
+        <div class="mm-row">
+          <span class="mm-name" style="color:#2563eb">Gemini / GPT</span>
+          <span class="mm-tag" style="background:#eff6ff;color:#2563eb">中等</span>
+        </div>
+        <div class="mm-row">
+          <span class="mm-name" style="color:#dc2626">Claude</span>
+          <span class="mm-tag" style="background:#fee2e2;color:#dc2626">最高</span>
+        </div>
+      </div>
+      <div class="arr-down"></div>
+      <div style="font-size:11px;color:#c2410c;background:#fff7ed;border:1.5px solid #fdba74;border-radius:8px;padding:6px 12px;text-align:center;width:100%">
+        <strong>📊 倍数差异引导决策</strong><br><span style="font-size:10px">高倍模型用在真正需要的场景</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 合流 -->
+  <div class="arr-down"></div>
+  <div class="merge-node">
+    <div class="mn-title">📊 积分实时消耗 · 全程可见</div>
+    <div class="mn-sub">每位用户可查看本周配额使用情况 · 呈现"充裕感"而非"倒计时紧迫感"</div>
+  </div>
+  <div class="arr-down"></div>
+
+  <!-- 充足 / 不足 分叉 -->
+  <div class="fork-row">
+    <div class="fork-col">
+      <div class="pill" style="border-color:#86efac;color:#15803d;background:#f0fdf4;margin-bottom:6px">✅ 积分充足</div>
+      <div class="node n-green" style="width:100%">
+        <div class="nt">继续正常使用</div>
+        <div class="ns">配额不变，循环上一轮</div>
+      </div>
+      <!-- 循环箭头提示 -->
+      <div class="arr-down"></div>
+      <div style="font-size:11px;color:#15803d;background:#dcfce7;border:1.5px solid #86efac;border-radius:8px;padding:6px 12px;text-align:center;width:100%">↩ 继续使用，下周重置配额</div>
+    </div>
+
+    <div class="vdash"></div>
+
+    <div class="fork-col">
+      <div class="pill" style="border-color:#fca5a5;color:#b91c1c;background:#fff5f5;margin-bottom:6px">⚠️ 积分不足</div>
+      <div class="node" style="width:100%;background:#fef2f2;border-color:#ef4444;color:#b91c1c">
+        <div class="nt">产品侧平滑引导</div>
+        <div class="ns">不硬断，不报错<br>引导用户进入超额路径</div>
+      </div>
+      <div class="arr-down"></div>
+      <!-- 三条出路 -->
+      <div style="display:flex;gap:6px;width:100%">
+        <div style="flex:1;background:#fff7ed;border:1.5px solid #f97316;border-radius:10px;padding:8px;text-align:center">
+          <div style="font-size:16px">🏆</div>
+          <div style="font-size:11px;font-weight:800;color:#c2410c;margin:3px 0">先锋队</div>
+          <div style="font-size:10px;color:#9a3412">认证赢积分</div>
+        </div>
+        <div style="flex:1;background:#eff6ff;border:1.5px solid #3b82f6;border-radius:10px;padding:8px;text-align:center">
+          <div style="font-size:16px">📋</div>
+          <div style="font-size:11px;font-weight:800;color:#1d4ed8;margin:3px 0">申请配额</div>
+          <div style="font-size:10px;color:#1e40af">业务线审批</div>
+        </div>
+        <div style="flex:1;background:#f0fdf4;border:1.5px solid #22c55e;border-radius:10px;padding:8px;text-align:center">
+          <div style="font-size:16px">🖥️</div>
+          <div style="font-size:11px;font-weight:800;color:#15803d;margin:3px 0">自有节点</div>
+          <div style="font-size:10px;color:#166534">不受限制</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

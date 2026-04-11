@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 900px;
+  background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #f0f9ff 100%);
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  padding: 36px 40px 44px;
+}
+.chart-title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 6px;
+}
+.chart-subtitle {
+  text-align: center;
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 28px;
+}
+
+/* ===== 上半：2×2矩阵区 ===== */
+.matrix-wrap {
+  position: relative;
+  width: 820px;
+  height: 440px;
+  margin: 0 auto;
+}
+
+/* 四个目标卡片 */
+.goal {
+  position: absolute;
+  width: 186px;
+  border-radius: 16px;
+  border: 2.5px solid;
+  padding: 18px 14px 14px;
+  text-align: center;
+  background: white;
+  z-index: 10;
+}
+.goal-icon  { font-size: 28px; margin-bottom: 6px; }
+.goal-name  { font-size: 15px; font-weight: 800; margin-bottom: 4px; }
+.goal-kpi   { font-size: 10.5px; font-weight: 700; border-radius: 20px; padding: 2px 10px; display:inline-block; margin-bottom: 6px; }
+.goal-desc  { font-size: 11px; line-height: 1.5; opacity: 0.8; }
+
+/* 2×2 位置：左上/右上/左下/右下 */
+.g-tl { top: 20px;  left: 20px; }   /* 全员推广 */
+.g-tr { top: 20px;  right: 20px; }  /* 成本可控 */
+.g-bl { bottom: 20px; left: 20px; } /* 组织转型 */
+.g-br { bottom: 20px; right: 20px;} /* 用户体验 */
+
+/* 颜色主题 */
+.g-push  { border-color: #f97316; }
+.g-push  .goal-name { color: #c2410c; }
+.g-push  .goal-kpi  { background: #ffedd5; color: #c2410c; }
+
+.g-cost  { border-color: #3b82f6; }
+.g-cost  .goal-name { color: #1d4ed8; }
+.g-cost  .goal-kpi  { background: #dbeafe; color: #1d4ed8; }
+
+.g-trans { border-color: #a855f7; }
+.g-trans .goal-name { color: #7e22ce; }
+.g-trans .goal-kpi  { background: #faf5ff; color: #7e22ce; }
+
+.g-exp   { border-color: #22c55e; }
+.g-exp   .goal-name { color: #15803d; }
+.g-exp   .goal-kpi  { background: #dcfce7; color: #15803d; }
+
+/* 中心圆 */
+.center {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px; height: 120px;
+  background: #1e293b;
+  border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  color: white;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(30,41,59,0.28);
+  z-index: 20;
+}
+.ct-title { font-size: 13px; font-weight: 800; line-height: 1.4; }
+.ct-sub   { font-size: 9.5px; opacity: 0.55; margin-top: 3px; }
+
+/* 箭头线标签 */
+.line-label {
+  position: absolute;
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+  padding: 2px 8px;
+  border-radius: 10px;
+  z-index: 15;
+  line-height: 1.4;
+}
+.ll-conflict { background: #fff1f2; border: 1.5px solid #fca5a5; color: #b91c1c; }
+.ll-boost    { background: #f0fdf4; border: 1.5px solid #86efac; color: #166534; }
+
+/* ===== 下半：张力说明区 ===== */
+.tension-section {
+  width: 820px;
+  margin: 20px auto 0;
+  display: flex;
+  gap: 12px;
+}
+.ts-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #475569;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.ts-col {
+  flex: 1;
+  background: white;
+  border-radius: 12px;
+  border: 1.5px solid #e2e8f0;
+  padding: 14px 16px;
+}
+.tension-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 9px;
+  font-size: 11px;
+  line-height: 1.5;
+  color: #334155;
+}
+.tension-item:last-child { margin-bottom: 0; }
+.ti-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+.tension-item strong { color: #1e293b; }
+</style>
+</head>
+<body>
+<div class="chart-title">四目标系统性权衡关系</div>
+<div class="chart-subtitle">四个目标之间存在 6 对张力 — 本方案是在这些张力之间寻求系统性平衡的结果</div>
+
+<div class="matrix-wrap">
+  <!-- SVG 关系线 -->
+  <svg style="position:absolute;top:0;left:0;width:100%;height:100%;overflow:visible;z-index:5">
+    <defs>
+      <marker id="m-red" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+        <path d="M1,1 L7,4 L1,7 Z" fill="#ef4444"/>
+      </marker>
+      <marker id="m-green" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+        <path d="M1,1 L7,4 L1,7 Z" fill="#22c55e"/>
+      </marker>
+      <marker id="m-orange" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+        <path d="M1,1 L7,4 L1,7 Z" fill="#f97316"/>
+      </marker>
+      <marker id="m-blue" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+        <path d="M1,1 L7,4 L1,7 Z" fill="#3b82f6"/>
+      </marker>
+      <marker id="m-purple" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+        <path d="M1,1 L7,4 L1,7 Z" fill="#a855f7"/>
+      </marker>
+    </defs>
+
+    <!--
+      卡片中心坐标估算（相对 820×440 canvas）：
+      全员推广 左上: TL = (113, 115)
+      成本可控 右上: TR = (707, 115)
+      组织转型 左下: BL = (113, 325)
+      用户体验 右下: BR = (707, 325)
+      中心圆:        C  = (410, 220)
+    -->
+
+    <!-- 横向上：全员推广 ↔ 成本可控（制约：规模越大成本越高）-->
+    <path d="M 210,95 Q 410,55 614,95"
+          stroke="#ef4444" stroke-width="2" fill="none" stroke-dasharray="6,3"
+          marker-end="url(#m-red)"/>
+    <path d="M 614,125 Q 410,160 210,125"
+          stroke="#f97316" stroke-width="1.5" fill="none" stroke-dasharray="4,3" opacity=".5"
+          marker-end="url(#m-orange)"/>
+
+    <!-- 纵向左：全员推广 ↔ 组织转型（正向：转型目标驱动推广）-->
+    <path d="M 88,220 Q 40,220 70,300"
+          stroke="#22c55e" stroke-width="2.5" fill="none"
+          marker-end="url(#m-green)"/>
+    <path d="M 138,300 Q 60,240 138,155"
+          stroke="#22c55e" stroke-width="2.5" fill="none"
+          marker-end="url(#m-green)"/>
+
+    <!-- 纵向右：成本可控 ↔ 用户体验（制约：过度限制体验下降）-->
+    <path d="M 735,175 Q 780,220 735,280"
+          stroke="#ef4444" stroke-width="2" fill="none" stroke-dasharray="6,3"
+          marker-end="url(#m-red)"/>
+    <path d="M 682,278 Q 750,220 682,165"
+          stroke="#3b82f6" stroke-width="1.5" fill="none" stroke-dasharray="4,3" opacity=".5"
+          marker-end="url(#m-blue)"/>
+
+    <!-- 横向下：组织转型 ↔ 用户体验（正向：体验好→自发使用→转型达成）-->
+    <path d="M 210,360 Q 410,400 614,360"
+          stroke="#22c55e" stroke-width="2.5" fill="none"
+          marker-end="url(#m-green)"/>
+
+    <!-- 对角线1：全员推广 ↔ 用户体验（正向：推广覆盖，体验被重视）-->
+    <path d="M 210,145 Q 410,220 614,295"
+          stroke="#22c55e" stroke-width="1.8" fill="none" stroke-dasharray="5,3" opacity=".7"
+          marker-end="url(#m-green)"/>
+
+    <!-- 对角线2：成本可控 ↔ 组织转型（制约：预算限制阻碍转型投入）-->
+    <path d="M 614,145 Q 410,220 210,295"
+          stroke="#ef4444" stroke-width="1.8" fill="none" stroke-dasharray="5,3" opacity=".7"
+          marker-end="url(#m-red)"/>
+
+  </svg>
+
+  <!-- 四个目标卡片 -->
+  <div class="goal g-tl g-push">
+    <div class="goal-icon">🚀</div>
+    <div class="goal-name">全员推广</div>
+    <div class="goal-kpi">渗透率目标</div>
+    <div class="goal-desc">覆盖快手全员<br>提升 AI 使用渗透率</div>
+  </div>
+
+  <div class="goal g-tr g-cost">
+    <div class="goal-icon">💰</div>
+    <div class="goal-name">成本可控</div>
+    <div class="goal-kpi">预算匹配</div>
+    <div class="goal-desc">与战略投资匹配<br>不失控、可持续</div>
+  </div>
+
+  <div class="goal g-bl g-trans">
+    <div class="goal-icon">🏢</div>
+    <div class="goal-name">组织转型</div>
+    <div class="goal-kpi">AI-Native 落地</div>
+    <div class="goal-desc">推动 AI-Native<br>文化与工作方式落地</div>
+  </div>
+
+  <div class="goal g-br g-exp">
+    <div class="goal-icon">✨</div>
+    <div class="goal-name">用户体验</div>
+    <div class="goal-kpi">流畅 · 无感</div>
+    <div class="goal-desc">流畅使用<br>切实感受效率提升</div>
+  </div>
+
+  <!-- 中心圆 -->
+  <div class="center">
+    <div class="ct-title">系统性<br>平衡点</div>
+    <div class="ct-sub">本方案目标</div>
+  </div>
+
+  <!-- 关系线标签 -->
+  <!-- 上横：制约 -->
+  <div class="line-label ll-conflict" style="top:48px; left:50%; transform:translateX(-50%)">
+    规模↑ → 成本↑&nbsp;⚠️
+  </div>
+  <!-- 左纵：正向 -->
+  <div class="line-label ll-boost" style="top:210px; left:2px; writing-mode:horizontal-tb; transform:none; font-size:9.5px">
+    转型目标<br>驱动推广 ✅
+  </div>
+  <!-- 右纵：制约 -->
+  <div class="line-label ll-conflict" style="top:210px; right:2px; font-size:9.5px">
+    限额过严<br>→体验↓ ⚠️
+  </div>
+  <!-- 下横：正向 -->
+  <div class="line-label ll-boost" style="bottom:48px; left:50%; transform:translateX(-50%)">
+    体验好 → 自发使用 → 转型达成 ✅
+  </div>
+</div>
+
+<!-- 张力说明区 -->
+<div class="tension-section">
+  <!-- 制约张力 -->
+  <div class="ts-col">
+    <div class="ts-title">
+      <span style="width:10px;height:10px;border-radius:50%;background:#ef4444;flex-shrink:0;display:inline-block"></span>
+      制约张力（需化解的矛盾）
+    </div>
+    <div class="tension-item">
+      <div class="ti-dot" style="background:#f97316"></div>
+      <div><strong>全员推广 → 成本可控：</strong>推广越成功，使用量越大，Token 消耗越高，预算压力越大</div>
+    </div>
+    <div class="tension-item">
+      <div class="ti-dot" style="background:#3b82f6"></div>
+      <div><strong>成本可控 → 用户体验：</strong>过度限额或强硬断流会直接伤害使用体验，引发抵触</div>
+    </div>
+    <div class="tension-item">
+      <div class="ti-dot" style="background:#a855f7"></div>
+      <div><strong>成本可控 → 组织转型：</strong>预算不足会限制转型所需的工具投入与培训资源</div>
+    </div>
+  </div>
+
+  <!-- 正向促进 -->
+  <div class="ts-col">
+    <div class="ts-title">
+      <span style="width:10px;height:10px;border-radius:50%;background:#22c55e;flex-shrink:0;display:inline-block"></span>
+      正向促进（可利用的飞轮）
+    </div>
+    <div class="tension-item">
+      <div class="ti-dot" style="background:#22c55e"></div>
+      <div><strong>组织转型 → 全员推广：</strong>AI-Native 文化目标成为推广的内在驱动力</div>
+    </div>
+    <div class="tension-item">
+      <div class="ti-dot" style="background:#22c55e"></div>
+      <div><strong>用户体验 → 组织转型：</strong>体验好 → 员工主动用 → 习惯形成 → 转型自然达成</div>
+    </div>
+    <div class="tension-item">
+      <div class="ti-dot" style="background:#22c55e"></div>
+      <div><strong>全员推广 → 用户体验：</strong>规模增长倒逼产品优化，体验随之提升</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 900px;
+  background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #f0f9ff 100%);
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  padding: 36px 40px 44px;
+}
+.chart-title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 6px;
+}
+.chart-subtitle {
+  text-align: center;
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 32px;
+}
+
+/* 整体布局 */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 820px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* 连接箭头 */
+.connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  position: relative;
+  z-index: 2;
+}
+.connector-line {
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, #94a3b8, #cbd5e1);
+  position: relative;
+}
+.connector-line::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: -5px;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid #94a3b8;
+}
+.connector-label {
+  position: absolute;
+  font-size: 10.5px;
+  color: #64748b;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 3px 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* 每一层 */
+.layer {
+  border-radius: 16px;
+  border: 2.5px solid;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+
+/* 层头部 */
+.layer-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 24px 16px;
+}
+.layer-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.layer-meta { flex: 1; }
+.layer-num  { font-size: 11px; font-weight: 700; opacity: 0.6; letter-spacing: 0.5px; text-transform: uppercase; }
+.layer-name { font-size: 17px; font-weight: 800; margin: 2px 0 3px; }
+.layer-goal { font-size: 12px; opacity: 0.82; }
+.layer-tag  {
+  font-size: 11px; font-weight: 700;
+  border-radius: 20px; padding: 4px 14px;
+  white-space: nowrap;
+}
+
+/* 层内容 */
+.layer-body {
+  display: flex;
+  gap: 0;
+  border-top: 1.5px solid;
+}
+.body-item {
+  flex: 1;
+  padding: 14px 18px;
+  border-right: 1px solid;
+}
+.body-item:last-child { border-right: none; }
+.bi-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  opacity: 0.55;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.bi-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.bi-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  background: white;
+  border: 1.5px solid;
+  border-radius: 8px;
+  padding: 4px 10px;
+  width: fit-content;
+}
+
+/* 第一层：经营模型 — 橙色系 */
+.l1 { border-color: #f97316; }
+.l1 .layer-head { background: #fff7ed; }
+.l1 .layer-name { color: #c2410c; }
+.l1 .layer-badge { background: #fed7aa; }
+.l1 .layer-tag  { background: #ffedd5; color: #c2410c; border: 1.5px solid #f97316; }
+.l1 .layer-body { border-color: #fed7aa; background: #fffbf7; }
+.l1 .body-item  { border-color: #fed7aa; }
+.l1 .bi-label   { color: #c2410c; }
+.l1 .bi-tag     { border-color: #fdba74; color: #9a3412; }
+
+/* 第二层：产品策略 — 蓝色系 */
+.l2 { border-color: #3b82f6; }
+.l2 .layer-head { background: #eff6ff; }
+.l2 .layer-name { color: #1d4ed8; }
+.l2 .layer-badge { background: #bfdbfe; }
+.l2 .layer-tag  { background: #dbeafe; color: #1d4ed8; border: 1.5px solid #3b82f6; }
+.l2 .layer-body { border-color: #bfdbfe; background: #f8fbff; }
+.l2 .body-item  { border-color: #bfdbfe; }
+.l2 .bi-label   { color: #1d4ed8; }
+.l2 .bi-tag     { border-color: #93c5fd; color: #1e40af; }
+
+/* 第三层：技术优化 — 绿色系 */
+.l3 { border-color: #22c55e; }
+.l3 .layer-head { background: #f0fdf4; }
+.l3 .layer-name { color: #15803d; }
+.l3 .layer-badge { background: #bbf7d0; }
+.l3 .layer-tag  { background: #dcfce7; color: #15803d; border: 1.5px solid #22c55e; }
+.l3 .layer-body { border-color: #bbf7d0; background: #f7fdf9; }
+.l3 .body-item  { border-color: #bbf7d0; }
+.l3 .bi-label   { color: #15803d; }
+.l3 .bi-tag     { border-color: #86efac; color: #166534; }
+
+/* 底部说明 */
+.footer {
+  margin-top: 20px;
+  width: 820px;
+  margin-left: auto;
+  margin-right: auto;
+  background: white;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.footer-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  color: #475569;
+}
+.footer-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+</style>
+</head>
+<body>
+<div class="chart-title">方案架构：三层体系</div>
+<div class="chart-subtitle">三层分工明确，各司其职，共同实现推广与成本的真正解耦</div>
+
+<div class="stack">
+
+  <!-- 第一层 -->
+  <div class="layer l1">
+    <div class="layer-head">
+      <div class="layer-badge">🏦</div>
+      <div class="layer-meta">
+        <div class="layer-num">Layer 1</div>
+        <div class="layer-name">经营模型</div>
+        <div class="layer-goal">算清这笔账，让推广规模与成本增长解耦</div>
+      </div>
+      <div class="layer-tag">定规则</div>
+    </div>
+    <div class="layer-body">
+      <div class="body-item">
+        <div class="bi-label">核心问题</div>
+        <div class="bi-content">
+          <span class="bi-tag">💰 钱从哪来</span>
+          <span class="bi-tag">📊 如何分配</span>
+          <span class="bi-tag">⚠️ 超了怎么办</span>
+        </div>
+      </div>
+      <div class="body-item">
+        <div class="bi-label">关键机制</div>
+        <div class="bi-content">
+          <span class="bi-tag">积分配额分层</span>
+          <span class="bi-tag">三条超额路径</span>
+          <span class="bi-tag">节省积分蓄水</span>
+        </div>
+      </div>
+      <div class="body-item">
+        <div class="bi-label">类比参考</div>
+        <div class="bi-content">
+          <span class="bi-tag">🖥️ AWS 企业套餐模型</span>
+          <span style="font-size:11px;color:#9a3412;margin-top:2px;line-height:1.5">预购配额换成本可控<br>分层路径保灵活性</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 连接箭头 1→2 -->
+  <div class="connector">
+    <div class="connector-line"></div>
+    <div class="connector-label">产品策略在规则框架内执行落地</div>
+  </div>
+
+  <!-- 第二层 -->
+  <div class="layer l2">
+    <div class="layer-head">
+      <div class="layer-badge">🎯</div>
+      <div class="layer-meta">
+        <div class="layer-num">Layer 2</div>
+        <div class="layer-name">产品策略</div>
+        <div class="layer-goal">用户在不感知成本的情况下，自然走向最优路径</div>
+      </div>
+      <div class="layer-tag">管预期</div>
+    </div>
+    <div class="layer-body">
+      <div class="body-item">
+        <div class="bi-label">短期止血</div>
+        <div class="bi-content">
+          <span class="bi-tag">Claude 缓存 −20%</span>
+          <span class="bi-tag">周限量 10B Token</span>
+          <span class="bi-tag">Auto 优化 −3%</span>
+        </div>
+      </div>
+      <div class="body-item">
+        <div class="bi-label">正式方案（4/20）</div>
+        <div class="bi-content">
+          <span class="bi-tag">积分可视化</span>
+          <span class="bi-tag">模型倍数策略</span>
+          <span class="bi-tag">场景分流暴露</span>
+          <span class="bi-tag">超额平滑引导</span>
+        </div>
+      </div>
+      <div class="body-item">
+        <div class="bi-label">设计原则</div>
+        <div class="bi-content">
+          <span class="bi-tag">📱 Auto 默认推荐</span>
+          <span style="font-size:11px;color:#1e40af;margin-top:2px;line-height:1.5">非 Code 场景不暴露选择<br>Code 场景倍数清晰可见</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 连接箭头 2→3 -->
+  <div class="connector">
+    <div class="connector-line"></div>
+    <div class="connector-label">技术优化持续扩大产品策略的操作空间</div>
+  </div>
+
+  <!-- 第三层 -->
+  <div class="layer l3">
+    <div class="layer-head">
+      <div class="layer-badge">⚙️</div>
+      <div class="layer-meta">
+        <div class="layer-num">Layer 3</div>
+        <div class="layer-name">技术优化</div>
+        <div class="layer-goal">从底层持续压低边际成本，随技术进步扩大经营空间</div>
+      </div>
+      <div class="layer-tag">降成本</div>
+    </div>
+    <div class="layer-body">
+      <div class="body-item">
+        <div class="bi-label">Auto 精准化</div>
+        <div class="bi-content">
+          <span class="bi-tag">4/19 首批上线</span>
+          <span class="bi-tag">4/30 第二批</span>
+          <span class="bi-tag">5月+ 激进化</span>
+        </div>
+      </div>
+      <div class="body-item">
+        <div class="bi-label">Claude 缓存深化</div>
+        <div class="bi-content">
+          <span class="bi-tag">重复调用趋近零成本</span>
+          <span style="font-size:11px;color:#166534;margin-top:2px;line-height:1.5">持续降低单次调用<br>边际成本</span>
+        </div>
+      </div>
+      <div class="body-item">
+        <div class="bi-label">GLM5 私有部署</div>
+        <div class="bi-content">
+          <span class="bi-tag">🇨🇳 国产 SOTA 私部</span>
+          <span style="font-size:11px;color:#166534;margin-top:2px;line-height:1.5">从根本上降低<br>Claude 云端依赖</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- 底部说明 -->
+<div class="footer" style="margin-top:20px">
+  <div class="footer-item">
+    <div class="footer-dot" style="background:#f97316"></div>
+    <span><strong>经营模型</strong>：定规则，保障整体可持续</span>
+  </div>
+  <div class="footer-item">
+    <div class="footer-dot" style="background:#3b82f6"></div>
+    <span><strong>产品策略</strong>：管预期，引导用户走低成本路径</span>
+  </div>
+  <div class="footer-item">
+    <div class="footer-dot" style="background:#22c55e"></div>
+    <span><strong>技术优化</strong>：降成本，持续扩大经营空间</span>
+  </div>
+</div>
+
+</body>
+</html>

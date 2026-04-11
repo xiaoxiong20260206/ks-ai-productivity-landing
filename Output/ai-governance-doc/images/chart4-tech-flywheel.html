@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 900px;
+  background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #f0f9ff 100%);
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  padding: 36px 40px 44px;
+}
+.title { text-align:center; font-size:18px; font-weight:700; color:#1e293b; margin-bottom:6px; }
+.subtitle { text-align:center; font-size:12px; color:#64748b; margin-bottom:28px; }
+
+/* ===== 飞轮环形区 ===== */
+.flywheel-wrap {
+  width: 820px;
+  margin: 0 auto;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+/* 左侧：三大驱动力 */
+.drivers {
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.driver-card {
+  background: white;
+  border-radius: 12px;
+  border: 2px solid;
+  padding: 12px 14px;
+}
+.dc-icon { font-size: 20px; margin-bottom: 4px; }
+.dc-title { font-size: 12px; font-weight: 800; margin-bottom: 3px; }
+.dc-desc { font-size: 10.5px; color: #64748b; line-height: 1.5; }
+.dc-effect { font-size: 10.5px; font-weight: 700; border-radius: 5px; padding: 2px 8px; margin-top: 6px; display: inline-block; }
+
+/* 右侧：飞轮 SVG + 中心 */
+.flywheel-right {
+  flex: 1;
+  position: relative;
+  height: 380px;
+}
+
+/* 飞轮中心 */
+.fw-center {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 110px; height: 110px;
+  background: #1e293b;
+  border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  color: white;
+  box-shadow: 0 8px 28px rgba(30,41,59,0.25);
+  z-index: 10;
+}
+.fw-center-title { font-size: 14px; font-weight: 800; line-height: 1.3; }
+.fw-center-sub { font-size: 10px; opacity: 0.65; margin-top: 3px; }
+
+/* 飞轮环节卡片（绝对定位） */
+.fw-node {
+  position: absolute;
+  width: 120px;
+  background: white;
+  border-radius: 10px;
+  border: 2px solid;
+  padding: 9px 10px;
+  text-align: center;
+  z-index: 5;
+}
+.fn-icon { font-size: 18px; margin-bottom: 3px; }
+.fn-title { font-size: 11.5px; font-weight: 800; margin-bottom: 2px; }
+.fn-sub { font-size: 10px; color: #64748b; line-height: 1.4; }
+
+/* 驱动箭头标签 */
+.drive-label {
+  position: absolute;
+  font-size: 10px;
+  font-weight: 700;
+  background: #fef9c3;
+  border: 1.5px solid #fde047;
+  color: #92400e;
+  border-radius: 5px;
+  padding: 2px 7px;
+  white-space: nowrap;
+  z-index: 15;
+}
+
+/* ===== 时间轴 ===== */
+.timeline {
+  width: 820px;
+  margin: 24px auto 0;
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 18px 24px;
+}
+.tl-title { font-size: 13px; font-weight: 700; color: #1e293b; margin-bottom: 16px; }
+.tl-track { display: flex; align-items: flex-start; position: relative; }
+.tl-track::before {
+  content: '';
+  position: absolute;
+  top: 11px; left: 24px; right: 24px;
+  height: 2px;
+  background: linear-gradient(to right, #f97316, #3b82f6, #22c55e, #a855f7);
+  z-index: 0;
+}
+.tl-node {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  position: relative;
+  z-index: 1;
+}
+.tl-dot {
+  width: 22px; height: 22px;
+  border-radius: 50%; border: 3px solid;
+  background: white; flex-shrink: 0;
+}
+.tl-date { font-size: 11px; font-weight: 700; color: #475569; }
+.tl-text { font-size: 11px; color: #1e293b; text-align: center; line-height: 1.5; }
+.tl-badge {
+  font-size: 10px; font-weight: 700;
+  border-radius: 4px; padding: 2px 7px;
+}
+</style>
+</head>
+<body>
+<div class="title">技术优化：三大驱动力 × 持续增强飞轮</div>
+<div class="subtitle">三项技术优化持续驱动边际成本下降，形成正向增强循环 · 越转越快</div>
+
+<div class="flywheel-wrap">
+
+  <!-- 左侧：三大驱动力 -->
+  <div class="drivers">
+    <div style="font-size:11px;font-weight:700;color:#64748b;text-align:center;margin-bottom:4px;letter-spacing:.5px">⚡ 三大技术驱动力</div>
+
+    <div class="driver-card" style="border-color:#3b82f6">
+      <div class="dc-icon">🧭</div>
+      <div class="dc-title" style="color:#1d4ed8">Auto 模式精准化</div>
+      <div class="dc-desc">持续提升路由准确率，复杂→高能力，简单→低成本</div>
+      <div class="dc-effect" style="background:#eff6ff;color:#1d4ed8">→ 更多任务走低价模型</div>
+    </div>
+
+    <div class="driver-card" style="border-color:#f97316">
+      <div class="dc-icon">💾</div>
+      <div class="dc-title" style="color:#c2410c">Claude 缓存深化</div>
+      <div class="dc-desc">对重复上下文建立缓存，避免反复计费</div>
+      <div class="dc-effect" style="background:#fff7ed;color:#c2410c">→ 重复调用趋近零成本</div>
+    </div>
+
+    <div class="driver-card" style="border-color:#22c55e">
+      <div class="dc-icon">🇨🇳</div>
+      <div class="dc-title" style="color:#15803d">GLM5 私有部署</div>
+      <div class="dc-desc">国产 SOTA 本地化，从根本上降低 Claude 云端依赖</div>
+      <div class="dc-effect" style="background:#dcfce7;color:#15803d">→ 云端依赖持续降低</div>
+    </div>
+
+    <!-- 驱动箭头提示 -->
+    <div style="text-align:center;font-size:11px;color:#94a3b8;margin-top:4px">▶▶ 持续注入飞轮</div>
+  </div>
+
+  <!-- 右侧：环形飞轮 -->
+  <div class="flywheel-right">
+    <svg style="position:absolute;top:0;left:0;width:100%;height:100%;overflow:visible">
+      <defs>
+        <marker id="arr-fw" markerWidth="8" markerHeight="8" refX="5" refY="4" orient="auto">
+          <path d="M1,1 L7,4 L1,7 Z" fill="#22c55e"/>
+        </marker>
+      </defs>
+      <!-- 大圆弧箭头（顺时针飞轮） -->
+      <!-- 上→右 -->
+      <path d="M 230,80 A 130,130 0 0 1 340,190"
+            stroke="#22c55e" stroke-width="2.5" fill="none" marker-end="url(#arr-fw)"/>
+      <!-- 右→下 -->
+      <path d="M 340,230 A 130,130 0 0 1 240,330"
+            stroke="#22c55e" stroke-width="2.5" fill="none" marker-end="url(#arr-fw)"/>
+      <!-- 下→左 -->
+      <path d="M 195,330 A 130,130 0 0 1 65,230"
+            stroke="#22c55e" stroke-width="2.5" fill="none" marker-end="url(#arr-fw)"/>
+      <!-- 左→上 -->
+      <path d="M 58,185 A 130,130 0 0 1 180,75"
+            stroke="#22c55e" stroke-width="2.5" fill="none" marker-end="url(#arr-fw)"/>
+    </svg>
+
+    <!-- 中心 -->
+    <div class="fw-center">
+      <div class="fw-center-title">边际成本<br>持续↓</div>
+      <div class="fw-center-sub">飞轮核心</div>
+    </div>
+
+    <!-- 四个飞轮节点 (上/右/下/左) -->
+    <div class="fw-node" style="top:10px;left:50%;transform:translateX(-50%);border-color:#3b82f6">
+      <div class="fn-icon">🧭</div>
+      <div class="fn-title" style="color:#1d4ed8">Auto 更精准</div>
+      <div class="fn-sub">更多任务走<br>低成本模型</div>
+    </div>
+
+    <div class="fw-node" style="top:50%;right:0;transform:translateY(-50%);border-color:#22c55e">
+      <div class="fn-icon">💸</div>
+      <div class="fn-title" style="color:#15803d">配额可宽松</div>
+      <div class="fn-sub">用户使用<br>更少受限</div>
+    </div>
+
+    <div class="fw-node" style="bottom:10px;left:50%;transform:translateX(-50%);border-color:#a855f7">
+      <div class="fn-icon">✨</div>
+      <div class="fn-title" style="color:#7e22ce">体验更好</div>
+      <div class="fn-sub">推广阻力<br>更小</div>
+    </div>
+
+    <div class="fw-node" style="top:50%;left:0;transform:translateY(-50%);border-color:#f97316">
+      <div class="fn-icon">📈</div>
+      <div class="fn-title" style="color:#c2410c">用户增长</div>
+      <div class="fn-sub">更多数据<br>优化路由</div>
+    </div>
+
+    <!-- 驱动标签 -->
+    <div class="drive-label" style="top:100px;right:5px">缓存深化↓</div>
+    <div class="drive-label" style="bottom:100px;right:5px">GLM5私部↓</div>
+  </div>
+
+</div>
+
+<!-- 时间轴 -->
+<div class="timeline">
+  <div class="tl-title">📅 技术优化推进节奏</div>
+  <div class="tl-track">
+    <div class="tl-node">
+      <div class="tl-dot" style="border-color:#f97316"></div>
+      <div class="tl-date">4月8日</div>
+      <div class="tl-text">Claude 缓存<br>首批上线</div>
+      <div class="tl-badge" style="background:#ffedd5;color:#c2410c">已完成 ✅</div>
+    </div>
+    <div class="tl-node">
+      <div class="tl-dot" style="border-color:#3b82f6"></div>
+      <div class="tl-date">4月19日</div>
+      <div class="tl-text">Auto 模式<br>首批优化</div>
+      <div class="tl-badge" style="background:#dbeafe;color:#1d4ed8">即将上线</div>
+    </div>
+    <div class="tl-node">
+      <div class="tl-dot" style="border-color:#22c55e"></div>
+      <div class="tl-date">4月30日</div>
+      <div class="tl-text">Auto 第二批<br>缓存持续深化</div>
+      <div class="tl-badge" style="background:#dcfce7;color:#15803d">规划中</div>
+    </div>
+    <div class="tl-node">
+      <div class="tl-dot" style="border-color:#a855f7"></div>
+      <div class="tl-date">5月+</div>
+      <div class="tl-text">Auto 激进化<br>GLM5 私部立项</div>
+      <div class="tl-badge" style="background:#faf5ff;color:#7e22ce">中长期</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

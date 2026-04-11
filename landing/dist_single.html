@@ -38,8 +38,8 @@
   --font: -apple-system, "SF Pro Display", "SF Pro Text", "PingFang SC", "Segoe UI", Inter, Helvetica, Arial, sans-serif;
   /* Skill layer colors */
   --l4-color: #16a34a; --l4-bg: #f0fdf4; --l4-border: #bbf7d0;
-  --l3-color: #0369a1; --l3-bg: #f0f9ff; --l3-border: #bae6fd;
-  --l2-color: #7c3aed; --l2-bg: #faf5ff; --l2-border: #ddd6fe;
+  --l3-color: #7c3aed; --l3-bg: #faf5ff; --l3-border: #ddd6fe;
+  --l2-color: #0369a1; --l2-bg: #f0f9ff; --l2-border: #bae6fd;
   --l1-color: #dc2626; --l1-bg: #fef2f2; --l1-border: #fecaca;
   /* Skill status colors */
   --done-color: #16a34a; --done-bg: #f0fdf4;
@@ -810,6 +810,206 @@ button { cursor: pointer; font-family: var(--font); }
 }
 .rm-cta:hover { background: #1d4ed8; }
 
+/* ===== HORIZONTAL TIMELINE (HTL) — MyFlicker 版本规划 ===== */
+.htl-wrapper {
+  margin: 24px 0 32px;
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  padding: 28px 28px 22px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.htl-shared-bar {
+  font-size: 11px;
+  color: #4f46e5;
+  background: linear-gradient(90deg, rgba(99,102,241,0.06) 0%, rgba(99,102,241,0.12) 100%);
+  border: 1px solid rgba(99,102,241,0.22);
+  border-radius: 20px;
+  padding: 4px 14px 4px 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  position: absolute;
+  /* 从第3个节点（约40%处）到右侧 */
+  left: calc(40% - 8px);
+  top: -4px;
+  pointer-events: none;
+  z-index: 10;
+}
+.htl-shared-bar::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #6366f1;
+  flex-shrink: 0;
+}
+.htl-track {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  position: relative;
+  padding: 28px 0 0;
+}
+.htl-line {
+  position: absolute;
+  top: calc(28px + 17px);
+  left: 24px;
+  right: 24px;
+  height: 2px;
+  background: linear-gradient(90deg, #e2e8f0 0%, #cbd5e1 25%, #818cf8 55%, #6366f1 70%, #818cf8 85%, #e2e8f0 100%);
+  z-index: 0;
+}
+.htl-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-width: 0;
+  padding: 0 4px;
+}
+.htl-dot {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700;
+  border: 2px solid #e2e8f0;
+  background: #fff;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1), 0 0 0 3px #fff;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+.htl-dot:hover { transform: scale(1.08); }
+.htl-dot-done { border-color: #4ade80; color: #16a34a; background: #f0fdf4; }
+.htl-dot-test { border-color: #818cf8; color: #4f46e5; background: #eef2ff; }
+.htl-dot-hot { border-color: #6366f1; color: #fff; background: #6366f1; box-shadow: 0 2px 12px rgba(99,102,241,0.4), 0 0 0 3px #fff; }
+.htl-dot-plan { border-color: #e2e8f0; color: #94a3b8; background: #f8fafc; }
+.htl-date {
+  font-size: 11px;
+  font-weight: 600;
+  color: #94a3b8;
+  text-align: center;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+.htl-date-active { color: #4f46e5; font-weight: 700; }
+.htl-live-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #ef4444;
+  display: inline-block;
+  margin-left: 3px;
+  vertical-align: middle;
+  animation: htl-blink 1.4s ease-in-out infinite;
+}
+@keyframes htl-blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+.htl-card {
+  background: #fff;
+  border: 1px solid #e8ecf4;
+  border-radius: 10px;
+  padding: 14px 14px 12px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  width: 100%;
+  min-width: 0;
+  transition: box-shadow 0.2s, transform 0.2s;
+  box-sizing: border-box;
+}
+.htl-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.09); transform: translateY(-2px); }
+.htl-card-done { border-color: #dcfce7; background: #fafffe; }
+.htl-card-test { border-color: #ddd6fe; background: #fafaff; }
+.htl-card-hot {
+  border-color: #818cf8;
+  background: linear-gradient(160deg, #fafaff 0%, #f5f3ff 100%);
+  box-shadow: 0 2px 16px rgba(99,102,241,0.1);
+}
+.htl-card-plan { border-color: #f1f5f9; background: #fafbfc; }
+.htl-card-tag {
+  font-size: 10px; font-weight: 600;
+  margin-bottom: 6px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  display: inline-block;
+  background: #f1f5f9;
+  color: #64748b;
+  letter-spacing: 0.02em;
+}
+.htl-tag-done { background: #dcfce7; color: #16a34a; }
+.htl-tag-test { background: #ede9fe; color: #6d28d9; }
+.htl-tag-hot { background: #e0e7ff; color: #4338ca; }
+.htl-tag-plan { background: #f1f5f9; color: #94a3b8; }
+.htl-card-name {
+  font-size: 15px; font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.htl-card-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+.htl-card-cta {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 6px 16px;
+  font-size: 12px; font-weight: 700;
+  border-radius: 6px; text-decoration: none;
+  background: #6366f1; color: #fff;
+  transition: background 0.15s, box-shadow 0.15s;
+  letter-spacing: 0.02em;
+}
+.htl-card-cta:hover { background: #4f46e5; box-shadow: 0 3px 10px rgba(99,102,241,0.35); }
+/* 阶段标签 */
+.htl-stages {
+  display: flex;
+  gap: 6px;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid #f1f5f9;
+  flex-wrap: wrap;
+}
+.htl-stage {
+  font-size: 11px; font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: #f8fafc;
+  color: #94a3b8;
+  border: 1px solid #f1f5f9;
+  letter-spacing: 0.02em;
+}
+.htl-stage-active {
+  background: #eef2ff;
+  color: #4f46e5;
+  border-color: #c7d2fe;
+  font-weight: 700;
+}
+.htl-stage-semi {
+  background: #f5f3ff;
+  color: #7c3aed;
+  border-color: #ddd6fe;
+  font-weight: 600;
+}
+.htl-stage-dim { opacity: 0.5; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .htl-track { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .htl-line { display: none; }
+  .htl-node { flex-direction: row; align-items: flex-start; gap: 12px; padding: 0; }
+  .htl-card { flex: 1; }
+  .htl-shared-bar { float: none; display: block; text-align: center; margin-bottom: 16px; }
+}
+
 /* ===== (legacy) PRODUCT COMPARE (old pc- classes, kept for reference) ===== */
 .product-compare { display: flex; align-items: center; gap: 0; margin: 20px 0 0; background: var(--bg-card); border-radius: 14px; box-shadow: var(--shadow-sm); overflow: hidden; border: 1px solid var(--border); }
 .pc-item { flex: 1; padding: 24px 28px; display: flex; flex-direction: column; gap: 8px; }
@@ -1021,8 +1221,19 @@ button { cursor: pointer; font-family: var(--font); }
 .matrix-cell.highlighted { background: #eff6ff; }
 .pkg-card { border-radius: 6px; padding: 8px 10px; border: 1px solid; margin-bottom: 4px; cursor: pointer; transition: box-shadow 0.15s; border-left-width: 3px; }
 .pkg-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
-.pkg-card-title { font-size: 12px; font-weight: 600; line-height: 1.3; margin-bottom: 4px; }
+.pkg-card-title { font-size: 12px; font-weight: 700; line-height: 1.3; margin-bottom: 5px; }
 .pkg-card-meta { display: flex; align-items: center; gap: 6px; }
+/* 卡片三属性行 */
+.pkg-card-attrs { margin-top: 4px; }
+.pkg-attr-row { display: flex; align-items: center; gap: 3px; margin-bottom: 2px; flex-wrap: wrap; }
+.pkg-attr-label { font-size: 9px; color: var(--text-muted); flex-shrink: 0; }
+.pkg-attr-val { font-size: 10px; font-weight: 500; }
+.pkg-attr-sep { color: var(--border); margin: 0 2px; font-size: 9px; }
+.attr-applied { color: var(--done-color); }
+.attr-building { color: var(--wip-color); }
+.attr-kb-published { color: var(--done-color); }
+.attr-kb-building { color: var(--canary-color); }
+.attr-kb-not { color: var(--text-muted); }
 .status-badge { font-size: 10px; padding: 1px 6px; border-radius: 3px; font-weight: 600; }
 .badge-done { background: var(--done-bg); color: var(--done-color); }
 .badge-canary { background: var(--canary-bg); color: var(--canary-color); }
@@ -1036,16 +1247,19 @@ button { cursor: pointer; font-family: var(--font); }
 .cell-empty { color: var(--text-muted); font-size: 12px; text-align: center; padding: 8px 0; }
 .cell-empty-skill { display: block; padding: 8px 0; }
 
-/* 知识库预留槽 */
-.knowledge-slot { margin-top: 6px; padding: 5px 8px; border-radius: 5px; font-size: 11px; font-weight: 600; text-align: center; cursor: default; }
-.knowledge-slot-locked { background: #f1f5f9; color: #94a3b8; border: 1px dashed #cbd5e1; }
-.knowledge-slot-locked:hover { background: #e2e8f0; }
+/* 知识库预留槽（已废弃，保留选择器避免旧引用报错）*/
+.knowledge-slot { display: none; }
+.knowledge-slot-locked { display: none; }
 .summary-row td { background: #f8fafc; font-size: 12px; font-weight: 600; text-align: center; padding: 10px; border: 1px solid var(--border); color: var(--text-secondary); }
 .summary-num { font-size: 16px; font-weight: 800; color: var(--text-primary); display: block; }
 /* Universal row */
-.universal-cell { background: rgba(3,105,161,0.04); padding: 10px; border: 1px solid var(--l3-border); }
-.universal-pkg { background: rgba(3,105,161,0.08); border: 1px solid var(--l3-border); border-left: 3px solid var(--l3-color); border-radius: 6px; padding: 8px 10px; display: inline-block; margin-right: 6px; margin-bottom: 6px; cursor: pointer; }
-.universal-pkg:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
+.universal-cell { background: rgba(3,105,161,0.04); padding: 8px 10px; border: 1px solid var(--l2-border); }
+.universal-cell-inner { display: flex; gap: 8px; align-items: stretch; flex-wrap: nowrap; }
+.universal-pkg { background: rgba(3,105,161,0.08); border: 1px solid var(--l2-border); border-left: 3px solid var(--l2-color); border-radius: 6px; padding: 8px 12px; display: flex; flex-direction: column; cursor: pointer; flex: 1; min-width: 0; margin-bottom: 0; }
+.universal-pkg:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.12); background: rgba(3,105,161,0.13); }
+.universal-pkg-more { background: rgba(3,105,161,0.04); border: 1px dashed var(--l2-border); border-radius: 6px; padding: 8px 14px; display: flex; align-items: center; justify-content: center; cursor: default; color: var(--text-muted); font-size: 18px; font-weight: 700; flex-shrink: 0; width: 44px; }
+.universal-pkg-header { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; margin-bottom: 4px; }
+.universal-pkg .pkg-card-title { margin-bottom: 0; font-size: 13px; }
 
 /* ===== SKILL FLOW ===== */
 .skill-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 32px 0; }
@@ -1085,9 +1299,119 @@ button { cursor: pointer; font-family: var(--font); }
 .cta-step { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
 .cta-card-highlight { border-color: rgba(37,99,235,0.5); background: rgba(37,99,235,0.1); }
 
-/* ===== PIONEER TAB v3 ===== */
+/* ===== PIONEER TAB v4 — 2 大区域版 ===== */
 
-/* ── AI-Native 实践：Top-Down / Down-Top 分区标识 ── */
+/* ── 大区域 Header Banner ── */
+.big-domain-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 22px;
+  border-radius: var(--radius);
+  margin-bottom: 28px;
+  border: 1px solid transparent;
+}
+.big-domain-org {
+  background: linear-gradient(135deg, #eff6ff 0%, #f5f3ff 100%);
+  border-color: rgba(99,102,241,0.18);
+}
+.big-domain-inclusion {
+  background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+  border-color: rgba(16,185,129,0.18);
+}
+.bdb-icon {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.big-domain-org .bdb-icon { background: rgba(99,102,241,0.1); color: #6366f1; }
+.big-domain-inclusion .bdb-icon { background: rgba(16,185,129,0.1); color: #059669; }
+.bdb-body { flex: 1; }
+.bdb-title { font-size: 18px; font-weight: 900; color: var(--text-primary); margin-bottom: 4px; letter-spacing: -0.01em; }
+.bdb-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+.bdb-stats {
+  display: flex;
+  gap: 16px;
+  flex-shrink: 0;
+}
+.bdb-stat {
+  text-align: center;
+}
+.bdb-num { font-size: 22px; font-weight: 900; color: var(--text-primary); display: block; line-height: 1; }
+.bdb-label { font-size: 11px; color: var(--text-muted); margin-top: 2px; white-space: nowrap; }
+.big-domain-org .bdb-num { color: #6366f1; }
+.big-domain-inclusion .bdb-num { color: #059669; }
+
+/* ── 子分区（组织专项内部） ── */
+.org-sub-section {
+  margin-bottom: 0;
+}
+.org-sub-section-btm {
+  margin-top: 36px;
+  padding-top: 32px;
+  border-top: 1px dashed #e2e8f0;
+}
+.org-sub-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border-left: 4px solid;
+}
+.org-sub-topdown {
+  background: linear-gradient(90deg, rgba(37,99,235,0.05) 0%, transparent 100%);
+  border-left-color: #2563eb;
+}
+.org-sub-bottomup {
+  background: linear-gradient(90deg, rgba(124,58,237,0.05) 0%, transparent 100%);
+  border-left-color: #7c3aed;
+}
+.osh-left { flex: 1; }
+.osh-direction-badge {
+  display: inline-block;
+  font-size: 11px; font-weight: 800;
+  padding: 2px 10px; border-radius: 20px;
+  margin-bottom: 6px;
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.osh-badge-topdown { background: rgba(37,99,235,0.1); color: #2563eb; }
+.osh-badge-bottomup { background: rgba(124,58,237,0.1); color: #7c3aed; }
+.osh-title { font-size: 16px; font-weight: 800; color: var(--text-primary); margin-bottom: 4px; }
+.osh-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 8px; }
+.osh-tracks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+.osh-track-item {
+  font-size: 11px;
+  color: var(--text-secondary);
+  background: rgba(0,0,0,0.04);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 20px;
+  padding: 2px 10px;
+  white-space: nowrap;
+}
+.bdb-owners {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  opacity: 0.85;
+}
+.osh-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.osh-meta-item { font-size: 12px; color: var(--text-muted); }
+
+/* ── AI-Native 实践：Top-Down / Down-Top 分区标识（旧类保留兼容） ── */
 .practice-type-banner {
   display: flex;
   align-items: center;
@@ -1661,8 +1985,8 @@ button { cursor: pointer; font-family: var(--font); }
     </div>
     <ul class="topbar-tabs" id="mainTabs">
       <li class="tab-item active" data-tab="intro"><svg class="tab-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> 战役介绍</li>
-      <li class="tab-item" data-tab="product"><svg class="tab-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg> AI 员工</li>
       <li class="tab-item" data-tab="pioneer"><svg class="tab-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> AI-Native 实践</li>
+      <li class="tab-item" data-tab="product"><svg class="tab-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg> AI 员工</li>
       <li class="tab-item" data-tab="skill"><svg class="tab-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg> AI 技能 &amp; 知识市场</li>
       <li class="tab-item tab-item-external" onclick="window.open('https://ai-school.corp.kuaishou.com/', '_blank')" title="跳转到 AI School 学习平台"><svg class="tab-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> AI School <span class="tab-ext-icon">↗</span></li>
     </ul>
@@ -2213,57 +2537,116 @@ button { cursor: pointer; font-family: var(--font); }
       </div>
     </section>
 
-    <!-- Section C: 版本路线（重新设计：横向时间线卡片）-->
+    <!-- Section C: 版本路线（横向时间线，参考演进之路样式）-->
     <section class="section">
       <div class="section-inner">
         <div class="section-label"><svg class="sec-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg> 产品路线图</div>
         <h2 class="section-title">MyFlicker 版本规划</h2>
-        <div class="roadmap-timeline">
-          <div class="rm-item rm-done">
-            <div class="rm-dot rm-dot-done">✓</div>
-            <div class="rm-card">
-              <div class="rm-tag tag-done">✅ 已发布</div>
-              <div class="rm-version">V0.1 内测版</div>
-              <div class="rm-date">2026-04-03</div>
-              <div class="rm-desc">核心能力可用，对内亮相</div>
+        <p class="section-desc">同一套 AgentOS 底层，驱动从核心能力验证到全员 AI 员工的完整跃迁</p>
+
+        <!-- 横向时间线 -->
+        <div class="htl-wrapper">
+          <!-- 时间线主体 -->
+          <div class="htl-track">
+            <!-- 连接线 -->
+            <div class="htl-line"></div>
+            <!-- 共用底层标注：从节点3开始覆盖右侧 -->
+            <div class="htl-shared-bar">共用底层：AgentOS（AgentCore · 全域 Skill · Auto · 安全体系）</div>
+
+            <!-- 节点 1: 2024-2025 Kwaipilot -->
+            <div class="htl-node htl-node-done">
+              <div class="htl-dot htl-dot-done">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div class="htl-date">2024—2025</div>
+              <div class="htl-card htl-card-done">
+                <div class="htl-card-tag htl-tag-done">✓ 已沉淀</div>
+                <div class="htl-card-name">Kwaipilot</div>
+                <div class="htl-card-desc">AI IDE + CLI<br/>代码补全 · 任务级生成<br/>研发覆盖率 70%</div>
+              </div>
+            </div>
+
+            <!-- 节点 2: 1月30日 CodeFlicker 1.0 -->
+            <div class="htl-node htl-node-done">
+              <div class="htl-dot htl-dot-done">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              </div>
+              <div class="htl-date">1 月 30 日</div>
+              <div class="htl-card htl-card-done">
+                <div class="htl-card-tag htl-tag-done">✅ 已发布</div>
+                <div class="htl-card-name">CodeFlicker 1.0</div>
+                <div class="htl-card-desc">四大 Agent 核心能力<br/>AI 代码贡献率 30%→50%<br/>研发覆盖率 90%+</div>
+              </div>
+            </div>
+
+            <!-- 节点 3: 4月12日 MyFlicker 0.1 内部测试 -->
+            <div class="htl-node htl-node-test">
+              <div class="htl-dot htl-dot-test">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M12 5v2M12 17v2M5 12H3M21 12h-2M7.05 7.05l-1.41-1.41M18.37 18.37l-1.41-1.41M7.05 16.95l-1.41 1.41M18.37 5.63l-1.41 1.41"/></svg>
+              </div>
+              <div class="htl-date htl-date-active">4 月 12 日 <span class="htl-live-dot"></span></div>
+              <div class="htl-card htl-card-test">
+                <div class="htl-card-tag htl-tag-test">🔵 内部测试</div>
+                <div class="htl-card-name">MyFlicker 0.1</div>
+                <div class="htl-card-desc">
+                  核心 AI 数字员工体验<br/>
+                  行政服务类 Skill 上线<br/>
+                  官方 Skill 门户启动
+                </div>
+                <a class="htl-card-cta" href="https://myflicker.kuaishou.com" target="_blank">体验 MyFlicker →</a>
+              </div>
+            </div>
+
+            <!-- 节点 4: 4月20日 MyFlicker 1.0 个人版 -->
+            <div class="htl-node htl-node-hot">
+              <div class="htl-dot htl-dot-hot">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <div class="htl-date htl-date-active">4 月 20 日</div>
+              <div class="htl-card htl-card-hot">
+                <div class="htl-card-tag htl-tag-hot">🚀 正式发布</div>
+                <div class="htl-card-name">MyFlicker 1.0 <span style="font-size:11px;font-weight:500;color:#7c3aed;background:#f5f3ff;padding:1px 6px;border-radius:4px;margin-left:4px">个人版</span></div>
+                <div class="htl-card-desc">
+                  全员 AI 数字员工正式上线<br/>
+                  个人专属 AI 员工 · 全类 Skill<br/>
+                  统一「快手 AI 员工」体验
+                </div>
+              </div>
+            </div>
+
+            <!-- 节点 5: 团队版 -->
+            <div class="htl-node htl-node-plan">
+              <div class="htl-dot htl-dot-plan">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div class="htl-date">2026 下半年</div>
+              <div class="htl-card htl-card-plan">
+                <div class="htl-card-tag htl-tag-plan">📅 规划中</div>
+                <div class="htl-card-name">MyFlicker 2.0 <span style="font-size:11px;font-weight:500;color:#64748b;background:#f1f5f9;padding:1px 6px;border-radius:4px;margin-left:4px">团队版</span></div>
+                <div class="htl-card-desc">多人共享 AI 员工<br/>团队知识库沉淀<br/>跨成员协作调度</div>
+              </div>
+            </div>
+
+            <!-- 节点 6: 组织版 -->
+            <div class="htl-node htl-node-plan">
+              <div class="htl-dot htl-dot-plan">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+              </div>
+              <div class="htl-date">2026 年底</div>
+              <div class="htl-card htl-card-plan">
+                <div class="htl-card-tag htl-tag-plan">✦ 展望</div>
+                <div class="htl-card-name">MyFlicker x.0 <span style="font-size:11px;font-weight:500;color:#64748b;background:#f1f5f9;padding:1px 6px;border-radius:4px;margin-left:4px">组织版</span></div>
+                <div class="htl-card-desc">团队 AI → 组织 AI<br/>跨团队调度协作<br/>组织效率提升 15%+</div>
+              </div>
             </div>
           </div>
-          <div class="rm-item rm-hot">
-            <div class="rm-dot rm-dot-hot">🔥</div>
-            <div class="rm-card rm-card-hot">
-              <div class="rm-tag tag-hot">🔥 即将发布</div>
-              <div class="rm-version">V1.0 正式版</div>
-              <div class="rm-date">2026-04-12</div>
-              <div class="rm-desc">AI 数字员工基础体验 · 行政服务类 Skill · 官方 Skill 门户上线</div>
-              <a class="rm-cta" href="https://myflicker.kuaishou.com" target="_blank">预约体验 →</a>
-            </div>
-          </div>
-          <div class="rm-item rm-plan">
-            <div class="rm-dot rm-dot-plan">○</div>
-            <div class="rm-card">
-              <div class="rm-tag tag-plan">📅 规划中</div>
-              <div class="rm-version">V1.1 游戏化升级</div>
-              <div class="rm-date">2026-05</div>
-              <div class="rm-desc">游戏化体验 · 多端接入 · 全类 Skill</div>
-            </div>
-          </div>
-          <div class="rm-item rm-plan">
-            <div class="rm-dot rm-dot-plan">○</div>
-            <div class="rm-card">
-              <div class="rm-tag tag-plan">📅 规划中</div>
-              <div class="rm-version">V1.2 全类 Skill</div>
-              <div class="rm-date">2026-06</div>
-              <div class="rm-desc">技术运维 Skill · 团队体验</div>
-            </div>
-          </div>
-          <div class="rm-item rm-plan">
-            <div class="rm-dot rm-dot-plan">○</div>
-            <div class="rm-card">
-              <div class="rm-tag tag-plan">🔭 展望</div>
-              <div class="rm-version">V1.x AI 团队协作</div>
-              <div class="rm-date">2026 下半年</div>
-              <div class="rm-desc">多会话管理 · AI 团队协作</div>
-            </div>
+
+          <!-- 底部阶段标签 -->
+          <div class="htl-stages">
+            <div class="htl-stage">阶段①② · AI 工具</div>
+            <div class="htl-stage htl-stage-active">阶段③ · AI 员工（个人版）</div>
+            <div class="htl-stage htl-stage-semi">阶段④ · AI 员工（团队版）</div>
+            <div class="htl-stage htl-stage-dim">阶段⑤ · AI 组织</div>
           </div>
         </div>
 
@@ -2513,7 +2896,7 @@ document.addEventListener('keydown', e => {
 
 </script>
 <script>
-/* skill-data.js — Complete Skill market data (based on reference page) */
+/* skill-data.js — Complete Skill market data (v2: 分层重排 + 属性扩展 + 标题精简) */
 
 window.SKILL_DATA = {
   channels: [
@@ -2524,58 +2907,59 @@ window.SKILL_DATA = {
     { id: 'ops',     name: '运营',     desc: '内外部运营',     online: 5,  total: 20 },
     { id: 'admin',   name: '行政职能', desc: 'HR/财务/法务等', online: 4,  total: 12 },
   ],
+  // 展示顺序：L4 → L3（生产工具）→ L2（协作办公）→ L1（基础设施）
   layers: [
+    /* ── L4：业务定制层 ──────────────────────────────────────── */
     {
       id: 'l4', code: 'L4', name: '业务定制层', desc: '短视频/直播/社区内容生态',
       color: '#16a34a',
       packages: {
-        dev:     [{ id:'l4-dev', title:'主站研发 AI 技能包', status:'canary', skillCount:8, desc:'面向主站研发工程师的定制化 AI 能力包，覆盖代码生成、需求澄清、自动测试等', skills:[{name:'智能代码生成 (主站版)',status:'done',desc:'理解主站代码规范，精准生成符合业务逻辑的代码'},{name:'需求文档智能解析',status:'done',desc:'自动拆解 PRD，生成任务清单与开发要点'},{name:'跨仓库代码研究',status:'canary',desc:'跨多仓库理解代码关联，辅助排查问题'},{name:'主站 Bug 自动修复',status:'wip',desc:'识别错误模式，自动提出修复方案'},{name:'主站测试用例生成',status:'wip'},{name:'代码 Review 助手（主站规范）',status:'plan'},{name:'性能优化建议 (主站)',status:'plan'},{name:'主站发布流程辅助',status:'plan'}]}],
-        product: [{ id:'l4-product', title:'主站数据分析技能包', status:'done', skillCount:4, desc:'主站产品数据分析与洞察能力', skills:[{name:'DAU/MAU 指标分析',status:'done'},{name:'用户行为路径分析',status:'done'},{name:'内容推荐数据解读',status:'done'},{name:'A/B 实验分析',status:'wip'}]}],
-        design:  [{ id:'l4-design', title:'主站视觉设计技能包', status:'wip', skillCount:3, skills:[{name:'短视频封面优化',status:'wip'},{name:'直播间视觉规范检查',status:'plan'},{name:'UGC 内容视觉打分',status:'plan'}]}],
-        data:    [{ id:'l4-data', title:'主站数据洞察技能包', status:'done', skillCount:5, desc:'数据分析师专属，覆盖取数、分析、报表全流程', skills:[{name:'快数智能取数',status:'done',desc:'自然语言描述需求，自动生成 Hive SQL'},{name:'指标异动归因',status:'done',desc:'智能分析指标波动原因'},{name:'用户画像生成',status:'done'},{name:'运营活动效果分析',status:'canary'},{name:'数据报告自动生成',status:'wip'}]}],
-        ops:     [{ id:'l4-ops', title:'主站运营 AI 技能包', status:'done', skillCount:6, desc:'主站运营专属能力，覆盖内容审核、活动策划等', skills:[{name:'内容标签智能打标',status:'done'},{name:'违规内容初审',status:'done'},{name:'热点话题追踪',status:'done'},{name:'活动方案生成',status:'canary'},{name:'运营周报自动生成',status:'canary'},{name:'UGC 高质量内容挖掘',status:'plan'}]}],
-        admin:   [{ id:'l4-admin', title:'行政职能 AI 技能包', status:'done', skillCount:4, desc:'行政/HR/法务专属，覆盖办公自动化', skills:[{name:'HR 智能问答',status:'done',desc:'人事政策、福利、流程智能解答'},{name:'合同智能审查',status:'done',desc:'自动识别合同风险点'},{name:'招聘 JD 生成与优化',status:'canary'},{name:'离职手续流程辅助',status:'plan'}]}],
+        dev:     [{ id:'l4-dev',     title:'主站研发 AI',         status:'canary', skillCount:8,  overallStatus:'building', skillProgress:'3/8',  knowledgeBase:'building',   desc:'面向主站研发工程师的定制化 AI 能力包，覆盖代码生成、需求澄清、自动测试等', skills:[{name:'智能代码生成 (主站版)',status:'done',desc:'理解主站代码规范，精准生成符合业务逻辑的代码'},{name:'需求文档智能解析',status:'done',desc:'自动拆解 PRD，生成任务清单与开发要点'},{name:'跨仓库代码研究',status:'canary',desc:'跨多仓库理解代码关联，辅助排查问题'},{name:'主站 Bug 自动修复',status:'wip',desc:'识别错误模式，自动提出修复方案'},{name:'主站测试用例生成',status:'wip'},{name:'代码 Review 助手（主站规范）',status:'plan'},{name:'性能优化建议 (主站)',status:'plan'},{name:'主站发布流程辅助',status:'plan'}] }],
+        product: [{ id:'l4-product', title:'主站数据分析',         status:'done',   skillCount:4,  overallStatus:'applied',  skillProgress:'3/4',  knowledgeBase:'notStarted', desc:'主站产品数据分析与洞察能力', skills:[{name:'DAU/MAU 指标分析',status:'done'},{name:'用户行为路径分析',status:'done'},{name:'内容推荐数据解读',status:'done'},{name:'A/B 实验分析',status:'wip'}] }],
+        design:  [{ id:'l4-design',  title:'主站视觉设计',         status:'wip',    skillCount:3,  overallStatus:'building', skillProgress:'0/3',  knowledgeBase:'notStarted', skills:[{name:'短视频封面优化',status:'wip'},{name:'直播间视觉规范检查',status:'plan'},{name:'UGC 内容视觉打分',status:'plan'}] }],
+        data:    [{ id:'l4-data',    title:'主站数据洞察',         status:'done',   skillCount:5,  overallStatus:'applied',  skillProgress:'3/5',  knowledgeBase:'building',   desc:'数据分析师专属，覆盖取数、分析、报表全流程', skills:[{name:'快数智能取数',status:'done',desc:'自然语言描述需求，自动生成 Hive SQL'},{name:'指标异动归因',status:'done',desc:'智能分析指标波动原因'},{name:'用户画像生成',status:'done'},{name:'运营活动效果分析',status:'canary'},{name:'数据报告自动生成',status:'wip'}] }],
+        ops:     [{ id:'l4-ops',     title:'主站运营 AI',          status:'done',   skillCount:6,  overallStatus:'applied',  skillProgress:'3/6',  knowledgeBase:'notStarted', desc:'主站运营专属能力，覆盖内容审核、活动策划等', skills:[{name:'内容标签智能打标',status:'done'},{name:'违规内容初审',status:'done'},{name:'热点话题追踪',status:'done'},{name:'活动方案生成',status:'canary'},{name:'运营周报自动生成',status:'canary'},{name:'UGC 高质量内容挖掘',status:'plan'}] }],
+        admin:   [{ id:'l4-admin',   title:'行政职能 AI',          status:'done',   skillCount:4,  overallStatus:'applied',  skillProgress:'3/4',  knowledgeBase:'notStarted', desc:'行政/HR/法务专属，覆盖办公自动化', skills:[{name:'HR 智能问答',status:'done',desc:'人事政策、福利、流程智能解答'},{name:'合同智能审查',status:'done',desc:'自动识别合同风险点'},{name:'招聘 JD 生成与优化',status:'canary'},{name:'离职手续流程辅助',status:'plan'}] }],
       }
     },
+
+    /* ── L3：生产工具层（原 L2）────────────────────────────── */
     {
-      id: 'l3', code: 'L3', name: '协作办公层', desc: '日常协作 & 办公自动化',
-      color: '#0369a1',
-      universal: [
-        { id:'l3-kim', title:'💬 KIM 移动办公通用包', status:'done', skillCount:6, colspan: 6, desc:'全员适用，基于 KIM 的 AI 助手核心能力', skills:[{name:'KIM 智能助手基础对话',status:'done'},{name:'会议纪要自动生成',status:'done'},{name:'任务创建与追踪',status:'done'},{name:'跨部门协作通知',status:'done'},{name:'待办事项智能整理',status:'canary'},{name:'KIM 群智能摘要',status:'wip'}]},
-        { id:'l3-docs', title:'📄 Docs 协同文档通用包', status:'done', skillCount:5, colspan: 6, desc:'基于快手内网 Docs 的文档智能能力', skills:[{name:'文档智能摘要',status:'done'},{name:'多文档关联分析',status:'done'},{name:'文档问答检索',status:'done'},{name:'表格数据智能分析',status:'canary'},{name:'文档自动格式化',status:'plan'}]},
-        { id:'l3-bpm', title:'🔄 BPM 全员审批通用包', status:'done', skillCount:4, colspan: 6, desc:'审批流程智能加速', skills:[{name:'审批单智能填写',status:'done'},{name:'审批状态查询',status:'done'},{name:'报销智能辅助',status:'done'},{name:'合规检查',status:'wip'}]},
-      ],
-      packages: {
-        dev:     [{ id:'l3-dev', title:'研发协作 & 通知技能包', status:'done', skillCount:5, skills:[{name:'代码 Review 通知自动化',status:'done'},{name:'故障告警智能处理',status:'done'},{name:'版本发布播报',status:'done'},{name:'on-call 辅助',status:'canary'},{name:'研发周报自动生成',status:'canary'}]}],
-        product: [{ id:'l3-product', title:'产品协作办公技能包', status:'done', skillCount:4, skills:[{name:'会议纪要 + 行动项提取',status:'done'},{name:'PRD 模板智能填写',status:'done'},{name:'竞品跟踪报告',status:'canary'},{name:'产品周报生成',status:'wip'}]}],
-        design:  [{ id:'l3-design', title:'设计协作技能包', status:'wip', skillCount:2, skills:[{name:'设计稿评审意见整理',status:'wip'},{name:'设计规范检查',status:'plan'}]}],
-        data:    [{ id:'l3-data', title:'数据协作技能包', status:'canary', skillCount:3, skills:[{name:'数据看板订阅播报',status:'done'},{name:'数据异动钉钉/KIM 告警',status:'canary'},{name:'数据报告定时推送',status:'wip'}]}],
-        ops:     [{ id:'l3-ops', title:'运营协作技能包', status:'done', skillCount:4, skills:[{name:'运营活动日历管理',status:'done'},{name:'物料需求协作',status:'done'},{name:'推广报表自动推送',status:'canary'},{name:'运营情报日报',status:'wip'}]}],
-        admin:   [{ id:'l3-admin', title:'行政办公自动化技能包', status:'done', skillCount:5, skills:[{name:'会议室自动预订',status:'done'},{name:'固定资产盘点辅助',status:'done'},{name:'员工入离职流程辅助',status:'done'},{name:'IT 报修智能分流',status:'canary'},{name:'差旅申请辅助',status:'plan'}]}],
-      }
-    },
-    {
-      id: 'l2', code: 'L2', name: '生产工具层', desc: '软件研发全生命周期',
+      id: 'l3', code: 'L3', name: '生产工具层', desc: '软件研发全生命周期',
       color: '#7c3aed',
       packages: {
-        dev:     [{ id:'l2-dev', title:'研发工具技能包', status:'done', skillCount:8, desc:'覆盖 KATE/KDev/CodeFlicker/Git 全研发工具链', skills:[{name:'CodeFlicker 编程助手',status:'done',desc:'AI Pair Programmer，代码生成/补全/解释'},{name:'KATE 需求理解',status:'done',desc:'理解 KATE 任务，自动拆解开发步骤'},{name:'KDev 调试助手',status:'done',desc:'智能定位 Bug，给出修复建议'},{name:'Git Commit 自动生成',status:'done'},{name:'代码安全扫描辅助',status:'canary'},{name:'SQL 优化建议',status:'canary'},{name:'API 文档自动生成',status:'wip'},{name:'自动化测试生成',status:'wip'}]}],
-        product: [{ id:'l2-product', title:'产品研发协作技能包', status:'done', skillCount:4, skills:[{name:'KEEP 需求文档智能生成',status:'done'},{name:'原型图说明生成',status:'done'},{name:'需求评审纪要',status:'canary'},{name:'排期自动估算',status:'plan'}]}],
-        design:  [{ id:'l2-design', title:'设计工具技能包', status:'done', skillCount:4, skills:[{name:'设计稿自动切图说明',status:'done'},{name:'色彩规范检查',status:'done'},{name:'响应式设计建议',status:'wip'},{name:'设计稿 → 代码生成',status:'plan'}]}],
-        data:    [{ id:'l2-data', title:'Data Agent 技能包', status:'done', skillCount:5, desc:'Data Agent 智能数据分析能力，全数据分析师可用', skills:[{name:'天策/快数自然语言取数',status:'done',desc:'用自然语言描述，AI 自动写 SQL 并取数'},{name:'Hive 表智能检索',status:'done'},{name:'数据血缘分析',status:'done'},{name:'可视化图表生成',status:'canary'},{name:'数据分析报告自动撰写',status:'wip'}]}],
-        ops:     [{ id:'l2-ops', title:'运营工具技能包', status:'wip', skillCount:4, skills:[{name:'小红书/抖音内容生成',status:'canary'},{name:'广告文案优化',status:'canary'},{name:'用户反馈智能分类',status:'wip'},{name:'内容推荐效果分析',status:'plan'}]}],
-        admin:   [{ id:'l2-admin', title:'职能工具技能包', status:'wip', skillCount:3, skills:[{name:'财务报销单智能填写',status:'wip'},{name:'法律合同模板生成',status:'wip'},{name:'HR 数据统计自动化',status:'plan'}]}],
+        dev:     [{ id:'l3-dev',     title:'研发工具',             status:'done',   skillCount:8,  overallStatus:'applied',  skillProgress:'6/8',  knowledgeBase:'published',  desc:'覆盖 KATE/KDev/CodeFlicker/Git 全研发工具链', skills:[{name:'CodeFlicker 编程助手',status:'done',desc:'AI Pair Programmer，代码生成/补全/解释'},{name:'KATE 需求理解',status:'done',desc:'理解 KATE 任务，自动拆解开发步骤'},{name:'KDev 调试助手',status:'done',desc:'智能定位 Bug，给出修复建议'},{name:'Git Commit 自动生成',status:'done'},{name:'代码安全扫描辅助',status:'canary'},{name:'SQL 优化建议',status:'canary'},{name:'API 文档自动生成',status:'wip'},{name:'自动化测试生成',status:'wip'}] }],
+        product: [{ id:'l3-product', title:'产品研发协作',         status:'done',   skillCount:4,  overallStatus:'applied',  skillProgress:'2/4',  knowledgeBase:'notStarted', skills:[{name:'KEEP 需求文档智能生成',status:'done'},{name:'原型图说明生成',status:'done'},{name:'需求评审纪要',status:'canary'},{name:'排期自动估算',status:'plan'}] }],
+        design:  [{ id:'l3-design',  title:'设计工具',             status:'done',   skillCount:4,  overallStatus:'applied',  skillProgress:'2/4',  knowledgeBase:'notStarted', skills:[{name:'设计稿自动切图说明',status:'done'},{name:'色彩规范检查',status:'done'},{name:'响应式设计建议',status:'wip'},{name:'设计稿 → 代码生成',status:'plan'}] }],
+        data:    [{ id:'l3-data',    title:'Data Agent',           status:'done',   skillCount:5,  overallStatus:'applied',  skillProgress:'3/5',  knowledgeBase:'published',  desc:'Data Agent 智能数据分析能力，全数据分析师可用', skills:[{name:'天策/快数自然语言取数',status:'done',desc:'用自然语言描述，AI 自动写 SQL 并取数'},{name:'Hive 表智能检索',status:'done'},{name:'数据血缘分析',status:'done'},{name:'可视化图表生成',status:'canary'},{name:'数据分析报告自动撰写',status:'wip'}] }],
+        ops:     [{ id:'l3-ops',     title:'运营工具',             status:'wip',    skillCount:4,  overallStatus:'building', skillProgress:'0/4',  knowledgeBase:'notStarted', skills:[{name:'小红书/抖音内容生成',status:'canary'},{name:'广告文案优化',status:'canary'},{name:'用户反馈智能分类',status:'wip'},{name:'内容推荐效果分析',status:'plan'}] }],
+        admin:   [{ id:'l3-admin',   title:'职能工具',             status:'wip',    skillCount:3,  overallStatus:'building', skillProgress:'0/3',  knowledgeBase:'notStarted', skills:[{name:'财务报销单智能填写',status:'wip'},{name:'法律合同模板生成',status:'wip'},{name:'HR 数据统计自动化',status:'plan'}] }],
       }
     },
+
+    /* ── L2：协作办公层（原 L3，只保留通用包，无职能分列）── */
+    {
+      id: 'l2', code: 'L2', name: '协作办公层', desc: '日常协作 & 办公自动化',
+      color: '#0369a1',
+      // 只保留通用行，不再有 packages 职能分列
+      universal: [
+        { id:'l2-kim',  title:'KIM 移动办公',  status:'done', skillCount:6, colspan: 6, overallStatus:'applied',  skillProgress:'4/6',  knowledgeBase:'notStarted', desc:'全员适用，基于 KIM 的 AI 助手核心能力', skills:[{name:'KIM 智能助手基础对话',status:'done'},{name:'会议纪要自动生成',status:'done'},{name:'任务创建与追踪',status:'done'},{name:'跨部门协作通知',status:'done'},{name:'待办事项智能整理',status:'canary'},{name:'KIM 群智能摘要',status:'wip'}] },
+        { id:'l2-docs', title:'Docs 协同文档', status:'done', skillCount:5, colspan: 6, overallStatus:'applied',  skillProgress:'3/5',  knowledgeBase:'building',   desc:'基于快手内网 Docs 的文档智能能力', skills:[{name:'文档智能摘要',status:'done'},{name:'多文档关联分析',status:'done'},{name:'文档问答检索',status:'done'},{name:'表格数据智能分析',status:'canary'},{name:'文档自动格式化',status:'plan'}] },
+        { id:'l2-bpm',  title:'BPM 全员审批', status:'done', skillCount:4, colspan: 6, overallStatus:'applied',  skillProgress:'3/4',  knowledgeBase:'notStarted', desc:'审批流程智能加速', skills:[{name:'审批单智能填写',status:'done'},{name:'审批状态查询',status:'done'},{name:'报销智能辅助',status:'done'},{name:'合规检查',status:'wip'}] },
+      ],
+    },
+
+    /* ── L1：基础设施层 ────────────────────────────────────── */
     {
       id: 'l1', code: 'L1', name: '基础设施层', desc: '底层平台 & 安全合规',
       color: '#dc2626',
       packages: {
-        dev:     [{ id:'l1-dev', title:'安全 & 基础运维技能包', status:'done', skillCount:7, desc:'安全合规与基础设施运维智能化', skills:[{name:'安全漏洞扫描辅助',status:'done'},{name:'权限申请智能审核',status:'done'},{name:'CMDB 资产智能查询',status:'done'},{name:'故障根因分析',status:'done'},{name:'Radar 告警智能处理',status:'canary'},{name:'容量规划建议',status:'wip'},{name:'合规检查自动化',status:'plan'}]}],
+        dev:     [{ id:'l1-dev',     title:'安全 & 基础运维',      status:'done',   skillCount:7,  overallStatus:'applied',  skillProgress:'4/7',  knowledgeBase:'notStarted', desc:'安全合规与基础设施运维智能化', skills:[{name:'安全漏洞扫描辅助',status:'done'},{name:'权限申请智能审核',status:'done'},{name:'CMDB 资产智能查询',status:'done'},{name:'故障根因分析',status:'done'},{name:'Radar 告警智能处理',status:'canary'},{name:'容量规划建议',status:'wip'},{name:'合规检查自动化',status:'plan'}] }],
         product: [],
         design:  [],
-        data:    [{ id:'l1-data', title:'数据存储 & 查询优化技能包', status:'done', skillCount:3, skills:[{name:'KDB 查询优化建议',status:'done'},{name:'数据仓库分层说明',status:'done'},{name:'慢查询诊断',status:'canary'}]}],
+        data:    [{ id:'l1-data',    title:'数据存储 & 查询优化',  status:'done',   skillCount:3,  overallStatus:'applied',  skillProgress:'2/3',  knowledgeBase:'notStarted', skills:[{name:'KDB 查询优化建议',status:'done'},{name:'数据仓库分层说明',status:'done'},{name:'慢查询诊断',status:'canary'}] }],
         ops:     [],
-        admin:   [{ id:'l1-admin', title:'IT 智能运维技能包', status:'done', skillCount:3, skills:[{name:'IT 设备智能报修',status:'done'},{name:'网络故障初诊',status:'done'},{name:'账号权限自动化',status:'plan'}]}],
+        admin:   [{ id:'l1-admin',   title:'IT 智能运维',          status:'done',   skillCount:3,  overallStatus:'applied',  skillProgress:'2/3',  knowledgeBase:'notStarted', skills:[{name:'IT 设备智能报修',status:'done'},{name:'网络故障初诊',status:'done'},{name:'账号权限自动化',status:'plan'}] }],
       }
     }
   ],
@@ -2590,39 +2974,39 @@ window.SKILL_DATA = {
  */
 window.L4_BIZ_PACKAGES = {
   zhuZhan: {
-    dev:     [{ id:'l4-dev',     title:'主站研发 AI 技能包',     status:'canary', skillCount:8,  desc:'面向主站研发工程师的定制化 AI 能力包，覆盖代码生成、需求澄清、自动测试等' }],
-    product: [{ id:'l4-product', title:'主站数据分析技能包',     status:'done',   skillCount:4,  desc:'主站产品数据分析与洞察能力' }],
-    design:  [{ id:'l4-design',  title:'主站视觉设计技能包',     status:'wip',    skillCount:3,  desc:'短视频封面优化/直播间视觉规范/UGC 内容视觉打分' }],
-    data:    [{ id:'l4-data',    title:'主站数据洞察技能包',     status:'done',   skillCount:5,  desc:'数据分析师专属，覆盖取数、分析、报表全流程' }],
-    ops:     [{ id:'l4-ops',     title:'主站运营 AI 技能包',     status:'done',   skillCount:6,  desc:'主站运营专属能力，覆盖内容审核、活动策划等' }],
-    admin:   [{ id:'l4-admin',   title:'行政职能 AI 技能包',     status:'done',   skillCount:4,  desc:'行政/HR/法务专属，覆盖办公自动化' }],
+    dev:     [{ id:'l4-dev',     title:'主站研发 AI',         status:'canary', skillCount:8,  overallStatus:'building', skillProgress:'3/8',  knowledgeBase:'building',   desc:'面向主站研发工程师的定制化 AI 能力包，覆盖代码生成、需求澄清、自动测试等' }],
+    product: [{ id:'l4-product', title:'主站数据分析',         status:'done',   skillCount:4,  overallStatus:'applied',  skillProgress:'3/4',  knowledgeBase:'notStarted', desc:'主站产品数据分析与洞察能力' }],
+    design:  [{ id:'l4-design',  title:'主站视觉设计',         status:'wip',    skillCount:3,  overallStatus:'building', skillProgress:'0/3',  knowledgeBase:'notStarted', desc:'短视频封面优化/直播间视觉规范/UGC 内容视觉打分' }],
+    data:    [{ id:'l4-data',    title:'主站数据洞察',         status:'done',   skillCount:5,  overallStatus:'applied',  skillProgress:'3/5',  knowledgeBase:'building',   desc:'数据分析师专属，覆盖取数、分析、报表全流程' }],
+    ops:     [{ id:'l4-ops',     title:'主站运营 AI',          status:'done',   skillCount:6,  overallStatus:'applied',  skillProgress:'3/6',  knowledgeBase:'notStarted', desc:'主站运营专属能力，覆盖内容审核、活动策划等' }],
+    admin:   [{ id:'l4-admin',   title:'行政职能 AI',          status:'done',   skillCount:4,  overallStatus:'applied',  skillProgress:'3/4',  knowledgeBase:'notStarted', desc:'行政/HR/法务专属，覆盖办公自动化' }],
   },
   ksib: {
-    dev:     [{ id:'l4-ksib-dev',     title:'KSIB 研发 AI 技能包',    status:'wip',    skillCount:5,  desc:'面向 KSIB 研发工程师，支持海外多时区协作与本地化研发' }],
-    product: [{ id:'l4-ksib-product', title:'KSIB 产品分析技能包',    status:'plan',   skillCount:3,  desc:'海外市场产品数据分析' }],
+    dev:     [{ id:'l4-ksib-dev',     title:'KSIB 研发 AI',        status:'wip',    skillCount:5,  overallStatus:'building', skillProgress:'0/5',  knowledgeBase:'notStarted', desc:'面向 KSIB 研发工程师，支持海外多时区协作与本地化研发' }],
+    product: [{ id:'l4-ksib-product', title:'KSIB 产品分析',        status:'plan',   skillCount:3,  overallStatus:'building', skillProgress:'0/3',  knowledgeBase:'notStarted', desc:'海外市场产品数据分析' }],
     design:  [],
-    data:    [{ id:'l4-ksib-data',    title:'KSIB 数据洞察技能包',    status:'plan',   skillCount:3,  desc:'海外业务数据分析与报告自动化' }],
-    ops:     [{ id:'l4-ksib-ops',     title:'KSIB 运营 AI 技能包',    status:'plan',   skillCount:4,  desc:'海外运营内容生成与活动策划' }],
+    data:    [{ id:'l4-ksib-data',    title:'KSIB 数据洞察',        status:'plan',   skillCount:3,  overallStatus:'building', skillProgress:'0/3',  knowledgeBase:'notStarted', desc:'海外业务数据分析与报告自动化' }],
+    ops:     [{ id:'l4-ksib-ops',     title:'KSIB 运营 AI',         status:'plan',   skillCount:4,  overallStatus:'building', skillProgress:'0/4',  knowledgeBase:'notStarted', desc:'海外运营内容生成与活动策划' }],
     admin:   [],
   },
   shangYeHua: {
-    dev:     [{ id:'l4-sy-dev',     title:'商业化研发 AI 技能包',   status:'done',   skillCount:10, desc:'商业化研发全流程 AI 化，覆盖广告/品牌/电商研发链路' }],
-    product: [{ id:'l4-sy-product', title:'商业化产品技能包',       status:'wip',    skillCount:4,  desc:'商业化产品规划与数据分析' }],
-    design:  [{ id:'l4-sy-design',  title:'商业化创意设计技能包',   status:'plan',   skillCount:3,  desc:'广告创意生成与优化' }],
-    data:    [{ id:'l4-sy-data',    title:'商业化数据洞察技能包',   status:'done',   skillCount:5,  desc:'广告数据看板智能分析' }],
-    ops:     [{ id:'l4-sy-ops',     title:'商业化运营 AI 技能包',   status:'done',   skillCount:6,  desc:'生服营销/活动策划/内容生成' }],
+    dev:     [{ id:'l4-sy-dev',     title:'商业化研发 AI',        status:'done',   skillCount:10, overallStatus:'applied',  skillProgress:'7/10', knowledgeBase:'building',   desc:'商业化研发全流程 AI 化，覆盖广告/品牌/电商研发链路' }],
+    product: [{ id:'l4-sy-product', title:'商业化产品',            status:'wip',    skillCount:4,  overallStatus:'building', skillProgress:'0/4',  knowledgeBase:'notStarted', desc:'商业化产品规划与数据分析' }],
+    design:  [{ id:'l4-sy-design',  title:'商业化创意设计',        status:'plan',   skillCount:3,  overallStatus:'building', skillProgress:'0/3',  knowledgeBase:'notStarted', desc:'广告创意生成与优化' }],
+    data:    [{ id:'l4-sy-data',    title:'商业化数据洞察',        status:'done',   skillCount:5,  overallStatus:'applied',  skillProgress:'4/5',  knowledgeBase:'notStarted', desc:'广告数据看板智能分析' }],
+    ops:     [{ id:'l4-sy-ops',     title:'商业化运营 AI',         status:'done',   skillCount:6,  overallStatus:'applied',  skillProgress:'4/6',  knowledgeBase:'notStarted', desc:'生服营销/活动策划/内容生成' }],
     admin:   [],
   },
   zongXiao: {
-    dev:     [{ id:'l4-zx-dev',  title:'综效研发 AI 技能包',    status:'canary', skillCount:4, desc:'企业应用前端研发效能提升' }],
+    dev:     [{ id:'l4-zx-dev',   title:'综效研发 AI',           status:'canary', skillCount:4,  overallStatus:'building', skillProgress:'1/4',  knowledgeBase:'notStarted', desc:'企业应用前端研发效能提升' }],
     product: [],
     design:  [],
     data:    [],
     ops:     [],
-    admin:   [{ id:'l4-zx-admin', title:'综效职能 AI 技能包',   status:'plan',   skillCount:3, desc:'企业内部系统行政职能自动化' }],
+    admin:   [{ id:'l4-zx-admin', title:'综效职能 AI',           status:'plan',   skillCount:3,  overallStatus:'building', skillProgress:'0/3',  knowledgeBase:'notStarted', desc:'企业内部系统行政职能自动化' }],
   },
   yanFaXian: {
-    dev:     [{ id:'l4-yfx-dev',  title:'研发线 AI 技能包',    status:'done',   skillCount:8, desc:'研发效能中心 AI Native 研发模式工具链' }],
+    dev:     [{ id:'l4-yfx-dev',  title:'研发线 AI',             status:'done',   skillCount:8,  overallStatus:'applied',  skillProgress:'6/8',  knowledgeBase:'building',   desc:'研发效能中心 AI Native 研发模式工具链' }],
     product: [],
     design:  [],
     data:    [],
@@ -2630,15 +3014,15 @@ window.L4_BIZ_PACKAGES = {
     admin:   [],
   },
   shujuPT: {
-    dev:     [{ id:'l4-sj-dev',     title:'数据平台研发 AI 技能包', status:'done',   skillCount:6, desc:'数据平台工程师代码生成/SQL 优化/数据血缘分析' }],
+    dev:     [{ id:'l4-sj-dev',     title:'数据平台研发 AI',      status:'done',   skillCount:6,  overallStatus:'applied',  skillProgress:'4/6',  knowledgeBase:'notStarted', desc:'数据平台工程师代码生成/SQL 优化/数据血缘分析' }],
     product: [],
     design:  [],
-    data:    [{ id:'l4-sj-data',    title:'数据平台分析师技能包',   status:'done',   skillCount:5, desc:'经营数据中心全流程 AI 分析' }],
+    data:    [{ id:'l4-sj-data',    title:'数据平台分析师',        status:'done',   skillCount:5,  overallStatus:'applied',  skillProgress:'4/5',  knowledgeBase:'building',   desc:'经营数据中心全流程 AI 分析' }],
     ops:     [],
     admin:   [],
   },
   anQuan: {
-    dev:     [{ id:'l4-aq-dev',  title:'安全风控研发 AI 技能包', status:'wip',    skillCount:4, desc:'安全攻防、漏洞检测、合规扫描 AI 辅助' }],
+    dev:     [{ id:'l4-aq-dev',  title:'安全风控研发 AI',        status:'wip',    skillCount:4,  overallStatus:'building', skillProgress:'0/4',  knowledgeBase:'notStarted', desc:'安全攻防、漏洞检测、合规扫描 AI 辅助' }],
     product: [],
     design:  [],
     data:    [],
@@ -2649,7 +3033,7 @@ window.L4_BIZ_PACKAGES = {
 
 </script>
 <script>
-/* skill-content.js — Renders the AI Skill Market tab from SKILL_DATA */
+/* skill-content.js — Renders the AI Skill Market tab from SKILL_DATA (v2) */
 
 document.addEventListener('DOMContentLoaded', function () {
   renderSkillTab();
@@ -2736,7 +3120,7 @@ function renderSkillTab() {
           <div class="legend-item"><div class="legend-dot" style="background:var(--canary-color)"></div><span>灰度中</span></div>
           <div class="legend-item"><div class="legend-dot" style="background:var(--wip-color)"></div><span>开发中</span></div>
           <div class="legend-item"><div class="legend-dot" style="background:var(--plan-color)"></div><span>计划中</span></div>
-          <span style="margin-left:8px">左侧彩条 = 架构层标识色 · 每格 = 技能包（可点击）+ 知识库（建设中）· 点击卡片查看详情</span>
+          <span style="margin-left:8px">左侧彩条 = 架构层标识色 · 点击卡片查看技能详情</span>
         </div>
 
         <!-- Matrix wrapper -->
@@ -2910,6 +3294,39 @@ function renderSkillTab() {
   });
 }
 
+/* ── 辅助函数：整体状态 ─────────────────────────────────── */
+function overallStatusLabel(s) {
+  return { applied: '🟢 已应用', building: '🟡 建设中' }[s] || '⬜ 未知';
+}
+function overallStatusClass(s) {
+  return { applied: 'attr-applied', building: 'attr-building' }[s] || '';
+}
+
+/* ── 辅助函数：知识库状态 ───────────────────────────────── */
+function kbLabel(s) {
+  return { notStarted: '⬜ 未启动', building: '🔵 建设中', published: '✅ 已发布' }[s] || '⬜ 未启动';
+}
+function kbClass(s) {
+  return { notStarted: 'attr-kb-not', building: 'attr-kb-building', published: 'attr-kb-published' }[s] || 'attr-kb-not';
+}
+
+/* ── 构建单个卡片内的属性行 HTML ──────────────────────── */
+function buildPkgAttrs(pkg) {
+  return `<div class="pkg-card-attrs">
+    <div class="pkg-attr-row">
+      <span class="pkg-attr-label">状态</span>
+      <span class="pkg-attr-val ${overallStatusClass(pkg.overallStatus)}">${overallStatusLabel(pkg.overallStatus)}</span>
+      <span class="pkg-attr-sep">|</span>
+      <span class="pkg-attr-label">Skills</span>
+      <span class="pkg-attr-val">${pkg.skillProgress || '0/0'}</span>
+    </div>
+    <div class="pkg-attr-row">
+      <span class="pkg-attr-label">知识库</span>
+      <span class="pkg-attr-val ${kbClass(pkg.knowledgeBase)}">${kbLabel(pkg.knowledgeBase)}</span>
+    </div>
+  </div>`;
+}
+
 function buildMatrixHTML(channels, layers) {
   const colCount = channels.length;
 
@@ -2943,7 +3360,7 @@ function buildMatrixHTML(channels, layers) {
   html += `</tr></thead><tbody>`;
 
   layers.forEach(layer => {
-    // Universal row (L3 only)
+    // Universal row（L2 协作办公层只渲染 universal，不渲染 packages 职能行）
     if (layer.universal && layer.universal.length) {
       html += `<tr>
         <td class="row-header">
@@ -2953,19 +3370,23 @@ function buildMatrixHTML(channels, layers) {
             <span class="layer-desc" style="font-size:9px;color:var(--text-muted)">${layer.desc}</span>
           </div>
         </td>
-        <td colspan="${colCount}" class="universal-cell">`;
+        <td colspan="${colCount}" class="universal-cell"><div class="universal-cell-inner">`;
       layer.universal.forEach(u => {
-        html += `<div class="universal-pkg" data-pkg-id="${u.id}" style="border-color:var(--l3-border)">
-          <span class="pkg-card-title">${u.title}</span>
-          <span class="status-badge ${statusBadge(u.status)}" style="margin-left:6px">${statusLabel(u.status)}</span>
-          <span class="pkg-count" style="margin-left:4px">${u.skillCount} 技能</span>
+        html += `<div class="universal-pkg" data-pkg-id="${u.id}" style="border-color:var(--l2-border)">
+          <div class="universal-pkg-header">
+            <span class="pkg-card-title">${u.title}</span>
+            <span class="status-badge ${statusBadge(u.status)}" style="margin-left:6px">${statusLabel(u.status)}</span>
+          </div>
+          ${buildPkgAttrs(u)}
         </div>`;
       });
-      html += `</td></tr>`;
+      html += `<div class="universal-pkg-more" title="更多通用包持续建设中">…</div>`;
+      html += `</div></td></tr>`;
+      // L2 协作办公层只有通用行，直接跳过，不再渲染 packages 行
+      return;
     }
 
-    // Normal layer row
-    // L4 行头特殊处理：加业务线下拉
+    // Normal layer row（L4、L3、L1 的职能分列矩阵）
     const isL4 = layer.id === 'l4';
     html += `<tr data-layer="${layer.id}">
       <td class="row-header">
@@ -2986,22 +3407,14 @@ function buildMatrixHTML(channels, layers) {
       const colIdx = channels.indexOf(ch);
       html += `<td class="matrix-cell" data-col="${ch.id}" data-col-idx="${colIdx}" data-layer="${layer.id}">`;
       if (pkgs.length === 0) {
-        html += `<div class="cell-empty">
-          <span class="cell-empty-skill">—</span>
-          <div class="knowledge-slot knowledge-slot-locked" title="知识库建设中">🔒 知识库</div>
-        </div>`;
+        html += `<div class="cell-empty"><span class="cell-empty-skill">—</span></div>`;
       } else {
         pkgs.forEach(pkg => {
           html += `<div class="pkg-card ${layer.id}" data-pkg-id="${pkg.id}">
             <div class="pkg-card-title">${pkg.title}</div>
-            <div class="pkg-card-meta">
-              <span class="status-badge ${statusBadge(pkg.status)}">${statusLabel(pkg.status)}</span>
-              ${pkg.skillCount ? `<span class="pkg-count">${pkg.skillCount} 技能</span>` : ''}
-            </div>
+            ${buildPkgAttrs(pkg)}
           </div>`;
         });
-        // 知识库占位卡（预留）
-        html += `<div class="knowledge-slot knowledge-slot-locked" title="知识库建设中">🔒 知识库</div>`;
       }
       html += `</td>`;
     });
@@ -3063,15 +3476,12 @@ function statusLabel(status) {
 }
 
 // ── L4 业务线切换 ──────────────────────────────────────────────
-// skill-data.js 每个 l4 packages 里按 bizId 分包，切换时刷新 L4 行
 function switchL4Biz(bizId) {
   const l4 = window.SKILL_DATA && window.SKILL_DATA.layers.find(l => l.id === 'l4');
   if (!l4) return;
 
-  // L4 business-line overrides: packages per biz（从 l4BizPackages 读取，若无则 fallback 到默认）
   const bizPkgs = (window.L4_BIZ_PACKAGES && window.L4_BIZ_PACKAGES[bizId]) || l4.packages;
 
-  // 更新 L4 行每个通道格
   const channels = window.SKILL_DATA.channels;
   const l4Cells = document.querySelectorAll('.matrix-cell[data-layer="l4"]');
   l4Cells.forEach(cell => {
@@ -3079,31 +3489,20 @@ function switchL4Biz(bizId) {
     const pkgs = (bizPkgs[chId]) || [];
     cell.innerHTML = '';
     if (pkgs.length === 0) {
-      cell.innerHTML = `<div class="cell-empty">
-        <span class="cell-empty-skill">—</span>
-        <div class="knowledge-slot knowledge-slot-locked" title="知识库建设中">🔒 知识库</div>
-      </div>`;
+      cell.innerHTML = `<div class="cell-empty"><span class="cell-empty-skill">—</span></div>`;
     } else {
       pkgs.forEach(pkg => {
         const div = document.createElement('div');
         div.className = `pkg-card l4`;
         div.dataset.pkgId = pkg.id;
         div.innerHTML = `<div class="pkg-card-title">${pkg.title}</div>
-          <div class="pkg-card-meta">
-            <span class="status-badge ${statusBadge(pkg.status)}">${statusLabel(pkg.status)}</span>
-            ${pkg.skillCount ? `<span class="pkg-count">${pkg.skillCount} 技能</span>` : ''}
-          </div>`;
+          ${buildPkgAttrs(pkg)}`;
         div.addEventListener('click', () => {
           const p = findPkg(pkg.id, window.SKILL_DATA.layers);
           if (p) openSkillModal(p); else openSkillModal(pkg);
         });
         cell.appendChild(div);
       });
-      const ks = document.createElement('div');
-      ks.className = 'knowledge-slot knowledge-slot-locked';
-      ks.title = '知识库建设中';
-      ks.textContent = '🔒 知识库';
-      cell.appendChild(ks);
     }
   });
 
@@ -3121,12 +3520,12 @@ function switchL4Biz(bizId) {
 
 window.PIONEER_DATA = {
   bizLines: [
-    { id: 'zhuZhan',    name: '主站',     bp: '王娟',   color: '#2563eb', bg: '#eff6ff', border: '#bfdbfe' },
-    { id: 'ksib',       name: 'KSIB',    bp: '王娟',   color: '#7c3aed', bg: '#faf5ff', border: '#ddd6fe' },
-    { id: 'shangYeHua', name: '商业化',   bp: '王贤',   color: '#16a34a', bg: '#f0fdf4', border: '#bbf7d0' },
+    { id: 'zhuZhan',    name: '主站',     bp: '王诩',   color: '#2563eb', bg: '#eff6ff', border: '#bfdbfe' },
+    { id: 'ksib',       name: 'KSIB',    bp: '王诩',   color: '#7c3aed', bg: '#faf5ff', border: '#ddd6fe' },
+    { id: 'shangYeHua', name: '商业化',   bp: '王诩',   color: '#16a34a', bg: '#f0fdf4', border: '#bbf7d0' },
     { id: 'zongXiao',   name: '综效',     bp: '于旭东', color: '#d97706', bg: '#fffbeb', border: '#fde68a' },
-    { id: 'yanFaXian',  name: '研发线',   bp: '于旭东', color: '#0369a1', bg: '#f0f9ff', border: '#bae6fd' },
-    { id: 'shujuPT',    name: '数据平台', bp: '—',      color: '#dc2626', bg: '#fef2f2', border: '#fecaca' },
+    { id: 'yanFaXian',  name: '研发线',   bp: '王硕',   color: '#0369a1', bg: '#f0f9ff', border: '#bae6fd' },
+    { id: 'shujuPT',    name: '数据平台', bp: '张蕤',   color: '#dc2626', bg: '#fef2f2', border: '#fecaca' },
     { id: 'anQuan',     name: '安全风控', bp: '于旭东', color: '#6b7280', bg: '#f9fafb', border: '#e5e7eb' },
   ],
   // 与 Skill 市场保持一致的 6 个通道（顺序一致）
@@ -3201,9 +3600,10 @@ window.PIONEER_DATA = {
 
 </script>
 <script>
-/* pioneer-content.js — 先锋队 Tab v3（视觉优化版）
- * 布局：行 = 业务线（7行），列 = 通道（6列，与Skill市场对齐）
- * 视觉：卡片化通道列头、渐变业务线行头、团队卡片立体感
+/* pioneer-content.js — 先锋队 Tab v4
+ * 布局：2 大区域
+ *   (1) 组织专项 → 子分区：自上而下 驱动 / 自下而上 涌现
+ *   (2) AI 普惠
  */
 (function () {
 
@@ -3249,7 +3649,7 @@ window.PIONEER_DATA = {
       return `<td class="pm-cell">${matched.map(t => teamCardHTML(t, tier, bizId)).join('')}</td>`;
     }
 
-    // ── 表格 HTML ─────────────────────────────────────────
+    // ── 先锋队矩阵表格 ─────────────────────────────────────
     const tableHTML = `
       <div class="pm-table-wrap">
         <table class="pm-table">
@@ -3295,121 +3695,174 @@ window.PIONEER_DATA = {
 
     // ── 渲染 ──────────────────────────────────────────────
     panel.innerHTML = `
-      <!-- ① Top-Down：AI-Native 先锋队 -->
-      <section class="section">
+
+      <!-- ══════════════════════════════════════════════════════
+           大区域 1：组织专项
+           ════════════════════════════════════════════════════ -->
+      <section class="section org-domain-section">
         <div class="section-inner">
-          <div class="practice-type-banner practice-type-top">
-            <div class="ptb-label">Top-Down</div>
-            <div class="ptb-name">AI-Native 先锋队</div>
-            <div class="ptb-desc">由公司 AI 基建虚拟组统一组织，业务线 × 职能通道双维覆盖，自上而下推进 AI-Native 工作范式落地</div>
-          </div>
 
-          <div class="section-label" style="margin-top:0">🌟 先锋队全景矩阵</div>
-          <p class="section-desc">
-            <strong>${totalTeams}</strong> 支先锋队横跨 <strong>${bizLines.length}</strong> 条业务线，<strong>${nativeCount}</strong> 支已进入 AI-Native 工作模式，<strong>${doneCount}</strong> 个案例已在 Showcase 产出 ·
-            <span style="font-size:12px;color:var(--text-muted)">矩阵以「业务线 × 职能通道」双维度呈现，空白格代表当前周期尚未设立先锋队（预留扩展位）</span>
-          </p>
-
-          <!-- 统计条 -->
-          <div class="pm-stats">
-            <div class="pm-stat-item">
-              <div class="pm-stat-num">${totalTeams}</div>
-              <div class="pm-stat-label">先锋队总数</div>
+          <!-- 大区域 Header -->
+          <div class="big-domain-banner big-domain-org">
+            <div class="bdb-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             </div>
-            <div class="pm-stat-item pm-stat-native">
-              <div class="pm-stat-num">${nativeCount}</div>
-              <div class="pm-stat-label">AI Native 团队</div>
+            <div class="bdb-body">
+              <div class="bdb-title">组织专项</div>
+              <div class="bdb-desc">联合业务线 × 职能通道，驱动各团队完成从「用 AI 工具」到「AI-Native 工作方式」的组织级跃迁</div>
             </div>
-            <div class="pm-stat-item pm-stat-done">
-              <div class="pm-stat-num">${doneCount}</div>
-              <div class="pm-stat-label">已产出案例</div>
-            </div>
-            <div class="pm-stat-item">
-              <div class="pm-stat-num">${bizLines.length}</div>
-              <div class="pm-stat-label">覆盖业务线</div>
+            <div class="bdb-stats">
+              <div class="bdb-stat"><span class="bdb-num">${totalTeams}</span><span class="bdb-label">先锋队</span></div>
+              <div class="bdb-stat"><span class="bdb-num">${nativeCount}</span><span class="bdb-label">AI-Native</span></div>
+              <div class="bdb-stat"><span class="bdb-num">${doneCount}</span><span class="bdb-label">已出案例</span></div>
             </div>
           </div>
 
-          <!-- 图例 -->
-          <div class="pm-legend-bar">
-            <span class="pm-leg"><span class="pm-leg-dot pm-leg-success"></span>已成功（有案例）</span>
-            <span class="pm-leg"><span class="pm-leg-dot pm-leg-wip"></span>进行中</span>
-            <span class="pm-leg-note">点击「查看案例 →」可查看实践详情</span>
-          </div>
-
-          ${tableHTML}
-        </div>
-      </section>
-
-      <!-- ② Down-Top：AI 超级个体/团队 -->
-      <section class="section section-bg-gray">
-        <div class="section-inner">
-          <div class="practice-type-banner practice-type-bottom">
-            <div class="ptb-label">Down-Top</div>
-            <div class="ptb-name">AI 超级个体 / 团队</div>
-            <div class="ptb-desc">由一线员工与自发团队驱动，探索 AI 使用边界，孵化极致 AI 用法，反哺公司级 Skill 市场</div>
-          </div>
-
-          <div class="super-collect-banner">
-            <div class="scb-icon">🌱</div>
-            <div class="scb-body">
-              <div class="scb-title">正在征集中 · 你就是下一个 AI 超级个体</div>
-              <div class="scb-desc">无论你是用 AI 干掉了繁琐流程、还是训练出了一个专属你的 AI 搭档，都欢迎来分享你的故事。</div>
-              <div class="scb-tags">
-                <span class="scb-tag scb-tag-a">🏆 AI 超级个体</span>
-                <span class="scb-tag scb-tag-b">🔥 AI-Native 团队</span>
-                <span class="scb-tag scb-tag-c">🛠️ 高价值 Skill 创造者</span>
+          <!-- ─────────────────────────────
+               子分区 A：自上而下 驱动
+               ───────────────────────────── -->
+          <div class="org-sub-section">
+            <div class="org-sub-header org-sub-topdown">
+              <div class="osh-left">
+                <div class="osh-direction-badge osh-badge-topdown">自上而下 驱动</div>
+                <div class="osh-title">AI-Native 先锋队</div>
+                <div class="osh-desc">由公司 AI 基建虚拟组统一组织，业务线 × 职能通道双维覆盖，推进 AI-Native 工作范式落地</div>
+                <div class="osh-tracks">
+                  <span class="osh-track-item">🔧 技术通道 · @王诩</span>
+                  <span class="osh-track-item">🏢 非技术通道 · @李玟潮</span>
+                  <span class="osh-track-item">⚙️ 职能通道 · @王诩</span>
+                  <span class="osh-track-item">🌱 自下而上涌现 · @周祥</span>
+                </div>
+              </div>
+              <div class="osh-meta">
+                <span class="osh-meta-item">📊 ${totalTeams} 支先锋队</span>
+                <span class="osh-meta-item">🏢 ${bizLines.length} 条业务线</span>
+                <span class="osh-meta-item">👤 @沈浪 统筹</span>
               </div>
             </div>
-            <a class="scb-cta" href="https://myflicker.kuaishou.com/nominate" target="_blank">👉 立即申报</a>
+
+            <!-- 统计条 -->
+            <div class="pm-stats">
+              <div class="pm-stat-item">
+                <div class="pm-stat-num">${totalTeams}</div>
+                <div class="pm-stat-label">先锋队总数</div>
+              </div>
+              <div class="pm-stat-item pm-stat-native">
+                <div class="pm-stat-num">${nativeCount}</div>
+                <div class="pm-stat-label">AI Native 团队</div>
+              </div>
+              <div class="pm-stat-item pm-stat-done">
+                <div class="pm-stat-num">${doneCount}</div>
+                <div class="pm-stat-label">已产出案例</div>
+              </div>
+              <div class="pm-stat-item">
+                <div class="pm-stat-num">${bizLines.length}</div>
+                <div class="pm-stat-label">覆盖业务线</div>
+              </div>
+            </div>
+
+            <!-- 图例 -->
+            <div class="pm-legend-bar">
+              <span class="pm-leg"><span class="pm-leg-dot pm-leg-success"></span>已成功（有案例）</span>
+              <span class="pm-leg"><span class="pm-leg-dot pm-leg-wip"></span>进行中</span>
+              <span class="pm-leg-note">点击「查看案例 →」可查看实践详情</span>
+            </div>
+
+            ${tableHTML}
           </div>
 
-          <!-- 四大入选标准 -->
-          <div class="super-criteria">
-            <div class="sc-card">
-              <div class="sc-icon">⚡</div>
-              <div class="sc-title">AI 超级个体</div>
-              <div class="sc-desc">个人通过 AI 工具使工作效率提升 2x+ 以上，或创造了可复用、可分享的高价值 AI 使用方法</div>
-              <div class="sc-status">征集中</div>
+          <!-- ─────────────────────────────
+               子分区 B：自下而上 涌现
+               ───────────────────────────── -->
+          <div class="org-sub-section org-sub-section-btm">
+            <div class="org-sub-header org-sub-bottomup">
+              <div class="osh-left">
+                <div class="osh-direction-badge osh-badge-bottomup">自下而上 涌现</div>
+                <div class="osh-title">AI 超级个体 / 团队</div>
+                <div class="osh-desc">由一线员工与自发团队驱动，探索 AI 使用边界，孵化极致 AI 用法，反哺公司级 Skill 市场</div>
+                <div class="osh-tracks">
+                  <span class="osh-track-item">👤 负责人 @周祥</span>
+                  <span class="osh-track-item">🔥 100+ 布道师已招募</span>
+                  <span class="osh-track-item">🏆 Skill大赛 · 5月正式启动</span>
+                </div>
+              </div>
             </div>
-            <div class="sc-card">
-              <div class="sc-icon">🧑‍🤝‍🧑</div>
-              <div class="sc-title">AI-Native 团队</div>
-              <div class="sc-desc">团队已将 AI 工具全面融入日常工作流，效率提升显著，愿意分享团队实践经验与 SOP</div>
-              <div class="sc-status">征集中</div>
+
+            <div class="super-collect-banner">
+              <div class="scb-icon">🌱</div>
+              <div class="scb-body">
+                <div class="scb-title">正在征集中 · 你就是下一个 AI 超级个体</div>
+                <div class="scb-desc">无论你是用 AI 干掉了繁琐流程、还是训练出了一个专属你的 AI 搭档，都欢迎来分享你的故事。</div>
+                <div class="scb-tags">
+                  <span class="scb-tag scb-tag-a">🏆 AI 超级个体</span>
+                  <span class="scb-tag scb-tag-b">🔥 AI-Native 团队</span>
+                  <span class="scb-tag scb-tag-c">🛠️ 高价值 Skill 创造者</span>
+                </div>
+              </div>
+              <a class="scb-cta" href="https://myflicker.kuaishou.com/nominate" target="_blank">👉 立即申报</a>
             </div>
-            <div class="sc-card">
-              <div class="sc-icon">🛠️</div>
-              <div class="sc-title">高价值 Skill 创造者</div>
-              <div class="sc-desc">开发了团队/个人级 Skill 并在组内落地，经评审后可晋升为公司级官方 Skill，获得官方认证与激励</div>
-              <div class="sc-status">征集中</div>
+
+            <!-- 四大入选标准 -->
+            <div class="super-criteria">
+              <div class="sc-card">
+                <div class="sc-icon">⚡</div>
+                <div class="sc-title">AI 超级个体</div>
+                <div class="sc-desc">个人通过 AI 工具使工作效率提升 2x+ 以上，或创造了可复用、可分享的高价值 AI 使用方法</div>
+                <div class="sc-status">征集中</div>
+              </div>
+              <div class="sc-card">
+                <div class="sc-icon">🧑‍🤝‍🧑</div>
+                <div class="sc-title">AI-Native 团队</div>
+                <div class="sc-desc">团队已将 AI 工具全面融入日常工作流，效率提升显著，愿意分享团队实践经验与 SOP</div>
+                <div class="sc-status">征集中</div>
+              </div>
+              <div class="sc-card">
+                <div class="sc-icon">🛠️</div>
+                <div class="sc-title">高价值 Skill 创造者</div>
+                <div class="sc-desc">开发了团队/个人级 Skill 并在组内落地，经评审后可晋升为公司级官方 Skill，获得官方认证与激励</div>
+                <div class="sc-status">征集中</div>
+              </div>
+              <div class="sc-card">
+                <div class="sc-icon">📖</div>
+                <div class="sc-title">实践案例贡献者</div>
+                <div class="sc-desc">有完整的 AI 实践案例（背景、方法、效果），愿意在公司级 AI 知识库中沉淀与分享</div>
+                <div class="sc-status">征集中</div>
+              </div>
             </div>
-            <div class="sc-card">
-              <div class="sc-icon">📖</div>
-              <div class="sc-title">实践案例贡献者</div>
-              <div class="sc-desc">有完整的 AI 实践案例（背景、方法、效果），愿意在公司级 AI 知识库中沉淀与分享</div>
-              <div class="sc-status">征集中</div>
+
+            <div class="super-footer-note">
+              📌 入选后将获得：官方认证荣誉 · 公司级 Skill 晋升通道 · Showcase 分享机会 · AI 生产力战役官方背书<br/>
+              如有意向，联系 PMO 张佳丽 或 在 MyFlicker 内搜索「AI超级个体申报」
             </div>
           </div>
 
-          <div class="super-footer-note">
-            📌 入选后将获得：官方认证荣誉 · 公司级 Skill 晋升通道 · Showcase 分享机会 · AI 生产力战役官方背书<br/>
-            如有意向，联系 PMO 张佳丽 或 在 MyFlicker 内搜索「AI超级个体申报」
-          </div>
         </div>
       </section>
 
-      <!-- ③ AI 普惠：用 AI 提升快手员工工作体验 -->
-      <section class="section">
+      <!-- ══════════════════════════════════════════════════════
+           大区域 2：AI 普惠
+           ════════════════════════════════════════════════════ -->
+      <section class="section section-bg-gray ai-inclusion-section">
         <div class="section-inner">
-          <div class="practice-type-banner practice-type-inclusion">
-            <div class="ptb-label">AI 普惠</div>
-            <div class="ptb-name">用 AI 提升快手员工工作体验</div>
-            <div class="ptb-desc">每月聚焦一个领域，将 AI 能力注入员工日常工作场景，让每一位快手员工都能切实感受到 AI 带来的效率提升与体验改善</div>
+
+          <!-- 大区域 Header -->
+          <div class="big-domain-banner big-domain-inclusion">
+            <div class="bdb-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>
+            </div>
+            <div class="bdb-body">
+              <div class="bdb-title">AI 普惠</div>
+              <div class="bdb-desc">用 AI 提升快手员工工作体验——每月聚焦一个领域，将 AI 能力注入员工日常工作场景，让每一位快手员工都能切实感受到效率提升与体验改善</div>
+              <div class="bdb-owners">负责人 @高海漩 &nbsp;|&nbsp; 协作 @罗森</div>
+            </div>
+            <div class="bdb-stats">
+              <div class="bdb-stat"><span class="bdb-num">每月</span><span class="bdb-label">1 个领域</span></div>
+              <div class="bdb-stat"><span class="bdb-num">全员</span><span class="bdb-label">零门槛</span></div>
+              <div class="bdb-stat"><span class="bdb-num">4.20</span><span class="bdb-label">第一期活动</span></div>
+            </div>
           </div>
 
-          <div class="section-label" style="margin-top:0">📅 每月一个领域·AI 化路线图</div>
-          <p class="section-desc">
+          <p class="section-desc" style="margin-top:20px">
             从高频、强感知的工作场景入手，按月滚动推进 AI 普惠——先让每个人在最日常的场景里感受到 AI 的价值，再逐步扩展到全岗位、全流程
           </p>
 
@@ -3530,8 +3983,10 @@ window.PIONEER_DATA = {
               </div>
             </div>
           </div>
+
         </div>
       </section>
+
       ${caseModal}
     `;
 
