@@ -45,9 +45,7 @@ def _load_dotenv():
                 line = line.strip()
                 if line and not line.startswith("#") and "=" in line:
                     key, _, val = line.partition("=")
-                    parsed = val.strip()
-                    if len(parsed) >= 2 and ((parsed[0] == '"' and parsed[-1] == '"') or (parsed[0] == "'" and parsed[-1] == "'")):
-                        parsed = parsed[1:-1]
+                    parsed = val.strip().strip('"').strip("'")
                     os.environ.setdefault(key.strip(), parsed)
 
 
