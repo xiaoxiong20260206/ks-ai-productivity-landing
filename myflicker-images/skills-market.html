@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skills 市场</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #f0f9ff 100%);
+      min-height: 100vh;
+      padding: 40px 60px;
+    }
+    
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .title {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1e293b;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    
+    .subtitle {
+      font-size: 16px;
+      color: #64748b;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    
+    .analogy {
+      background: white;
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 40px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+      border: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    
+    .analogy-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #dbeafe, #ede9fe);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      flex-shrink: 0;
+    }
+    
+    .analogy-content {
+      flex: 1;
+    }
+    
+    .analogy-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 8px;
+    }
+    
+    .analogy-desc {
+      font-size: 14px;
+      color: #64748b;
+      line-height: 1.7;
+    }
+    
+    .steps {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    
+    .step {
+      flex: 1;
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      border: 1px solid #e2e8f0;
+      position: relative;
+    }
+    
+    .step-number {
+      position: absolute;
+      top: -12px;
+      left: 24px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 600;
+      color: white;
+    }
+    
+    .step:nth-child(1) .step-number { background: #2563eb; }
+    .step:nth-child(2) .step-number { background: #16a34a; }
+    .step:nth-child(3) .step-number { background: #7c3aed; }
+    .step:nth-child(4) .step-number { background: #d97706; }
+    
+    .step-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 8px;
+      margin-top: 12px;
+    }
+    
+    .step-desc {
+      font-size: 13px;
+      color: #64748b;
+      line-height: 1.6;
+    }
+    
+    .quality-badge {
+      background: linear-gradient(135deg, #dcfce7, #d1fae5);
+      border: 1px solid #16a34a;
+      border-radius: 12px;
+      padding: 16px 24px;
+      margin-top: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    
+    .quality-icon {
+      font-size: 24px;
+    }
+    
+    .quality-text {
+      font-size: 14px;
+      color: #15803d;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">Skills 市场：AI 的夜校</h1>
+    <p class="subtitle">白天一起干活，晚上回来上课，第二天技能又多了</p>
+    
+    <div class="analogy">
+      <div class="analogy-icon">📚</div>
+      <div class="analogy-content">
+        <div class="analogy-title">一个白天打工、晚上上课的伙伴</div>
+        <div class="analogy-desc">
+          白天，我们一起整理会议纪要、自动拉数据、搞定行政审批。<br>
+          晚上，我去"夜校"——从 Skills 市场里学一个新的班车查询 Skill，学一个 KwaiBI 数据取数 Skill，学完立刻装进身体，明天就能和你一起用。<br>
+          更妙的是：这所夜校里，每个人既是学生，也是老师。你积累的经验，会被整理成新课程，供更多人受益。
+        </div>
+      </div>
+    </div>
+    
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-title">场景梳理</div>
+        <div class="step-desc">业务方按标准范式开发 Skill</div>
+      </div>
+      
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-title">质量验证</div>
+        <div class="step-desc">沙盒测试 → 安全合规扫描 → 上线前评测</div>
+      </div>
+      
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-title">灰度发布</div>
+        <div class="step-desc">通过审核 → 小流量灰度 → 稳定后全量上线</div>
+      </div>
+      
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-title">持续迭代</div>
+        <div class="step-desc">实时监控调用质量，发现问题持续优化</div>
+      </div>
+    </div>
+    
+    <div class="quality-badge">
+      <span class="quality-icon">✓</span>
+      <span class="quality-text">门很严，但进来的课，质量都有保障</span>
+    </div>
+  </div>
+</body>
+</html>

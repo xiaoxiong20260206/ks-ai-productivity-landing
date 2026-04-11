@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 """
-快手AI生产力战役 - 周报 MixCard 发送脚本 v2.0.0
+快手AI生产力战役 - 周报 MixCard 发送脚本 v2.1.0
 技能: sl-ai-productivity v2.1.0
 
 变更说明:
+  v2.1.0 (2026-04-11) - 安全 & 架构修复：
+    - P0: 凭证移出硬编码，改为从环境变量读取（或 .env 文件）
+    - P1: build_weekly_card() 改为从 templates/weekly_card_template.json 加载，
+          模板文件是唯一事实来源，直接编辑 JSON 即可更新卡片内容
   v2.0.0 (2026-04-11) - 卡片完全重构：
     - 标题含周期，无冗余"权威口径"行
     - 绿灯状态统一收敛到"📊 整体态势"
@@ -16,6 +20,10 @@
   python3 send_weekly_card.py --preview  # 私发 shenlang 预览
   python3 send_weekly_card.py --send     # 推送到2个目标群
   python3 send_weekly_card.py --dry-run  # 只打印卡片内容，不发送
+
+环境变量（必须设置，或在仓库根目录放 .env 文件）:
+  MF_APP_KEY    - MyFlicker 应用 Key
+  MF_SECRET_KEY - MyFlicker 应用 Secret
 """
 import asyncio
 import json
@@ -27,11 +35,47 @@ from pathlib import Path
 import httpx
 
 # ============================================================
-# MyFlicker 凭证（群机器人已接入目标群）
+# 凭证与环境变量处理
 # ============================================================
-MF_APP_KEY    = "d6024d1f-e99c-44d7-906f-0c63b558a573"
-MF_SECRET_KEY = "openApp0f2131b2400470b75077b8819"
-GATEWAY_URL   = "https://is-gateway.corp.kuaishou.com"
+def _load_dotenv():
+    env_file = Path(__file__).resolve().parent.parent / ".env"
+    if env_file.exists():
+        with open(env_file, encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith("#") and "=" in line:
+                    key, _, val = line.partition("=")
+                    parsed = val.strip()
+                    if len(parsed) >= 2 and ((parsed[0] == '"' and parsed[-1] == '"') or (parsed[0] == "'" and parsed[-1] == "'")):
+                        parsed = parsed[1:-1]
+                    os.environ.setdefault(key.strip(), parsed)
+
+
+def get_runtime_config(require_credentials: bool = True) -> tuple[str, str, str]:
+    """
+    加载 .env 并返回运行时配置。
+
+    - require_credentials=True: 要求 MF_APP_KEY/MF_SECRET_KEY 必须存在
+    - require_credentials=False: 允许无凭证（用于 --dry-run / import / 测试）
+    """
+    _load_dotenv()
+
+    app_key = os.environ.get("MF_APP_KEY", "")
+    secret_key = os.environ.get("MF_SECRET_KEY", "")
+    gateway_url = os.environ.get("MF_GATEWAY_URL", "https://is-gateway.corp.kuaishou.com")
+
+    if require_credentials and (not app_key or not secret_key):
+        print("❌ 错误: MF_APP_KEY 和 MF_SECRET_KEY 环境变量未设置。")
+        print("   请复制 .env.example 为 .env 并填入实际凭证，或通过系统环境变量注入。")
+        sys.exit(1)
+
+    return app_key, secret_key, gateway_url
+
+
+# 运行时配置（在 main 中加载）
+MF_APP_KEY = ""
+MF_SECRET_KEY = ""
+GATEWAY_URL = "https://is-gateway.corp.kuaishou.com"
 
 PREVIEW_USERNAME = "shenlang"
 
@@ -40,11 +84,12 @@ TARGET_GROUPS = [
     {"groupId": "6723053031035975", "groupName": "【AI生产力】指挥部"},     # 3人
 ]
 
-# 日志路径（相对于本脚本位置的仓库根目录）
+# 模板文件路径（single source of truth）
+TEMPLATE_FILE = Path(__file__).resolve().parent.parent / "templates" / "weekly_card_template.json"
+
+# 日志路径
 LOG_FILE = Path(__file__).resolve().parent.parent / "logs" / "preview_send_log.jsonl"
 
-# OnePage 链接（权威案例入口）
-ONEPAGE_URL = "https://docs.corp.kuaishou.com/k/home/VIk71GqLpA8M/fcABzhPO1WwkNAClTVc5DIhEO"
 
 # ============================================================
 # Token 获取
@@ -63,207 +108,29 @@ async def get_mf_token() -> str:
 
 
 # ============================================================
-# 卡片构建（v2.0.0 — 视觉重构版）
+# 卡片构建 — 从模板文件加载（templates/weekly_card_template.json 是唯一内容来源）
 # ============================================================
 def build_weekly_card() -> dict:
     """
-    构建周报 MixCard v2.0.0。
-    设计原则:
-      - 标题行直接含时间范围，不再有独立"日期行"
-      - 无冗余"权威口径/预览稿"行
-      - 所有整体状态收敛到「📊 整体态势」区块
-      - AI普惠与其他模块格式一致（无序列表）
-      - OnePage 入口为卡片底部 action button
-      - 解读章节名称: 本周战役解读
+    从 templates/weekly_card_template.json 加载卡片结构，
+    并注入运行时所需的 appKey / updateMulti 字段。
+
+    要修改卡片内容时，只需编辑 JSON 模板文件，无需改动本脚本。
     """
-    return {
-        "config": {"forward": True, "forwardType": 2, "wideSelfAdaptive": True},
-        "appKey": MF_APP_KEY,
+    if not TEMPLATE_FILE.exists():
+        raise FileNotFoundError(f"卡片模板文件不存在: {TEMPLATE_FILE}")
+
+    with open(TEMPLATE_FILE, encoding="utf-8") as f:
+        tpl = json.load(f)
+
+    # 从模板中提取 config + blocks（忽略 _meta 元数据）
+    card = {
+        "config": tpl["config"],
+        "appKey": MF_APP_KEY,          # 注入运行时凭证（不存入模板）
         "updateMulti": 1,
-        "blocks": [
-
-            # ── 标题（含时间范围） ──────────────────────────────
-            {
-                "blockId": "title",
-                "type": "content",
-                "text": {"type": "kimMd", "content": "# 🚀 快手AI生产力战役 · 周报（4.6 - 4.10）"}
-            },
-            {"blockId": "d0", "type": "divider"},
-
-            # ── 整体态势（整体状态集中在此） ───────────────────
-            {
-                "blockId": "overview",
-                "type": "content",
-                "text": {
-                    "type": "kimMd",
-                    "content": (
-                        "**📊 整体态势**\n"
-                        "本周战役整体保持绿灯推进，重心已从单点能力交付，"
-                        "切换到「两类形态启动内测 → 版本合一正式发布 → AI普惠活动落地」的连续节奏。"
-                    )
-                }
-            },
-            {"blockId": "d1", "type": "divider"},
-
-            # ── 业务推广 ──────────────────────────────────────
-            {
-                "blockId": "biz_title",
-                "type": "content",
-                "text": {"type": "kimMd", "content": "**🏢 业务推广**"}
-            },
-            {
-                "blockId": "biz_content",
-                "type": "content",
-                "text": {
-                    "type": "kimMd",
-                    "content": (
-                        "**AI转型**\n"
-                        "- 技术通道完成4象限模型，Q2目标从30支先锋队扩展到50+，并沉淀Top5标杆实践\n"
-                        "- 非技术通道启动产品讨论与AIBP方案设计\n"
-                        "- 职能通道明确HR/行政/财务等Skill接入路径\n"
-                        "- 涌现通道已招募100+布道师，5月启动Skill大赛\n\n"
-                        "**AI普惠**\n"
-                        "- 行政领域首期活动需求澄清完成，人员分工与排期已确认\n"
-                        "- 4.20落地第一期全员体验活动：行政AI化"
-                    )
-                }
-            },
-            {"blockId": "d2", "type": "divider"},
-
-            # ── 产品建设 ──────────────────────────────────────
-            {
-                "blockId": "prod_title",
-                "type": "content",
-                "text": {"type": "kimMd", "content": "**📱 产品建设（MyFlicker + AgentOS）**"}
-            },
-            {
-                "blockId": "prod_content",
-                "type": "content",
-                "text": {
-                    "type": "kimMd",
-                    "content": (
-                        "- 0403内测版正常交付，整体进度符合预期\n"
-                        "- 0412节点：CodeFlicker V1.1 + MyFlicker V0.1 两个形态同步启动内测\n"
-                        "- 0420节点：版本合一，正式发布 MyFlicker 1.0"
-                        "（全形态：客户端/云/KIM；全场景：Code + Work）\n"
-                        "- 4月内统一合并为服务全员的 MyFlicker 单一版本（端+云）"
-                    )
-                }
-            },
-            {"blockId": "d3", "type": "divider"},
-
-            # ── 技术专项（双列） ─────────────────────────────
-            {
-                "blockId": "tech_title",
-                "type": "content",
-                "text": {"type": "kimMd", "content": "**⚙️ 技术专项**"}
-            },
-            {
-                "blockId": "tech_fields1",
-                "type": "section",
-                "fields": [
-                    {"text": {"type": "kimMd", "content": (
-                        "**技能生态**\n"
-                        "- 基础能力建设拉齐60%，可用性评测完成70%\n"
-                        "- SSO标准基建完成，开发规范发布\n"
-                        "- 0412预计20+精品Skill、40+通用Skill"
-                    )}},
-                    {"text": {"type": "kimMd", "content": (
-                        "**模型服务**\n"
-                        "- Auto分类器一版完成，整体开发进度60%\n"
-                        "- Claude/Kimi Auto provider 在建"
-                    )}}
-                ]
-            },
-            {
-                "blockId": "tech_fields2",
-                "type": "section",
-                "fields": [
-                    {"text": {"type": "kimMd", "content": (
-                        "**自进化**\n"
-                        "- 10个核心Skill建设完成\n"
-                        "- 记忆进化、定时复盘、知识库、引导Skill均已交付"
-                    )}},
-                    {"text": {"type": "kimMd", "content": (
-                        "**高可用**\n"
-                        "- 推进0412机器资源筹备\n"
-                        "- KFS独立集群方案推进\n"
-                        "- 用户目录规则统一完成"
-                    )}}
-                ]
-            },
-            {
-                "blockId": "tech_fields3",
-                "type": "section",
-                "fields": [
-                    {"text": {"type": "kimMd", "content": (
-                        "**安全建设**\n"
-                        "- 审计日志建设完成，泄露风险已加固\n"
-                        "- AP认证方案0403上线\n"
-                        "- 目录隔离/非root权限完成"
-                    )}},
-                    {"text": {"type": "kimMd", "content": (
-                        "**项目经营**\n"
-                        "- 已输出AI经营分析框架\n"
-                        "- Token额度对标进展持续跟进中"
-                    )}}
-                ]
-            },
-            {"blockId": "d4", "type": "divider"},
-
-            # ── 近期关键里程碑 ────────────────────────────────
-            {
-                "blockId": "milestone",
-                "type": "content",
-                "text": {
-                    "type": "kimMd",
-                    "content": (
-                        "**🏁 近期关键里程碑**\n"
-                        "- 📌 **4.12** — CodeFlicker V1.1 / MyFlicker V0.1，2个形态启动内测\n"
-                        "- 📌 **4.20** — 版本合一，正式发布MyFlicker1.0"
-                        "（全形态：客户端/云/KIM；全场景：Code + Work）；"
-                        "AI普惠第一期全员体验（行政AI化）\n"
-                        "- 📌 **4.30** — 模型服务三期交付 + 安全需求上线"
-                    )
-                }
-            },
-            {"blockId": "d5", "type": "divider"},
-
-            # ── 本周战役解读 ──────────────────────────────────
-            {
-                "blockId": "insight",
-                "type": "content",
-                "text": {
-                    "type": "kimMd",
-                    "content": (
-                        "**🧭 本周战役解读**\n\n"
-                        "本周一个明显变化是：子项目划分更清晰了——AI转型、AI普惠、产品建设、"
-                        "技能生态、技术专项、项目经营，6条线各司其职，责任更明确。"
-                        "更多团队正在从「观察者」变成「建设者」，"
-                        "在公司级AI基础设施中承担实质性工作。\n\n"
-                        "力出一孔的效果开始显现：过去分散在各团队的AI探索，"
-                        "正在逐步收敛到统一的平台和Skill体系上，"
-                        "每个人的工作都在直接对齐4.20的最终交付。\n\n"
-                        "整体进度加速推进中，4.12是技术验证的节点，4.20是面向全员的第一次真正亮相。"
-                    )
-                }
-            },
-            {"blockId": "d6", "type": "divider"},
-
-            # ── OnePage 权威入口（底部按钮） ──────────────────
-            {
-                "blockId": "onepage_btn",
-                "type": "action",
-                "actions": [
-                    {
-                        "type": "button",
-                        "text": {"type": "plainText", "content": "📖 了解快手AI生产力战役"},
-                        "url": ONEPAGE_URL
-                    }
-                ]
-            }
-        ]
+        "blocks": tpl["blocks"],
     }
+    return card
 
 
 # ============================================================
@@ -280,7 +147,7 @@ async def send_preview(token: str, card: dict) -> dict:
         return resp.json()
 
 
-async def send_to_groups(token: str, card: dict) -> list[dict]:
+async def send_to_groups(token: str, card: dict) -> list:
     """推送到2个目标群，群间间隔2.5s，返回每个群的结果列表"""
     results = []
     for g in TARGET_GROUPS:
@@ -329,7 +196,14 @@ def write_log(mode: str, target: str, result: dict) -> None:
 # 主入口
 # ============================================================
 async def main():
+    global MF_APP_KEY, MF_SECRET_KEY, GATEWAY_URL
+
     mode = sys.argv[1] if len(sys.argv) > 1 else "--preview"
+
+    if mode == "--dry-run":
+        MF_APP_KEY, MF_SECRET_KEY, GATEWAY_URL = get_runtime_config(require_credentials=False)
+    else:
+        MF_APP_KEY, MF_SECRET_KEY, GATEWAY_URL = get_runtime_config(require_credentials=True)
 
     card = build_weekly_card()
 
