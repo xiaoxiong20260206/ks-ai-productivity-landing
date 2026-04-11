@@ -1524,26 +1524,44 @@ button { cursor: pointer; font-family: var(--font); }
 }
 
 /* ────────────────────────────────────────────────────────
-   AI 普惠：月度领域路线图时间线
+   AI 普惠：月度领域路线图时间线（横向版）
 ──────────────────────────────────────────────────────── */
 .inclusion-timeline {
   display: flex;
-  flex-direction: column;
+  align-items: stretch;
   gap: 0;
   margin-bottom: 28px;
+  overflow-x: auto;
+  padding: 6px 4px 14px;
+  scroll-snap-type: x proximity;
+}
+
+.inclusion-timeline::-webkit-scrollbar {
+  height: 8px;
+}
+.inclusion-timeline::-webkit-scrollbar-track {
+  background: #e2e8f0;
+  border-radius: 999px;
+}
+.inclusion-timeline::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #10b981 0%, #94a3b8 100%);
+  border-radius: 999px;
 }
 
 .itl-item {
   display: flex;
   align-items: flex-start;
-  gap: 0;
+  gap: 14px;
   position: relative;
+  min-width: 320px;
+  flex: 0 0 320px;
+  scroll-snap-align: start;
 }
 
 .itl-dot {
   flex-shrink: 0;
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   background: #e2e8f0;
   border: 2px solid #cbd5e1;
@@ -1553,9 +1571,8 @@ button { cursor: pointer; font-family: var(--font); }
   font-size: 11px;
   font-weight: 900;
   color: var(--text-muted);
-  z-index: 1;
+  z-index: 2;
   margin-top: 18px;
-  margin-right: 16px;
 }
 
 .itl-done .itl-dot {
@@ -1567,12 +1584,14 @@ button { cursor: pointer; font-family: var(--font); }
 
 .itl-connector {
   position: absolute;
-  left: 17px;
-  top: 54px;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(180deg, #10b981 0%, #e2e8f0 100%);
+  left: 38px;
+  right: -14px;
+  top: 36px;
+  height: 2px;
+  background: linear-gradient(90deg, #10b981 0%, #e2e8f0 100%);
+  z-index: 1;
 }
+
 .itl-connector-last {
   display: none;
 }
@@ -1580,16 +1599,16 @@ button { cursor: pointer; font-family: var(--font); }
 
 .itl-card {
   flex: 1;
+  min-width: 0;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 18px 20px;
-  margin-bottom: 12px;
   box-shadow: var(--shadow-sm);
   transition: all 0.3s var(--ease-out);
 }
 .itl-card:hover {
-  transform: translateX(4px);
+  transform: translateY(-4px);
   box-shadow: var(--shadow-md);
 }
 
@@ -1599,7 +1618,7 @@ button { cursor: pointer; font-family: var(--font); }
 }
 
 .itl-card-planned {
-  opacity: 0.8;
+  opacity: 0.88;
   border-style: dashed;
 }
 
@@ -1618,10 +1637,11 @@ button { cursor: pointer; font-family: var(--font); }
   align-items: center;
   gap: 8px;
   margin-bottom: 10px;
+  flex-wrap: wrap;
 }
 
 .itl-domain-icon { font-size: 22px; flex-shrink: 0; }
-.itl-domain-name { font-size: 17px; font-weight: 900; color: var(--text-primary); flex: 1; }
+.itl-domain-name { font-size: 17px; font-weight: 900; color: var(--text-primary); flex: 1; min-width: 120px; }
 
 .itl-status {
   font-size: 11px;
@@ -1702,6 +1722,10 @@ button { cursor: pointer; font-family: var(--font); }
 @media (max-width: 768px) {
   .inclusion-goal-banner { flex-direction: column; align-items: flex-start; }
   .igb-stats { width: 100%; justify-content: space-around; }
+  .itl-item {
+    min-width: 280px;
+    flex-basis: 280px;
+  }
   .itl-card:hover { transform: none; }
 }
 
@@ -2019,8 +2043,508 @@ button { cursor: pointer; font-family: var(--font); }
 .pgn-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
 .pgn-arrow { font-size: 20px; color: #7c3aed; flex-shrink: 0; font-weight: 300; }
 
-/* ===== AgentOS Spotlight ===== */
-.agentos-spotlight {
+/* ===== AgentOS v3 完整架构图 ===== */
+.agentos2-wrap {
+  margin-top: 28px;
+  padding: 32px 32px 28px;
+  border-radius: 24px;
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(99,102,241,0.18) 0%, transparent 42%),
+    radial-gradient(ellipse at 80% 100%, rgba(59,130,246,0.12) 0%, transparent 38%),
+    linear-gradient(160deg, #0a0f1e 0%, #0f1832 55%, #0e1628 100%);
+  border: 1px solid rgba(99,102,241,0.26);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.06);
+  color: #fff;
+}
+.agentos2-header {
+  margin-bottom: 24px;
+}
+.agentos2-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: rgba(129,140,248,0.14);
+  border: 1px solid rgba(165,180,252,0.22);
+  color: #c7d2fe;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.agentos2-title {
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  max-width: 900px;
+}
+.agentos2-subtitle {
+  font-size: 13px;
+  color: rgba(255,255,255,0.56);
+  line-height: 1.6;
+}
+
+/* 整体图容器 */
+.agentos2-diagram {
+  display: grid;
+  grid-template-rows: auto auto auto auto auto auto auto;
+  gap: 0;
+}
+
+/* ---- 接入层：顶部双入口 ---- */
+.agentos2-row-entry {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto minmax(0,1fr);
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 0;
+}
+.agentos2-entry-block {
+  padding: 18px 20px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.agentos2-entry-cf {
+  background: rgba(99,102,241,0.12);
+  border-color: rgba(165,180,252,0.28);
+}
+.agentos2-entry-mf {
+  background: rgba(59,130,246,0.1);
+  border-color: rgba(147,197,253,0.22);
+}
+.agentos2-entry-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.agentos2-entry-tag {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #bfdbfe;
+  background: rgba(255,255,255,0.1);
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.14);
+}
+.agentos2-entry-name {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+.agentos2-entry-channels {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.agentos2-channel {
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.12);
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.88);
+}
+.agentos2-entry-sub {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+}
+
+/* 中间流向箭头 */
+.agentos2-entry-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  min-width: 180px;
+}
+.agentos2-arrow-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #c7d2fe;
+  text-align: center;
+  line-height: 1.4;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, rgba(99,102,241,0.16), rgba(59,130,246,0.12));
+  border: 1px dashed rgba(199,210,254,0.3);
+}
+.agentos2-arrow-line {
+  width: 2px;
+  height: 18px;
+  background: linear-gradient(180deg, rgba(199,210,254,0.4), rgba(99,102,241,0.2));
+}
+
+/* ---- 连线行 ---- */
+.agentos2-connector-row {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  height: 24px;
+  align-items: center;
+  margin: 4px 0;
+}
+.agentos2-vline {
+  width: 2px;
+  height: 100%;
+  background: rgba(99,102,241,0.28);
+  margin: 0 auto;
+}
+.agentos2-hbridge {
+  width: 1px;
+  background: rgba(99,102,241,0.2);
+  height: 100%;
+}
+
+/* ---- Gateway 接入层 ---- */
+.agentos2-gateway-row {
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(99,102,241,0.08);
+  border: 1px solid rgba(129,140,248,0.2);
+  margin: 0 0 0 0;
+}
+.agentos2-gateway-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: #a5b4fc;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.agentos2-gateway-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.agentos2-gchip {
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #c7d2fe;
+  background: rgba(99,102,241,0.12);
+  border: 1px solid rgba(165,180,252,0.2);
+}
+
+/* 向下箭头 */
+.agentos2-down-arrow-row {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0 4px;
+}
+.agentos2-down-arrow {
+  font-size: 20px;
+  color: rgba(165,180,252,0.5);
+  line-height: 1;
+}
+
+/* ---- 中部：AgentOS 核心 + Sec&Ops ---- */
+.agentos2-row-core {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 200px;
+  gap: 16px;
+  align-items: stretch;
+}
+
+/* AgentOS 核心盒子 */
+.agentos2-core-box {
+  padding: 22px;
+  border-radius: 20px;
+  background: linear-gradient(160deg, rgba(99,102,241,0.14) 0%, rgba(15,23,42,0.3) 100%);
+  border: 1.5px solid rgba(129,140,248,0.3);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 8px 24px rgba(0,0,0,0.16);
+}
+.agentos2-core-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.agentos2-core-badge {
+  font-size: 10px;
+  font-weight: 800;
+  color: #a5b4fc;
+  background: rgba(99,102,241,0.18);
+  border: 1px solid rgba(165,180,252,0.28);
+  padding: 4px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.agentos2-core-name {
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  background: linear-gradient(90deg, #fff 0%, #c7d2fe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.agentos2-core-modules {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 12px;
+}
+.agentos2-module {
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: border-color 0.2s;
+}
+.agentos2-module:last-child {
+  grid-column: 1 / -1;
+}
+.agentos2-module-cloud { border-left: 3px solid #818cf8; }
+.agentos2-module-edge  { border-left: 3px solid #38bdf8; }
+.agentos2-module-model { border-left: 3px solid #f472b6; }
+.agentos2-module-memory{ border-left: 3px solid #34d399; }
+.agentos2-module-evo   { border-left: 3px solid #fb923c; }
+.agentos2-mod-name {
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 5px;
+  color: #f1f5f9;
+}
+.agentos2-mod-desc {
+  font-size: 12px;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.58);
+}
+
+/* Sec&Ops 盒子 */
+.agentos2-secops-box {
+  padding: 18px;
+  border-radius: 20px;
+  background: rgba(248,250,252,0.95);
+  border: 1px solid rgba(203,213,225,0.8);
+  color: #0f172a;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+.agentos2-secops-title {
+  font-size: 13px;
+  font-weight: 900;
+  color: #1e40af;
+  letter-spacing: 0.06em;
+  margin-bottom: 14px;
+  padding: 6px 10px;
+  background: #eff6ff;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid #bfdbfe;
+}
+.agentos2-secops-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+}
+.agentos2-sec-item {
+  padding: 12px 10px;
+  flex: 1;
+}
+.agentos2-sec-name {
+  font-size: 13px;
+  font-weight: 800;
+  color: #1e3a5f;
+  margin-bottom: 4px;
+}
+.agentos2-sec-detail {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #64748b;
+}
+.agentos2-sec-divider {
+  height: 1px;
+  background: #e2e8f0;
+  margin: 0 10px;
+}
+
+/* ---- 双向箭头行（AgentOS ↔ Skills 市场） ---- */
+.agentos2-bidirect-row {
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+}
+.agentos2-bidirect-line {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 20px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.04);
+  border: 1px dashed rgba(255,255,255,0.14);
+}
+.agentos2-bidirect-arrows {
+  font-size: 20px;
+  color: #818cf8;
+  font-weight: 300;
+}
+.agentos2-bidirect-label-l,
+.agentos2-bidirect-label-r {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.52);
+}
+
+/* ---- 公司级 Skills 市场 ---- */
+.agentos2-skills-box {
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(248,250,252,0.97);
+  border: 1.5px solid rgba(203,213,225,0.9);
+  color: #0f172a;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+.agentos2-skills-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.agentos2-skills-badge {
+  font-size: 10px;
+  font-weight: 800;
+  color: #1d4ed8;
+  background: #dbeafe;
+  border: 1px solid #bfdbfe;
+  padding: 3px 8px;
+  border-radius: 999px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.agentos2-skills-name {
+  font-size: 18px;
+  font-weight: 900;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+.agentos2-skills-body {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 12px;
+}
+.agentos2-skills-col {
+  padding: 14px;
+  border-radius: 14px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+.agentos2-skills-col-wide {
+  /* normal width, grid handles it */
+}
+.agentos2-skills-col-title {
+  font-size: 11px;
+  font-weight: 800;
+  color: #1e40af;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1.5px solid #dbeafe;
+}
+.agentos2-skills-col-items {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.agentos2-skill-chip {
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1e3a5f;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  text-align: center;
+}
+.agentos2-skills-domain-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 6px;
+}
+.agentos2-domain-chip {
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #1e3a5f;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  text-align: center;
+}
+.agentos2-domain-sys {
+  background: #f5f3ff;
+  border-color: #ddd6fe;
+  color: #4c1d95;
+}
+
+/* ---- 底部基础设施 ---- */
+.agentos2-infra-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  padding: 16px 0 4px;
+  flex-wrap: wrap;
+}
+.agentos2-infra-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 20px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  min-width: 140px;
+  text-align: center;
+}
+.agentos2-infra-icon {
+  font-size: 24px;
+  opacity: 0.7;
+}
+.agentos2-infra-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
+}
+.agentos2-infra-desc {
+  font-size: 11px;
+  color: rgba(255,255,255,0.44);
+}
+
+/* ---- 响应式 ---- */
+@media (max-width: 1100px) {
+  .agentos2-row-entry { grid-template-columns: 1fr; gap: 12px; }
+  .agentos2-entry-arrow { flex-direction: row; min-width: unset; }
+  .agentos2-connector-row { display: none; }
+  .agentos2-row-core { grid-template-columns: 1fr; }
+  .agentos2-skills-body { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 768px) {
+  .agentos2-wrap { padding: 20px 16px; }
+  .agentos2-title { font-size: 20px; }
+  .agentos2-core-modules { grid-template-columns: 1fr; }
+  .agentos2-module:last-child { grid-column: unset; }
+  .agentos2-skills-body { grid-template-columns: 1fr; }
+  .agentos2-gateway-chips { flex-direction: column; }
+  .agentos2-bidirect-line { flex-direction: column; text-align: center; gap: 8px; }
+  .agentos2-infra-row { flex-direction: column; align-items: center; }
+}
+
+
   margin-top: 22px;
   padding: 28px;
   border-radius: 20px;
@@ -2676,54 +3200,54 @@ button { cursor: pointer; font-family: var(--font); }
     <section class="section section-entry">
       <div class="section-inner">
         <div class="section-label"><svg class="sec-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg> 找到你的 AI 生产力起点</div>
-        <h2 class="section-title">你是谁？从这里开始</h2>
-        <p class="section-desc">无论你是研发、产品、运营还是行政，AI 工作伙伴都有适合你的方式</p>
+        <h2 class="section-title">你是谁，就从哪一步开始</h2>
+        <p class="section-desc">这场战役不是先讲概念，而是先把每个人都接进来：先用起来，再逐步走向团队协同和组织升级。</p>
         <div class="entry-grid">
           <div class="entry-card entry-card-blue">
             <div class="entry-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
             <div class="entry-title">研发工程师</div>
             <div class="entry-primary">
-              <span class="entry-badge">首选</span>体验快手AI员工（MyFlicker）
+              <span class="entry-badge">首选</span>进入 AI 工作伙伴体验
             </div>
             <div class="entry-extends">
-              <span class="ext-tag">CodeFlicker 编程加速</span>
-              <span class="ext-tag">参与 Skill 建设</span>
+              <span class="ext-tag">CodeFlicker 能力延续到 MyFlicker</span>
+              <span class="ext-tag">研发场景已验证效率提升</span>
             </div>
-            <button class="entry-btn" onclick="switchTab('product')">立即体验 →</button>
+            <button class="entry-btn" onclick="switchTab('product')">查看 AI 工作伙伴 →</button>
           </div>
           <div class="entry-card entry-card-purple">
             <div class="entry-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
             <div class="entry-title">产品 / 运营 / 数据</div>
             <div class="entry-primary">
-              <span class="entry-badge">首选</span>体验快手AI员工（MyFlicker）
+              <span class="entry-badge">首选</span>从通用办公与分析场景开始
             </div>
             <div class="entry-extends">
-              <span class="ext-tag">查看适合我的 Skill 包</span>
-              <span class="ext-tag">提交 Skill 需求</span>
+              <span class="ext-tag">先选适合你的 Skill</span>
+              <span class="ext-tag">再把高频工作交给 AI</span>
             </div>
-            <button class="entry-btn" onclick="switchTab('product')">立即体验 →</button>
+            <button class="entry-btn" onclick="switchTab('skill')">逛 AI 技能市场 →</button>
           </div>
           <div class="entry-card entry-card-green">
             <div class="entry-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
             <div class="entry-title">设计 / 行政 / 职能</div>
             <div class="entry-primary">
-              <span class="entry-badge">首选</span>体验快手AI员工（MyFlicker）
+              <span class="entry-badge">首选</span>从 AI 普惠场景零门槛上手
             </div>
             <div class="entry-extends">
-              <span class="ext-tag">行政 AI 化先行</span>
-              <span class="ext-tag">4月「今天请客」活动</span>
+              <span class="ext-tag">先覆盖高频刚需场景</span>
+              <span class="ext-tag">让每个人都先感受到价值</span>
             </div>
-            <button class="entry-btn" onclick="switchTab('product')">立即体验 →</button>
+            <button class="entry-btn" onclick="switchTab('pioneer')">查看组织转型与 AI 普惠 →</button>
           </div>
           <div class="entry-card entry-card-amber">
             <div class="entry-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
             <div class="entry-title">管理者 / Leader</div>
             <div class="entry-primary">
-              <span class="entry-badge">首选</span>带领团队 AI-Native 转型
+              <span class="entry-badge">首选</span>看清全局路径与组织推进方式
             </div>
             <div class="entry-extends">
-              <span class="ext-tag">申请 AI 先锋队</span>
-              <span class="ext-tag">了解战役全貌</span>
+              <span class="ext-tag">先抓试点，再带规模化</span>
+              <span class="ext-tag">产品、组织、普惠三条线并进</span>
             </div>
             <button class="entry-btn entry-btn-amber" onclick="switchTab('pioneer')">查看组织转型案例 →</button>
           </div>
@@ -2731,26 +3255,26 @@ button { cursor: pointer; font-family: var(--font); }
       </div>
     </section>
 
-    <!-- Section B: 战役背景 -->
+    <!-- Section B: 战役定位 -->
     <section class="section section-bg-gray">
       <div class="section-inner">
-        <div class="section-label"><svg class="sec-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 为什么现在做</div>
-        <h2 class="section-title">AI 员工时代已经到来</h2>
+        <div class="section-label"><svg class="sec-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 战役定位</div>
+        <h2 class="section-title">这场战役，本质上在做三件事</h2>
         <div class="three-cols">
           <div class="col-card">
-            <div class="col-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-            <h3>AI 能帮你承担更多了</h3>
-            <p>ChatGPT、Cursor、Manus 相继验证——AI 已从辅助工具进化为<strong>能和你一起干活的 AI 工作伙伴</strong>，效率差距正在拉开。</p>
+            <div class="col-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/></svg></div>
+            <h3>让每个人先拥有 AI 工作伙伴</h3>
+            <p>以 <strong>MyFlicker</strong> 为统一入口，把 AI 从研发能力扩展到全员日常工作场景，先解决「能不能用、好不好用」的问题。</p>
           </div>
           <div class="col-card">
-            <div class="col-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent-purple)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-            <h3>快手已经准备好了</h3>
-            <p>三年 AI 基础设施积累，底座就绪。<strong>2026 Q2 是组织级跃迁的关键窗口期</strong>，现在出发正当时。</p>
+            <div class="col-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent-purple)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/></svg></div>
+            <h3>把经验沉淀成可复用的 Skill 与知识</h3>
+            <p>以 <strong>AI 技能 &amp; 知识市场</strong> 为统一能力底座，把各业务线的最佳实践沉淀下来，让 AI 不只是能回答，更能稳定执行。</p>
           </div>
           <div class="col-card">
             <div class="col-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-            <h3>公司全力投入</h3>
-            <p>经管委正式决议，Sponsor：孙琳 / 郭亮。<strong>全员覆盖</strong>，六大业务线同步推进。</p>
+            <h3>用先锋队与 AI 普惠带动组织转型</h3>
+            <p>一条线做深：先锋队验证 AI-Native 工作方式；一条线做广：AI 普惠按月覆盖高频场景，推动全员真正用起来。</p>
           </div>
         </div>
       </div>
@@ -2759,186 +3283,157 @@ button { cursor: pointer; font-family: var(--font); }
     <!-- Section C: 目标体系 -->
     <section class="section">
       <div class="section-inner">
-        <div class="section-label"><svg class="sec-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> 目标体系</div>
-        <h2 class="section-title">这场战役要打赢什么</h2>
+        <div class="section-label"><svg class="sec-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> 战役目标</div>
+        <h2 class="section-title">统一目标，分三条主线推进</h2>
         <div class="stats-strip">
           <div class="stat-chip">
             <div class="stat-accent" style="background:var(--accent-blue)"></div>
             <div class="stat-num">15%<span class="stat-sup">+</span></div>
             <div class="stat-label">组织效率提升目标</div>
-            <div class="stat-sub">2026年全年</div>
+            <div class="stat-sub">让 AI 真正进入日常工作流</div>
           </div>
           <div class="stat-chip">
             <div class="stat-accent" style="background:var(--accent-purple)"></div>
-            <div class="stat-num">11</div>
-            <div class="stat-label">子项目并行推进</div>
-            <div class="stat-sub">业务 2 + 产品 2 + 技术 3 + 运营 2 + 先锋队 + 成本</div>
+            <div class="stat-num">MyFlicker</div>
+            <div class="stat-label">统一产品入口</div>
+            <div class="stat-sub">全员 AI 工作伙伴</div>
           </div>
           <div class="stat-chip">
             <div class="stat-accent" style="background:var(--accent-green)"></div>
-            <div class="stat-num">全员</div>
-            <div class="stat-label">覆盖目标</div>
-            <div class="stat-sub">研发 + 非研发</div>
+            <div class="stat-num">100+</div>
+            <div class="stat-label">Skill 持续扩展</div>
+            <div class="stat-sub">研发、办公、数据、行政等多场景</div>
           </div>
           <div class="stat-chip">
             <div class="stat-accent" style="background:var(--accent-amber)"></div>
-            <div class="stat-num">4.12</div>
-            <div class="stat-label">正式发布里程碑</div>
-            <div class="stat-sub">MyFlicker V1.0 + CodeFlicker V1.1</div>
+            <div class="stat-num">全员</div>
+            <div class="stat-label">覆盖对象</div>
+            <div class="stat-sub">先从高频场景建立使用习惯</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Section D: 五阶段演进 -->
+    <!-- Section D: 三条推进主线 -->
     <section class="section section-bg-gray">
       <div class="section-inner">
-        <div class="section-label"><svg class="sec-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg> 产品演进路线</div>
-        <h2 class="section-title">AI 生产力的五个阶段</h2>
+        <div class="section-label"><svg class="sec-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg> 推进路径</div>
+        <h2 class="section-title">不是一条线冲刺，而是三条线协同</h2>
         <div class="timeline-h">
-          <div class="tl-item tl-done">
-            <div class="tl-dot tl-dot-done">✓</div>
+          <div class="tl-item tl-current">
+            <div class="tl-dot tl-dot-current">1</div>
             <div class="tl-content">
-              <div class="tl-year">2025</div>
-              <div class="tl-title">AI 辅助提效</div>
-              <div class="tl-desc">KATE + CodeAgent，人→工具提效</div>
+              <div class="tl-year">产品线</div>
+              <div class="tl-title">先把统一入口做出来</div>
+              <div class="tl-desc">MyFlicker 承接全员体验，统一产品形态、统一访问方式、统一能力认知。</div>
             </div>
-          </div>
-          <div class="tl-line tl-line-done"></div>
-          <div class="tl-item tl-done">
-            <div class="tl-dot tl-dot-done">✓</div>
-            <div class="tl-content">
-              <div class="tl-year">2026 Q1</div>
-              <div class="tl-title">AI 工程师</div>
-              <div class="tl-desc">CodeFlicker，AI 替代部分研发工作</div>
-            </div>
+            <div class="tl-badge">AI 工作伙伴</div>
           </div>
           <div class="tl-line tl-line-done"></div>
           <div class="tl-item tl-current">
-            <div class="tl-dot tl-dot-current">🔥</div>
+            <div class="tl-dot tl-dot-current">2</div>
             <div class="tl-content">
-              <div class="tl-year">2026 Q2</div>
-              <div class="tl-title">AI 工作伙伴 ← 你在这里</div>
-              <div class="tl-desc">MyFlicker，陪你一起上班，全员可用</div>
+              <div class="tl-year">能力线</div>
+              <div class="tl-title">把能力做成可复用资产</div>
+              <div class="tl-desc">通过技能与知识市场，把一线经验转成可安装、可调用、可复用的组织能力。</div>
             </div>
-            <div class="tl-badge">当前阶段</div>
+            <div class="tl-badge">AI 技能 &amp; 知识市场</div>
           </div>
           <div class="tl-line"></div>
           <div class="tl-item tl-future">
-            <div class="tl-dot tl-dot-future">◯</div>
+            <div class="tl-dot tl-dot-future">3</div>
             <div class="tl-content">
-              <div class="tl-year">2026 Q3</div>
-              <div class="tl-title">AI 团队</div>
-              <div class="tl-desc">MyFlicker 团队伙伴，共享一个 AI 伙伴</div>
-            </div>
-          </div>
-          <div class="tl-line"></div>
-          <div class="tl-item tl-future">
-            <div class="tl-dot tl-dot-future">◯</div>
-            <div class="tl-content">
-              <div class="tl-year">2026 Q4-2027</div>
-              <div class="tl-title">AI 组织</div>
-              <div class="tl-desc">组织共享 AI 伙伴，全面 AI-Native</div>
+              <div class="tl-year">组织线</div>
+              <div class="tl-title">一边做深，一边做广</div>
+              <div class="tl-desc">先锋队跑出 AI-Native 案例，AI 普惠按月滚动推进，把 AI 从试点带到全员日常。</div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Section E: 冲刺进度（精简版） -->
+    <!-- Section E: 当前进展 -->
     <section class="section section-dark" id="section-progress">
       <div class="section-inner">
-        <div class="section-label" style="color:var(--blue-300)"><svg class="sec-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> 冲刺进度</div>
-        <h2 class="section-title" style="color:#fff">距 4.12 正式发布，整体进度 72%</h2>
-        <p class="section-desc" style="color:rgba(255,255,255,0.45)">最后更新：2026-04-05 · 11 个子项目并行推进（业务应用 2 + 产品建设 2 + 技术能力 3 + 运营推广 2 + 先锋队 1 + 成本治理 1）</p>
-
-        <div class="progress-overall" style="margin-bottom:32px">
-          <div class="po-label">4.12 正式发布冲刺</div>
-          <div class="po-bar"><div class="po-fill" style="width:72%"></div></div>
-          <div class="po-pct">72%</div>
-        </div>
+        <div class="section-label" style="color:var(--blue-300)"><svg class="sec-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> 当前进展</div>
+        <h2 class="section-title" style="color:#fff">战役已经从“概念讨论”进入“全员落地”阶段</h2>
+        <p class="section-desc" style="color:rgba(255,255,255,0.45)">当前更重要的不是再讲一遍愿景，而是把产品入口、能力底座、组织推进和 AI 普惠节奏真正跑起来。</p>
 
         <div class="sprint-status-grid">
           <div class="sprint-cat-card">
-            <div class="sprint-cat-label cat-biz">业务应用</div>
-            <div class="sprint-cat-items">
-              <div class="sprint-item"><span class="si-dot si-green"></span><span class="si-name">先锋队 AI-Native 转型</span><span class="si-tag">3月 Showcase ✅</span></div>
-              <div class="sprint-item"><span class="si-dot si-green"></span><span class="si-name">全员活动（4.20 今天请客）</span><span class="si-tag">方案已输出</span></div>
-            </div>
-          </div>
-          <div class="sprint-cat-card">
             <div class="sprint-cat-label cat-product">产品建设</div>
             <div class="sprint-cat-items">
-              <div class="sprint-item"><span class="si-dot si-green"></span><span class="si-name">MyFlicker 工作伙伴</span><span class="si-tag">V1.0 正式发布</span></div>
-              <div class="sprint-item"><span class="si-dot si-green"></span><span class="si-name">CodeFlicker V1.1</span><span class="si-tag">4.12 冲刺</span></div>
+              <div class="sprint-item"><span class="si-dot si-green"></span><span class="si-name">MyFlicker 统一全员入口</span><span class="si-tag">当前主形态</span></div>
+              <div class="sprint-item"><span class="si-dot si-green"></span><span class="si-name">AI 工作伙伴叙事已统一</span><span class="si-tag">与其他 Tab 对齐</span></div>
             </div>
           </div>
           <div class="sprint-cat-card">
-            <div class="sprint-cat-label cat-tech">技术能力</div>
+            <div class="sprint-cat-label cat-tech">能力建设</div>
             <div class="sprint-cat-items">
-              <div class="sprint-item"><span class="si-dot si-green"></span><span class="si-name">AgentCore / 自进化</span><span class="si-tag">4.12 上线</span></div>
-              <div class="sprint-item"><span class="si-dot si-green"></span><span class="si-name">Auto 模式 / 安全 / 高可用</span><span class="si-tag">4.7-4.9 交付</span></div>
-              <div class="sprint-item"><span class="si-dot si-yellow"></span><span class="si-name">Skill 市场 Roadmap 展示</span><span class="si-tag">非刚需，排期顺延</span></div>
+              <div class="sprint-item"><span class="si-dot si-green"></span><span class="si-name">100+ Skill 持续扩展</span><span class="si-tag">覆盖多岗位</span></div>
+              <div class="sprint-item"><span class="si-dot si-green"></span><span class="si-name">技能市场承接组织经验</span><span class="si-tag">公司级能力底座</span></div>
             </div>
           </div>
           <div class="sprint-cat-card">
-            <div class="sprint-cat-label cat-ops">运营推广</div>
+            <div class="sprint-cat-label cat-biz">组织推进</div>
             <div class="sprint-cat-items">
-              <div class="sprint-item"><span class="si-dot si-green"></span><span class="si-name">培训方案</span><span class="si-tag">4.10 完成</span></div>
-              <div class="sprint-item"><span class="si-dot si-green"></span><span class="si-name">成本治理方案</span><span class="si-tag">4.9 交付</span></div>
+              <div class="sprint-item"><span class="si-dot si-green"></span><span class="si-name">先锋队持续沉淀案例</span><span class="si-tag">做深</span></div>
+              <div class="sprint-item"><span class="si-dot si-green"></span><span class="si-name">AI 普惠按月拓展场景</span><span class="si-tag">做广</span></div>
+            </div>
+          </div>
+          <div class="sprint-cat-card">
+            <div class="sprint-cat-label cat-ops">战役节奏</div>
+            <div class="sprint-cat-items">
+              <div class="sprint-item"><span class="si-dot si-green"></span><span class="si-name">4.12 两类形态启动内测</span><span class="si-tag">已完成</span></div>
+              <div class="sprint-item"><span class="si-dot si-green"></span><span class="si-name">4.20 版本合一 + AI 普惠一期</span><span class="si-tag">关键节点</span></div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Section F: 先锋队成果 -->
-    <section class="section" id="section-pioneer">
+    <!-- Section F: 关键里程碑 -->
+    <section class="section section-bg-gray">
       <div class="section-inner">
-        <div class="section-label"><svg class="sec-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 组织转型实践成果</div>
-        <h2 class="section-title">真实案例，不是口号</h2>
-        <p class="section-desc">三个业务线先锋队已完成 3 月 Showcase，效率提升有数据可循</p>
-        <div style="margin:10px 0 18px;display:flex;justify-content:flex-end;">
-          <a href="ai-native-org-transform-research.html" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;text-decoration:none;color:#fff;font-size:13px;font-weight:600;background:linear-gradient(135deg,#2563EB 0%,#4F46E5 100%);">🔬 查看AI-Native深度调研</a>
-        </div>
-        <div class="pioneer-grid">
-          <div class="pioneer-card">
-            <div class="pioneer-tag">主站先锋队</div>
-            <div class="pioneer-metric">AI 辅助代码生成</div>
-            <div class="pioneer-num">40%<span class="pioneer-unit">+ 效率提升</span></div>
-            <div class="pioneer-desc">研发工程师借助 AI 伙伴完成需求分析、代码编写、测试用例生成全流程，已沉淀最佳实践 Skill 包<span class="data-source">（来源：3月 Showcase 实测数据）</span></div>
-          </div>
-          <div class="pioneer-card">
-            <div class="pioneer-tag">商业化先锋队</div>
-            <div class="pioneer-metric">数据分析 + 报告生成</div>
-            <div class="pioneer-num">80%<span class="pioneer-unit"> 时间节省</span></div>
-            <div class="pioneer-desc">数据分析师使用 AI 伙伴自动取数、生成分析报告，每日节省 3-4 小时重复工作<span class="data-source">（来源：3月 Showcase 实测数据）</span></div>
-          </div>
-          <div class="pioneer-card">
-            <div class="pioneer-tag">KSIB 先锋队</div>
-            <div class="pioneer-metric">产品需求研究</div>
-            <div class="pioneer-num">90%<span class="pioneer-unit"> 调研时间↓</span></div>
-            <div class="pioneer-desc">产品经理使用 AI 伙伴完成竞品调研、需求文档撰写，调研周期从 1 周压缩至半天<span class="data-source">（来源：3月 Showcase 实测数据）</span></div>
-          </div>
-        </div>
-        <!-- 月度参与活动 -->
-        <div class="activity-strip">
-          <div class="activity-label"><svg class="sec-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 月度全员参与活动</div>
-          <div class="activity-chips">
-            <div class="act-chip act-chip-hot">
-              <span class="act-month">4 月</span>
-              <span class="act-theme">行政 AI 化 🔥</span>
-              <span class="act-name">「今天请客」全员体验</span>
+        <div class="section-label"><svg class="sec-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg> 关键里程碑</div>
+        <h2 class="section-title">战役节奏一眼看清</h2>
+        <div class="milestones-h">
+          <div class="mh-track">
+            <div class="mh-line"></div>
+            <div class="mh-node mh-done">
+              <div class="mh-dot">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div class="mh-card">
+                <div class="mh-date">4 月 12 日</div>
+                <div class="mh-name">两类形态启动内测</div>
+                <div class="mh-desc">CodeFlicker V1.1 / MyFlicker V0.1<br/>能力开始从研发走向全员</div>
+              </div>
             </div>
-            <div class="act-chip">
-              <span class="act-month">5 月</span>
-              <span class="act-theme">财务 AI 化</span>
-              <span class="act-name">报销 / 预算 / 核算</span>
+            <div class="mh-node mh-hot">
+              <div class="mh-dot">🔥</div>
+              <div class="mh-card">
+                <div class="mh-date">4 月 20 日</div>
+                <div class="mh-name">MyFlicker 1.0 正式发布</div>
+                <div class="mh-desc">版本合一，成为全员 AI 工作伙伴<br/>同步落地 AI 普惠第一期</div>
+                <a class="mh-cta" href="https://myflicker.kuaishou.com" target="_blank">立即体验 →</a>
+              </div>
             </div>
-            <div class="act-chip">
-              <span class="act-month">6 月</span>
-              <span class="act-theme">移动办公 AI 化</span>
-              <span class="act-name">随时随地用 AI 员工</span>
+            <div class="mh-node mh-plan">
+              <div class="mh-dot">📌</div>
+              <div class="mh-card">
+                <div class="mh-date">4 月下旬</div>
+                <div class="mh-name">AI 普惠首期活动</div>
+                <div class="mh-desc">从行政 AI 化切入<br/>让全员先感知 AI 价值</div>
+              </div>
+            </div>
+            <div class="mh-node mh-plan">
+              <div class="mh-dot">🗓</div>
+              <div class="mh-card">
+                <div class="mh-date">后续持续推进</div>
+                <div class="mh-name">团队化 / 组织化扩展</div>
+                <div class="mh-desc">从个人伙伴到团队协作<br/>再到组织级 AI 能力底座</div>
+              </div>
             </div>
           </div>
         </div>
@@ -2948,99 +3443,29 @@ button { cursor: pointer; font-family: var(--font); }
     <!-- Section G: 加入行动 CTA -->
     <section class="section section-cta">
       <div class="section-inner">
-        <h2 class="section-title" style="color:#fff">现在就开始，三步上手</h2>
-        <p class="section-desc" style="color:var(--blue-200)">不需要任何技术背景，AI 员工为你而来</p>
+        <h2 class="section-title" style="color:#fff">如果你只记住一件事：先用起来</h2>
+        <p class="section-desc" style="color:var(--blue-200)">战役真正的起点，不是看完所有说明，而是把你的第一个真实任务交给 AI。</p>
         <div class="cta-grid">
           <div class="cta-card cta-card-highlight">
             <div class="cta-step">Step 1</div>
             <div class="cta-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--blue-300)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg></div>
-            <div class="cta-title">认识 MyFlicker AI 工作伙伴</div>
-            <div class="cta-desc">了解 MyFlicker 能更你做什么，看看真实效率数据</div>
-            <button class="cta-btn cta-btn-primary" onclick="switchTab('product')">了解 MyFlicker AI 伙伴 →</button>
+            <div class="cta-title">先认识 MyFlicker</div>
+            <div class="cta-desc">从统一产品入口开始，先把一个真实工作任务交给 AI 工作伙伴。</div>
+            <button class="cta-btn cta-btn-primary" onclick="switchTab('product')">查看 AI 工作伙伴 →</button>
           </div>
           <div class="cta-card">
             <div class="cta-step">Step 2</div>
             <div class="cta-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--blue-300)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
             <div class="cta-title">找到适合你的 Skill</div>
-            <div class="cta-desc">浏览公司 Skill 市场，选择适合你职能的 AI 能力包</div>
-            <button class="cta-btn cta-btn-outline" onclick="switchTab('skill')">逛 Skill 市场</button>
+            <div class="cta-desc">如果你已经知道自己的场景，就直接去技能市场挑适合的能力包。</div>
+            <button class="cta-btn cta-btn-outline" onclick="switchTab('skill')">逛 AI 技能市场</button>
           </div>
           <div class="cta-card">
             <div class="cta-step">Step 3</div>
             <div class="cta-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--blue-300)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-            <div class="cta-title">参与 4 月体验活动</div>
-            <div class="cta-desc">4.20「今天请客」全员活动，行政 AI 化，人人可参与</div>
-            <button class="cta-btn cta-btn-outline">了解活动详情</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section H: 里程碑时间轴 -->
-    <section class="section section-bg-gray">
-      <div class="section-inner">
-        <div class="section-label"><svg class="sec-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg> 关键里程碑</div>
-        <h2 class="section-title">战役节奏</h2>
-        <div class="milestones-h">
-          <div class="mh-track">
-            <div class="mh-line"></div>
-            <!-- 节点 1 -->
-            <div class="mh-node mh-done">
-              <div class="mh-dot">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-              </div>
-              <div class="mh-card">
-                <div class="mh-date">4 月 3 日</div>
-                <div class="mh-name">V0.1 内测发布</div>
-                <div class="mh-desc">对内可亮相版本<br/>核心能力可用</div>
-              </div>
-            </div>
-            <!-- 节点 2 -->
-            <div class="mh-node mh-hot">
-              <div class="mh-dot">🔥</div>
-              <div class="mh-card">
-                <div class="mh-date">4 月 20 日</div>
-                <div class="mh-name">V1.0 正式发布</div>
-                <div class="mh-desc">全员即开即用<br/>陪你一起上班</div>
-                <a class="mh-cta" href="https://myflicker.kuaishou.com" target="_blank">立即体验 →</a>
-              </div>
-            </div>
-            <!-- 节点 3 -->
-            <div class="mh-node mh-plan">
-              <div class="mh-dot">📅</div>
-              <div class="mh-card">
-                <div class="mh-date">4 月 20 日活动</div>
-                <div class="mh-name">今天请大家</div>
-                <div class="mh-desc">行政 AI 化主题<br/>全员参与体验</div>
-              </div>
-            </div>
-            <!-- 节点 4 -->
-            <div class="mh-node mh-plan">
-              <div class="mh-dot">🗓</div>
-              <div class="mh-card">
-                <div class="mh-date">5 月</div>
-                <div class="mh-name">V1.1 游戏化升级</div>
-                <div class="mh-desc">游戏化体验<br/>全类 Skill 上线</div>
-              </div>
-            </div>
-            <!-- 节点 5 -->
-            <div class="mh-node mh-plan">
-              <div class="mh-dot">🗓</div>
-              <div class="mh-card">
-                <div class="mh-date">6 月</div>
-                <div class="mh-name">V2.0 AI 团队</div>
-                <div class="mh-desc">AI 数字员工 Team<br/>技术运维类 Skill</div>
-              </div>
-            </div>
-            <!-- 节点 6 -->
-            <div class="mh-node mh-plan">
-              <div class="mh-dot">✦</div>
-              <div class="mh-card">
-                <div class="mh-date">下半年</div>
-                <div class="mh-name">V2.x 持续进化</div>
-                <div class="mh-desc">多会话管理<br/>AI 团队协作</div>
-              </div>
-            </div>
+            <div class="cta-title">如果你在带团队</div>
+            <div class="cta-desc">去看组织转型与先锋队案例，明确如何从个人使用走向团队工作方式升级。</div>
+            <button class="cta-btn cta-btn-outline" onclick="switchTab('pioneer')">查看组织转型 →</button>
           </div>
         </div>
       </div>
@@ -3324,128 +3749,208 @@ button { cursor: pointer; font-family: var(--font); }
           </div>
         </div>
 
-        <!-- AgentOS 强化架构图 -->
-        <div class="agentos-spotlight">
-          <div class="agentos-head">
-            <div class="agentos-kicker">AgentOS · 统一智能底座</div>
-            <h3 class="agentos-title">真正厉害的，不是单个 Skill，而是把“思考、调用、执行、进化”串成一套系统</h3>
-            <p class="agentos-desc">同一套 AgentOS，同时驱动面向全员的 MyFlicker 与面向研发的 CodeFlicker，让 AI 从“会回答”升级为“能把任务做完”的工作伙伴。</p>
+        <!-- AgentOS 完整架构图 v3 -->
+        <div class="agentos2-wrap">
+          <div class="agentos2-header">
+            <div class="agentos2-kicker">AgentOS · 企业级智能底座</div>
+            <h3 class="agentos2-title">同一套 AgentOS，支撑研发 + 全员双端，从对话到执行的完整闭环</h3>
+            <p class="agentos2-subtitle">Cloud Agent 引擎 · 公司级 Skills 市场 · 共享记忆 · 自进化 · 全链路企业安全</p>
           </div>
 
-          <div class="agentos-arch-shell">
-            <div class="agentos-layer-tag">接入层</div>
-            <div class="agentos-entry-row">
-              <div class="agentos-entry-card agentos-entry-card-dev">
-                <div class="agentos-entry-label">研发入口</div>
-                <div class="agentos-entry-name">CodeFlicker</div>
-                <div class="agentos-entry-desc">IDE / CLI 深度协作，直接进入研发执行流</div>
+          <!-- 整体架构图容器 -->
+          <div class="agentos2-diagram">
+
+            <!-- ========== 顶部：接入入口 ========== -->
+            <div class="agentos2-row agentos2-row-entry">
+              <!-- CodeFlicker 入口 -->
+              <div class="agentos2-entry-block agentos2-entry-cf">
+                <div class="agentos2-entry-header">
+                  <span class="agentos2-entry-tag">研发入口</span>
+                  <span class="agentos2-entry-name">CodeFlicker</span>
+                </div>
+                <div class="agentos2-entry-channels">
+                  <div class="agentos2-channel">IDE Plugin</div>
+                  <div class="agentos2-channel">CLI</div>
+                </div>
+                <div class="agentos2-entry-sub">主动感知 · 定时任务 · Heartbeat</div>
               </div>
-              <div class="agentos-entry-link">研发先跑通 → 能力产品化 → 全员规模化</div>
-              <div class="agentos-entry-card">
-                <div class="agentos-entry-label">全员入口</div>
-                <div class="agentos-entry-name">MyFlicker</div>
-                <div class="agentos-entry-desc">KIM 对话入口，零门槛使用 AI 工作伙伴</div>
+
+              <div class="agentos2-entry-arrow">
+                <div class="agentos2-arrow-label">研发先跑通 → 能力产品化 → 全员规模化</div>
+                <div class="agentos2-arrow-line"></div>
+              </div>
+
+              <!-- MyFlicker 入口 -->
+              <div class="agentos2-entry-block agentos2-entry-mf">
+                <div class="agentos2-entry-header">
+                  <span class="agentos2-entry-tag">全员入口</span>
+                  <span class="agentos2-entry-name">MyFlicker</span>
+                </div>
+                <div class="agentos2-entry-channels">
+                  <div class="agentos2-channel">客户端 / Web 端</div>
+                  <div class="agentos2-channel">KIM 机器人</div>
+                </div>
+                <div class="agentos2-entry-sub">会话管理 · 多模态感知 · 意图识别</div>
               </div>
             </div>
 
-            <div class="agentos-flow-rail">
-              <span class="agentos-flow-chip">任务规划</span>
-              <span class="agentos-flow-line"></span>
-              <span class="agentos-flow-chip">资源调度</span>
-              <span class="agentos-flow-line"></span>
-              <span class="agentos-flow-chip">执行闭环</span>
+            <!-- 向下连线 -->
+            <div class="agentos2-connector-row">
+              <div class="agentos2-vline"></div>
+              <div class="agentos2-hbridge"></div>
+              <div class="agentos2-vline"></div>
             </div>
 
-            <div class="agentos-layer-tag agentos-layer-tag-core">核心底座</div>
-            <div class="agentos-main-grid">
-              <div class="agentos-core-panel">
-                <div class="agentos-core-top">
-                  <div>
-                    <div class="agentos-core-badge">核心能力中枢</div>
-                    <div class="agentos-core-title">AgentOS</div>
-                  </div>
-                  <div class="agentos-core-summary">统一任务理解、资源调度与执行闭环</div>
-                </div>
+            <!-- 接入层 Gateway -->
+            <div class="agentos2-gateway-row">
+              <div class="agentos2-gateway-label">接入层（Gateway）</div>
+              <div class="agentos2-gateway-chips">
+                <div class="agentos2-gchip">客户端 / Web Channel</div>
+                <div class="agentos2-gchip">KIM Channel</div>
+                <div class="agentos2-gchip">会话管理</div>
+                <div class="agentos2-gchip">多模态感知 &amp; 意图识别</div>
+              </div>
+            </div>
 
-                <div class="agentos-cap-grid">
-                  <div class="agentos-cap-card">
-                    <div class="agentos-cap-micro">01</div>
-                    <div class="agentos-cap-name">Agent Runtime</div>
-                    <div class="agentos-cap-desc">任务拆解、规划推理、状态编排</div>
-                  </div>
-                  <div class="agentos-cap-card">
-                    <div class="agentos-cap-micro">02</div>
-                    <div class="agentos-cap-name">Skill Router</div>
-                    <div class="agentos-cap-desc">工具、知识、数据源统一调度</div>
-                  </div>
-                  <div class="agentos-cap-card">
-                    <div class="agentos-cap-micro">03</div>
-                    <div class="agentos-cap-name">Memory & Evolution</div>
-                    <div class="agentos-cap-desc">共享记忆沉淀，越用越懂业务</div>
-                  </div>
-                  <div class="agentos-cap-card">
-                    <div class="agentos-cap-micro">04</div>
-                    <div class="agentos-cap-name">Auto Execution</div>
-                    <div class="agentos-cap-desc">从对话到执行，再到反馈闭环</div>
-                  </div>
-                </div>
+            <div class="agentos2-down-arrow-row"><div class="agentos2-down-arrow">↓</div></div>
 
-                <div class="agentos-value-strip">
-                  <div class="agentos-value-item">
-                    <span class="agentos-value-key">统一大脑</span>
-                    <span class="agentos-value-text">MyFlicker 与 CodeFlicker 共用底层能力，不重复建设</span>
+            <!-- ========== 中部主体：AgentOS + Sec&Ops ========== -->
+            <div class="agentos2-row agentos2-row-core">
+
+              <!-- AgentOS 核心 -->
+              <div class="agentos2-core-box">
+                <div class="agentos2-core-title-row">
+                  <span class="agentos2-core-badge">Core</span>
+                  <span class="agentos2-core-name">AgentOS</span>
+                </div>
+                <div class="agentos2-core-modules">
+                  <div class="agentos2-module agentos2-module-cloud">
+                    <div class="agentos2-mod-name">Cloud Agent 引擎</div>
+                    <div class="agentos2-mod-desc">任务规划 · 多步推理 · 状态编排</div>
                   </div>
-                  <div class="agentos-value-item">
-                    <span class="agentos-value-key">统一执行闭环</span>
-                    <span class="agentos-value-text">不只会答，还能调 Skill、跑任务、交付结果</span>
+                  <div class="agentos2-module agentos2-module-edge">
+                    <div class="agentos2-mod-name">Edge Agent Node</div>
+                    <div class="agentos2-mod-desc">本地 CF 调度 · 端侧执行 · 低延迟响应</div>
                   </div>
-                  <div class="agentos-value-item">
-                    <span class="agentos-value-key">统一扩展路径</span>
-                    <span class="agentos-value-text">天然支撑个人伙伴、团队伙伴、组织伙伴持续升级</span>
+                  <div class="agentos2-module agentos2-module-model">
+                    <div class="agentos2-mod-name">模型 Auto 调度</div>
+                    <div class="agentos2-mod-desc">成本 · 效果双优化，自动选模型</div>
+                  </div>
+                  <div class="agentos2-module agentos2-module-memory">
+                    <div class="agentos2-mod-name">共享记忆引擎</div>
+                    <div class="agentos2-mod-desc">跨会话记忆沉淀，越用越懂业务</div>
+                  </div>
+                  <div class="agentos2-module agentos2-module-evo">
+                    <div class="agentos2-mod-name">自进化引擎</div>
+                    <div class="agentos2-mod-desc">从使用中学习，Skill 持续优化</div>
                   </div>
                 </div>
               </div>
 
-              <div class="agentos-guardrail-panel">
-                <div class="agentos-guardrail-title">企业级护栏</div>
-                <div class="agentos-guardrail-list">
-                  <div class="agentos-guardrail-item">
-                    <div class="agentos-guardrail-name">安全与权限</div>
-                    <div class="agentos-guardrail-desc">数据不出域，按角色分级授权</div>
+              <!-- Sec&Ops 安全体系 -->
+              <div class="agentos2-secops-box">
+                <div class="agentos2-secops-title">Sec &amp; Ops</div>
+                <div class="agentos2-secops-items">
+                  <div class="agentos2-sec-item">
+                    <div class="agentos2-sec-name">高可用</div>
+                    <div class="agentos2-sec-detail">存算分离 · 故障转移</div>
                   </div>
-                  <div class="agentos-guardrail-item">
-                    <div class="agentos-guardrail-name">审计与可追踪</div>
-                    <div class="agentos-guardrail-desc">全链路记录，过程可回溯、可治理</div>
+                  <div class="agentos2-sec-divider"></div>
+                  <div class="agentos2-sec-item">
+                    <div class="agentos2-sec-name">弹性扩容</div>
+                    <div class="agentos2-sec-detail">超卖 · 秒级扩展</div>
                   </div>
-                  <div class="agentos-guardrail-item">
-                    <div class="agentos-guardrail-name">高可用与弹性</div>
-                    <div class="agentos-guardrail-desc">多通道接入，支持稳定运行与快速扩容</div>
+                  <div class="agentos2-sec-divider"></div>
+                  <div class="agentos2-sec-item">
+                    <div class="agentos2-sec-name">安全管控</div>
+                    <div class="agentos2-sec-detail">水平越权 · 垂直越权防护</div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="agentos-bottom-rail">
-              <div class="agentos-bottom-title">能力扩张路径</div>
-              <div class="agentos-bottom-stages">
-                <div class="agentos-bottom-stage">个人伙伴</div>
-                <div class="agentos-bottom-arrow">→</div>
-                <div class="agentos-bottom-stage">团队伙伴</div>
-                <div class="agentos-bottom-arrow">→</div>
-                <div class="agentos-bottom-stage">组织伙伴</div>
+            <!-- AgentOS ↔ Skills 市场双向箭头 -->
+            <div class="agentos2-bidirect-row">
+              <div class="agentos2-bidirect-line">
+                <span class="agentos2-bidirect-label-l">安装/卸载</span>
+                <span class="agentos2-bidirect-arrows">⇄</span>
+                <span class="agentos2-bidirect-label-r">安全扫描 &amp; 审查 · 信息上报</span>
               </div>
             </div>
-          </div>
-        </div>
 
-        <!-- 技术说明（精简版）-->
-        <div class="tech-note-open">
-          <div class="tech-note-title">🔧 底层架构（研发同学选看）</div>
-          <div class="tech-note-body">
-            <p>MyFlicker 底层由 <strong>AgentOS</strong> 驱动：AgentCore（任务规划引擎）+ 公司级全域 Skill 市场 + Auto 调度 + 安全体系。企业级安全可控，数据不出域，所有 Skill 均经过六阶段安全审核。</p>
-            <p class="tech-note-muted">CodeFlicker（研发专属）与 MyFlicker 共用同一套 AgentOS 底层——同一个大脑，两种接入界面，陪不同人一起工作。</p>
-          </div>
-        </div>
+            <!-- ========== 右侧：公司级 Skills 市场 ========== -->
+            <div class="agentos2-skills-box">
+              <div class="agentos2-skills-header">
+                <span class="agentos2-skills-badge">公司级</span>
+                <span class="agentos2-skills-name">Skills 市场</span>
+              </div>
+              <div class="agentos2-skills-body">
+                <!-- 开发工具箱 -->
+                <div class="agentos2-skills-col">
+                  <div class="agentos2-skills-col-title">Skills 开发工具箱</div>
+                  <div class="agentos2-skills-col-items">
+                    <div class="agentos2-skill-chip">Skill 开发 / 调试</div>
+                    <div class="agentos2-skill-chip">Skill 评测</div>
+                    <div class="agentos2-skill-chip">Skill 发布</div>
+                  </div>
+                </div>
+                <!-- Skills 门户 -->
+                <div class="agentos2-skills-col">
+                  <div class="agentos2-skills-col-title">Skills 门户</div>
+                  <div class="agentos2-skills-col-items">
+                    <div class="agentos2-skill-chip">安装 / 卸载</div>
+                    <div class="agentos2-skill-chip">评价体系</div>
+                    <div class="agentos2-skill-chip">分类</div>
+                  </div>
+                </div>
+                <!-- 业务领域 Skills -->
+                <div class="agentos2-skills-col agentos2-skills-col-wide">
+                  <div class="agentos2-skills-col-title">业务领域 Skills 层</div>
+                  <div class="agentos2-skills-domain-grid">
+                    <div class="agentos2-domain-chip">行政服务类</div>
+                    <div class="agentos2-domain-chip">办公效率类</div>
+                    <div class="agentos2-domain-chip">研发效能类</div>
+                    <div class="agentos2-domain-chip">技术运维类</div>
+                    <div class="agentos2-domain-chip">内容创作类</div>
+                    <div class="agentos2-domain-chip">数据分析类</div>
+                  </div>
+                </div>
+                <!-- 通用 Skills -->
+                <div class="agentos2-skills-col agentos2-skills-col-wide">
+                  <div class="agentos2-skills-col-title">通用 Skills 层</div>
+                  <div class="agentos2-skills-domain-grid">
+                    <div class="agentos2-domain-chip agentos2-domain-sys">KIM</div>
+                    <div class="agentos2-domain-chip agentos2-domain-sys">Docs</div>
+                    <div class="agentos2-domain-chip agentos2-domain-sys">SSO</div>
+                    <div class="agentos2-domain-chip agentos2-domain-sys">Team</div>
+                    <div class="agentos2-domain-chip agentos2-domain-sys">CDN</div>
+                    <div class="agentos2-domain-chip agentos2-domain-sys">搜索</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ========== 底部：底层调用 ========== -->
+            <div class="agentos2-infra-row">
+              <div class="agentos2-infra-item">
+                <div class="agentos2-infra-icon">☁</div>
+                <div class="agentos2-infra-name">万擎（大模型平台）</div>
+                <div class="agentos2-infra-desc">Cloud Agent 调用</div>
+              </div>
+              <div class="agentos2-infra-item">
+                <div class="agentos2-infra-icon">▣</div>
+                <div class="agentos2-infra-name">高密服务器</div>
+                <div class="agentos2-infra-desc">Edge Node 驻留</div>
+              </div>
+              <div class="agentos2-infra-item">
+                <div class="agentos2-infra-icon">⊡</div>
+                <div class="agentos2-infra-name">个人电脑</div>
+                <div class="agentos2-infra-desc">调度本地 CF</div>
+              </div>
+            </div>
+
+          </div><!-- /agentos2-diagram -->
+        </div><!-- /agentos2-wrap -->
       </div>
     </section>
   </div><!-- /tab-product -->
