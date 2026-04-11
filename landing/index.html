@@ -747,128 +747,208 @@
           </div>
         </div>
 
-        <!-- AgentOS 强化架构图 -->
-        <div class="agentos-spotlight">
-          <div class="agentos-head">
-            <div class="agentos-kicker">AgentOS · 统一智能底座</div>
-            <h3 class="agentos-title">真正厉害的，不是单个 Skill，而是把“思考、调用、执行、进化”串成一套系统</h3>
-            <p class="agentos-desc">同一套 AgentOS，同时驱动面向全员的 MyFlicker 与面向研发的 CodeFlicker，让 AI 从“会回答”升级为“能把任务做完”的工作伙伴。</p>
+        <!-- AgentOS 完整架构图 v3 -->
+        <div class="agentos2-wrap">
+          <div class="agentos2-header">
+            <div class="agentos2-kicker">AgentOS · 企业级智能底座</div>
+            <h3 class="agentos2-title">同一套 AgentOS，支撑研发 + 全员双端，从对话到执行的完整闭环</h3>
+            <p class="agentos2-subtitle">Cloud Agent 引擎 · 公司级 Skills 市场 · 共享记忆 · 自进化 · 全链路企业安全</p>
           </div>
 
-          <div class="agentos-arch-shell">
-            <div class="agentos-layer-tag">接入层</div>
-            <div class="agentos-entry-row">
-              <div class="agentos-entry-card agentos-entry-card-dev">
-                <div class="agentos-entry-label">研发入口</div>
-                <div class="agentos-entry-name">CodeFlicker</div>
-                <div class="agentos-entry-desc">IDE / CLI 深度协作，直接进入研发执行流</div>
+          <!-- 整体架构图容器 -->
+          <div class="agentos2-diagram">
+
+            <!-- ========== 顶部：接入入口 ========== -->
+            <div class="agentos2-row agentos2-row-entry">
+              <!-- CodeFlicker 入口 -->
+              <div class="agentos2-entry-block agentos2-entry-cf">
+                <div class="agentos2-entry-header">
+                  <span class="agentos2-entry-tag">研发入口</span>
+                  <span class="agentos2-entry-name">CodeFlicker</span>
+                </div>
+                <div class="agentos2-entry-channels">
+                  <div class="agentos2-channel">IDE Plugin</div>
+                  <div class="agentos2-channel">CLI</div>
+                </div>
+                <div class="agentos2-entry-sub">主动感知 · 定时任务 · Heartbeat</div>
               </div>
-              <div class="agentos-entry-link">研发先跑通 → 能力产品化 → 全员规模化</div>
-              <div class="agentos-entry-card">
-                <div class="agentos-entry-label">全员入口</div>
-                <div class="agentos-entry-name">MyFlicker</div>
-                <div class="agentos-entry-desc">KIM 对话入口，零门槛使用 AI 工作伙伴</div>
+
+              <div class="agentos2-entry-arrow">
+                <div class="agentos2-arrow-label">研发先跑通 → 能力产品化 → 全员规模化</div>
+                <div class="agentos2-arrow-line"></div>
+              </div>
+
+              <!-- MyFlicker 入口 -->
+              <div class="agentos2-entry-block agentos2-entry-mf">
+                <div class="agentos2-entry-header">
+                  <span class="agentos2-entry-tag">全员入口</span>
+                  <span class="agentos2-entry-name">MyFlicker</span>
+                </div>
+                <div class="agentos2-entry-channels">
+                  <div class="agentos2-channel">客户端 / Web 端</div>
+                  <div class="agentos2-channel">KIM 机器人</div>
+                </div>
+                <div class="agentos2-entry-sub">会话管理 · 多模态感知 · 意图识别</div>
               </div>
             </div>
 
-            <div class="agentos-flow-rail">
-              <span class="agentos-flow-chip">任务规划</span>
-              <span class="agentos-flow-line"></span>
-              <span class="agentos-flow-chip">资源调度</span>
-              <span class="agentos-flow-line"></span>
-              <span class="agentos-flow-chip">执行闭环</span>
+            <!-- 向下连线 -->
+            <div class="agentos2-connector-row">
+              <div class="agentos2-vline"></div>
+              <div class="agentos2-hbridge"></div>
+              <div class="agentos2-vline"></div>
             </div>
 
-            <div class="agentos-layer-tag agentos-layer-tag-core">核心底座</div>
-            <div class="agentos-main-grid">
-              <div class="agentos-core-panel">
-                <div class="agentos-core-top">
-                  <div>
-                    <div class="agentos-core-badge">核心能力中枢</div>
-                    <div class="agentos-core-title">AgentOS</div>
-                  </div>
-                  <div class="agentos-core-summary">统一任务理解、资源调度与执行闭环</div>
-                </div>
+            <!-- 接入层 Gateway -->
+            <div class="agentos2-gateway-row">
+              <div class="agentos2-gateway-label">接入层（Gateway）</div>
+              <div class="agentos2-gateway-chips">
+                <div class="agentos2-gchip">客户端 / Web Channel</div>
+                <div class="agentos2-gchip">KIM Channel</div>
+                <div class="agentos2-gchip">会话管理</div>
+                <div class="agentos2-gchip">多模态感知 &amp; 意图识别</div>
+              </div>
+            </div>
 
-                <div class="agentos-cap-grid">
-                  <div class="agentos-cap-card">
-                    <div class="agentos-cap-micro">01</div>
-                    <div class="agentos-cap-name">Agent Runtime</div>
-                    <div class="agentos-cap-desc">任务拆解、规划推理、状态编排</div>
-                  </div>
-                  <div class="agentos-cap-card">
-                    <div class="agentos-cap-micro">02</div>
-                    <div class="agentos-cap-name">Skill Router</div>
-                    <div class="agentos-cap-desc">工具、知识、数据源统一调度</div>
-                  </div>
-                  <div class="agentos-cap-card">
-                    <div class="agentos-cap-micro">03</div>
-                    <div class="agentos-cap-name">Memory & Evolution</div>
-                    <div class="agentos-cap-desc">共享记忆沉淀，越用越懂业务</div>
-                  </div>
-                  <div class="agentos-cap-card">
-                    <div class="agentos-cap-micro">04</div>
-                    <div class="agentos-cap-name">Auto Execution</div>
-                    <div class="agentos-cap-desc">从对话到执行，再到反馈闭环</div>
-                  </div>
-                </div>
+            <div class="agentos2-down-arrow-row"><div class="agentos2-down-arrow">↓</div></div>
 
-                <div class="agentos-value-strip">
-                  <div class="agentos-value-item">
-                    <span class="agentos-value-key">统一大脑</span>
-                    <span class="agentos-value-text">MyFlicker 与 CodeFlicker 共用底层能力，不重复建设</span>
+            <!-- ========== 中部主体：AgentOS + Sec&Ops ========== -->
+            <div class="agentos2-row agentos2-row-core">
+
+              <!-- AgentOS 核心 -->
+              <div class="agentos2-core-box">
+                <div class="agentos2-core-title-row">
+                  <span class="agentos2-core-badge">Core</span>
+                  <span class="agentos2-core-name">AgentOS</span>
+                </div>
+                <div class="agentos2-core-modules">
+                  <div class="agentos2-module agentos2-module-cloud">
+                    <div class="agentos2-mod-name">Cloud Agent 引擎</div>
+                    <div class="agentos2-mod-desc">任务规划 · 多步推理 · 状态编排</div>
                   </div>
-                  <div class="agentos-value-item">
-                    <span class="agentos-value-key">统一执行闭环</span>
-                    <span class="agentos-value-text">不只会答，还能调 Skill、跑任务、交付结果</span>
+                  <div class="agentos2-module agentos2-module-edge">
+                    <div class="agentos2-mod-name">Edge Agent Node</div>
+                    <div class="agentos2-mod-desc">本地 CF 调度 · 端侧执行 · 低延迟响应</div>
                   </div>
-                  <div class="agentos-value-item">
-                    <span class="agentos-value-key">统一扩展路径</span>
-                    <span class="agentos-value-text">天然支撑个人伙伴、团队伙伴、组织伙伴持续升级</span>
+                  <div class="agentos2-module agentos2-module-model">
+                    <div class="agentos2-mod-name">模型 Auto 调度</div>
+                    <div class="agentos2-mod-desc">成本 · 效果双优化，自动选模型</div>
+                  </div>
+                  <div class="agentos2-module agentos2-module-memory">
+                    <div class="agentos2-mod-name">共享记忆引擎</div>
+                    <div class="agentos2-mod-desc">跨会话记忆沉淀，越用越懂业务</div>
+                  </div>
+                  <div class="agentos2-module agentos2-module-evo">
+                    <div class="agentos2-mod-name">自进化引擎</div>
+                    <div class="agentos2-mod-desc">从使用中学习，Skill 持续优化</div>
                   </div>
                 </div>
               </div>
 
-              <div class="agentos-guardrail-panel">
-                <div class="agentos-guardrail-title">企业级护栏</div>
-                <div class="agentos-guardrail-list">
-                  <div class="agentos-guardrail-item">
-                    <div class="agentos-guardrail-name">安全与权限</div>
-                    <div class="agentos-guardrail-desc">数据不出域，按角色分级授权</div>
+              <!-- Sec&Ops 安全体系 -->
+              <div class="agentos2-secops-box">
+                <div class="agentos2-secops-title">Sec &amp; Ops</div>
+                <div class="agentos2-secops-items">
+                  <div class="agentos2-sec-item">
+                    <div class="agentos2-sec-name">高可用</div>
+                    <div class="agentos2-sec-detail">存算分离 · 故障转移</div>
                   </div>
-                  <div class="agentos-guardrail-item">
-                    <div class="agentos-guardrail-name">审计与可追踪</div>
-                    <div class="agentos-guardrail-desc">全链路记录，过程可回溯、可治理</div>
+                  <div class="agentos2-sec-divider"></div>
+                  <div class="agentos2-sec-item">
+                    <div class="agentos2-sec-name">弹性扩容</div>
+                    <div class="agentos2-sec-detail">超卖 · 秒级扩展</div>
                   </div>
-                  <div class="agentos-guardrail-item">
-                    <div class="agentos-guardrail-name">高可用与弹性</div>
-                    <div class="agentos-guardrail-desc">多通道接入，支持稳定运行与快速扩容</div>
+                  <div class="agentos2-sec-divider"></div>
+                  <div class="agentos2-sec-item">
+                    <div class="agentos2-sec-name">安全管控</div>
+                    <div class="agentos2-sec-detail">水平越权 · 垂直越权防护</div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="agentos-bottom-rail">
-              <div class="agentos-bottom-title">能力扩张路径</div>
-              <div class="agentos-bottom-stages">
-                <div class="agentos-bottom-stage">个人伙伴</div>
-                <div class="agentos-bottom-arrow">→</div>
-                <div class="agentos-bottom-stage">团队伙伴</div>
-                <div class="agentos-bottom-arrow">→</div>
-                <div class="agentos-bottom-stage">组织伙伴</div>
+            <!-- AgentOS ↔ Skills 市场双向箭头 -->
+            <div class="agentos2-bidirect-row">
+              <div class="agentos2-bidirect-line">
+                <span class="agentos2-bidirect-label-l">安装/卸载</span>
+                <span class="agentos2-bidirect-arrows">⇄</span>
+                <span class="agentos2-bidirect-label-r">安全扫描 &amp; 审查 · 信息上报</span>
               </div>
             </div>
-          </div>
-        </div>
 
-        <!-- 技术说明（精简版）-->
-        <div class="tech-note-open">
-          <div class="tech-note-title">🔧 底层架构（研发同学选看）</div>
-          <div class="tech-note-body">
-            <p>MyFlicker 底层由 <strong>AgentOS</strong> 驱动：AgentCore（任务规划引擎）+ 公司级全域 Skill 市场 + Auto 调度 + 安全体系。企业级安全可控，数据不出域，所有 Skill 均经过六阶段安全审核。</p>
-            <p class="tech-note-muted">CodeFlicker（研发专属）与 MyFlicker 共用同一套 AgentOS 底层——同一个大脑，两种接入界面，陪不同人一起工作。</p>
-          </div>
-        </div>
+            <!-- ========== 右侧：公司级 Skills 市场 ========== -->
+            <div class="agentos2-skills-box">
+              <div class="agentos2-skills-header">
+                <span class="agentos2-skills-badge">公司级</span>
+                <span class="agentos2-skills-name">Skills 市场</span>
+              </div>
+              <div class="agentos2-skills-body">
+                <!-- 开发工具箱 -->
+                <div class="agentos2-skills-col">
+                  <div class="agentos2-skills-col-title">Skills 开发工具箱</div>
+                  <div class="agentos2-skills-col-items">
+                    <div class="agentos2-skill-chip">Skill 开发 / 调试</div>
+                    <div class="agentos2-skill-chip">Skill 评测</div>
+                    <div class="agentos2-skill-chip">Skill 发布</div>
+                  </div>
+                </div>
+                <!-- Skills 门户 -->
+                <div class="agentos2-skills-col">
+                  <div class="agentos2-skills-col-title">Skills 门户</div>
+                  <div class="agentos2-skills-col-items">
+                    <div class="agentos2-skill-chip">安装 / 卸载</div>
+                    <div class="agentos2-skill-chip">评价体系</div>
+                    <div class="agentos2-skill-chip">分类</div>
+                  </div>
+                </div>
+                <!-- 业务领域 Skills -->
+                <div class="agentos2-skills-col agentos2-skills-col-wide">
+                  <div class="agentos2-skills-col-title">业务领域 Skills 层</div>
+                  <div class="agentos2-skills-domain-grid">
+                    <div class="agentos2-domain-chip">行政服务类</div>
+                    <div class="agentos2-domain-chip">办公效率类</div>
+                    <div class="agentos2-domain-chip">研发效能类</div>
+                    <div class="agentos2-domain-chip">技术运维类</div>
+                    <div class="agentos2-domain-chip">内容创作类</div>
+                    <div class="agentos2-domain-chip">数据分析类</div>
+                  </div>
+                </div>
+                <!-- 通用 Skills -->
+                <div class="agentos2-skills-col agentos2-skills-col-wide">
+                  <div class="agentos2-skills-col-title">通用 Skills 层</div>
+                  <div class="agentos2-skills-domain-grid">
+                    <div class="agentos2-domain-chip agentos2-domain-sys">KIM</div>
+                    <div class="agentos2-domain-chip agentos2-domain-sys">Docs</div>
+                    <div class="agentos2-domain-chip agentos2-domain-sys">SSO</div>
+                    <div class="agentos2-domain-chip agentos2-domain-sys">Team</div>
+                    <div class="agentos2-domain-chip agentos2-domain-sys">CDN</div>
+                    <div class="agentos2-domain-chip agentos2-domain-sys">搜索</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ========== 底部：底层调用 ========== -->
+            <div class="agentos2-infra-row">
+              <div class="agentos2-infra-item">
+                <div class="agentos2-infra-icon">☁</div>
+                <div class="agentos2-infra-name">万擎（大模型平台）</div>
+                <div class="agentos2-infra-desc">Cloud Agent 调用</div>
+              </div>
+              <div class="agentos2-infra-item">
+                <div class="agentos2-infra-icon">▣</div>
+                <div class="agentos2-infra-name">高密服务器</div>
+                <div class="agentos2-infra-desc">Edge Node 驻留</div>
+              </div>
+              <div class="agentos2-infra-item">
+                <div class="agentos2-infra-icon">⊡</div>
+                <div class="agentos2-infra-name">个人电脑</div>
+                <div class="agentos2-infra-desc">调度本地 CF</div>
+              </div>
+            </div>
+
+          </div><!-- /agentos2-diagram -->
+        </div><!-- /agentos2-wrap -->
       </div>
     </section>
   </div><!-- /tab-product -->

@@ -2011,8 +2011,508 @@ button { cursor: pointer; font-family: var(--font); }
 .pgn-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
 .pgn-arrow { font-size: 20px; color: #7c3aed; flex-shrink: 0; font-weight: 300; }
 
-/* ===== AgentOS Spotlight ===== */
-.agentos-spotlight {
+/* ===== AgentOS v3 完整架构图 ===== */
+.agentos2-wrap {
+  margin-top: 28px;
+  padding: 32px 32px 28px;
+  border-radius: 24px;
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(99,102,241,0.18) 0%, transparent 42%),
+    radial-gradient(ellipse at 80% 100%, rgba(59,130,246,0.12) 0%, transparent 38%),
+    linear-gradient(160deg, #0a0f1e 0%, #0f1832 55%, #0e1628 100%);
+  border: 1px solid rgba(99,102,241,0.26);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.06);
+  color: #fff;
+}
+.agentos2-header {
+  margin-bottom: 24px;
+}
+.agentos2-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: rgba(129,140,248,0.14);
+  border: 1px solid rgba(165,180,252,0.22);
+  color: #c7d2fe;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.agentos2-title {
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  max-width: 900px;
+}
+.agentos2-subtitle {
+  font-size: 13px;
+  color: rgba(255,255,255,0.56);
+  line-height: 1.6;
+}
+
+/* 整体图容器 */
+.agentos2-diagram {
+  display: grid;
+  grid-template-rows: auto auto auto auto auto auto auto;
+  gap: 0;
+}
+
+/* ---- 接入层：顶部双入口 ---- */
+.agentos2-row-entry {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto minmax(0,1fr);
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 0;
+}
+.agentos2-entry-block {
+  padding: 18px 20px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.agentos2-entry-cf {
+  background: rgba(99,102,241,0.12);
+  border-color: rgba(165,180,252,0.28);
+}
+.agentos2-entry-mf {
+  background: rgba(59,130,246,0.1);
+  border-color: rgba(147,197,253,0.22);
+}
+.agentos2-entry-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.agentos2-entry-tag {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #bfdbfe;
+  background: rgba(255,255,255,0.1);
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.14);
+}
+.agentos2-entry-name {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+.agentos2-entry-channels {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.agentos2-channel {
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.12);
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.88);
+}
+.agentos2-entry-sub {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+}
+
+/* 中间流向箭头 */
+.agentos2-entry-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  min-width: 180px;
+}
+.agentos2-arrow-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #c7d2fe;
+  text-align: center;
+  line-height: 1.4;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, rgba(99,102,241,0.16), rgba(59,130,246,0.12));
+  border: 1px dashed rgba(199,210,254,0.3);
+}
+.agentos2-arrow-line {
+  width: 2px;
+  height: 18px;
+  background: linear-gradient(180deg, rgba(199,210,254,0.4), rgba(99,102,241,0.2));
+}
+
+/* ---- 连线行 ---- */
+.agentos2-connector-row {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  height: 24px;
+  align-items: center;
+  margin: 4px 0;
+}
+.agentos2-vline {
+  width: 2px;
+  height: 100%;
+  background: rgba(99,102,241,0.28);
+  margin: 0 auto;
+}
+.agentos2-hbridge {
+  width: 1px;
+  background: rgba(99,102,241,0.2);
+  height: 100%;
+}
+
+/* ---- Gateway 接入层 ---- */
+.agentos2-gateway-row {
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(99,102,241,0.08);
+  border: 1px solid rgba(129,140,248,0.2);
+  margin: 0 0 0 0;
+}
+.agentos2-gateway-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: #a5b4fc;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.agentos2-gateway-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.agentos2-gchip {
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #c7d2fe;
+  background: rgba(99,102,241,0.12);
+  border: 1px solid rgba(165,180,252,0.2);
+}
+
+/* 向下箭头 */
+.agentos2-down-arrow-row {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0 4px;
+}
+.agentos2-down-arrow {
+  font-size: 20px;
+  color: rgba(165,180,252,0.5);
+  line-height: 1;
+}
+
+/* ---- 中部：AgentOS 核心 + Sec&Ops ---- */
+.agentos2-row-core {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 200px;
+  gap: 16px;
+  align-items: stretch;
+}
+
+/* AgentOS 核心盒子 */
+.agentos2-core-box {
+  padding: 22px;
+  border-radius: 20px;
+  background: linear-gradient(160deg, rgba(99,102,241,0.14) 0%, rgba(15,23,42,0.3) 100%);
+  border: 1.5px solid rgba(129,140,248,0.3);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 8px 24px rgba(0,0,0,0.16);
+}
+.agentos2-core-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.agentos2-core-badge {
+  font-size: 10px;
+  font-weight: 800;
+  color: #a5b4fc;
+  background: rgba(99,102,241,0.18);
+  border: 1px solid rgba(165,180,252,0.28);
+  padding: 4px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.agentos2-core-name {
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  background: linear-gradient(90deg, #fff 0%, #c7d2fe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.agentos2-core-modules {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 12px;
+}
+.agentos2-module {
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: border-color 0.2s;
+}
+.agentos2-module:last-child {
+  grid-column: 1 / -1;
+}
+.agentos2-module-cloud { border-left: 3px solid #818cf8; }
+.agentos2-module-edge  { border-left: 3px solid #38bdf8; }
+.agentos2-module-model { border-left: 3px solid #f472b6; }
+.agentos2-module-memory{ border-left: 3px solid #34d399; }
+.agentos2-module-evo   { border-left: 3px solid #fb923c; }
+.agentos2-mod-name {
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 5px;
+  color: #f1f5f9;
+}
+.agentos2-mod-desc {
+  font-size: 12px;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.58);
+}
+
+/* Sec&Ops 盒子 */
+.agentos2-secops-box {
+  padding: 18px;
+  border-radius: 20px;
+  background: rgba(248,250,252,0.95);
+  border: 1px solid rgba(203,213,225,0.8);
+  color: #0f172a;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+.agentos2-secops-title {
+  font-size: 13px;
+  font-weight: 900;
+  color: #1e40af;
+  letter-spacing: 0.06em;
+  margin-bottom: 14px;
+  padding: 6px 10px;
+  background: #eff6ff;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid #bfdbfe;
+}
+.agentos2-secops-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+}
+.agentos2-sec-item {
+  padding: 12px 10px;
+  flex: 1;
+}
+.agentos2-sec-name {
+  font-size: 13px;
+  font-weight: 800;
+  color: #1e3a5f;
+  margin-bottom: 4px;
+}
+.agentos2-sec-detail {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #64748b;
+}
+.agentos2-sec-divider {
+  height: 1px;
+  background: #e2e8f0;
+  margin: 0 10px;
+}
+
+/* ---- 双向箭头行（AgentOS ↔ Skills 市场） ---- */
+.agentos2-bidirect-row {
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+}
+.agentos2-bidirect-line {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 20px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.04);
+  border: 1px dashed rgba(255,255,255,0.14);
+}
+.agentos2-bidirect-arrows {
+  font-size: 20px;
+  color: #818cf8;
+  font-weight: 300;
+}
+.agentos2-bidirect-label-l,
+.agentos2-bidirect-label-r {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.52);
+}
+
+/* ---- 公司级 Skills 市场 ---- */
+.agentos2-skills-box {
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(248,250,252,0.97);
+  border: 1.5px solid rgba(203,213,225,0.9);
+  color: #0f172a;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+.agentos2-skills-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.agentos2-skills-badge {
+  font-size: 10px;
+  font-weight: 800;
+  color: #1d4ed8;
+  background: #dbeafe;
+  border: 1px solid #bfdbfe;
+  padding: 3px 8px;
+  border-radius: 999px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.agentos2-skills-name {
+  font-size: 18px;
+  font-weight: 900;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+.agentos2-skills-body {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 12px;
+}
+.agentos2-skills-col {
+  padding: 14px;
+  border-radius: 14px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+.agentos2-skills-col-wide {
+  /* normal width, grid handles it */
+}
+.agentos2-skills-col-title {
+  font-size: 11px;
+  font-weight: 800;
+  color: #1e40af;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1.5px solid #dbeafe;
+}
+.agentos2-skills-col-items {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.agentos2-skill-chip {
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1e3a5f;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  text-align: center;
+}
+.agentos2-skills-domain-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 6px;
+}
+.agentos2-domain-chip {
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #1e3a5f;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  text-align: center;
+}
+.agentos2-domain-sys {
+  background: #f5f3ff;
+  border-color: #ddd6fe;
+  color: #4c1d95;
+}
+
+/* ---- 底部基础设施 ---- */
+.agentos2-infra-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  padding: 16px 0 4px;
+  flex-wrap: wrap;
+}
+.agentos2-infra-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 20px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  min-width: 140px;
+  text-align: center;
+}
+.agentos2-infra-icon {
+  font-size: 24px;
+  opacity: 0.7;
+}
+.agentos2-infra-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
+}
+.agentos2-infra-desc {
+  font-size: 11px;
+  color: rgba(255,255,255,0.44);
+}
+
+/* ---- 响应式 ---- */
+@media (max-width: 1100px) {
+  .agentos2-row-entry { grid-template-columns: 1fr; gap: 12px; }
+  .agentos2-entry-arrow { flex-direction: row; min-width: unset; }
+  .agentos2-connector-row { display: none; }
+  .agentos2-row-core { grid-template-columns: 1fr; }
+  .agentos2-skills-body { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 768px) {
+  .agentos2-wrap { padding: 20px 16px; }
+  .agentos2-title { font-size: 20px; }
+  .agentos2-core-modules { grid-template-columns: 1fr; }
+  .agentos2-module:last-child { grid-column: unset; }
+  .agentos2-skills-body { grid-template-columns: 1fr; }
+  .agentos2-gateway-chips { flex-direction: column; }
+  .agentos2-bidirect-line { flex-direction: column; text-align: center; gap: 8px; }
+  .agentos2-infra-row { flex-direction: column; align-items: center; }
+}
+
+
   margin-top: 22px;
   padding: 28px;
   border-radius: 20px;
