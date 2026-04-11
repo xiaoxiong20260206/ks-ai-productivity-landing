@@ -2016,3 +2016,172 @@ button { cursor: pointer; font-family: var(--font); }
   .pgn-items { flex-direction: column; }
   .pgn-arrow { transform: rotate(90deg); }
 }
+
+/* ===== MyFlicker 单产品介绍卡 (mf-intro) ===== */
+.mf-intro-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  background: linear-gradient(135deg, #faf5ff 0%, #eff6ff 100%);
+  border: 1.5px solid #c4b5fd;
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.mf-intro-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+.mf-intro-icon {
+  width: 52px; height: 52px;
+  background: white;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(124,58,237,0.15);
+}
+.mf-intro-name { font-size: 20px; font-weight: 800; color: #4c1d95; }
+.mf-intro-version {
+  font-size: 12px; font-weight: 600;
+  background: #7c3aed; color: white;
+  padding: 2px 8px; border-radius: 20px; margin-top: 4px;
+  display: inline-block;
+}
+.mf-intro-body { flex: 1; min-width: 200px; }
+.mf-intro-quote {
+  font-size: 15px; font-weight: 600; color: #3730a3;
+  border-left: 3px solid #7c3aed;
+  padding-left: 12px;
+  margin: 0 0 10px 0;
+  font-style: italic;
+}
+.mf-intro-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.7; margin: 0 0 12px 0; }
+.mf-intro-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.mf-intro-tags span {
+  font-size: 12px; background: white; border: 1px solid #c4b5fd;
+  color: #5b21b6; border-radius: 20px; padding: 3px 10px;
+}
+.mf-intro-btn {
+  display: inline-flex; align-items: center;
+  background: #7c3aed; color: white; font-weight: 600;
+  padding: 10px 20px; border-radius: 10px; font-size: 14px;
+  text-decoration: none; white-space: nowrap; flex-shrink: 0;
+  transition: background 0.2s, transform 0.15s;
+  align-self: center;
+}
+.mf-intro-btn:hover { background: #6d28d9; transform: translateY(-1px); }
+
+/* ===== 横向里程碑 (milestones-h) ===== */
+.milestones-h { overflow-x: auto; padding-bottom: 8px; margin-top: 32px; }
+.mh-track {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  position: relative;
+  min-width: 700px;
+  padding-top: 20px;
+}
+.mh-line {
+  position: absolute;
+  top: 32px;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #10b981 0%, #7c3aed 30%, #94a3b8 100%);
+}
+.mh-node {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.mh-dot {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  border: 2px solid var(--border);
+  background: white;
+  margin-bottom: 10px;
+  flex-shrink: 0;
+}
+.mh-done .mh-dot {
+  background: #10b981; border-color: #10b981; color: white;
+}
+.mh-hot .mh-dot {
+  background: white; border-color: #f59e0b;
+  font-size: 16px; box-shadow: 0 0 0 4px rgba(245,158,11,0.15);
+}
+.mh-plan .mh-dot {
+  background: white; border-color: #94a3b8; color: #94a3b8; font-size: 14px;
+}
+.mh-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  width: calc(100% - 16px);
+  font-size: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.mh-hot .mh-card {
+  border-color: #f59e0b;
+  background: #fffbeb;
+}
+.mh-date { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
+.mh-name { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+.mh-hot .mh-name { color: #d97706; }
+.mh-done .mh-name { color: #059669; }
+.mh-desc { font-size: 11.5px; color: var(--text-secondary); line-height: 1.5; }
+.mh-cta {
+  display: inline-block; margin-top: 8px;
+  font-size: 11px; font-weight: 600; color: #7c3aed;
+  background: #f5f3ff; border-radius: 6px; padding: 4px 10px;
+  text-decoration: none;
+}
+.mh-cta:hover { background: #ede9fe; }
+
+/* ===== 三大核心能力新版 (ab3) ===== */
+.ab3-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 16px;
+  margin-top: 28px;
+}
+.ab3-card-full { grid-column: 1 / -1; }
+.ab3-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  transition: box-shadow 0.2s var(--ease-out);
+}
+.ab3-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); }
+.ab3-card-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px; }
+.ab3-icon-wrap {
+  width: 40px; height: 40px; min-width: 40px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+}
+.ab3-label { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+.ab3-title { font-size: 15px; font-weight: 700; color: var(--text-primary); }
+.ab3-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 14px; }
+.ab3-skills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.ab3-skills span {
+  font-size: 12px; background: #f8fafc; border: 1px solid var(--border);
+  border-radius: 6px; padding: 4px 10px; color: var(--text-secondary);
+}
+.ab3-bullets { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+.ab3-bullets div { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+.ab3-tech { font-size: 11px; color: var(--text-muted); background: #f8fafc; border-radius: 6px; padding: 4px 10px; display: inline-block; }
+
+@media (max-width: 768px) {
+  .mf-intro-card { flex-direction: column; }
+  .ab3-grid { grid-template-columns: 1fr; }
+  .ab3-card-full { grid-column: 1; }
+  .mh-track { min-width: 600px; }
+}
