@@ -1962,3 +1962,57 @@ button { cursor: pointer; font-family: var(--font); }
 .tab-panel.active {
   animation: fadeInUp 0.35s var(--ease-out);
 }
+
+/* ===== MyFlicker 三大定位 (mf-positions) ===== */
+.mf-positions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 28px 0 24px;
+}
+.mf-pos-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 18px;
+  transition: box-shadow 0.2s var(--ease-out), transform 0.2s var(--ease-out);
+}
+.mf-pos-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); transform: translateY(-2px); }
+.mf-pos-icon { font-size: 24px; margin-bottom: 10px; }
+.mf-pos-title { font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+.mf-pos-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+/* ===== 伙伴成长叙事 (partner-growth-note) ===== */
+.partner-growth-note {
+  background: linear-gradient(135deg, #f5f3ff 0%, #eff6ff 100%);
+  border: 1px solid #ddd6fe;
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin-top: 24px;
+}
+.pgn-title { font-size: 14px; font-weight: 700; color: #5b21b6; margin-bottom: 16px; }
+.pgn-items {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.pgn-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 140px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.pgn-stage { font-size: 13px; font-weight: 700; color: #4c1d95; }
+.pgn-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+.pgn-arrow { font-size: 20px; color: #7c3aed; flex-shrink: 0; font-weight: 300; }
+
+@media (max-width: 768px) {
+  .mf-positions { grid-template-columns: 1fr; }
+  .pgn-items { flex-direction: column; }
+  .pgn-arrow { transform: rotate(90deg); }
+}
