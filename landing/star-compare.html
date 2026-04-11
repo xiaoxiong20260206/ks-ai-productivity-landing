@@ -19,6 +19,7 @@
       <h2 class="ending-title">终章</h2>
       <p class="ending-desc"></p>
       <div class="ending-badge" style="font-size:28px;margin:12px 0"></div>
+      <p class="ending-note hidden" id="endingNote"></p>
       <div class="ending-facts">
         <div class="ef-item">🔴 0.09 M☉ 红矮星 → 🌑 黑矮星（3万亿年后）</div>
         <div class="ef-item">☀️ 1.0 M☉ 太阳 → 💙 白矮星（约115亿年）</div>
@@ -80,7 +81,9 @@
     <!-- ===== 进度条 ===== -->
     <div class="progress-section">
       <div class="progress-track" id="progressTrack">
-        <div class="progress-fill" id="progressFill"></div>
+        <div class="progress-rail">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
         <div class="progress-thumb" id="progressThumb"></div>
         <input type="range" id="progressBar" min="0" max="1000" value="0" class="progress-input" />
         <div class="milestone-bar" id="milestoneBar"></div>
