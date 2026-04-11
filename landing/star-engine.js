@@ -427,6 +427,17 @@ class StarApp {
     overlay.querySelector(".ending-desc").textContent  = star.endingDesc;
     overlay.querySelector(".ending-badge").textContent = star.endingBadge;
     overlay.querySelector(".ending-badge").style.color = star.fateColor;
+    // endingNote（可选）
+    const noteEl = document.getElementById("endingNote");
+    if (noteEl) {
+      if (star.endingNote) {
+        noteEl.textContent = star.endingNote;
+        noteEl.classList.remove("hidden");
+      } else {
+        noteEl.textContent = "";
+        noteEl.classList.add("hidden");
+      }
+    }
     overlay.classList.add("visible");
   }
 
@@ -480,6 +491,7 @@ class StarApp {
       this.playBtn.textContent = "▶ 播放";
     }
     this.progressEl.value = String(this.progress);
+    this._updateProgressBar(this.progress);
     this.render(this.progress);
     if (this.playing) this.rafId = requestAnimationFrame(() => this._tick());
   }
@@ -502,6 +514,7 @@ class StarApp {
       this._endingShown = false;
       this._snEndingShown = false;
       this.endingOverlay.classList.remove("visible");
+      this._updateProgressBar(0);
       this.render(0);
     });
 
@@ -509,8 +522,10 @@ class StarApp {
       this.speed = Number(e.target.value);
     });
 
+    // 备用：原生 range input 同步
     this.progressEl.addEventListener("input", e => {
       this.progress = Number(e.target.value);
+      this._updateProgressBar(this.progress);
       this.render(this.progress);
     });
 
@@ -531,6 +546,9 @@ class StarApp {
       document.getElementById("quizPanel").classList.toggle("hidden");
     });
 
+    // ===== 拖拽进度条（鼠标 + 触屏） =====
+    this._bindProgressDrag();
+
     // 脉冲星动画需要持续刷新
     setInterval(() => {
       this.activeStars.forEach(k => {
@@ -540,6 +558,55 @@ class StarApp {
         }
       });
     }, 50);
+  }
+
+  // ---------- 拖拽进度条 ----------
+  _bindProgressDrag() {
+    const track = document.getElementById("progressTrack");
+    if (!track) return;
+
+    const calcProgress = (clientX) => {
+      const rect = track.getBoundingClientRect();
+      const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+      return Math.round(ratio * MAX_PROGRESS);
+    };
+
+    const onMove = (clientX) => {
+      this.progress = calcProgress(clientX);
+      this.progressEl.value = String(this.progress);
+      this._updateProgressBar(this.progress);
+      this.render(this.progress);
+    };
+
+    // 鼠标事件
+    track.addEventListener("mousedown", (e) => {
+      if (e.button !== 0) return;
+      track.classList.add("dragging");
+      onMove(e.clientX);
+      const onMouseMove = (ev) => onMove(ev.clientX);
+      const onMouseUp   = () => {
+        track.classList.remove("dragging");
+        document.removeEventListener("mousemove", onMouseMove);
+        document.removeEventListener("mouseup",   onMouseUp);
+      };
+      document.addEventListener("mousemove", onMouseMove);
+      document.addEventListener("mouseup",   onMouseUp);
+    });
+
+    // 触屏事件
+    track.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      track.classList.add("dragging");
+      onMove(e.touches[0].clientX);
+      const onTouchMove = (ev) => { ev.preventDefault(); onMove(ev.touches[0].clientX); };
+      const onTouchEnd  = () => {
+        track.classList.remove("dragging");
+        document.removeEventListener("touchmove", onTouchMove);
+        document.removeEventListener("touchend",  onTouchEnd);
+      };
+      document.addEventListener("touchmove", onTouchMove, { passive: false });
+      document.addEventListener("touchend",  onTouchEnd);
+    }, { passive: false });
   }
 }
 
