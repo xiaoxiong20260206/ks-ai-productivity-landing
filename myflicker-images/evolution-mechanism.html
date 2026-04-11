@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyFlicker 进化机制</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #f0f9ff 100%);
+      min-height: 100vh;
+      padding: 40px 60px;
+    }
+    
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .title {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1e293b;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    
+    .evolution-cycle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      position: relative;
+    }
+    
+    .node {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      position: relative;
+      background: white;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      border: 2px solid transparent;
+    }
+    
+    .node-1 { border-color: #2563eb; }
+    .node-2 { border-color: #16a34a; }
+    .node-3 { border-color: #d97706; }
+    
+    .node-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+    
+    .node-1 .node-icon { background: #dbeafe; }
+    .node-2 .node-icon { background: #dcfce7; }
+    .node-3 .node-icon { background: #fef3c7; }
+    
+    .node-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 8px;
+    }
+    
+    .node-desc {
+      font-size: 13px;
+      color: #64748b;
+      line-height: 1.5;
+    }
+    
+    .arrow {
+      width: 60px;
+      height: 40px;
+      position: relative;
+    }
+    
+    .arrow-line {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: linear-gradient(90deg, #2563eb, #16a34a, #d97706);
+      border-radius: 2px;
+    }
+    
+    .arrow-head {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      width: 0;
+      height: 0;
+      border-left: 12px solid #d97706;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      transform: translateY(-50%);
+    }
+    
+    .bottom-section {
+      margin-top: 48px;
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+    }
+    
+    .feature-card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      width: 300px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      border: 1px solid #e2e8f0;
+    }
+    
+    .feature-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .feature-title::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    
+    .feature-card:nth-child(1) .feature-title::before { background: #2563eb; }
+    .feature-card:nth-child(2) .feature-title::before { background: #16a34a; }
+    .feature-card:nth-child(3) .feature-title::before { background: #d97706; }
+    
+    .feature-desc {
+      font-size: 14px;
+      color: #64748b;
+      line-height: 1.6;
+    }
+    
+    .highlight {
+      color: #2563eb;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">进化机制：用得越久，越像你的风格</h1>
+    
+    <div class="evolution-cycle">
+      <div class="node node-1">
+        <div class="node-icon">🧠</div>
+        <div class="node-title">越用越懂你</div>
+        <div class="node-desc">感知你的代码风格、技术选型偏好、工作习惯</div>
+      </div>
+      
+      <div class="arrow">
+        <div class="arrow-line"></div>
+        <div class="arrow-head"></div>
+      </div>
+      
+      <div class="node node-2">
+        <div class="node-icon">📝</div>
+        <div class="node-title">纠错即学习</div>
+        <div class="node-desc">今天纠正的问题写入记忆，明天不再重犯</div>
+      </div>
+      
+      <div class="arrow">
+        <div class="arrow-line"></div>
+        <div class="arrow-head"></div>
+      </div>
+      
+      <div class="node node-3">
+        <div class="node-icon">🌱</div>
+        <div class="node-title">社区共同进化</div>
+        <div class="node-desc">所有人的智慧汇聚，你用到的我在被大家一起喂养</div>
+      </div>
+    </div>
+    
+    <div class="bottom-section">
+      <div class="feature-card">
+        <div class="feature-title">个人记忆持续积累</div>
+        <div class="feature-desc">第一天用，我们还在磨合；用久了，我就像你的老搭档，知道你爱怎么写代码、怎么命名变量</div>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-title">每一次纠正都在进化</div>
+        <div class="feature-desc">"不对，应该是这样"——这句话不只是指令，更是学习信号，我会记住下次做得更好</div>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-title"> Skills 市场持续供给</div>
+        <div class="feature-desc">任何人都可以贡献新 Skill，整个组织的经验在这里汇聚，我们一起成长</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

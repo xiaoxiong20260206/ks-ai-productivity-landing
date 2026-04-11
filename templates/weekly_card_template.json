@@ -52,7 +52,7 @@
       "type": "content",
       "text": {
         "type": "kimMd",
-        "content": "**AI转型**\n- 技术通道完成4象限模型，Q2目标从30支先锋队扩展到50+，并沉淀Top5标杆实践\n- 非技术通道启动产品讨论与AIBP方案设计\n- 职能通道明确HR/行政/财务等Skill接入路径\n- 涌现通道已招募100+布道师，5月启动Skill大赛\n\n**AI普惠**\n- 行政领域首期活动需求澄清完成，人员分工与排期已确认\n- 4.20落地第一期全员体验活动：行政AI化"
+        "content": "🟢 **AI转型**\n- 技术通道完成4象限模型，Q2目标从30支先锋队扩展到50+，并沉淀Top5标杆实践\n- 非技术通道启动产品讨论与AIBP方案设计\n- 职能通道明确HR/行政/财务等Skill接入路径\n- 涌现通道已招募100+布道师，5月启动Skill大赛\n\n🟢 **AI普惠**\n- 行政领域首期活动需求澄清完成，人员分工与排期已确认\n- 4.20落地第一期全员体验活动：行政AI化"
       }
     },
     {
@@ -72,7 +72,7 @@
       "type": "content",
       "text": {
         "type": "kimMd",
-        "content": "- 0403内测版正常交付，整体进度符合预期\n- 0412节点：CodeFlicker V1.1 + MyFlicker V0.1 两个形态同步启动内测\n- 0420节点：版本合一，正式发布 MyFlicker 1.0（全形态：客户端/云/KIM；全场景：Code + Work）\n- 4月内统一合并为服务全员的 MyFlicker 单一版本（端+云）"
+        "content": "🟢 **产品建设（CodeFlicker & MyFlicker）**\n- 0403内测版正常交付，整体进度符合预期\n- 0412节点：CodeFlicker V1.1 + MyFlicker V0.1 两个形态同步启动内测\n- 0420节点：版本合一，正式发布 MyFlicker 1.0（全形态：客户端/云/KIM；全场景：Code + Work）\n- 4月内统一合并为服务全员的 MyFlicker 单一版本（端+云）"
       }
     },
     {
@@ -94,13 +94,13 @@
         {
           "text": {
             "type": "kimMd",
-            "content": "**技能生态**\n- Skill市场基础能力建设拉齐60%，可用性评测完成70%\n- SSO标准基建完成，开发规范发布\n- 0412预计覆盖20+精品Skill、40+通用Skill"
+            "content": "🟢 **技能生态**\n- Skill市场基础能力建设拉齐60%，可用性评测完成70%\n- SSO标准基建完成，开发规范发布\n- 0412预计覆盖20+精品Skill、40+通用Skill"
           }
         },
         {
           "text": {
             "type": "kimMd",
-            "content": "**模型服务**\n- Auto分类器一版完成，整体开发进度60%\n- Claude/Kimi Auto provider 在建"
+            "content": "🟢 **模型服务**\n- Auto分类器一版完成，整体开发进度60%\n- Claude/Kimi Auto provider 在建"
           }
         }
       ]
@@ -112,13 +112,13 @@
         {
           "text": {
             "type": "kimMd",
-            "content": "**自进化**\n- 10个核心Skill建设完成\n- 记忆进化、定时复盘、知识库、引导Skill均已交付"
+            "content": "🟢 **自进化**\n- 10个核心Skill建设完成\n- 记忆进化、定时复盘、知识库、引导Skill均已交付"
           }
         },
         {
           "text": {
             "type": "kimMd",
-            "content": "**高可用**\n- 推进0412机器资源筹备\n- KFS独立集群方案推进\n- 用户目录规则统一完成"
+            "content": "🟢 **高可用**\n- 推进0412机器资源筹备\n- KFS独立集群方案推进\n- 用户目录规则统一完成"
           }
         }
       ]
@@ -130,13 +130,13 @@
         {
           "text": {
             "type": "kimMd",
-            "content": "**安全建设**\n- 审计日志建设完成并完成泄露风险加固\n- AP认证方案0403上线\n- 目录隔离/非root权限完成"
+            "content": "🟢 **安全建设**\n- 审计日志建设完成并完成泄露风险加固\n- AP认证方案0403上线\n- 目录隔离/非root权限完成"
           }
         },
         {
           "text": {
             "type": "kimMd",
-            "content": "**项目经营**\n- 已输出AI经营分析框架\n- Token额度对标进展持续跟进中"
+            "content": "🟢 **项目经营**\n- 已输出AI经营分析框架\n- Token额度对标进展持续跟进中"
           }
         }
       ]

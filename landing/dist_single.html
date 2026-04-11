@@ -2019,10 +2019,395 @@ button { cursor: pointer; font-family: var(--font); }
 .pgn-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
 .pgn-arrow { font-size: 20px; color: #7c3aed; flex-shrink: 0; font-weight: 300; }
 
+/* ===== AgentOS Spotlight ===== */
+.agentos-spotlight {
+  margin-top: 22px;
+  padding: 28px;
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at top right, rgba(99,102,241,0.16), transparent 32%),
+    linear-gradient(135deg, #0f172a 0%, #172554 52%, #1e1b4b 100%);
+  border: 1px solid rgba(129,140,248,0.28);
+  box-shadow: 0 18px 50px rgba(15,23,42,0.16);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.agentos-spotlight::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.04) 48%, transparent 100%);
+  pointer-events: none;
+}
+.agentos-head,
+.agentos-arch-shell,
+.agentos-entry-row,
+.agentos-main-grid,
+.agentos-bottom-rail { position: relative; z-index: 1; }
+.agentos-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(191,219,254,0.12);
+  border: 1px solid rgba(191,219,254,0.18);
+  color: #bfdbfe;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.agentos-title {
+  font-size: 28px;
+  line-height: 1.25;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+  max-width: 880px;
+}
+.agentos-desc {
+  font-size: 14px;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.74);
+  max-width: 860px;
+}
+.agentos-arch-shell {
+  margin-top: 24px;
+  padding: 18px;
+  border-radius: 20px;
+  background: rgba(15,23,42,0.18);
+  border: 1px solid rgba(165,180,252,0.16);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+}
+.agentos-layer-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #cbd5e1;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.agentos-layer-tag-core {
+  margin-top: 2px;
+  color: #bfdbfe;
+  background: rgba(59,130,246,0.1);
+  border-color: rgba(147,197,253,0.18);
+}
+.agentos-entry-row {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 180px minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+}
+.agentos-entry-card {
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  backdrop-filter: blur(6px);
+  min-height: 106px;
+}
+.agentos-entry-card-dev {
+  background: rgba(129,140,248,0.12);
+  border-color: rgba(165,180,252,0.28);
+}
+.agentos-entry-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: #bfdbfe;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.agentos-entry-name {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+.agentos-entry-desc {
+  font-size: 13px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.72);
+}
+.agentos-entry-link {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #c7d2fe;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: linear-gradient(90deg, rgba(99,102,241,0.18), rgba(59,130,246,0.14));
+  border: 1px dashed rgba(199,210,254,0.34);
+  line-height: 1.5;
+}
+.agentos-flow-rail {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 16px 4px 18px;
+}
+.agentos-flow-chip {
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #e0e7ff;
+  background: rgba(99,102,241,0.14);
+  border: 1px solid rgba(165,180,252,0.18);
+  white-space: nowrap;
+}
+.agentos-flow-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(99,102,241,0.1), rgba(191,219,254,0.7), rgba(99,102,241,0.1));
+}
+.agentos-main-grid {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: minmax(0, 2.1fr) minmax(280px, 0.9fr);
+  gap: 18px;
+  align-items: stretch;
+}
+.agentos-core-panel {
+  padding: 22px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(15,23,42,0.22) 100%);
+  border: 1px solid rgba(129,140,248,0.22);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+}
+.agentos-core-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+.agentos-core-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  color: #c7d2fe;
+  background: rgba(99,102,241,0.16);
+  border: 1px solid rgba(165,180,252,0.26);
+  padding: 4px 8px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.agentos-core-title {
+  font-size: 34px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.agentos-core-summary {
+  max-width: 260px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.66);
+  text-align: right;
+}
+.agentos-cap-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.agentos-cap-card {
+  padding: 16px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+  border: 1px solid rgba(191,219,254,0.14);
+  min-height: 118px;
+  position: relative;
+}
+.agentos-cap-micro {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+  color: #bfdbfe;
+  background: rgba(59,130,246,0.12);
+  border: 1px solid rgba(147,197,253,0.16);
+  margin-bottom: 10px;
+}
+.agentos-cap-name {
+  font-size: 16px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.agentos-cap-desc {
+  font-size: 13px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.68);
+}
+.agentos-value-strip {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.agentos-value-item {
+  padding: 14px 14px 12px;
+  border-radius: 14px;
+  background: rgba(15,23,42,0.28);
+  border: 1px solid rgba(148,163,184,0.16);
+}
+.agentos-value-key {
+  display: block;
+  font-size: 12px;
+  font-weight: 800;
+  color: #93c5fd;
+  margin-bottom: 6px;
+}
+.agentos-value-text {
+  display: block;
+  font-size: 12px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.68);
+}
+.agentos-guardrail-panel {
+  padding: 22px 18px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(248,250,252,0.95) 0%, rgba(226,232,240,0.92) 100%);
+  border: 1px solid rgba(226,232,240,0.8);
+  color: var(--text-primary);
+  position: relative;
+}
+.agentos-guardrail-panel::before {
+  content: '治理层';
+  position: absolute;
+  top: -10px;
+  left: 16px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4338ca;
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+}
+.agentos-guardrail-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: #4338ca;
+  margin-bottom: 14px;
+}
+.agentos-guardrail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.agentos-guardrail-item {
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.78);
+  border: 1px solid rgba(203,213,225,0.9);
+}
+.agentos-guardrail-name {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+.agentos-guardrail-desc {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+.agentos-bottom-rail {
+  margin-top: 16px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.agentos-bottom-title {
+  font-size: 12px;
+  font-weight: 800;
+  color: #c7d2fe;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.agentos-bottom-stages {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.agentos-bottom-stage {
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(59,130,246,0.12);
+  border: 1px solid rgba(147,197,253,0.16);
+  font-size: 12px;
+  font-weight: 700;
+  color: #eff6ff;
+}
+.agentos-bottom-arrow {
+  color: rgba(255,255,255,0.46);
+  font-weight: 700;
+}
+
+@media (max-width: 1024px) {
+  .agentos-entry-row {
+    grid-template-columns: 1fr;
+  }
+  .agentos-entry-link {
+    justify-self: center;
+    width: fit-content;
+  }
+  .agentos-flow-rail {
+    flex-wrap: wrap;
+  }
+  .agentos-flow-line {
+    min-width: 30px;
+  }
+  .agentos-main-grid {
+    grid-template-columns: 1fr;
+  }
+  .agentos-core-top {
+    flex-direction: column;
+  }
+  .agentos-core-summary {
+    max-width: none;
+    text-align: left;
+  }
+  .agentos-value-strip {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 768px) {
   .mf-positions { grid-template-columns: 1fr; }
   .pgn-items { flex-direction: column; }
   .pgn-arrow { transform: rotate(90deg); }
+  .agentos-spotlight { padding: 22px 18px; }
+  .agentos-arch-shell { padding: 16px 14px; }
+  .agentos-title { font-size: 22px; }
+  .agentos-cap-grid { grid-template-columns: 1fr; }
+  .agentos-entry-name { font-size: 20px; }
+  .agentos-core-title { font-size: 28px; }
+  .agentos-bottom-stages { flex-direction: column; align-items: flex-start; }
+  .agentos-bottom-arrow { transform: rotate(90deg); }
 }
 
 /* ===== MyFlicker 单产品介绍卡 (mf-intro) ===== */
@@ -2933,6 +3318,120 @@ button { cursor: pointer; font-family: var(--font); }
             <div class="pgn-item"><span class="pgn-stage">我们和伙伴</span><span class="pgn-desc">团队的目标对齐、知识共享，也有我陪着一起做</span></div>
             <div class="pgn-arrow">→</div>
             <div class="pgn-item"><span class="pgn-stage">组织和伙伴</span><span class="pgn-desc">全公司的方法论、最佳实践，都有我参与沉淀</span></div>
+          </div>
+        </div>
+
+        <!-- AgentOS 强化架构图 -->
+        <div class="agentos-spotlight">
+          <div class="agentos-head">
+            <div class="agentos-kicker">AgentOS · 统一智能底座</div>
+            <h3 class="agentos-title">真正厉害的，不是单个 Skill，而是把“思考、调用、执行、进化”串成一套系统</h3>
+            <p class="agentos-desc">同一套 AgentOS，同时驱动面向全员的 MyFlicker 与面向研发的 CodeFlicker，让 AI 从“会回答”升级为“能把任务做完”的工作伙伴。</p>
+          </div>
+
+          <div class="agentos-arch-shell">
+            <div class="agentos-layer-tag">接入层</div>
+            <div class="agentos-entry-row">
+              <div class="agentos-entry-card">
+                <div class="agentos-entry-label">全员入口</div>
+                <div class="agentos-entry-name">MyFlicker</div>
+                <div class="agentos-entry-desc">KIM 对话入口，零门槛使用 AI 工作伙伴</div>
+              </div>
+              <div class="agentos-entry-link">统一意图理解 → 任务接管</div>
+              <div class="agentos-entry-card agentos-entry-card-dev">
+                <div class="agentos-entry-label">研发入口</div>
+                <div class="agentos-entry-name">CodeFlicker</div>
+                <div class="agentos-entry-desc">IDE / CLI 深度协作，直接进入研发执行流</div>
+              </div>
+            </div>
+
+            <div class="agentos-flow-rail">
+              <span class="agentos-flow-chip">任务规划</span>
+              <span class="agentos-flow-line"></span>
+              <span class="agentos-flow-chip">资源调度</span>
+              <span class="agentos-flow-line"></span>
+              <span class="agentos-flow-chip">执行闭环</span>
+            </div>
+
+            <div class="agentos-layer-tag agentos-layer-tag-core">核心底座</div>
+            <div class="agentos-main-grid">
+              <div class="agentos-core-panel">
+                <div class="agentos-core-top">
+                  <div>
+                    <div class="agentos-core-badge">核心能力中枢</div>
+                    <div class="agentos-core-title">AgentOS</div>
+                  </div>
+                  <div class="agentos-core-summary">统一任务理解、资源调度与执行闭环</div>
+                </div>
+
+                <div class="agentos-cap-grid">
+                  <div class="agentos-cap-card">
+                    <div class="agentos-cap-micro">01</div>
+                    <div class="agentos-cap-name">Agent Runtime</div>
+                    <div class="agentos-cap-desc">任务拆解、规划推理、状态编排</div>
+                  </div>
+                  <div class="agentos-cap-card">
+                    <div class="agentos-cap-micro">02</div>
+                    <div class="agentos-cap-name">Skill Router</div>
+                    <div class="agentos-cap-desc">工具、知识、数据源统一调度</div>
+                  </div>
+                  <div class="agentos-cap-card">
+                    <div class="agentos-cap-micro">03</div>
+                    <div class="agentos-cap-name">Memory & Evolution</div>
+                    <div class="agentos-cap-desc">共享记忆沉淀，越用越懂业务</div>
+                  </div>
+                  <div class="agentos-cap-card">
+                    <div class="agentos-cap-micro">04</div>
+                    <div class="agentos-cap-name">Auto Execution</div>
+                    <div class="agentos-cap-desc">从对话到执行，再到反馈闭环</div>
+                  </div>
+                </div>
+
+                <div class="agentos-value-strip">
+                  <div class="agentos-value-item">
+                    <span class="agentos-value-key">统一大脑</span>
+                    <span class="agentos-value-text">MyFlicker 与 CodeFlicker 共用底层能力，不重复建设</span>
+                  </div>
+                  <div class="agentos-value-item">
+                    <span class="agentos-value-key">统一执行闭环</span>
+                    <span class="agentos-value-text">不只会答，还能调 Skill、跑任务、交付结果</span>
+                  </div>
+                  <div class="agentos-value-item">
+                    <span class="agentos-value-key">统一扩展路径</span>
+                    <span class="agentos-value-text">天然支撑个人伙伴、团队伙伴、组织伙伴持续升级</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="agentos-guardrail-panel">
+                <div class="agentos-guardrail-title">企业级护栏</div>
+                <div class="agentos-guardrail-list">
+                  <div class="agentos-guardrail-item">
+                    <div class="agentos-guardrail-name">安全与权限</div>
+                    <div class="agentos-guardrail-desc">数据不出域，按角色分级授权</div>
+                  </div>
+                  <div class="agentos-guardrail-item">
+                    <div class="agentos-guardrail-name">审计与可追踪</div>
+                    <div class="agentos-guardrail-desc">全链路记录，过程可回溯、可治理</div>
+                  </div>
+                  <div class="agentos-guardrail-item">
+                    <div class="agentos-guardrail-name">高可用与弹性</div>
+                    <div class="agentos-guardrail-desc">多通道接入，支持稳定运行与快速扩容</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="agentos-bottom-rail">
+              <div class="agentos-bottom-title">能力扩张路径</div>
+              <div class="agentos-bottom-stages">
+                <div class="agentos-bottom-stage">个人伙伴</div>
+                <div class="agentos-bottom-arrow">→</div>
+                <div class="agentos-bottom-stage">团队伙伴</div>
+                <div class="agentos-bottom-arrow">→</div>
+                <div class="agentos-bottom-stage">组织伙伴</div>
+              </div>
+            </div>
           </div>
         </div>
 
